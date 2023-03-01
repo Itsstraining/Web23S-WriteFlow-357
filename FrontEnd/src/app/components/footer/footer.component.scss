@@ -1,0 +1,60 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.logo {
+    width: 100%;
+    border-top: 1px solid var(--color-1);
+    padding-top: 30px;
+}
+
+.logo>div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.write,
+.flow {
+    color: white;
+    font-size: 28px;
+}
+
+.write {
+    font-weight: 500;
+}
+
+.flow {
+    font-weight: 700;
+}
+
+
+.container {
+    background-color: var(--color-4);
+    padding: 50px 0px;
+}
+
+.container>div {
+    margin: 0px auto;
+
+    width: 80%;
+    min-width: 400px;
+    min-height: 200px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.social {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    img {
+        margin: 0rem 0.25rem;
+    }
+}
