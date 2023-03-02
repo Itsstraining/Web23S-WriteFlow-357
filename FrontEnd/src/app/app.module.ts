@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { RouterModule } from '@angular/router';
     AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,
+
     RouterModule
   ],
   providers: [],
