@@ -1,0 +1,162 @@
+#contain-all{
+  background-color: #424874;
+  height: 100%;
+  display: flex;
+}
+
+#title{
+  color: #424874;
+}
+.example-form {
+
+  width: 100%;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+
+}
+
+.example-container{
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  max-width: 75%;
+  min-width: 20%;
+  width: 90%;
+}
+
+.example-full-width {
+  width: 100%;
+  border-radius: 10px;
+  max-width: 95%;
+  display: flex;
+  justify-self: center;
+}
+
+#contain-all{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+#title{
+  display: flex;
+  align-self: center;
+}
+
+.example-container mat-form-field + mat-form-field {
+  margin-left: 8px;
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+#login-container{
+  display: flex;
+  flex-direction: column;
+  background-color: #A6B1E1;
+  height: 87%;
+  width: 30%;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: auto 60%;
+  align-items: center;
+}
+//login bang facebook, google
+#other-login{
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  align-self: center;
+  justify-content: center;
+  width: 100%;
+
+}
+
+#with-google,#with-facebook{
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 5px auto;
+  display: flex;
+  align-items: center;
+  width: 70%;
+  background-color: #fff;
+
+}
+//login khong can google, facebook
+#normal-login{
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+  max-width: 100%;
+  min-width: 20%;
+  width: 95%;
+
+}
+
+#break-page{
+  width: 50%;
+}
+
+#forgot-password{
+  font-size: small;
+  margin: 0 43% 5% 0;
+}
+//Keep sign in
+#keep-sign{
+  display: flex;
+  font-size: small;
+  margin-right: 3%;
+
+}
+
+// .example-section {
+//   margin: 0px 0;
+// }
+
+// .example-margin {
+//   margin: 0 0px;
+// }
+
+//nut dang nhap
+#login-btn{
+  width: 70%;
+}
+
+#login{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: #F4EEFF;
+  border-radius: 10px;
+  color: #424874;
+  font-weight: 400;
+  font-size: large;
+}
+
+//nut dang ky
+#signup-holder{
+  width: 70%;
+  margin-bottom: 15%;
+}
+
+#signup{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: #F4EEFF;
+  border-radius: 10px;
+  margin-top: 5%;
+  color: #424874;
+  font-weight: 400;
+  font-size: large;
+
+}
+
+

@@ -8,6 +8,7 @@ import { FooterComponent } from 'src/app/components/footer/footer.component';
 //Angular Material
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 
+
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -15,11 +16,12 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
   ],
   imports: [
     CommonModule,
-    AngularMaterialModule
+    AngularMaterialModule,
   ],
   exports: [
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+
   ]
 })
 

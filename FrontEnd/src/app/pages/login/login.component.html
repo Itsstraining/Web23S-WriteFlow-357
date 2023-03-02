@@ -1,0 +1,78 @@
+<div id="contain-all">
+
+    <div id="login-container">
+        <div id="title">
+          <h1>Login</h1>
+        </div>
+        <div id="other-login">
+          <button mat-button id="with-google" >
+            <mat-icon>Google</mat-icon>
+            Continue with Google
+          </button>
+          <button mat-button id="with-facebook">
+            <mat-icon>Facebook</mat-icon>
+            Continue with Facebook
+          </button>
+        </div>
+        <div style="display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;">
+        <div style="height: 1.5px;
+            background-color:rgb(92, 92, 92);
+            width: 90px;"></div>
+        <div style="margin-left: 5px;
+                    margin-right: 5px;
+                    font-weight: 300;
+                    color: #6B7280;">
+           Or
+        </div>
+        <div style="height: 1.5px;
+                    background-color:rgb(92, 92, 92);
+                    width: 90px;"></div>
+        </div>
+        <div id="normal-login">
+          <div class="example-container">
+            <form class="example-form">
+              <mat-form-field class="example-full-width">
+                <mat-label>Email Address</mat-label>
+                <input type="email" matInput placeholder="Ex. pat@example.com">
+                <mat-icon matSuffix>mail</mat-icon>
+              </mat-form-field>
+            </form>
+          </div>
+
+          <div class="example-container">
+            <mat-form-field >
+              <mat-label>Enter your password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+        </div>
+          <div id="forgot-password">
+            <a href="">Forgot password?</a>
+          </div>
+          <div id="keep-sign">
+            <section class="example-section">
+              <mat-checkbox class="example-margin">Keep me signed in</mat-checkbox>
+            </section>
+          </div>
+          <div id="login-btn">
+            <button mat-button id="login" >LOG IN</button>
+          </div>
+          <div id="break-page">
+              <hr>
+          </div>
+          <div style="display: flex; align-self: center; font-size: small; color: #424874;">
+            Don't have an account?
+          </div>
+          <div id="signup-holder">
+            <button mat-button id="signup">SIGN UP</button>
+          </div>
+    </div>
+
+</div>
+
