@@ -7,7 +7,6 @@ import { FooterComponent } from 'src/app/components/footer/footer.component';
 
 //Angular Material
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
-import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -16,12 +15,12 @@ import { QuillModule } from 'ngx-quill';
   ],
   imports: [
     CommonModule,
-    AngularMaterialModule,
-
+    AngularMaterialModule
   ],
   exports: [
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+
   ]
 })
 
