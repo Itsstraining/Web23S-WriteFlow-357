@@ -1,0 +1,41 @@
+.center {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    z-index: 9999;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+}
+
+object {
+    margin-left: 50px;
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    padding-top: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #310e92;
+    margin: 0;
+
+    animation: heartBeart 1s linear infinite;
+}
+
+@keyframes heartBeart {
+    0% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.3;
+    }
+}

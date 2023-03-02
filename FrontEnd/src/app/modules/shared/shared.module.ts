@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 //Components
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
+import { LoadingComponent } from 'src/app/components/loading/loading.component';
 
 //Angular Material
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
@@ -11,7 +12,8 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 @NgModule({
   declarations: [
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,7 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
   exports: [
     NavbarComponent,
     FooterComponent,
-
+    LoadingComponent
   ]
 })
 
