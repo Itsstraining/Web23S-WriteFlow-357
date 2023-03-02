@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
   hide = true;
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 }
