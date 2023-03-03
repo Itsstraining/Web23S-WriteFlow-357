@@ -15,6 +15,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
     CommonModule,
     HomeRoutingModule,
     AngularMaterialModule,
+    SharedModule
   ]
 })
 export class HomeModule { }

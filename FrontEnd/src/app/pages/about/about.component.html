@@ -1,0 +1,42 @@
+<app-navbar></app-navbar>
+<div class="navbar-spacer"></div>
+<div class="container">
+    <div class="quote background-image">
+        <div>
+            <h1>"Fill your paper with the<br>breathings of your heart." <br>- William Wordsworth</h1>
+        </div>
+        <div class="quote-spacer"></div>
+    </div>
+    <div class="about">
+        <h1>About Us</h1>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl nec
+            tincidunt lacinia, nunc est aliquam nisl, vitae aliquet nisl nunc eget lorem. Sed
+            euismod, nisl nec tincidunt lacinia, nunc est aliquam nisl, vitae aliquet nisl
+            nunc eget lorem.
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl nec
+            tincidunt lacinia, nunc est aliquam nisl, vitae aliquet nisl nunc eget lorem. Sed
+            euismod, nisl nec tincidunt lacinia, nunc est aliquam nisl, vitae aliquet nisl
+            nunc eget lorem.
+        </p>
+
+    </div>
+    <div class="member-container">
+        <div>
+            <div>
+                <div class="card" *ngFor="let member of members">
+                    <div class="profile-image">
+                        <img [src]="member.image" oncontextmenu="return false">
+                    </div>
+                    <div class="description">
+                        <h3>{{member.name}}</h3>
+                        <p>{{member.position}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
