@@ -8,6 +8,7 @@ import { LoadingComponent } from 'src/app/components/loading/loading.component';
 
 //Angular Material
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
+import { AuthService } from 'src/app/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
     CommonModule,
     AngularMaterialModule
   ],
+  providers: [AuthService],
   exports: [
     NavbarComponent,
     FooterComponent,

@@ -12,7 +12,15 @@
     </span>
     <span class="spacer"></span>
     <span>
-        <button mat-button class="button register">Register</button>
-        <button mat-button class="button login">Login</button>
+        <span *ngIf="!(user$ |async); else isLogged">
+            <button mat-button class="button register">Register</button>
+            <button mat-button class="button login" (click)="loginWithFacebook()">Login</button>
+        </span>
+        <ng-template #isLogged>
+            <span>
+                <button mat-button class="button logout" (click)="logout()">Logout</button>
+                <img class="avatar" [src]="user?.photoURL" [alt]="user?.displayName">
+            </span>
+        </ng-template>
     </span>
 </mat-toolbar>

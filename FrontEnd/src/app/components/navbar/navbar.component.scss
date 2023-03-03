@@ -37,16 +37,28 @@ mat-toolbar>span {
         width: 120px !important;
     }
 
+    &>span {
+        display: flex;
+        align-items: center;
+
+        .avatar {
+            margin-left: 1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+    }
 
     .login,
-    .login-2,
+    .logout,
     .register {
         font-size: 16px;
         font-weight: 700;
         border-radius: 10px;
     }
 
-    .register {
+    .register,
+    .logout {
         color: var(--color-4);
         border: 1px solid rgba(var(--color-4-rgb), 0.2);
     }
@@ -78,10 +90,4 @@ mat-toolbar>span {
     .flow {
         font-weight: 700;
     }
-}
-
-.login-2 {
-    background-color: var(--color-4);
-    color: #fff !important;
-    box-shadow: 2px 2px 2px 0px rgba(var(--color-4-rgb), 0.2);
 }
