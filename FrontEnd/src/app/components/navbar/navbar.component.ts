@@ -14,6 +14,7 @@ export class NavbarComponent {
 
   user$ = this.authService.user$;
   user: User | null = this.authService.currentUser;
+  isLoading = true;
 
   ngOnInit(): void {
     window.addEventListener('scroll', () => {
@@ -26,6 +27,10 @@ export class NavbarComponent {
 
     this.user$.subscribe(user => {
       this.user = user;
+    });
+
+    this.authService.isLoading$.subscribe(isLoading => {
+      this.isLoading = isLoading;
     });
   }
 

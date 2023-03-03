@@ -9,13 +9,17 @@ export class AuthService {
 
   user$: Subject<User | null> = new Subject<User | null>();
   currentUser: User | null = null;
+  isLoading$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private auth: Auth) {
     this.currentUser = auth.currentUser;
+    this.user$.next(this.currentUser);
+    this.isLoading$.next(true);
 
     onAuthStateChanged(auth, (user) => {
       this.currentUser = user;
       this.user$.next(user);
+      this.isLoading$.next(false);
     });
   }
 

@@ -18,7 +18,9 @@ export class LoadingComponent {
 
   ngAfterViewInit(): void {
     if (this.fixed) {
-      this.container.last.nativeElement.style.position = 'fixed';
+      try {
+        this.container.last.nativeElement.style.position = 'fixed';
+      } catch (error: any) { }
     }
   }
 }
