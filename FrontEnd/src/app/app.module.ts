@@ -9,8 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
