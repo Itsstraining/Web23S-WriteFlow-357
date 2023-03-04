@@ -1,0 +1,1 @@
+export const url = 'mongodb+srv://khanhnlq14917:nXQ6getG2C0CDnqt@document.l4gr226.mongodb.net/?retryWrites=true&w=majority'
