@@ -1,0 +1,107 @@
+h3{
+  color: var(--color-4);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.container{
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-4);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-all{
+  border-radius: 10px;
+  padding: 4rem 4rem;
+  background-color: var(--color-3);
+
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.full-width{
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: #FFF;
+}
+
+.section{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  .margin {
+    margin-left: -9px;
+
+    font-weight: 400;
+
+    span {
+      color: var(--color-4);
+    }
+  }
+}
+
+.forgot{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  a{
+    color: var(--color-4);
+    font-weight: 700;
+    text-decoration: none;
+  }
+}
+
+.check-holder{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  .forgot{
+    margin-left: 10rem;
+  }
+}
+
+.login-button{
+  display: flex;
+  background-color: var(--color-5);
+  border-radius: 10px;
+  width: 100%;
+  background-color: #FFF;
+  font-weight: 500;
+  margin-top: 0.5rem;
+
+}
+
+.break-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  margin-top: 1rem;
+
+  .break{
+    width: 50%;
+    border-top: 1px solid var(--color-4);
+  }
+
+  .or{
+    font-size: 1rem;
+  }
+}
+
+.button{
+  border-radius: 50%;
+}
