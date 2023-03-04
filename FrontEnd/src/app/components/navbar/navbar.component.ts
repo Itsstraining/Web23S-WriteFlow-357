@@ -1,6 +1,8 @@
+import { LoginpopupComponent } from '../../components/loginpopup/loginpopup.component';
 import { Component } from '@angular/core';
 import { User } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavbarComponent {
   isTop = true;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, public dialog: MatDialog) { }
 
   user$ = this.authService.user$;
   user: User | null = this.authService.currentUser;
@@ -46,4 +48,12 @@ export class NavbarComponent {
     this.authService.logout();
   }
 
+  openDialogLogin() {
+    const dialogRef = this.dialog.open(LoginpopupComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }
+
