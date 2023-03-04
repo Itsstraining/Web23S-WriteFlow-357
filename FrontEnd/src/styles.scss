@@ -2,8 +2,8 @@
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 // Plus imports for other components in your app.
-@import '~quill/dist/quill.bubble.css';
-@import '~quill/dist/quill.snow.css';
+@import 'node_modules/quill/dist/quill.core.css';
+@import 'node_modules/quill/dist/quill.snow.css';
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
@@ -95,4 +95,34 @@ body {
 html,
 body {
     height: 100%;
+}
+
+$toolbar-padding: 20px;
+$toolbar-button: 24px;
+
+quill-editor {
+    height: 100%;
+    width: 100%;
+}
+
+.ql-toolbar {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+
+    padding: $toolbar-padding !important;
+    position: fixed;
+    z-index: 1000;
+    background-color: var(--color-1);
+
+
+
+}
+
+.ql-container {
+    height: 100%;
+    width: 80%;
+    margin: 0 auto;
+    top: calc(#{$toolbar-button + $toolbar-padding * 2});
 }
