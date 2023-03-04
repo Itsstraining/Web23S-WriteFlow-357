@@ -44,8 +44,11 @@
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <mat-label>Password</mat-label>
-        <input class="input" matInput placeholder="Password" type="password">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
       </mat-form-field>
 
       <div class="forgot">

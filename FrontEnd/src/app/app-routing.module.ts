@@ -9,6 +9,7 @@ const routes: Routes = [
 
   { path: 'main', loadChildren: () => import('./pages/main/main.module').then(m => m.MainModule) },
   { path: 'about', loadChildren: () => import('./pages/about/about.module').then(m => m.AboutModule) },
+  { path: 'loginPopup', loadChildren: () => import('./pages/login-popup/login-popup.module').then(m => m.LoginPopupModule) },
 
   { path: '**', loadChildren: () => import('./pages/notfound/notfound.module').then(m => m.NotfoundModule) },
 ];
