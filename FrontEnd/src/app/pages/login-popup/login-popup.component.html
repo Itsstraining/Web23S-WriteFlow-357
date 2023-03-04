@@ -1,7 +1,8 @@
 <div class="container">
   <div class="container-all">
-    <div class="title"><h3>LOGIN</h3></div>
-
+    <div class="title">
+      <h3>LOGIN</h3>
+    </div>
       <mat-form-field class="full-width">
         <mat-label>Email</mat-label>
         <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
@@ -22,13 +23,11 @@
       </mat-form-field>
 
       <div class="check-holder">
-        <section class="section">
-          <mat-checkbox class="margin"><span>Keep me logged in</span></mat-checkbox>
-        </section>
-        <span class="forgot">
-          <a href="#">Forgot password?</a>
-      </span>
-    </div>
+          <section class="section">
+          <mat-checkbox class="keep-sign-in">Keep me logged in</mat-checkbox>
+          </section>
+          <a href="#" class="forgot-password">Forgot password?</a>
+      </div>
 
       <button mat-button class="login-button">LOG IN</button>
 
