@@ -7,7 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import {MatDialogModule} from '@angular/material/dialog';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 @NgModule({
   declarations: [],
   imports: [
@@ -17,7 +18,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     MatToolbarModule,
@@ -25,7 +29,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class AngularMaterialModule { }
