@@ -4,7 +4,9 @@ dialog{
     border-color: rgba(var(--color-4-rgb), 0.8)
     // color-4-rgb: 66, 72, 116;
 }
-
+.Display{
+    display: flex;
+}
 .Invite{
     background-color: #424874;
     color: #F4F6FF;
@@ -53,6 +55,7 @@ dialog{
 
 #lock-icon{
     color: #424874;
+    margin-right: 0.5em;
 }
 
 .Copy-Link{
@@ -61,6 +64,8 @@ dialog{
     width: 11em;
     height: 3em;
     border-radius: 10px;
+    margin-top: 0.5em;
+    margin-left: 1em;
 }
 .Close{
     color:#424874;

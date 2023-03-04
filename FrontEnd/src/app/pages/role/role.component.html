@@ -23,9 +23,10 @@
     <div mat-dialog-content class="List-Title"> List of people who have access </div> 
     <!-- End -->
     <div mat-dialog-content >
-        <div class="General-Text"> General access </div> <br>  
-
-            <mat-icon id="lock-icon">lock</mat-icon>
+        <div class="General-Text"> General access </div> <br>
+        <div class="Display">
+            <div class="">
+            <mat-icon id="lock-icon">lock</mat-icon></div>
             <div>
                 <select id="Access-List">
                     <option value="Restricted"> Restricted </option>
@@ -34,12 +35,12 @@
                 <div class="Only"> Only people with access can open with the link  </div><br>  
             </div>
         <!-- Copy-Link Button -->
-        
-        <button mat-fab extended class="Copy-Link">
+        <div><button mat-fab extended class="Copy-Link">
             <mat-icon>link</mat-icon>
             Copy link
-          </button>
+          </button></div> 
           <!-- End -->
+        </div> 
     </div>
 
 </dialog>
