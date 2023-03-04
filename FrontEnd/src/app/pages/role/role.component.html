@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role Management</title>
+</head>
+<body>
+    <dialog open>
+        <div mat-dialog-actions>
+            <button mat-button mat-dialog-close class="Close">X</button>
+        </div>
+   <div mat-dialog-content class="Title"> Share "Document1.docx" </div>
+   <!-- Search Input, Invite Button -->
+   <div> 
+    <input class="Search" type="text" placeholder="Type to search people and groups">
+    <button mat-fab extended class="Invite"> Invite </button>
+    </div>
+    <!-- End -->
+    <!-- People list -->
+    <div mat-dialog-content class="List-Title"> List of people who have access </div> 
+    <!-- End -->
+    <div mat-dialog-content >
+        <div class="General-Text"> General access </div> <br>  
+
+            <mat-icon id="lock-icon">lock</mat-icon>
+            <div>
+                <select id="Access-List">
+                    <option value="Restricted"> Restricted </option>
+                    <option value="Anyone"> Anyone with the link </option>
+                </select> <br>
+                <div class="Only"> Only people with access can open with the link  </div><br>  
+            </div>
+        <!-- Copy-Link Button -->
+        
+        <button mat-fab extended class="Copy-Link">
+            <mat-icon>link</mat-icon>
+            Copy link
+          </button>
+          <!-- End -->
+    </div>
+
+</dialog>
+</body>
+</html>

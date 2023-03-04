@@ -1,0 +1,72 @@
+dialog{
+    border-radius: 10px;
+    background-color: #F4F6FF;
+    border-color: rgba(var(--color-4-rgb), 0.8)
+    // color-4-rgb: 66, 72, 116;
+}
+
+.Invite{
+    background-color: #424874;
+    color: #F4F6FF;
+    border-radius: 5px;
+    border-color: rgba(var(--color-4-rgb), 0.25);
+    height: 2em;
+    margin-left: 0.5em;
+}
+.Only{
+    font-family: 'Open Sans', sans-serif;
+    color: #424874;
+    font-weight: 400;
+}
+#Access-List{
+    background-color: #F4F6FF;
+}
+.General-Text{
+    font-family: 'Open Sans', sans-serif;
+    color: #424874;
+    font-weight: bold;
+}
+#Access-List{
+    font-family: 'Open Sans', sans-serif;
+    color: #424874;
+    border-radius: 5px;
+}
+.Search{
+    width: 20em;
+    border-color: rgba(var(--color-4-rgb), 0.25);
+    border-radius: 5px;
+    background-color: #F4F6FF;
+    color: #424874;
+    opacity: 0.5;
+    height: 1.5em;
+}
+.Title{
+    font-family: 'Open Sans', sans-serif;
+    color: #424874;
+    font-weight: bold;
+}
+.List-Title{
+    font-family: 'Open Sans', sans-serif;
+    color: #424874;
+    font-weight: bold;
+}
+
+#lock-icon{
+    color: #424874;
+}
+
+.Copy-Link{
+    color: #fff;
+    background-color: #424874;
+    width: 11em;
+    height: 3em;
+    border-radius: 10px;
+}
+.Close{
+    color:#424874;
+    position: absolute;
+    top: 0;
+  right: 0;
+  padding: 5px;
+  line-height: 14px;
+}
