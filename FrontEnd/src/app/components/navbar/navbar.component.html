@@ -1,3 +1,4 @@
+<app-loading [fixed]="true" [loading]="isLoading" *ngIf="isLoading"></app-loading>
 <mat-toolbar [ngClass]="{'hide': !isTop}" class="fixed">
     <span class="logo">
         <img src="../../../assets/Logo.svg" alt="logo" width="60px">
@@ -12,7 +13,15 @@
     </span>
     <span class="spacer"></span>
     <span>
-        <button mat-button class="button register">Register</button>
-        <button mat-button class="button login">Login</button>
+        <span *ngIf="!(user$ |async); else isLogged">
+            <button mat-button class="button register">Register</button>
+            <button mat-button class="button login" (click)="loginWithGoogle()">Login</button>
+        </span>
+        <ng-template #isLogged>
+            <span>
+                <button mat-button class="button logout" (click)="logout()">Logout</button>
+                <img class="avatar" [src]="user?.photoURL" [alt]="user?.displayName">
+            </span>
+        </ng-template>
     </span>
 </mat-toolbar>

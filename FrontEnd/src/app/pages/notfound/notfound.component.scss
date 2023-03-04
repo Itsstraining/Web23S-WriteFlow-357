@@ -1,0 +1,29 @@
+.container,
+.container>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+
+    color: var(--color-4);
+}
+
+.container>div {
+    h1 {
+        font-size: 4em;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    p {
+        font-size: 1.5em;
+        font-weight: 400;
+        margin: 0;
+    }
+
+    img {
+        margin-top: 2rem;
+    }
+}

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { User } from '@angular/fire/auth';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +9,12 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
   isTop = true;
-  constructor() { }
+
+  constructor(private authService: AuthService) { }
+
+  user$ = this.authService.user$;
+  user: User | null = this.authService.currentUser;
+  isLoading = true;
 
   ngOnInit(): void {
     window.addEventListener('scroll', () => {
@@ -17,5 +24,26 @@ export class NavbarComponent {
         this.isTop = true;
       }
     })
+
+    this.user$.subscribe(user => {
+      this.user = user;
+    });
+
+    this.authService.isLoading$.subscribe(isLoading => {
+      this.isLoading = isLoading;
+    });
   }
+
+  loginWithGoogle() {
+    this.authService.loginWithGoogle();
+  }
+
+  loginWithFacebook() {
+    this.authService.loginWithFacebook();
+  }
+
+  logout() {
+    this.authService.logout();
+  }
+
 }
