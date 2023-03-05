@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,300&display=swap');
 .dialog{
+    height: 13rem;
+    width: 33rem;
     border-radius: 10px;
     background-color: #F4F6FF;
     border-color: rgba(var(--color-4-rgb), 0.8);
@@ -11,111 +14,72 @@
     
   transform: translate(-50%, -50%);
 }
-.grid-item2, #People-Access-List{
-    font-size: 17px;
-    font-family: 'Open Sans', sans-serif;
-    color: #424874;
-    border-radius: 5px;
-    background-color: #F4F6FF;
-    text-align-last:center;
-}
-.grid-item2{
-    margin-left:1.5rem;
-}
-.Person-Name{
-    color: #424874;
-}
-.grid-container {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-gap: 1rem;
-    column-gap: 16rem;
-    padding: 10px;
-    
-  }
-.Display{
+.Undo-Div{
     display: flex;
 }
-.Invite{
-    background-color: #424874;
-    color: #F4F6FF;
-    border-radius: 5px;
-    border-color: rgba(var(--color-4-rgb), 0.25);
-    height: 2.2em;
-    width: 7.75rem;
-    font-size: 18px;
-    margin-left: 0.5em;
+.icon-warning{
+  font-size:48px;
+  color:red;
+  margin-left:15rem;
+  display: inline-block;
 }
-.Only{
-    font-family: 'Open Sans', sans-serif;
-    color: #424874;
-    font-weight: 400;
+.delete-question{
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.3em;
+  font-family: 'Open Sans', sans-serif;
+  color:#424874;
 }
-#Access-List{
-    background-color: #F4F6FF;
+.sure-delete{
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 1.3em;
+  font-family: 'Open Sans', sans-serif;
+  color:#424874;
+  font-weight: 400;
 }
-.General-Text{
-    font-family: 'Open Sans', sans-serif;
-    color: #424874;
-    font-weight: bold;
-    margin-top: 0.5rem;
-    font-size: 22px;
-}
-#Access-List{
-    font-size: 17px;
-    font-family: 'Open Sans', sans-serif;
-    color: #424874;
-    border-radius: 5px;
-}
-.Search{
-    width: 25em;
-    border-color: rgba(var(--color-4-rgb), 0.25);
-    border-radius: 5px;
-    background-color: #F4F6FF;
-    color: #424874;
-    margin-top: 1em;
-    height: 2em;
-    font-size: 17px;
-}
-.Title{
-    font-family: 'Open Sans', sans-serif;
-    color: #424874;
-    font-weight: bold;
-    font-size: 22px;
-}
-.List-Title{
-    margin-top: 0.5em;
-    font-family: 'Open Sans', sans-serif;
-    color: #424874;
-    font-weight: bold;
-    font-size: 22px;
-}
+span{
+  font-weight: bold;
 
-#lock-icon{
-    color: #424874;
-    margin-right: 0.5em;
 }
-
-.Copy-Link{
-    color: #fff;
+.Undo-Div{
+  align-items: center;
+  margin-left: 8.4rem;
+  margin-top: 0.6rem;
+  font-size: 1.3em;
+  font-family: 'Open Sans', sans-serif;
+  color:#424874;
+  font-weight: 400;
+}
+.Yes-Button{
+  color: #fff;
     background-color: #424874;
-    width: 8.62em;
+    width: 8em;
     font-size: 17px;
-    height: 3em;
+    height: 2.4em;
     border-radius: 10px;
-    margin-top: 0.3em;
-    margin-left: 0.5em;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-left: 9em;
+    margin-right: 1em;
+}
+.No-Button{
+  color: #fff;
+    background-color: #424874;
+    width: 8em;
+    font-size: 17px;
+    height: 2.4em;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    margin-left: 0.1em;
+    
 }
 .Close{
-    color:#424874;
+ color:#424874;
     position: absolute;
     top: 0;
   right: 0;
   padding: 5px;
-  line-height: 14px;
-  font-size: 1.5rem;
-  
-}
-option{
-    text-align: center;
+  line-height: 12px;
+  font-size: 1.2rem;
 }

@@ -11,13 +11,15 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginpopupComponent } from 'src/app/components/loginpopup/loginpopup.component';
 import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
+import { RoleDialogComponent } from 'src/app/components/role-dialog/role-dialog.component';
 @NgModule({
   declarations: [
     NavbarComponent,
     FooterComponent,
     LoadingComponent,
     LoginpopupComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    RoleDialogComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confir
     NavbarComponent,
     FooterComponent,
     LoadingComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    RoleDialogComponent
   ]
 })
 
