@@ -9,11 +9,13 @@ import { QuillModule } from 'ngx-quill';
 
 
 
+
 @NgModule({
   declarations: [
     MainComponent,
     DocumentComponent,
-    ListComponent
+    ListComponent,
+ 
   ],
   imports: [
     CommonModule,

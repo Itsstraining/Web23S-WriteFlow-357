@@ -12,7 +12,7 @@ const routes: Routes = [
  
   { path: 'role', loadChildren: () => import('./pages/role/role.module').then(m => m.RoleModule) },
 
-
+ 
   { path: '**', loadChildren: () => import('./pages/notfound/notfound.module').then(m => m.NotfoundModule) },
 ];
 

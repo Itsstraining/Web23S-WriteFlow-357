@@ -14,4 +14,5 @@ export class RoleComponent {
     {value: 'v1', viewValue: 'Restricted'},
     {value: 'v2', viewValue: 'Anyone with the link'}
   ];
+  
 }
