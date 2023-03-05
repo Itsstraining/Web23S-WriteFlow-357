@@ -9,12 +9,14 @@ import { LoadingComponent } from 'src/app/components/loading/loading.component';
 //Angular Material
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { AuthService } from 'src/app/services/auth.service';
+import { LoginpopupComponent } from 'src/app/components/loginpopup/loginpopup.component';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     FooterComponent,
-    LoadingComponent
+    LoadingComponent,
+    LoginpopupComponent
   ],
   imports: [
     CommonModule,

@@ -8,6 +8,7 @@ import { ListComponent } from './components/list/list.component';
 import { QuillModule } from 'ngx-quill';
 
 
+
 @NgModule({
   declarations: [
     MainComponent,
