@@ -4,43 +4,34 @@ h3{
   font-weight: 800;
 }
 
-// .container{
-//   width: 70vw;
-//   height: 70vh;
-//   background-color: var(--color-4);
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
+.name{
+  color: var(--color-4);
+  font-weight: 600;
+}
 
 .container-all{
-  border-radius: 10px;
-  width: 80vw;
-  padding: 2%;
-  height: 80vh;
+  padding: 1rem 2rem;
+  width: 20vw;
+  height: 60vh;
   background-color: var(--color-3);
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
+  // border-radius: 10px;
 }
 
 .full-width{
-  width: 100%;
+  width: 20vw;
   border-radius: 10px;
-  box-shadow: #FFF;
+  font-size: small;
 }
 
-
-.logged{
-  width: 100%;
-}
 .keep-sign-in{
   font-size: 12px;
-
 }
+
 .forgot{
-  width: 100%;
+  width: 20vw;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -58,13 +49,13 @@ h3{
 .check-holder{
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 20vw;
   align-items: center;
-
 }
 
 .forgot-password{
   font-size:12px;
+  text-decoration: none;
 }
 
 
@@ -72,11 +63,10 @@ h3{
   display: flex;
   background-color: var(--color-5);
   border-radius: 10px;
-  width: 100%;
+  width: 20vw;
   background-color: #FFF;
   font-weight: 500;
   margin-top: 0.5rem;
-
 }
 
 .break-container{
@@ -84,7 +74,7 @@ h3{
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 20vw;
 
 
   margin-top: 1rem;
@@ -101,8 +91,8 @@ h3{
 }
 
 .button{
-  border-radius: 50%;
-}
+    border-radius: 50%;
+  }
 
 img{
   width: 30px;
