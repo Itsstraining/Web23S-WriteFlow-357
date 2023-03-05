@@ -4,13 +4,35 @@
     border-color: rgba(var(--color-4-rgb), 0.8);
     position: absolute;
     float: left;
-  left: 40%;
+  left: 38%;
   top: 50%;
   justify-items: center;
   align-items: center;
-  
+    
   transform: translate(-50%, -50%);
 }
+.grid-item2, #People-Access-List{
+    font-size: 17px;
+    font-family: 'Open Sans', sans-serif;
+    color: #424874;
+    border-radius: 5px;
+    background-color: #F4F6FF;
+    text-align-last:center;
+}
+.grid-item2{
+    margin-left:1.5rem;
+}
+.Person-Name{
+    color: #424874;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 1rem;
+    column-gap: 16rem;
+    padding: 10px;
+    
+  }
 .Display{
     display: flex;
 }
@@ -91,4 +113,7 @@
   right: 0;
   padding: 5px;
   line-height: 14px;
+}
+option{
+    text-align: center;
 }
