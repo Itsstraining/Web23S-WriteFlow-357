@@ -1,5 +1,22 @@
-<dialog class="Dialog-Confirm" open>
 
-    <mat-icon>warning</mat-icon>
+    <dialog class="dialog" open >
+        <div mat-dialog-actions>
+            <button mat-button mat-dialog-close class="Close">X</button>
+        </div>
+        <!-- icon warning -->
+        <div  class="icon-warning"> <mat-icon [inline]="true">warning</mat-icon></div>
 
+        <!-- End -->
+        <div class="delete-question"> Deleting document?</div>
+        <div class="sure-delete"> Are you sure to delete "<span>document1.docx</span>"?</div>
+        <!-- Undo -->
+        <div class="Undo-Div"> <div class="undo"> You can't undo this action </div>
+        <mat-icon>error_outline</mat-icon>
+        </div>
+        <!-- 2 Button -->
+        <div class="Yes-No-Button">
+            <button mat-fab extended class="Yes-Button"> Yes </button>
+            <button mat-fab extended class="No-Button"> No </button></div>
+        
 </dialog>
+
