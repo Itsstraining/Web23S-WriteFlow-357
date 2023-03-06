@@ -1,49 +1,46 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Document, DocumentDocument } from 'src/schemas/document.schema';
+import { UserDocument, UserDocumentDocument } from 'src/schemas/document.schema';
+import { DocumentModel } from 'src/models/document.model';
 
 @Injectable()
 export class DocumentService {
-    constructor(@InjectModel(Document.name) private documentModel: Model<DocumentDocument>) { }
+    constructor(@InjectModel(UserDocument.name) private userDocumentModel: Model<UserDocumentDocument>) { }
 
-    async create(document: Document): Promise<Document> {
-        const createdDocument = new this.documentModel(document);
+    async createDocument(document: UserDocument) {
+        const createdDocument = new this.userDocumentModel(document);
         return createdDocument.save();
     }
 
-    async findAll(): Promise<Document[]> {
-        return this.documentModel.find().exec();
+    async getDocuments(uid: string): Promise<DocumentModel[]> {
+        let documents = this.userDocumentModel.find({ uid: uid }).exec();
+        return documents['documents'];
     }
 
-    async findOne(id: string): Promise<Document> {
-        return this.documentModel.findOne({ id }).exec();
+    async getDocument(uid: string, id: string): Promise<DocumentModel> {
+        let documents = this.userDocumentModel.find({ uid: uid }).exec();
+        return documents['documents'].find((document: any) => document.id === id);
     }
 
-    async findByOwnerId(ownerId: string): Promise<Document[]> {
-        return this.documentModel.find({ ownerId }).exec();
+    async updateDocument(uid: string, id: string, documentData: DocumentModel): Promise<string> {
+        let document = await this.getDocument(uid, id);
+        if (!document) return "Document not found";
+        document = documentData;
+        return `Document ${id} updated`;
     }
 
-    async update(id: string, document: Document): Promise<void> {
-        let documentFind = this.documentModel.findOne({ id }).exec();
-        documentFind.then((doc) => {
-            doc.contentPath = document.contentPath;
-            doc.dateModified = document.dateModified;
-            doc.status = document.status;
-            doc.save();
-        })
+    async deleteDocument(uid: string, id: string): Promise<string> {
+        let document = await this.getDocument(uid, id);
+        if (!document) return "Document not found";
+        return `Document ${id} deleted`;
     }
 
-    async remove(id: string): Promise<void> {
-        let documentFind = this.documentModel.findOne({ id }).exec();
-        documentFind.then((doc) => {
-            doc.isDelete = true;
-            doc.save();
+    async checkValidUser(uid: string): Promise<boolean> {
+        let users = await this.userDocumentModel.find({ uid: uid }).exec();
+        users.forEach((user: any) => {
+            if (user.uid === uid) return true;
         });
+        return false;
     }
-
-    async removePermanently(id: string): Promise<void> {
-        this.documentModel.remove({ id }).exec();
-    }
-
 }

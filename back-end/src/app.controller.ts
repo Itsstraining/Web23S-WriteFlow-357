@@ -1,7 +1,8 @@
 import { Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { DocumentService } from './services/document/document.service';
-import { v4 as uuidv4 } from 'uuid';
+const { v4: uuidv4 } = require('uuid');
+//import { v4 as uuidv4 } from 'uuid';
 
 @Controller()
 export class AppController {
