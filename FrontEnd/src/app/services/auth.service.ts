@@ -23,9 +23,9 @@ export class AuthService {
     });
   }
 
-  loginWithGoogle() {
+  async loginWithGoogle() {
     let provider = new GoogleAuthProvider();
-    signInWithPopup(this.auth, provider);
+   await signInWithPopup(this.auth, provider);
   }
 
   loginWithFacebook() {

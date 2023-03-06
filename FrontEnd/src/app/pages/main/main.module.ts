@@ -7,6 +7,9 @@ import { DocumentComponent } from './components/document/document.component';
 import { ListComponent } from './components/list/list.component';
 import { QuillModule } from 'ngx-quill';
 import { AngularMaterialModule } from 'src/app/modules/angular-material/angular-material.module';
+import { MailComponent } from './components/mail/mail.component';
+import { RecycleComponent } from './components/recycle/recycle.component';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 
 
@@ -15,12 +18,16 @@ import { AngularMaterialModule } from 'src/app/modules/angular-material/angular-
   declarations: [
     MainComponent,
     DocumentComponent,
-    ListComponent
+    ListComponent,
+    MailComponent,
+    RecycleComponent,
+
   ],
   imports: [
     CommonModule,
     MainRoutingModule,
     AngularMaterialModule,
+    SharedModule,
     QuillModule.forRoot(),
   ]
 })

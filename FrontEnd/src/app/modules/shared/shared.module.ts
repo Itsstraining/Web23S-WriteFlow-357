@@ -10,13 +10,15 @@ import { LoadingComponent } from 'src/app/components/loading/loading.component';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginpopupComponent } from 'src/app/components/loginpopup/loginpopup.component';
+import { StatusComponent } from 'src/app/components/status/status.component';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     FooterComponent,
     LoadingComponent,
-    LoginpopupComponent
+    LoginpopupComponent,
+    StatusComponent,
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { LoginpopupComponent } from 'src/app/components/loginpopup/loginpopup.co
   exports: [
     NavbarComponent,
     FooterComponent,
-    LoadingComponent
+    LoadingComponent,
+    StatusComponent,
   ]
 })
 

@@ -3,19 +3,32 @@
   height: 100%;
   display: flex;
 }
+.main-container-opensidebar{
+  width: 80%;
+  height: 100%;
+  transition: width 0.5s;
+}
+.main-container-closesidebar{
+  width: 95%;
+  height: 100%;
+  transition: width 0.5s;
+}
 .side-bar-container{
   width: 20%;
   border-right: 1px solid #ccc;
   transition: width 0.5s;
-  position: relative;
+
 }
 .side-bar-close{
   width: 5%;
-  position: relative;
+
   border-right: 1px solid #ccc;
   transition: width 0.5s;
 
   .logo-container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
     img{
       width: 100%;
       height: 100%;
@@ -23,6 +36,7 @@
     span{
       display: none;
     }
+
   }
   .navigate-container, .navigate-active-link{
 
@@ -32,10 +46,6 @@
       display: none;
     }
   }
-}
-.toggle-sidebar{
-position: absolute;
-bottom: 0;
 }
 .navigate-container, .navigate-active-link{
   transition: visibility 0s, opacity 0.5s linear;

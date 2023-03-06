@@ -30,7 +30,7 @@ export class MainComponent {
     {
       icon: 'delete',
       title: 'Recyle bin',
-      link: 'trash',
+      link: 'recycle',
       active: false
     },
     {
