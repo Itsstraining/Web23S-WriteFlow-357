@@ -1,30 +1,16 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { DocumentModel } from '../models/document.model';
 
-export type DocumentDocument = HydratedDocument<Document>;
+export type UserDocumentDocument = HydratedDocument<UserDocument>;
 
 @Schema()
-export class Document {
+export class UserDocument {
     @Prop()
-    id: string;
+    uid: string;
 
     @Prop()
-    contentPath: string;
-
-    @Prop()
-    dateCreated: string;
-
-    @Prop()
-    dateModified: string;
-
-    @Prop()
-    status: string;
-
-    @Prop()
-    isDelete: boolean;
-
-    @Prop()
-    ownerId: string;
+    documents: DocumentModel[];
 }
 
-export const DocumentSchema = SchemaFactory.createForClass(Document);
+export const DocumentSchema = SchemaFactory.createForClass(UserDocument);

@@ -1,57 +1,37 @@
 import { Controller, Get, Post, Put, Query, UploadedFile, Headers, UseInterceptors, Body, Delete } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import * as fs from 'fs';
 import { join } from 'path';
-import { cwd } from 'process';
+import { AuthService } from 'src/services/auth/auth.service';
 import { DocumentService } from 'src/services/document/document.service';
 import { saveDocumentToStorage } from './documentFilter';
 
 @Controller('document')
 export class DocumentController {
-    constructor(private documentService: DocumentService) { }
+    constructor(private documentService: DocumentService, private authService: AuthService) { }
 
-    //related to document info
-    @Get('info')
-    async getDocumentInfo(@Query('id') id: string) {
-        let document = await this.documentService.findOne(id);
-        return document;
+    @Get('')
+    async getDocuments(@Query('id') id: string, @Headers() header: any) {
+        let token = header['authorization'];
+        token.replace('Bearer ', '');
+
+        let decodedToken = await this.authService.validateUser(token);
+        if (!decodedToken) return "Token is not valid";
+
+        if (id) return await this.documentService.getDocument(decodedToken.uid, id);
+        return await this.documentService.getDocuments(decodedToken.uid);
     }
 
-    @Put('info')
-    async updateDocumentInfo(@Body() body: any) {
-        let document = await this.documentService.findOne(body.id);
-        if (!document) {
-            return this.documentService.create(body);
-        } else {
-            return this.documentService.update(body.id, body);
-        }
+    @Put('')
+    async updateDocument(@Body() document: any, @Headers() header: any) {
+        let token = header['authorization'];
+        token.replace('Bearer ', '');
+
+        let decodedToken = await this.authService.validateUser(token);
+        if (!decodedToken) return "Token is not valid";
+
+        return await this.documentService.updateDocument(decodedToken.uid, document.id, document);
     }
 
-    @Delete('info')
-    async deleteDocumentInfo(@Query('id') id: string) {
-        let document = await this.documentService.findOne(id);
-        if (!document) {
-            return "Document not found";
-        } else {
-            return this.documentService.remove(id);
-        }
-    }
-
-
-    //related to user
-    @Get('user')
-    async getDocumentsByUser(@Query('id') id: string) {
-        let documents = await this.documentService.findByOwnerId(id);
-        return documents;
-    }
-
-
-    //related to file
-    @Get('file')
-    async getDocument(@Query('path') path: string) {
-        let document = fs.readFileSync(join(cwd(), 'src', path), 'utf8');
-        return document;
-    }
 
     @Post('file')
     @UseInterceptors(FileInterceptor('file', saveDocumentToStorage))
@@ -61,6 +41,9 @@ export class DocumentController {
         const pathToImageFolder = join('documentsStorage', header['ownerid']);
         const pathToImage = join(pathToImageFolder, file.filename);
 
-        return pathToImage;
+        return {
+            path: pathToImage,
+            name: file.filename,
+        };
     }
 }

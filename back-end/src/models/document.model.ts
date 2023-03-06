@@ -5,5 +5,10 @@ export interface DocumentModel {
     dateModified: string;
     status: string;
     isDelete: boolean;
-    owerID: string;
-}    
+    isStarred: boolean;
+}
+
+export interface UserDocumentModel {
+    uid: string;
+    documents: DocumentModel[];
+}
