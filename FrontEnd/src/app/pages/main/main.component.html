@@ -1,1 +1,19 @@
-<router-outlet></router-outlet>
+<div class="container">
+  <div [ngClass]="{'side-bar-container':this.sidebarToggle,'side-bar-close':this.sidebarToggle==false}">
+    <div class="logo-container">
+        <img src="../../../assets/Logo.svg" alt="page-logo">
+        <span class="write">Write</span ><span class="flow">Flow</span>
+    </div>
+    <hr>
+    <div [ngClass]="{'navigate-active-link':item.active,'navigate-container':item.active==false}" *ngFor="let item of this.navigateItems" (click)="navigate(item.link)" >
+      <mat-icon aria-hidden="false" aria-label="Document Icon" fontIcon="{{item.icon}}"></mat-icon>
+      <span>{{item.title}}</span>
+    </div>
+    <button (click)="sidebarChange()" class="toggle-sidebar">{{this.sidebarToggle?'<':'>'}}</button>
+  </div>
+
+  <div class="main-container">
+   <router-outlet></router-outlet>
+  </div>
+
+</div>
