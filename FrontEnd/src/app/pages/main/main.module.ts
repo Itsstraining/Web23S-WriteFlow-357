@@ -6,6 +6,8 @@ import { MainComponent } from './main.component';
 import { DocumentComponent } from './components/document/document.component';
 import { ListComponent } from './components/list/list.component';
 import { QuillModule } from 'ngx-quill';
+import { AngularMaterialModule } from 'src/app/modules/angular-material/angular-material.module';
+
 
 
 
@@ -18,6 +20,7 @@ import { QuillModule } from 'ngx-quill';
   imports: [
     CommonModule,
     MainRoutingModule,
+    AngularMaterialModule,
     QuillModule.forRoot(),
   ]
 })
