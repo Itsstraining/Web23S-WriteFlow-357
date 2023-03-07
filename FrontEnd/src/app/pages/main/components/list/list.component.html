@@ -3,11 +3,13 @@
 
   </div>
 
-  <!-- <div class="status-container">
-      <app-status></app-status>
-      <app-loading [inputData]="'Getting your documents'" [loading]="true"></app-loading>
-  </div> -->
-  <div class="tab-container">
+  <div class="status-container" *ngIf="(this.doc$|async)?.loading==true">
+      <app-loading [inputData]="'Getting your documents'" [loading]="true" ></app-loading>
+  </div>
+  <div class="status-container" *ngIf="(this.doc$|async)?.loading==false&&(this.doc$|async)?.error!=''">
+    <app-status ></app-status>
+</div>
+  <!-- <div class="tab-container" >
     <span class="tab-name">Open recently</span>
     <div class="add-container" matTooltip="Create">
       <mat-icon class="add-icon">add_circle</mat-icon>
@@ -30,11 +32,11 @@
         <span class="doc-created">Created: <span>15:30 24/12/2023</span></span>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="tab-container">
     <span class="tab-name">All Document</span>
   </div>
-  <div class="main-container">
+  <div class="main-container" *ngIf="(this.doc$|async)?.loading==false&&(this.doc$|async)?.error==''">
     <div class="item-container">
       <div class="icon-container">
         <div>

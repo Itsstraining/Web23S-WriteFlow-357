@@ -32,7 +32,7 @@ export const DocumentReducer = createReducer(
     return {
       ...state,
       documents:null,
-      loading: true,
+      loading: false,
       error:error
       }
     })
