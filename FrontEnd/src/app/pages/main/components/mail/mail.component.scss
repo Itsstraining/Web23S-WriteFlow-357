@@ -1,3 +1,4 @@
+
 .container{
   height: 100%;
   width: 100%;
@@ -8,23 +9,15 @@
   width: 100%;
 }
 
-.form {
-  min-width: 10%;
-  max-width: 40%;
-  width: 100%;
-
-  .full-width{
-    width: 80%;
+.full-width{
+    width: 20rem;
     margin: 0.5rem 0 0 0.5rem;
     font-size: medium;
-  }
-
-  .input{
-    border-radius: 10px;
-  }
+    outline: none;
 
   .input-holder{
     color: var(--color-4);
+    font-size: 1rem;
   }
 }
 
@@ -48,14 +41,25 @@
   background-color: var(--color-3);
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 90%;
   height: 5%;
-
+  border-radius: 10px;
+  margin: 0 1.5rem 0 2.5rem;
   .move-button-holder{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 25rem;
+
+    p{
+      font-size: small;
+      color: var(--color-4);
+    }
+  }
+
+  .loop-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -87,8 +91,8 @@
 
 .panel{
   background-color: var(--color-4);
-  margin-top: 0.5rem;
   border-radius: 10px;
+  margin: 1.5rem 0.5rem 0 0.5rem;
 }
 
 .panel-button{
@@ -108,4 +112,14 @@
 
 .Close:hover{
   background-color: var(--color-5);
+}
+
+.loading-state{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 90%;
+  z-index: 10000;
 }

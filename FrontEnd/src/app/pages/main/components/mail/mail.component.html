@@ -1,13 +1,10 @@
-<<<<<<< HEAD
 <div class="container">
   <div class="top-container">
-      <form class="form">
-      <mat-form-field class="full-width">
+      <mat-form-field class="full-width" appearance="outline">
         <mat-icon matSuffix>search</mat-icon>
         <mat-label class="input-holder">Find</mat-label>
         <input matInput placeholder="Ex. Email" class="input">
       </mat-form-field>
-      </form>
 
       <div class="button-holder">
         <button mat-button class="button">Invited</button>
@@ -19,9 +16,11 @@
   </div>
 
   <div class="mid-container">
+    <div class="loop-button">
       <button mat-button >
           <mat-icon>loop</mat-icon>
       </button>
+    </div>
       <div class="move-button-holder">
       <button mat-button >
         <mat-icon>keyboard_arrow_left</mat-icon>
@@ -54,8 +53,8 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
-
+<div class="loading-state">
   <app-loading [fixed]="true" [loading]="true"></app-loading>
 </div>
-=======
->>>>>>> b073ace048e3fe65d39dbad9f2b8ef0eace70e27
+</div>
+

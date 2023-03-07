@@ -24,14 +24,14 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatCheckboxModule,
     MatDialogModule,
     ReactiveFormsModule,
-<<<<<<< HEAD
+
     FormsModule,
     MatExpansionModule,
-    MatBadgeModule
-=======
+    MatBadgeModule,
+
     MatTooltipModule,
     FormsModule
->>>>>>> b073ace048e3fe65d39dbad9f2b8ef0eace70e27
+
   ],
   exports: [
     MatToolbarModule,
@@ -42,14 +42,13 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatCheckboxModule,
     MatDialogModule,
     ReactiveFormsModule,
-<<<<<<< HEAD
+
     FormsModule,
     MatExpansionModule,
-    MatBadgeModule
-=======
-    MatTooltipModule,
+    MatBadgeModule,
+   MatTooltipModule,
     FormsModule
->>>>>>> b073ace048e3fe65d39dbad9f2b8ef0eace70e27
+
   ]
 })
 export class AngularMaterialModule { }
