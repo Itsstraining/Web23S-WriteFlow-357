@@ -46,7 +46,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     FormsModule,
     MatExpansionModule,
     MatBadgeModule,
-   MatTooltipModule,
+
+    MatTooltipModule,
     FormsModule
 
   ]
