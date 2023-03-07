@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatTooltipModule} from '@angular/material/tooltip'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 @NgModule({
   declarations: [],
@@ -21,6 +22,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatCheckboxModule,
     MatDialogModule,
     ReactiveFormsModule,
+    MatTooltipModule,
     FormsModule
   ],
   exports: [
@@ -32,6 +34,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatCheckboxModule,
     MatDialogModule,
     ReactiveFormsModule,
+    MatTooltipModule,
     FormsModule
   ]
 })
