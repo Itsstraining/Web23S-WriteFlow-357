@@ -4,17 +4,30 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { url } from './databaseUrl';
-import { DocumentService } from './services/document/document.service';
-import { UserDocument, DocumentSchema } from './schemas/document.schema';
-import { DocumentController } from './controller/document/document.controller';
+
+//services
 import { AuthService } from './services/auth/auth.service';
+import { DocumentService } from './services/document/document.service';
+import { UserService } from './services/user/user.service';
+
+//schemas
+import { Doc, DocumentSchema } from './schemas/document.schema';
+import { User, UserSchema } from './schemas/user.schema';
+
+
+//controllers
+import { DocumentController } from './controller/document/document.controller';
+import { UserController } from './controller/user/user.controller';
 
 @Module({
   imports: [
     MongooseModule.forRoot(url),
-    MongooseModule.forFeature([{ name: UserDocument.name, schema: DocumentSchema }]),
+    MongooseModule.forFeature([
+      { name: Doc.name, schema: DocumentSchema },
+      { name: User.name, schema: UserSchema },
+    ]),
   ],
-  controllers: [AppController, DocumentController],
-  providers: [AppService, DocumentService, AuthService],
+  controllers: [AppController, DocumentController, UserController,],
+  providers: [AppService, DocumentService, AuthService, UserService,],
 })
 export class AppModule { }
