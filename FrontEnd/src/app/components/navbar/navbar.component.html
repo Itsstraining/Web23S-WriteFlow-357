@@ -1,15 +1,15 @@
 <app-loading [fixed]="true" [loading]="true" *ngIf="isLoading"></app-loading>
 <mat-toolbar [ngClass]="{'hide': !isTop}" class="fixed">
-    <span class="logo">
+    <span class="logo" (click)="navigateToHome()">
         <img src="../../../assets/Logo.svg" alt="logo" width="60px">
         <span class="write">Write</span>
         <span class="flow">Flow</span>
     </span>
     <span class="spacer"></span>
     <span>
-        <a href="">Community</a>
-        <a href="">Support</a>
-        <a href="">About</a>
+        <a href="/community">Community</a>
+        <a href="/support">Support</a>
+        <a href="/about">About</a>
     </span>
     <span class="spacer"></span>
     <span>
@@ -20,7 +20,7 @@
         <ng-template #isLogged>
             <span>
                 <button mat-button class="button logout" (click)="logout()">Logout</button>
-                <img class="avatar" [src]="user?.photoURL" [alt]="user?.displayName">
+                <img class="avatar" [src]="user?.photoURL" [alt]="user?.displayName" referrerpolicy='no-referrer'>
             </span>
         </ng-template>
     </span>

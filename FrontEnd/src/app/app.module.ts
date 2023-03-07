@@ -20,15 +20,12 @@ import { EffectsModule } from '@ngrx/effects';
 @NgModule({
   declarations: [
     AppComponent,
-
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,
-
     RouterModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
