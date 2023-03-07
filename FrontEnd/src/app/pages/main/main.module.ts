@@ -10,6 +10,7 @@ import { AngularMaterialModule } from 'src/app/modules/angular-material/angular-
 import { MailComponent } from './components/mail/mail.component';
 import { RecycleComponent } from './components/recycle/recycle.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { CreateDocumentComponent } from './components/create-document/create-document.component';
 
 
 
@@ -21,6 +22,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
     ListComponent,
     MailComponent,
     RecycleComponent,
+    CreateDocumentComponent,
 
   ],
   imports: [

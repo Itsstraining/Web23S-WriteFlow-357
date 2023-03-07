@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatTooltipModule} from '@angular/material/tooltip'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBadgeModule} from '@angular/material/badge';
@@ -23,9 +24,14 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatCheckboxModule,
     MatDialogModule,
     ReactiveFormsModule,
+<<<<<<< HEAD
     FormsModule,
     MatExpansionModule,
     MatBadgeModule
+=======
+    MatTooltipModule,
+    FormsModule
+>>>>>>> b073ace048e3fe65d39dbad9f2b8ef0eace70e27
   ],
   exports: [
     MatToolbarModule,
@@ -36,9 +42,14 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatCheckboxModule,
     MatDialogModule,
     ReactiveFormsModule,
+<<<<<<< HEAD
     FormsModule,
     MatExpansionModule,
     MatBadgeModule
+=======
+    MatTooltipModule,
+    FormsModule
+>>>>>>> b073ace048e3fe65d39dbad9f2b8ef0eace70e27
   ]
 })
 export class AngularMaterialModule { }
