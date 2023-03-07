@@ -10,7 +10,7 @@ import * as fs from 'fs';
 export class DocumentController {
     constructor(private documentService: DocumentService, private authService: AuthService) { }
     @Get('')
-    async getDocuments(@Headers() header, @Query('id') id, @Query('uid') uid) {
+    async getDocuments(@Headers() header, @Query('id') id) {
         let decodedToken = await this.authService.validateUser(header.authorization);
         if (!decodedToken) throw new HttpException('Unauthorized', 401);
 
@@ -18,8 +18,8 @@ export class DocumentController {
             if (id) {
                 return await this.documentService.getDocument(id);
             }
-            if (uid) {
-                return await this.documentService.getDocuments(uid);
+            if (decodedToken.uid) {
+                return await this.documentService.getDocuments(decodedToken.uid);
             }
             return await this.documentService.getDocuments(null);
         } catch (error) {
@@ -28,12 +28,12 @@ export class DocumentController {
     }
 
     @Put('')
-    async updateDocument(@Headers() header, @Body() body, @Query('id') id, @Query('uid') uid) {
+    async updateDocument(@Headers() header, @Body() body) {
         let decodedToken = await this.authService.validateUser(header.authorization);
         if (!decodedToken) throw new HttpException('Unauthorized', 401);
 
         try {
-            return await this.documentService.updateDocument(id, uid, body);
+            return await this.documentService.updateDocument(body.id, decodedToken.uid, body);
         } catch (error) {
             throw new HttpException(error, 500);
         }
