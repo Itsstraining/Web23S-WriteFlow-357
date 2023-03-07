@@ -32,6 +32,18 @@ export class DocumentController {
         return await this.documentService.updateDocument(decodedToken.uid, document.id, document);
     }
 
+    @Delete('')
+    async deleteDocument(@Query('id') id: string, @Headers() header: any) {
+        let token = header['authorization'];
+        token.replace('Bearer ', '');
+
+        let decodedToken = await this.authService.validateUser(token);
+        if (!decodedToken) return "Token is not valid";
+
+        if (!id) return "Id is not valid";
+        return await this.documentService.deleteDocument(decodedToken.uid, id);
+    }
+
 
     @Post('file')
     @UseInterceptors(FileInterceptor('file', saveDocumentToStorage))
