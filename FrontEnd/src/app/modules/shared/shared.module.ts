@@ -22,9 +22,11 @@ import { StatusComponent } from 'src/app/components/status/status.component';
   ],
   imports: [
     CommonModule,
-    AngularMaterialModule
+    AngularMaterialModule,
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+  ],
   exports: [
     NavbarComponent,
     FooterComponent,

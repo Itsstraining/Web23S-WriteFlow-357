@@ -1,75 +1,106 @@
-h3{
-  color: var(--color-4);
-  font-size: 1.5rem;
-  font-weight: 800;
-}
+.container {
+  padding: 3rem 2rem;
+  background-color: var(--color-1);
 
-.name{
-  color: var(--color-4);
-  font-weight: 600;
-}
-
-.container-all{
-  padding: 1rem 2rem;
-  width: 20vw;
-  height: 60vh;
-  background-color: var(--color-3);
   display: flex;
   align-items: center;
   flex-direction: column;
-  // border-radius: 10px;
+
+  border-radius: 10px;
 }
 
-.full-width{
-  width: 20vw;
+.title {
+  &>h3 {
+    color: var(--color-4);
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+}
+
+.full-width {
+  width: 100%;
+
   border-radius: 10px;
   font-size: small;
+
+  margin-bottom: 1rem;
+
+
+  .name {
+    color: var(--color-4);
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  input {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
 }
 
-.keep-sign-in{
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: green !important;
+}
+
+.keep-sign-in {
   font-size: 12px;
 }
 
-.forgot{
+.forgot {
   width: 20vw;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 
 
-  a{
+}
+
+.check-holder {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+
+  .section {
+    margin-left: -10px;
+
+    mat-checkbox {
+      font-size: 0.75rem;
+      font-weight: 600;
+
+      &>span {
+        color: var(--color-4);
+      }
+    }
+  }
+
+  &>a {
     color: var(--color-4);
     font-weight: 700;
     text-decoration: none;
     margin-left: 10rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
-
 }
 
-.check-holder{
+.login-button {
   display: flex;
-  justify-content: space-between;
-  width: 20vw;
-  align-items: center;
-}
+  background-color: var(--color-4);
 
-.forgot-password{
-  font-size:12px;
-  text-decoration: none;
-}
-
-
-.login-button{
-  display: flex;
-  background-color: var(--color-5);
+  width: 100%;
   border-radius: 10px;
-  width: 20vw;
-  background-color: #FFF;
-  font-weight: 500;
-  margin-top: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-1);
+  padding: 1.5rem 0rem;
 }
 
-.break-container{
+.break-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -79,21 +110,22 @@ h3{
 
   margin-top: 1rem;
 
-  .break{
+  .break {
     width: 50%;
     border-top: 1px solid var(--color-4);
   }
 
-  .or{
+  .or {
     font-size: 1rem;
     margin: 0 0.5rem 0 0.5rem;
   }
 }
 
-.button{
-    border-radius: 50%;
-  }
+.button {
 
-img{
+  margin: 1rem 0rem;
+}
+
+img {
   width: 30px;
 }
