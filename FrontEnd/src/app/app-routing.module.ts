@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'about', loadChildren: () => import('./pages/about/about.module').then(m => m.AboutModule) },
  
   { path: 'role', loadChildren: () => import('./pages/role/role.module').then(m => m.RoleModule) },
+  { path: 'community', loadChildren: () => import('./pages/community/community.module').then(m => m.CommunityModule) },
 
  
   { path: '**', loadChildren: () => import('./pages/notfound/notfound.module').then(m => m.NotfoundModule) },

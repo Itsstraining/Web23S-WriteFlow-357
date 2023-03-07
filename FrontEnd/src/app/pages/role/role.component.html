@@ -9,25 +9,61 @@
     <title>Role Management</title>
 </head>
 <body>
-    <dialog class="dialog" open >
-        <div mat-dialog-actions>
-            <button mat-button mat-dialog-close class="Close">X</button>
+    
+<dialog class="dialog" open >
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close class="Close">X</button>
+    </div>
+<div mat-dialog-content class="Title"> Share "Document1.docx" </div>
+<!-- Search Input, Invite Button -->
+<div> 
+<input class="Search" type="text" placeholder="Type to search people and groups">
+<button mat-fab extended class="Invite"> Invite </button>
+</div>
+<!-- End -->
+<!-- People list -->
+<div mat-dialog-content class="List-Title"> List of people who have access </div> 
+<div class="grid-container">
+    <div class="Person-Name">Nguyễn Văn A <br> vana01@gmail.com</div>
+    <div class="grid-item2"> Owner </div>
+    <div class="Person-Name">Nguyễn Văn B <br> vanb01@gmail.com</div>  
+    <div class="grid-item4"><select id="People-Access-List">
+        <option value="Viewer"> Viewer </option>
+        <option value="Anyone"> Commenter </option>
+        <option value="Editor"> Editor </option> <hr>
+        <option value="Delete"> Delete </option>
+    </select></div>
+    <div class="Person-Name">Nguyễn Văn C <br> vanc01@gmail.com</div>
+    <div class="grid-item6"><select id="People-Access-List">
+        <option value="Viewer"> Viewer </option>
+        <option value="Anyone"> Commenter </option>
+        <option value="Editor"> Editor </option> <hr>
+        <option value="Delete"> Delete </option>
+    </select></div>  
+    
+  </div>
+<!-- End -->
+<div mat-dialog-content >
+    <div class="General-Text"> General access </div> <br>
+    <div class="Display">
+        <div class="">
+        <mat-icon id="lock-icon" >lock</mat-icon></div>
+        <div>
+            <select id="Access-List">
+                <option value="Restricted"> Restricted </option>
+                <option value="Anyone"> Anyone with the link </option>
+            </select> <br>
+            <div class="Only"> Only people with access can open with the link  </div><br>  
         </div>
-        <!-- icon warning -->
-        <div  class="icon-warning"> <mat-icon [inline]="true">warning</mat-icon></div>
+    <!-- Copy-Link Button -->
+    <div><button mat-fab extended class="Copy-Link">
+        <mat-icon>link</mat-icon>
+        Copy link
+      </button></div> 
+      <!-- End -->
+    </div> 
+</div>
 
-        <!-- End -->
-        <div class="delete-question"> Deleting document?</div>
-        <div class="sure-delete"> Are you sure to delete "<span>document1.docx</span>"?</div>
-        <!-- Undo -->
-        <div class="Undo-Div"> <div class="undo"> You can't undo this action </div>
-        <mat-icon>error_outline</mat-icon>
-        </div>
-        <!-- 2 Button -->
-        <div class="Yes-No-Button">
-            <button mat-fab extended class="Yes-Button"> Yes </button>
-            <button mat-fab extended class="No-Button"> No </button></div>
-        
 </dialog>
 </body>
 </html>

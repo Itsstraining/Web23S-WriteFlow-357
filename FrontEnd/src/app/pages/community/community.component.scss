@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,300&display=swap');
+
+.Recent-New{
+    display: flex;
+    margin-top: 1rem;
+    font-size: 18px;
+}
+.doc1{
+    display: flex;
+    
+}
+.Recent-Text{
+    color: #424874;
+    font-weight: 500;
+    margin-top: 0.3rem;
+    margin-left: 1rem;
+}
+.Doc-When{
+    display: flex;
+}
+.Doc-Navigation{
+    height:41rem;
+   width: 16rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    border: 2px;
+    border-style:solid;
+    border-radius: 10px;
+    border-color: #424874;
+}
+.grid-container1 {
+    height: 5rem;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 1.5rem;
+    grid-column-gap: 20rem;
+  }
+.Person-Name{
+    margin-left:3rem;
+}
+.New-Button{
+    width:4rem;
+    height:2rem;
+    margin-left: 2rem;
+    border-radius: 5px;
+    margin-bottom: 0.2rem;
+    color: #F4F6FF;
+    background-color: #424874;
+    font-size:18px;
+}
+.File-Name{
+    margin-top:0.4rem;
+}
+
+.Doc-List{
+    margin-bottom: 8rem;
+    height:10rem;
+}
+
+.Find-Doc{
+    margin-left: 1rem;
+    margin-top: 0.7rem;
+    width: 13.5rem;
+    height: 2rem;
+    color:#F9FAFF;
+    border-color: rgba(var(--color-4-rgb), 0.25);
+    border-radius: 5px;
+    background-color: #F4F6FF;
+    color: #424874;
+    
+}
+.header-image {
+    background-image: url("../../../assets/document-icon.png");
+    background-size: cover;
+   
+}
+.document-img{
+    width: 2rem;
+}
+.Edit-Status{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
