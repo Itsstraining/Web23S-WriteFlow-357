@@ -1,14 +1,14 @@
-export interface DocumentModel {
+export interface DocModel {
     id: string;
     contentPath: string;
     dateCreated: string;
     dateModified: string;
-    status: string;
-    isDelete: boolean;
-    isStarred: boolean;
-}
+    stars: number;
 
-export interface UserDocumentModel {
+    isPublic: boolean;
+    isDelete: boolean;
+
+    forkedFrom: string;
+
     uid: string;
-    documents: DocumentModel[];
 }

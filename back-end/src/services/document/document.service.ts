@@ -1,46 +1,46 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { UserDocument, UserDocumentDocument } from 'src/schemas/document.schema';
-import { DocumentModel } from 'src/models/document.model';
+import { Doc, DocDocument } from 'src/schemas/document.schema';
+import { DocModel } from 'src/models/document.model';
+import { DeleteResult } from 'mongodb';
 
 @Injectable()
 export class DocumentService {
-    constructor(@InjectModel(UserDocument.name) private userDocumentModel: Model<UserDocumentDocument>) { }
+    constructor(@InjectModel(Doc.name) private documentModel: Model<DocDocument>) { }
 
-    async createDocument(document: UserDocument) {
-        const createdDocument = new this.userDocumentModel(document);
+    async createDocument(document: DocModel): Promise<DocModel> {
+        const createdDocument = new this.documentModel(document);
         return createdDocument.save();
     }
 
-    async getDocuments(uid: string): Promise<DocumentModel[]> {
-        let documents = this.userDocumentModel.find({ uid: uid }).exec();
-        return documents['documents'];
+    async getDocuments(uid: string): Promise<DocModel[]> {
+        if (uid) {
+            const documents = this.documentModel.find({ uid: uid }).exec();
+            return documents;
+        }
+
+        const documents = this.documentModel.find({ isPublic: true }).exec();
+        return documents;
     }
 
-    async getDocument(uid: string, id: string): Promise<DocumentModel> {
-        let documents = this.userDocumentModel.find({ uid: uid }).exec();
-        return documents['documents'].find((document: any) => document.id === id);
+    async getDocument(id: string): Promise<DocModel> {
+        const document = this.documentModel.findOne({ id: id }).exec();
+        return document;
     }
 
-    async updateDocument(uid: string, id: string, documentData: DocumentModel): Promise<string> {
-        let document = await this.getDocument(uid, id);
-        if (!document) return "Document not found";
-        document = documentData;
-        return `Document ${id} updated`;
+    async updateDocument(id: string, uid: string, documentModel: DocModel): Promise<DocModel> {
+        const document = await this.documentModel.findOne({ id: id }).exec();
+
+        if (!document) return null;
+        if (document.uid != uid) return null;
+
+        Object.assign(document, documentModel);
+        return document.save();
     }
 
-    async deleteDocument(uid: string, id: string): Promise<string> {
-        let document = await this.getDocument(uid, id);
-        if (!document) return "Document not found";
-        return `Document ${id} deleted`;
-    }
-
-    async checkValidUser(uid: string): Promise<boolean> {
-        let users = await this.userDocumentModel.find({ uid: uid }).exec();
-        users.forEach((user: any) => {
-            if (user.uid === uid) return true;
-        });
-        return false;
+    async deleteDocument(id: string): Promise<DeleteResult> {
+        const document = this.documentModel.deleteOne({ id: id }).exec();
+        return document;
     }
 }

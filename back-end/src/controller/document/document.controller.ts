@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Query, UploadedFile, Headers, UseInterceptors, Body, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Put, Query, UploadedFile, Headers, UseInterceptors, Body, Delete, HttpException } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AuthService } from 'src/services/auth/auth.service';
@@ -9,60 +9,54 @@ import * as fs from 'fs';
 @Controller('document')
 export class DocumentController {
     constructor(private documentService: DocumentService, private authService: AuthService) { }
-
     @Get('')
-    async getDocuments(@Query('id') id: string, @Headers() header: any) {
-        let token = header['authorization'];
-        token.replace('Bearer ', '');
+    async getDocuments(@Headers() header, @Query('id') id, @Query('uid') uid) {
+        let decodedToken = await this.authService.validateUser(header.authorization);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401);
 
-        let decodedToken = await this.authService.validateUser(token);
-        if (!decodedToken) return "Token is not valid";
-
-        if (id) return await this.documentService.getDocument(decodedToken.uid, id);
-        return await this.documentService.getDocuments(decodedToken.uid);
+        try {
+            if (id) {
+                return await this.documentService.getDocument(id);
+            }
+            if (uid) {
+                return await this.documentService.getDocuments(uid);
+            }
+            return await this.documentService.getDocuments(null);
+        } catch (error) {
+            throw new HttpException(error, 500);
+        }
     }
 
     @Put('')
-    async updateDocument(@Body() document: any, @Headers() header: any) {
-        let token = header['authorization'];
-        token.replace('Bearer ', '');
+    async updateDocument(@Headers() header, @Body() body, @Query('id') id, @Query('uid') uid) {
+        let decodedToken = await this.authService.validateUser(header.authorization);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401);
 
-        let decodedToken = await this.authService.validateUser(token);
-        if (!decodedToken) return "Token is not valid";
-
-        return await this.documentService.updateDocument(decodedToken.uid, document.id, document);
-    }
-
-    @Delete('')
-    async deleteDocument(@Query('id') id: string, @Headers() header: any) {
-        let token = header['authorization'];
-        token.replace('Bearer ', '');
-
-        let decodedToken = await this.authService.validateUser(token);
-        if (!decodedToken) return "Token is not valid";
-
-        if (!id) return "Id is not valid";
-        return await this.documentService.deleteDocument(decodedToken.uid, id);
+        try {
+            return await this.documentService.updateDocument(id, uid, body);
+        } catch (error) {
+            throw new HttpException(error, 500);
+        }
     }
 
 
     //file
     @Get('file')
-    async getDocumentFile(@Query('id') id: string, @Headers() header: any) {
-        let token = header['authorization'];
-        token.replace('Bearer ', '');
+    async getDocument(@Headers() header, @Query('path') path) {
+        let decodedToken = await this.authService.validateUser(header.authorization);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401);
 
-        let decodedToken = await this.authService.validateUser(token);
-        if (!decodedToken) return "Token is not valid";
-        if (!id) return "Id is not valid";
+        try {
+            const pathToImage = join(process.cwd(), 'documentsStorage', header['ownerid'], path);
+            //read file json
+            let file = fs.readFileSync(pathToImage, 'utf8');
+            return file;
 
-        let document = await this.documentService.getDocument(decodedToken.uid, id);
-        if (!document) return "Document is not valid";
-
-        let pathToImage = join('documentsStorage', decodedToken.uid, document.contentPath);
-
-        return fs.readFileSync(pathToImage);
+        } catch (error) {
+            throw new HttpException(error, 500);
+        }
     }
+
 
     @Post('file')
     @UseInterceptors(FileInterceptor('file', saveDocumentToStorage))
