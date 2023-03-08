@@ -1,4 +1,4 @@
 <div #container *ngIf="loading" class="center">
     <object data="../../../assets/Loading.svg" type="image/svg+xml" width="150px"></object>
-    <h1>Loading... {{inputData}}</h1>
+    <h1> {{inputData==undefined?'Loading...':inputData}}</h1>
 </div>

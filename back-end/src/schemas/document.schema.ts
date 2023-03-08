@@ -1,12 +1,16 @@
+/* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
-export type DocumentDocument = HydratedDocument<Document>;
+export type DocDocument = HydratedDocument<Doc>;
 
 @Schema()
-export class Document {
+export class Doc {
     @Prop()
     id: string;
+
+    @Prop()
+    name: string;
 
     @Prop()
     contentPath: string;
@@ -18,13 +22,22 @@ export class Document {
     dateModified: string;
 
     @Prop()
-    status: string;
+    stars: number;
+
+
+    @Prop()
+    isPublic: boolean;
 
     @Prop()
     isDelete: boolean;
-
     @Prop()
-    ownerId: string;
+    forkedFrom: string;
+    @Prop()
+    canView:string[];
+    @Prop()
+    canEdit: string[];
+    @Prop()
+    uid: string;
 }
 
-export const DocumentSchema = SchemaFactory.createForClass(Document);
+export const DocumentSchema = SchemaFactory.createForClass(Doc);

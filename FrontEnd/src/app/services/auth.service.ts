@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 export class AuthService {
 
   user$: Subject<User | null> = new Subject<User | null>();
+  userToken: string = "";
   currentUser: User | null = null;
   isLoading$: Subject<boolean> = new Subject<boolean>();
 
@@ -16,16 +17,26 @@ export class AuthService {
     this.user$.next(this.currentUser);
     this.isLoading$.next(true);
 
-    onAuthStateChanged(auth, (user) => {
-      this.currentUser = user;
-      this.user$.next(user);
-      this.isLoading$.next(false);
-    });
+    onAuthStateChanged(auth, async (user) => {
+      if (user!=null) {
+        this.userToken = await user.getIdToken();
+        this.currentUser = user;
+        this.user$.next(user);
+
+        this.isLoading$.next(false);
+      } else {
+        this.currentUser = null;
+        this.user$.next(null);
+
+        this.isLoading$.next(false);
+      }
+    })
+
   }
 
-  loginWithGoogle() {
+  async loginWithGoogle() {
     let provider = new GoogleAuthProvider();
-    signInWithPopup(this.auth, provider);
+    await signInWithPopup(this.auth, provider);
   }
 
   loginWithFacebook() {
@@ -35,5 +46,9 @@ export class AuthService {
 
   logout() {
     this.auth.signOut();
+  }
+   getToken() {
+    
+    return this.userToken;
   }
 }

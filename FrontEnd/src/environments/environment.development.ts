@@ -6,5 +6,6 @@ export const environment = {
     apiKey: 'AIzaSyCcIwUtNcrK4_N0eLE5p7qFU9FuJaJFOS8',
     authDomain: 'writeflow-7cb01.firebaseapp.com',
     messagingSenderId: '92118223652',
-  }
+  },
+  apiURL: 'http://localhost:3000',
 };

@@ -11,6 +11,12 @@ import { QuillModule } from 'ngx-quill';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
+import { DocumentReducer } from 'src/ngrx/reducers/document.reducer';
+import { DocumentEffects } from 'src/ngrx/effects/document.effect';
+
 
 
 
@@ -18,18 +24,23 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 @NgModule({
   declarations: [
     AppComponent,
+<<<<<<< HEAD
   
 
+=======
+>>>>>>> ad73d645cdd3c7cb61cff37d37b1272b1ca2ee39
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,
-
     RouterModule,
+    HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth())
+    provideAuth(() => getAuth()),
+    StoreModule.forRoot({doc:DocumentReducer}, {}),
+    EffectsModule.forRoot([DocumentEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,109 +1,131 @@
-h3{
-  color: var(--color-4);
-  font-size: 1.5rem;
-  font-weight: 800;
-}
+.container {
+  padding: 3rem 2rem;
+  background-color: var(--color-1);
 
-// .container{
-//   width: 70vw;
-//   height: 70vh;
-//   background-color: var(--color-4);
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
-
-.container-all{
-  border-radius: 10px;
-  width: 80vw;
-  padding: 2%;
-  height: 80vh;
-  background-color: var(--color-3);
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
-}
 
-.full-width{
-  width: 100%;
   border-radius: 10px;
-  box-shadow: #FFF;
 }
 
+.title {
+  &>h3 {
+    color: var(--color-4);
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+}
 
-.logged{
+.full-width {
   width: 100%;
+
+  border-radius: 10px;
+  font-size: small;
+
+  margin-bottom: 1rem;
+
+
+  .name {
+    color: var(--color-4);
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  input {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
 }
-.keep-sign-in{
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: green !important;
+}
+
+.keep-sign-in {
   font-size: 12px;
-
 }
-.forgot{
-  width: 100%;
+
+.forgot {
+  width: 20vw;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 
 
-  a{
-    color: var(--color-4);
-    font-weight: 700;
-    text-decoration: none;
-    margin-left: 10rem;
-  }
-
 }
 
-.check-holder{
+.check-holder {
   display: flex;
   justify-content: space-between;
   width: 100%;
   align-items: center;
 
+  .section {
+    margin-left: -10px;
+
+    mat-checkbox {
+      font-size: 0.75rem;
+      font-weight: 600;
+
+      &>span {
+        color: var(--color-4);
+      }
+    }
+  }
+
+  &>a {
+    color: var(--color-4);
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 10rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
-.forgot-password{
-  font-size:12px;
-}
-
-
-.login-button{
+.login-button {
   display: flex;
-  background-color: var(--color-5);
-  border-radius: 10px;
-  width: 100%;
-  background-color: #FFF;
-  font-weight: 500;
-  margin-top: 0.5rem;
+  background-color: var(--color-4);
 
+  width: 100%;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-1);
+  padding: 1.5rem 0rem;
 }
 
-.break-container{
+.break-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 20vw;
 
 
   margin-top: 1rem;
 
-  .break{
+  .break {
     width: 50%;
     border-top: 1px solid var(--color-4);
   }
 
-  .or{
+  .or {
     font-size: 1rem;
     margin: 0 0.5rem 0 0.5rem;
   }
 }
 
-.button{
-  border-radius: 50%;
+.button {
+
+  margin: 1rem 0rem;
 }
 
-img{
+img {
   width: 30px;
 }

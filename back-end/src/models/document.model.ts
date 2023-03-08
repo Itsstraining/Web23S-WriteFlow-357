@@ -1,9 +1,15 @@
-export interface DocumentModel {
+/* eslint-disable prettier/prettier */
+export interface DocModel {
     id: string;
+    name: string;
     contentPath: string;
     dateCreated: string;
     dateModified: string;
-    status: string;
+    stars: number;
+    isPublic: boolean;
     isDelete: boolean;
-    owerID: string;
-}    
+    forkedFrom: string;
+    canView: string[];
+    canEdit: string[];
+    uid: string;
+}

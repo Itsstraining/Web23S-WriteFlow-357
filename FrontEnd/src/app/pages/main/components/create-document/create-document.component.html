@@ -1,0 +1,34 @@
+<div mat-dialog-title class="header">
+  <h2>Create new document</h2>
+  <mat-icon (click)="close()" matTooltip="Info about the action">close</mat-icon>
+</div>
+<mat-dialog-content class="dialog-container">
+  <mat-stepper #stepper linear>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Fill out document name</ng-template>
+        <mat-form-field class="input-container" appearance="outline">
+          <mat-label>Document name</mat-label>
+          <input matInput placeholder="Enter document name" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <mat-dialog-actions align="end">
+          <button mat-button mat-dialog-close>Cancel</button>
+          <button mat-button  (click)="createDoc()">Create</button>
+        </mat-dialog-actions>
+
+      </form>
+    </mat-step>
+    <mat-step label="Creating document">
+      <app-loading [inputData]="'Creating your document please wait'" [loading]="true"></app-loading>
+       </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>The document has been created</p>
+        <p>Do you want to move to the document?</p>
+        <mat-dialog-actions align="end">
+          <button mat-button (click)="close()">Stay</button>
+          <button mat-button >Move</button>
+        </mat-dialog-actions>
+      </mat-step>
+  </mat-stepper>
+</mat-dialog-content>
