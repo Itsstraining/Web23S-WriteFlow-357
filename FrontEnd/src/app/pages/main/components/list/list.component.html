@@ -38,7 +38,7 @@
     </div>
   </div>
   <div class="main-container" *ngIf="(this.doc$|async)?.loading==false&&(this.doc$|async)?.error==''">
-    <div class="item-container"*ngFor="let doc of (this.doc$|async)?.documents">
+    <div class="item-container"*ngFor="let doc of (this.doc$|async)?.documents" (click)="navigateToDoc(doc.id)">
       <div class="icon-container">
         <div>
           <mat-icon matTooltip="Edit">edit</mat-icon>
