@@ -21,5 +21,20 @@ export class DocumentEffects {
 
     )
   )
+  create$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(DocumentActions.create),
+      switchMap((action) => this.documentService.create(action.document).pipe(
+        map((document) => {
+          return DocumentActions.createSuccess({ document: document })
+        }),
+        catchError((error) => {
+          return of(DocumentActions.createFail({ error }))
+        })
+       )
+      ),
+
+    )
+  )
 
 }

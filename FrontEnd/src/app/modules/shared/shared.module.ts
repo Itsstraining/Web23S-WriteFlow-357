@@ -11,6 +11,7 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginpopupComponent } from 'src/app/components/loginpopup/loginpopup.component';
 import { StatusComponent } from 'src/app/components/status/status.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { StatusComponent } from 'src/app/components/status/status.component';
   imports: [
     CommonModule,
     AngularMaterialModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthService,
@@ -32,6 +34,7 @@ import { StatusComponent } from 'src/app/components/status/status.component';
     FooterComponent,
     LoadingComponent,
     StatusComponent,
+    ReactiveFormsModule,
   ]
 })
 

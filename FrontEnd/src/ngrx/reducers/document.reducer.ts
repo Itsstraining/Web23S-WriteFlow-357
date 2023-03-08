@@ -2,7 +2,7 @@ import { createReducer, on } from "@ngrx/store";
 import { DocumentActions } from "../actions/document.action";
 import { DocumentState } from "../states/document.state";
 
-let initialState:DocumentState = {
+let initialState: DocumentState = {
   documents: null,
   document: null,
   loading: false,
@@ -14,27 +14,49 @@ export const DocumentReducer = createReducer(
   on(DocumentActions.getAll, ((state) => {
     return {
       ...state,
-      documents:null,
+      documents: null,
       loading: true,
       error: ''
-      }
-    })
-  ),
-  on(DocumentActions.getAllSuccess,((state,{documents}) => {
+    }
+  })),
+  on(DocumentActions.getAllSuccess, ((state, { documents }) => {
     return {
       ...state,
-      documents:documents,
+      documents: documents,
       loading: false
-      }
-    })
-  ),
-  on(DocumentActions.getAllFail, ((state,{error}) => {
+    }
+  })),
+  on(DocumentActions.getAllFail, ((state, { error }) => {
     return {
       ...state,
-      documents:null,
+      documents: null,
       loading: false,
-      error:error
-      }
-    })
-  ),
+      error: error
+    }
+  })),
+  on(DocumentActions.create, ((state) => {
+    return {
+      ...state,
+      document: null,
+      inProcess: true,
+      error: ''
+    }
+  })),
+  on(DocumentActions.createSuccess, ((state, { document }) => {
+    let documents = state.documents!;
+    documents.push(document);
+    return {
+      ...state,
+      document: documents,
+      inProcess: false
+    }
+  })),
+  on(DocumentActions.createFail, ((state, { error }) => {
+    return {
+      ...state,
+      document: null,
+      inProcess: false,
+      error: error
+    }
+  })),
 )

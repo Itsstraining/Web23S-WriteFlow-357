@@ -48,7 +48,7 @@ export class AuthService {
     this.auth.signOut();
   }
    getToken() {
-
+    
     return this.userToken;
   }
 }

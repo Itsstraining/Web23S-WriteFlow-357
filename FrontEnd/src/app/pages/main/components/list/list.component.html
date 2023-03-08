@@ -9,9 +9,9 @@
   <div class="status-container" *ngIf="(this.doc$|async)?.loading==false&&(this.doc$|async)?.error!=''">
     <app-status ></app-status>
 </div>
-  <!-- <div class="tab-container" >
+  <div class="tab-container" >
     <span class="tab-name">Open recently</span>
-    <div class="add-container" matTooltip="Create">
+    <div class="add-container" matTooltip="Create" (click)="openCreateDialog()">
       <mat-icon class="add-icon">add_circle</mat-icon>
       <span class="add-text">New Document</span>
     </div>
@@ -32,7 +32,7 @@
         <span class="doc-created">Created: <span>15:30 24/12/2023</span></span>
       </div>
     </div>
-  </div> -->
+  </div>
   <div class="tab-container">
     <span class="tab-name">All Document</span>
   </div>
