@@ -22,7 +22,7 @@ import { CreateDocumentComponent } from './components/create-document/create-doc
     ListComponent,
     MailComponent,
     RecycleComponent,
-    CreateDocumentComponent,
+    CreateDocumentComponent
 
   ],
   imports: [

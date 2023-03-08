@@ -25,7 +25,6 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatCheckboxModule,
     MatDialogModule,
     ReactiveFormsModule,
-
     FormsModule,
     MatExpansionModule,
     MatBadgeModule,
@@ -40,14 +39,11 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatCheckboxModule,
     MatDialogModule,
     ReactiveFormsModule,
-
-    FormsModule,
     MatExpansionModule,
     MatBadgeModule,
-
     MatTooltipModule,
-    FormsModule
-
+    FormsModule,
+    MatStepperModule
   ]
 })
 export class AngularMaterialModule { }

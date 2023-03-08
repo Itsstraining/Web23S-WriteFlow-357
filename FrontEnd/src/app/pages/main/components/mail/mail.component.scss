@@ -12,8 +12,6 @@
     width: 20rem;
     margin: 0.5rem 0 0 0.5rem;
     font-size: medium;
-    outline: none;
-
   .input-holder{
     color: var(--color-4);
     font-size: 1rem;
@@ -41,7 +39,7 @@
   display: flex;
   justify-content: space-between;
   width: 90%;
-  height: 5%;
+  height: 2.5rem;
   border-radius: 10px;
   margin: 0 1.5rem 0 2.5rem;
   .move-button-holder{
@@ -59,9 +57,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 0.3rem;
   }
 }
 
+.reload{
+  border-radius: 10%;
+
+  &:hover{
+    background-color: var(--color-2);
+  }
+}
 .email-container{
   display: flex;
   background-color: var(--color-4);
@@ -102,15 +108,15 @@
   color: var(--color-4);
   font-size: medium;
   font-weight: 500;
-  width: 10rem;
+  width: 5rem;
 }
 
 .Open:hover{
-  background-color: var(--color-1);
+  background-color: green;
 }
 
 .Close:hover{
-  background-color: var(--color-5);
+  background-color: red;
 }
 
 .loading-state{

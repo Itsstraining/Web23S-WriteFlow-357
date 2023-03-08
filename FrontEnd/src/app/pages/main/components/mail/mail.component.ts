@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class MailComponent {
 
+  constructor(){}
+
+  reloadEmail(){
+    location.reload();
+  }
 }
