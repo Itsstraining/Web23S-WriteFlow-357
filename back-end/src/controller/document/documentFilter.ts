@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { diskStorage } from "multer";
 
 const { v4: uuidv4 } = require('uuid');

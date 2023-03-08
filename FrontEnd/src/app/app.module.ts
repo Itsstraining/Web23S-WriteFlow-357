@@ -13,6 +13,9 @@ import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
+import { DocumentReducer } from 'src/ngrx/reducers/document.reducer';
+import { DocumentEffects } from 'src/ngrx/effects/document.effect';
 
 
 
@@ -27,10 +30,11 @@ import { EffectsModule } from '@ngrx/effects';
     SharedModule,
     BrowserAnimationsModule,
     RouterModule,
+    HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([])
+    StoreModule.forRoot({doc:DocumentReducer}, {}),
+    EffectsModule.forRoot([DocumentEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

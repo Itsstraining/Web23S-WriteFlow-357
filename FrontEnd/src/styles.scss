@@ -163,6 +163,11 @@ quill-editor {
   transform: translate(-50%, -50%);
   width: 100%;
   height: 90%;
-  z-index: 10000;
+  z-index: 10001;
 
+}
+.cdk-overlay-container {
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 10000 !important;
 }

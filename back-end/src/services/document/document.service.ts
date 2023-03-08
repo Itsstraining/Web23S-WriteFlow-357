@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -42,5 +43,29 @@ export class DocumentService {
     async deleteDocument(id: string): Promise<DeleteResult> {
         const document = this.documentModel.deleteOne({ id: id }).exec();
         return document;
+    }
+
+    async addViewer(id: string, vieweruid: string): Promise<DocModel> {
+        const document = await this.documentModel.findOne({ id: id }).exec();
+        document.canView.push(vieweruid);
+        return document.save();
+    }
+
+    async addEditor(id: string, vieweruid: string): Promise<DocModel> {
+        const document = await this.documentModel.findOne({ id: id }).exec();
+        document.canEdit.push(vieweruid);
+        return document.save();
+    }
+
+    async removeViewer(id: string, vieweruid: string): Promise<DocModel> {
+        const document = await this.documentModel.findOne({ id: id }).exec();
+        document.canView = document.canView.filter(uid => uid != vieweruid);
+        return document.save();
+    }
+
+    async removeEditor(id: string, vieweruid: string): Promise<DocModel> {
+        const document = await this.documentModel.findOne({ id: id }).exec();
+        document.canEdit = document.canEdit.filter(uid => uid != vieweruid);
+        return document.save();
     }
 }

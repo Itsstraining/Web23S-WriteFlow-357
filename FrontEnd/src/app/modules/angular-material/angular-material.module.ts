@@ -12,6 +12,7 @@ import {MatTooltipModule} from '@angular/material/tooltip'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatStepperModule} from '@angular/material/stepper';
 @NgModule({
   declarations: [],
   imports: [
@@ -28,10 +29,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     FormsModule,
     MatExpansionModule,
     MatBadgeModule,
-
-    MatTooltipModule,
-    FormsModule
-
+    MatStepperModule
   ],
   exports: [
     MatToolbarModule,

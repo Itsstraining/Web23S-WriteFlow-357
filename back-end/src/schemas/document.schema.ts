@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
@@ -7,6 +8,9 @@ export type DocDocument = HydratedDocument<Doc>;
 export class Doc {
     @Prop()
     id: string;
+
+    @Prop()
+    name: string;
 
     @Prop()
     contentPath: string;
@@ -26,11 +30,12 @@ export class Doc {
 
     @Prop()
     isDelete: boolean;
-
     @Prop()
     forkedFrom: string;
-
-
+    @Prop()
+    canView:string[];
+    @Prop()
+    canEdit: string[];
     @Prop()
     uid: string;
 }
