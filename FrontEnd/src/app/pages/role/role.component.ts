@@ -10,6 +10,7 @@ interface Option{
   styleUrls: ['./role.component.scss']
 })
 export class RoleComponent {
+  selectedValue !: string;
   options: Option[] = [
     {value: 'v1', viewValue: 'Restricted'},
     {value: 'v2', viewValue: 'Anyone with the link'}
