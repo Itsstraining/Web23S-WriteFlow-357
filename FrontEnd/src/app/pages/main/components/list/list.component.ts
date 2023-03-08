@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { config } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { SharedFunctionService } from 'src/app/services/shared-function/shared-function.service';
 import { DocumentActions } from 'src/ngrx/actions/document.action';
 import { DocumentState } from 'src/ngrx/states/document.state';
 import { CreateDocumentComponent } from '../create-document/create-document.component';
@@ -18,7 +19,8 @@ export class ListComponent {
 doc$=this.store.select('doc');
 constructor(private activateRoute:ActivatedRoute
   ,private authService:AuthService,private store:Store<{doc:DocumentState}>,
-  private dialogService:MatDialog) {
+  private dialogService:MatDialog,
+  public shareFunctionService:SharedFunctionService) {
 
   // this.activateRoute.paramMap.subscribe((params)=>{
   //   console.log(params.get('type'));
@@ -29,9 +31,9 @@ constructor(private activateRoute:ActivatedRoute
     if(data!=null){
 
       this.store.dispatch(DocumentActions.getAll());
-      // this.doc$.subscribe((data=>{
-      //   console.log(data);
-      // }))
+      this.doc$.subscribe((data=>{
+        console.log(data);
+      }))
     }
   })
  }

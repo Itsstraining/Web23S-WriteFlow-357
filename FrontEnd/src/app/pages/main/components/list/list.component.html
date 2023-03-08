@@ -9,12 +9,9 @@
   <div class="status-container" *ngIf="(this.doc$|async)?.loading==false&&(this.doc$|async)?.error!=''">
     <app-status ></app-status>
 </div>
-  <div class="tab-container" >
+  <!-- <div class="tab-container" >
     <span class="tab-name">Open recently</span>
-    <div class="add-container" matTooltip="Create" (click)="openCreateDialog()">
-      <mat-icon class="add-icon">add_circle</mat-icon>
-      <span class="add-text">New Document</span>
-    </div>
+
   </div>
   <div class="main-container-recently">
     <div class="item-container">
@@ -32,12 +29,16 @@
         <span class="doc-created">Created: <span>15:30 24/12/2023</span></span>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="tab-container">
     <span class="tab-name">All Document</span>
+    <div class="add-container" matTooltip="Create" (click)="openCreateDialog()">
+      <mat-icon class="add-icon">add_circle</mat-icon>
+      <span class="add-text">New Document</span>
+    </div>
   </div>
   <div class="main-container" *ngIf="(this.doc$|async)?.loading==false&&(this.doc$|async)?.error==''">
-    <div class="item-container">
+    <div class="item-container"*ngFor="let doc of (this.doc$|async)?.documents">
       <div class="icon-container">
         <div>
           <mat-icon matTooltip="Edit">edit</mat-icon>
@@ -48,8 +49,9 @@
       <img src="../../../../../assets/Logo.svg" alt="" class="doc-img">
       <hr>
       <div class="item-info">
-        <p class="doc-name">Report</p>
-        <span class="doc-created">Created: <span>15:30 24/12/2023</span></span>
+        <p class="doc-name">{{doc.name}}</p>
+        <span class="doc-created">Created: <span>{{this.shareFunctionService.convertDateTime(doc.dateCreated)}}</span></span><br>
+        <span class="doc-created">Modify: <span>{{this.shareFunctionService.convertDateTime(doc.dateCreated)}}</span></span>
       </div>
     </div>
   </div>

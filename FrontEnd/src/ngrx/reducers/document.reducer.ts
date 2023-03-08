@@ -43,11 +43,11 @@ export const DocumentReducer = createReducer(
     }
   })),
   on(DocumentActions.createSuccess, ((state, { document }) => {
-    let documents = state.documents!;
+    let documents = [...state.documents!]
     documents.push(document);
     return {
       ...state,
-      document: documents,
+      documents: documents,
       inProcess: false
     }
   })),

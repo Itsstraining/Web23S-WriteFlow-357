@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 export interface DocModel {
     id: string;
+    name: string;
     contentPath: string;
     dateCreated: string;
     dateModified: string;

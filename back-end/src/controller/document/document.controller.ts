@@ -7,6 +7,7 @@ import { AuthService } from 'src/services/auth/auth.service';
 import { DocumentService } from 'src/services/document/document.service';
 import { saveDocumentToStorage } from './documentFilter';
 import * as fs from 'fs';
+import { DocModel } from 'src/models/document.model';
 
 @Controller('document')
 export class DocumentController {
@@ -24,6 +25,16 @@ export class DocumentController {
                 return await this.documentService.getDocuments(uid);
             }
             return await this.documentService.getDocuments(null);
+        } catch (error) {
+            throw new HttpException(error, 500);
+        }
+    }
+    @Post('/createDoc')
+    async createUserDocument(@Headers() header, @Body('document') document:DocModel) {
+        let decodedToken = await this.authService.validateUser(header.authorization);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401);
+        try {
+            return await this.documentService.createDocument(document);
         } catch (error) {
             throw new HttpException(error, 500);
         }
@@ -58,6 +69,7 @@ export class DocumentController {
             throw new HttpException(error, 500);
         }
     }
+   
 
 
     @Post('file')

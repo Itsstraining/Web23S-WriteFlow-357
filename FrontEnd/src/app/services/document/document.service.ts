@@ -13,7 +13,7 @@ export class DocumentService {
   constructor(private http: HttpClient, private authService: AuthService,) { }
   getAll(): Observable<any[]> {
 
-    return this.http.get(environment.apiURL + this.url, {
+    return this.http.get(`${environment.apiURL}${this.url}?uid=${this.authService.currentUser?.uid}`, {
       headers: {
         'authorization': this.authService.getToken(),
       }
@@ -21,7 +21,7 @@ export class DocumentService {
   }
 
   create(doc: DocModel): Observable<any> {
-    return this.http.post(environment.apiURL + this.url,
+    return this.http.post(environment.apiURL + this.url +"/createDoc",
       {
         document: doc,
       },

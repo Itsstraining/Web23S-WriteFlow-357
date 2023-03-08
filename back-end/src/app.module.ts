@@ -18,6 +18,7 @@ import { User, UserSchema } from './schemas/user.schema';
 //controllers
 import { DocumentController } from './controller/document/document.controller';
 import { UserController } from './controller/user/user.controller';
+import { AutoSaveGateway } from './sockets/auto-save/auto-save.gateway';
 
 @Module({
   imports: [
@@ -28,6 +29,6 @@ import { UserController } from './controller/user/user.controller';
     ]),
   ],
   controllers: [AppController, DocumentController, UserController,],
-  providers: [AppService, DocumentService, AuthService, UserService,],
+  providers: [AppService, DocumentService, AuthService, UserService, AutoSaveGateway,],
 })
 export class AppModule { }

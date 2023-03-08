@@ -10,6 +10,9 @@ export class Doc {
     id: string;
 
     @Prop()
+    name: string;
+
+    @Prop()
     contentPath: string;
 
     @Prop()
