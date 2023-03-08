@@ -93,7 +93,6 @@ export class DocumentController {
     }
 
 
-
     //file
     @Get('file')
     async getDocument(@Headers() header, @Query('path') path) {
