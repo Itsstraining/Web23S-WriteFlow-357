@@ -19,6 +19,8 @@
     border-radius: 5px;
     background-color: #F4F6FF;
     text-align-last:center;
+    width:5rem;
+    margin-left: 1.6rem;
 }
 .grid-item2{
     margin-left:1.5rem;
@@ -63,11 +65,36 @@
     margin-top: 0.5rem;
     font-size: 22px;
 }
-#Access-List{
+.Access-Select{
+    width: 12rem;
+    color: #fff;
+    margin-bottom: 0.35rem;
+}
+.Select-Button{
+    color:#424874;
     font-size: 17px;
-    font-family: 'Open Sans', sans-serif;
+    width: 12rem;
+}
+.Option-Icon{
     color: #424874;
-    border-radius: 5px;
+}
+.Option-Value{
+    color: #424874;
+}
+.Option-Icon1{
+    color: #424874;
+    margin-top:0.5rem;
+}
+.Option-Value1{
+    color: #424874;
+    margin-top: 0.68rem;
+    margin-left: 0.3rem;
+}
+.Div-Group1{
+    display: flex;
+}
+.Div-Group2{
+    display: flex;
 }
 .Search{
     width: 25em;
@@ -93,9 +120,11 @@
     font-size: 22px;
 }
 
-#lock-icon{
+#security-icon{
     color: #424874;
     margin-right: 0.5em;
+    margin-top: 1rem;
+   
 }
 
 .Copy-Link{

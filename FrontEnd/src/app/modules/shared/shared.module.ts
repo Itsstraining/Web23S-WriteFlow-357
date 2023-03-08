@@ -8,6 +8,8 @@ import { LoadingComponent } from 'src/app/components/loading/loading.component';
 
 //Angular Material
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
+import {MatMenuModule} from '@angular/material/menu';
+
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginpopupComponent } from 'src/app/components/loginpopup/loginpopup.component';
 import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
@@ -23,7 +25,8 @@ import { RoleDialogComponent } from 'src/app/components/role-dialog/role-dialog.
   ],
   imports: [
     CommonModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    MatMenuModule
   ],
   providers: [AuthService],
   exports: [
