@@ -11,5 +11,8 @@ export interface DocModel {
 
     forkedFrom: string;
 
+    canView: string[];
+    canEdit: string[];
+
     uid: string;
 }

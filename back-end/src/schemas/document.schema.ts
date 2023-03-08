@@ -35,6 +35,13 @@ export class Doc {
 
 
     @Prop()
+    canView: string[];
+
+    @Prop()
+    canEdit: string[];
+
+
+    @Prop()
     uid: string;
 }
 
