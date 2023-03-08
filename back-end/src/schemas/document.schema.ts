@@ -36,8 +36,6 @@ export class Doc {
     canView:string[];
     @Prop()
     canEdit: string[];
-
-
     @Prop()
     uid: string;
 }

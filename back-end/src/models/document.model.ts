@@ -9,7 +9,7 @@ export interface DocModel {
     isPublic: boolean;
     isDelete: boolean;
     forkedFrom: string;
-    canView:string[];
+    canView: string[];
     canEdit: string[];
     uid: string;
 }
