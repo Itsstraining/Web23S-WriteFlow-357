@@ -19,7 +19,7 @@ import { DocumentEffects } from 'src/ngrx/effects/document.effect';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const config: SocketIoConfig = { url: environment.socketURL, options: {} };
 
 @NgModule({
   declarations: [

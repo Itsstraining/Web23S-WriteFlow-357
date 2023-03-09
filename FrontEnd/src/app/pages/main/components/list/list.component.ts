@@ -26,6 +26,7 @@ constructor(private activateRoute:ActivatedRoute
   public shareFunctionService:SharedFunctionService,
   private _snackBar: MatSnackBar,
   private router:Router) {
+
  }
  ngOnInit(): void {
   this.authService.user$.subscribe((data)=>{
