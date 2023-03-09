@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DocumentActions } from 'src/ngrx/actions/document.action';
 import { DocumentState } from 'src/ngrx/states/document.state';
 import * as uuid from 'uuid';
+
 @Component({
   selector: 'app-create-document',
   templateUrl: './create-document.component.html',
@@ -20,9 +21,9 @@ export class CreateDocumentComponent {
   inProgress = false;
 
   constructor(private _formBuilder: FormBuilder,
-     private store: Store<{ doc: DocumentState }>,
-     private authService: AuthService,
-     private dialogRef:DialogRef<CreateDocumentComponent>) {
+    private store: Store<{ doc: DocumentState }>,
+    private authService: AuthService,
+    private dialogRef: DialogRef<CreateDocumentComponent>) {
   }
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],

@@ -13,6 +13,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import {MatMenuModule} from '@angular/material/menu';
 @NgModule({
   declarations: [],
   imports: [
@@ -28,7 +32,12 @@ import {MatStepperModule} from '@angular/material/stepper';
     FormsModule,
     MatExpansionModule,
     MatBadgeModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSnackBarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatMenuModule
+
   ],
   exports: [
     MatToolbarModule,
@@ -41,9 +50,11 @@ import {MatStepperModule} from '@angular/material/stepper';
     ReactiveFormsModule,
     MatExpansionModule,
     MatBadgeModule,
-    MatTooltipModule,
-    FormsModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSnackBarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatMenuModule
   ]
 })
 export class AngularMaterialModule { }

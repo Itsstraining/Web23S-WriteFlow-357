@@ -59,4 +59,28 @@ export const DocumentReducer = createReducer(
       error: error
     }
   })),
+  on(DocumentActions.delete, ((state) => {
+    return {
+      ...state,
+      inProcess: true,
+      error: ''
+    }
+  })),
+  on(DocumentActions.deleteSuccess, ((state, { id }) => {
+    let documents = [...state.documents!]
+    let index = documents.findIndex(x => x.id == id);
+    documents.splice(index, 1);
+    return {
+      ...state,
+      documents: documents,
+      inProcess: false
+    }
+  })),
+  on(DocumentActions.deleteFail, ((state, { error }) => {
+    return {
+      ...state,
+      inProcess: false,
+      error: error
+    }
+  })),
 )

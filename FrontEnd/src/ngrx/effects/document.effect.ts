@@ -33,7 +33,20 @@ export class DocumentEffects {
         })
        )
       ),
-
+    )
+  )
+  delete$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(DocumentActions.delete),
+      switchMap((action) => this.documentService.delete(action.id).pipe(
+        map((id) => {
+          return DocumentActions.deleteSuccess({ id: id })
+        }),
+        catchError((error) => {
+          return of(DocumentActions.deleteFail({ error }))
+        })
+       )
+      ),
     )
   )
 

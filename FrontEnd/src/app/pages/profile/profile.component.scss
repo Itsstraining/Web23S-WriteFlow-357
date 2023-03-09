@@ -1,0 +1,203 @@
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+$max-width: 1000px;
+$banner-height-pc: 300px;
+$banner-height-mobile: 150px;
+$avatar-pc: 200px;
+$avatar-mobile: 150px;
+
+.banner {
+    width: 100%;
+    height: $banner-height-pc;
+    background-image: url('https://picsum.photos/1000/800');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 2px 0px 150px 50px rgba(var(--color-4-rgb), $alpha: 0.5) inset;
+}
+
+
+.profile-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    .detail {
+        display: flex;
+        flex-direction: row;
+        width: $max-width;
+        height: 100%;
+
+        margin-top: calc($banner-height-pc);
+
+        span {
+            height: $avatar-pc;
+        }
+
+        &>span>img {
+            width: $avatar-pc;
+            height: $avatar-pc ;
+            border-radius: 50%;
+            margin: 0 10px;
+            background-color: grey;
+            border: 5px solid var(--color-5);
+            box-shadow: 0px 0px 10px 0px rgba(var(--color-1-rgb), $alpha: 0.5);
+        }
+
+        &>.name {
+            display: flex;
+            align-items: flex-end;
+
+            div {
+                margin: calc($avatar-pc / 4) 2rem;
+                color: var(--color-4);
+                font-size: 1.5em;
+                font-weight: 800;
+            }
+        }
+    }
+
+}
+
+$padding-pc: 2rem;
+$padding-mobile: 1rem;
+
+.information-container {
+    height: 100%;
+    width: 100%;
+
+    margin-top: calc($avatar-pc / 2);
+
+    &>div {
+        width: $max-width;
+        height: 100%;
+
+        margin: 0 auto;
+
+        display: flex;
+        flex-direction: row;
+
+
+        &>div {
+            padding: $padding-pc calc($padding-pc / 2);
+            width: calc(30% - #{$padding-pc});
+            height: 100%;
+        }
+
+        &>.documents {
+            padding: $padding-pc calc($padding-pc / 2);
+            width: calc(70% - #{$padding-pc});
+
+            min-height: auto;
+        }
+
+        &>div {
+            display: flex;
+            flex-direction: column;
+
+            span {
+                font-size: 1.3em;
+                font-weight: 800;
+                color: var(--color-4);
+                margin-top: 1rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        .about,
+        .contact,
+        .documents>div {
+            background-color: var(--color-1);
+            border-radius: 10px;
+
+            padding: 1rem;
+            font-size: 1rem;
+
+            box-shadow: 2px 2px 4px 0px rgba(var(--color-4-rgb), $alpha: 0.5);
+            flex: 1 1 auto
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .profile-image {
+        .detail {
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+
+            margin-top: calc($banner-height-pc + 5rem);
+
+            &>.name {
+                display: flex;
+                align-items: center;
+
+                div {
+                    margin: 0rem;
+                    padding: 0rem;
+                }
+            }
+        }
+    }
+
+    .information-container {
+        margin-top: calc($avatar-pc / 2 + 5rem);
+
+        &>div {
+            width: 100%;
+            flex-direction: column;
+
+            &>div,
+            &>.documents {
+                padding: $padding-mobile calc($padding-mobile * 2);
+
+                width: calc(100% - #{$padding-mobile * 4});
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .banner {
+        height: $banner-height-mobile;
+    }
+
+    .profile-image {
+        .detail {
+            margin-top: calc($banner-height-mobile);
+
+            &>span>img {
+                width: $avatar-mobile;
+                height: $avatar-mobile;
+            }
+
+            &>.name {
+                div {
+                    font-size: 1.2em;
+                    margin: 2rem;
+                }
+            }
+        }
+    }
+
+    .information-container {
+
+        &>div {
+
+            .about,
+            .contact,
+            .documents>div {
+                font-size: 0.75rem;
+            }
+        }
+    }
+}
