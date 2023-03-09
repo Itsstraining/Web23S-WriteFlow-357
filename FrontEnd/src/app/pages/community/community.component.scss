@@ -33,9 +33,15 @@
     height: 5rem;
     display: grid;
     grid-template-columns: auto auto auto;
-    padding: 1.5rem;
-    grid-column-gap: 20rem;
+    padding: 1.3rem;
+    grid-column-gap: 19rem;
   }
+  .Img-DocStatus{
+    display: flex;
+  }
+.Doc-When{
+    margin-top:0.35rem;
+}
 .Person-Name{
     margin-left:3rem;
 }
@@ -54,15 +60,17 @@
 }
 
 .Doc-List{
-    margin-bottom: 8rem;
+ 
+    margin-bottom: 7rem;
     height:10rem;
 }
 
 .Find-Doc{
     margin-left: 1rem;
-    margin-top: 0.7rem;
+    margin-top: 0.5rem;
+    margin-bottom: -1rem;
     width: 13.5rem;
-    height: 2rem;
+    height: 1.6rem;
     color:#F9FAFF;
     border-color: rgba(var(--color-4-rgb), 0.25);
     border-radius: 5px;

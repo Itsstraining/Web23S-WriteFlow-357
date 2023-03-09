@@ -9,7 +9,7 @@
   top: 50%;
   justify-items: center;
   align-items: center;
-    
+   
   transform: translate(-50%, -50%);
 }
 .grid-item2, #People-Access-List{
@@ -35,7 +35,9 @@
     grid-gap: 1rem;
     column-gap: 16rem;
     padding: 10px;
-    
+    max-height: 12rem;
+    overflow-y:scroll;
+   
   }
 .Display{
     display: flex;
@@ -43,12 +45,14 @@
 .Invite{
     background-color: #424874;
     color: #F4F6FF;
-    border-radius: 5px;
+    border-radius: 10px;
     border-color: rgba(var(--color-4-rgb), 0.25);
     height: 2.2em;
     width: 7.75rem;
     font-size: 18px;
     margin-left: 0.5em;
+    border-color: #F4F6FF;
+    
 }
 .Only{
     font-family: 'Open Sans', sans-serif;
@@ -66,7 +70,7 @@
     font-size: 22px;
 }
 .Access-Select{
-    width: 12rem;
+    width: 11rem;
     color: #fff;
     margin-bottom: 0.35rem;
 }
@@ -86,10 +90,12 @@
     margin-top:0.5rem;
 }
 .Option-Value1{
+    font-size: 17px;
     color: #424874;
     margin-top: 0.68rem;
     margin-left: 0.3rem;
 }
+
 
 .Div-Group1{
     display: flex;
@@ -121,12 +127,14 @@
     font-size: 22px;
 }
 
+
 #security-icon{
     color: #424874;
     margin-right: 0.5em;
     margin-top: 1rem;
    
 }
+
 
 .Copy-Link{
     color: #fff;
@@ -135,18 +143,38 @@
     font-size: 17px;
     height: 3em;
     border-radius: 10px;
-    margin-bottom: 1rem;
+    margin-bottom: 1.3rem;
     margin-left: 0.5em;
+    border-color: #F4F6FF;
+    display: flex;
+   
+}
+.Icon-Text{
+    display: flex;
+    margin-bottom: 0.3rem;
+}
+.Copy-Text{
+    margin-top: 0.7rem;
+    margin-left: 0.5rem;
+}
+.Copy-Icon{
+    margin-top: 0.63rem;
 }
 .Close{
     color:#424874;
     position: absolute;
     top: 0;
   right: 0;
-  padding: 5px;
+  padding: 0.5rem;
   line-height: 14px;
   font-size: 1.5rem;
-  
+  border-style: none;
+  margin-right: 0.5rem;
+  background-color: #F4F6FF;
+}
+.Close:hover{
+ background-color: #424874;
+ color: #F4F6FF;
 }
 option{
     text-align: center;

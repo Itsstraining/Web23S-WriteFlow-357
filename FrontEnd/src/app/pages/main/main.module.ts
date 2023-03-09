@@ -21,14 +21,10 @@ import { CreateDocumentComponent } from './components/create-document/create-doc
     MainComponent,
     DocumentComponent,
     ListComponent,
-<<<<<<< HEAD
- 
-=======
     MailComponent,
     RecycleComponent,
     CreateDocumentComponent,
 
->>>>>>> ad73d645cdd3c7cb61cff37d37b1272b1ca2ee39
   ],
   imports: [
     CommonModule,

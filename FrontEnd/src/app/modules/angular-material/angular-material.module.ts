@@ -13,6 +13,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatSelectModule} from '@angular/material/select';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -28,7 +30,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     FormsModule,
     MatExpansionModule,
     MatBadgeModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSelectModule
   ],
   exports: [
     MatToolbarModule,
@@ -42,7 +45,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     FormsModule,
     MatExpansionModule,
     MatBadgeModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSelectModule
 
   ]
 })

@@ -1,28 +1,22 @@
-<!-- Làm tạm confirm -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Role Management</title>
-</head>
-<body>
-    
+<mat-dialog-actions>
+    <button style="width: 10rem; height:5rem" mat-button (click)="openDialog()">Test</button>
+
+</mat-dialog-actions>
+
+
 <dialog class="dialog" open >
     <div mat-dialog-actions>
         <button mat-button mat-dialog-close class="Close">X</button>
     </div>
 <div mat-dialog-content class="Title"> Share "Document1.docx" </div>
 <!-- Search Input, Invite Button -->
-<div> 
+<div>
 <input class="Search" type="text" placeholder="Type to search people and groups">
 <button mat-fab extended class="Invite"> Invite </button>
 </div>
 <!-- End -->
 <!-- People list -->
-<div mat-dialog-content class="List-Title"> List of people who have access </div> 
+<div mat-dialog-content class="List-Title"> List of people who have access </div>
 <div class="grid-container">
     <div class="Person-Name">Nguyễn Văn A <br> vana01@gmail.com</div>
     <div class="grid-item2"> Owner </div>
@@ -38,17 +32,17 @@
         <option value="Editor"> Editor </option> <hr>
         <option value="Delete"> Delete </option>
     </select></div>  
-    
+   
   </div>
 <!-- End -->
-<div mat-dialog-content >
+
     <div class="General-Text"> General access </div> <br>
     <div class="Display">
         <div class="">
             <mat-icon id="security-icon">security</mat-icon>
     </div>
         <div>
-            
+           
             <button mat-raised-button type="button" color="primary" class="Select-Button">
                 <mat-select class="Access-Select"[(value)]="selected2" [compareWith]="compareFn">
                   <mat-select-trigger> <div class="Div-Group1"><div class="Option-Icon1"><mat-icon class="">{{selected2.icon}}</mat-icon></div><div class="Option-Value1">{{selected2.viewValue}}</div></div></mat-select-trigger>
@@ -57,18 +51,18 @@
                   </mat-option>
                 </mat-select>
                 </button>
-          
+         
             <div class="Only"> Only people with access can open with the link  </div><br>  
         </div>
     <!-- Copy-Link Button -->
     <div><button mat-fab extended class="Copy-Link">
-        <mat-icon>link</mat-icon>
-        Copy link
-      </button></div> 
+       
+        <div class="Icon-Text"><div class="Copy-Icon"><mat-icon >link</mat-icon></div> <div class="Copy-Text">Copy link</div></div></button>
+    </div>
       <!-- End -->
-    </div> 
-</div>
+    </div>
+
+
 
 </dialog>
-</body>
-</html>
+

@@ -16,6 +16,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { DocumentReducer } from 'src/ngrx/reducers/document.reducer';
 import { DocumentEffects } from 'src/ngrx/effects/document.effect';
+import { RoleDialogComponent } from './components/role-dialog/role-dialog.component';
 
 
 
@@ -24,11 +25,7 @@ import { DocumentEffects } from 'src/ngrx/effects/document.effect';
 @NgModule({
   declarations: [
     AppComponent,
-<<<<<<< HEAD
-  
-
-=======
->>>>>>> ad73d645cdd3c7cb61cff37d37b1272b1ca2ee39
+    RoleDialogComponent,
   ],
   imports: [
     BrowserModule,
