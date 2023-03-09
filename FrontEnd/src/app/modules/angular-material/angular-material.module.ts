@@ -48,7 +48,6 @@ import {MatMenuModule} from '@angular/material/menu';
     MatCheckboxModule,
     MatDialogModule,
     ReactiveFormsModule,
-    FormsModule,
     MatExpansionModule,
     MatBadgeModule,
     MatStepperModule,
