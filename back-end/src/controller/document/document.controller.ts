@@ -8,7 +8,6 @@ import { DocumentService } from 'src/services/document/document.service';
 import { saveDocumentToStorage } from './documentFilter';
 import * as fs from 'fs';
 import { DocModel } from 'src/models/document.model';
-
 @Controller('document')
 export class DocumentController {
     constructor(private documentService: DocumentService, private authService: AuthService) { }
@@ -43,8 +42,7 @@ export class DocumentController {
     async deleteDocument(@Headers() header, @Query('id') id) {
         let decodedToken = await this.authService.validateUser(header.authorization);
         if (!decodedToken) throw new HttpException('Unauthorized', 401);
-        return await this.documentService.deleteDocument(id,decodedToken.uid);
-        
+        return await this.documentService.deleteDocument(id,decodedToken.uid);    
     }
 
     @Put('')

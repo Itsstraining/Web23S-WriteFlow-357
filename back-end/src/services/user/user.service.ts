@@ -1,3 +1,6 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -9,6 +12,8 @@ export class UserService {
     constructor(@InjectModel(User.name) private documentModel: Model<UserDocument>) { }
 
     async createUser(user: UserModel): Promise<UserDocument> {
+        let findUser=await this.getUser(user.uid);
+        if(findUser) return null;
         const createdUser = new this.documentModel(user);
         return createdUser.save();
     }

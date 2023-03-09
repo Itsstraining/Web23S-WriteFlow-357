@@ -1,6 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { config, Subscription } from 'rxjs';
@@ -23,7 +24,7 @@ constructor(private activateRoute:ActivatedRoute
   ,private authService:AuthService,private store:Store<{doc:DocumentState}>,
   private dialogService:MatDialog,
   public shareFunctionService:SharedFunctionService,
-
+  private _snackBar: MatSnackBar,
   private router:Router) {
  }
  ngOnInit(): void {
@@ -51,10 +52,14 @@ constructor(private activateRoute:ActivatedRoute
 
           tempSub.unsubscribe();
           this.inProgress = false;
+          this._snackBar.open('Delete document successfully', 'Close');
 
-        } catch (err) { }
+        } catch (err) {
+          this._snackBar.open('Delete document failed', 'Close');
+        }
       } else {
         this.inProgress = false;
+        this._snackBar.open('Delete document failed', 'Close');
       }
     } else {
       this.inProgress = data.inProcess;
