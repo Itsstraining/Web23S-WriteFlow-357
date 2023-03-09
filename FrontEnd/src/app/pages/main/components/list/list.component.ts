@@ -30,13 +30,13 @@ constructor(private activateRoute:ActivatedRoute
  ngOnInit(): void {
   this.authService.user$.subscribe((data)=>{
     if(data!=null){
-
       this.store.dispatch(DocumentActions.getAll());
       // this.doc$.subscribe((data=>{
       //   console.log(data);
       // }))
     }
   })
+  console.log("alo");
  }
  openCreateDialog(){
   this.dialogService.open(CreateDocumentComponent,{

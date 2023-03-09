@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -19,6 +20,7 @@ import { User, UserSchema } from './schemas/user.schema';
 import { DocumentController } from './controller/document/document.controller';
 import { UserController } from './controller/user/user.controller';
 import { AutoSaveGateway } from './sockets/auto-save/auto-save.gateway';
+import { DocumentGateway } from './sockets/document/document.gateway';
 
 @Module({
   imports: [
@@ -29,6 +31,6 @@ import { AutoSaveGateway } from './sockets/auto-save/auto-save.gateway';
     ]),
   ],
   controllers: [AppController, DocumentController, UserController,],
-  providers: [AppService, DocumentService, AuthService, UserService, AutoSaveGateway,],
+  providers: [AppService, DocumentService, AuthService, UserService, AutoSaveGateway, DocumentGateway,],
 })
 export class AppModule { }

@@ -16,9 +16,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { DocumentReducer } from 'src/ngrx/reducers/document.reducer';
 import { DocumentEffects } from 'src/ngrx/effects/document.effect';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
 
-
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { DocumentEffects } from 'src/ngrx/effects/document.effect';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     StoreModule.forRoot({doc:DocumentReducer}, {}),
-    EffectsModule.forRoot([DocumentEffects])
+    EffectsModule.forRoot([DocumentEffects]),
+    SocketIoModule.forRoot(config),
   ],
   providers: [],
   bootstrap: [AppComponent]
