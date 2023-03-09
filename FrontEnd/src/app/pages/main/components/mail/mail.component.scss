@@ -9,7 +9,7 @@
 }
 
 .full-width{
-    width: 20rem;
+    width: 25rem;
     margin: 0.5rem 0 0 0.5rem;
     font-size: medium;
   .input-holder{
@@ -21,10 +21,11 @@
 .button-holder{
   display: flex;
   justify-content: space-between;
+  margin: auto;
 
   .button{
     color: var(--color-4);
-    margin: auto 0.5rem;
+    margin: 0 1rem 0 1.2rem;
     background-color: var(--color-3);
     height: 2rem;
     width: 8rem;
@@ -38,17 +39,19 @@
   background-color: var(--color-3);
   display: flex;
   justify-content: space-between;
-  width: 90%;
+  width: 99%;
   height: 2.5rem;
   border-radius: 10px;
-  margin: 0 1.5rem 0 2.5rem;
+  margin: 0.5rem 0 0.3rem 0.3rem;
+
   .move-button-holder{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 3rem;
 
     p{
-      font-size: small;
+      font-size: medium;
       color: var(--color-4);
     }
   }
@@ -86,24 +89,38 @@
   .date{
     margin-right: 0.5rem;
   }
+  .request{
+    height: 15%;
+    width: 40%;
+
+    p{
+      font-size: medium;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }
 
 .panel-button-holder{
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   width: 100%;
 }
 
 .panel{
   background-color: var(--color-4);
   border-radius: 10px;
-  margin: 1.5rem 0.5rem 0 0.5rem;
+  margin: 0.1rem 0.4rem 0.5rem 1rem;
 }
 
+.text{
+  color: var(--color-1);
+}
 .panel-button{
   border-radius: 10px;
   background-color: var(--color-3);
-  margin: 0 1rem 0 1rem ;
+  margin: 0 0.5rem 0 0rem ;
   align-items: center;
   color: var(--color-4);
   font-size: medium;
@@ -119,12 +136,22 @@
   background-color: red;
 }
 
+.panel-header{
+  margin-top: 0.5rem;
+}
+
+.email-holder{
+  height: 80%;
+  overflow: scroll;
+}
 .loading-state{
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 60%;
   transform: translate(-50%, -50%);
   width: 100%;
   height: 90%;
   z-index: 10000;
 }
+
+
