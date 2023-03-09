@@ -40,7 +40,10 @@ export class DocumentService {
         return document.save();
     }
 
-    async deleteDocument(id: string): Promise<DeleteResult> {
+    async deleteDocument(id: string,uid:string): Promise<DeleteResult> {
+        const documentRef= await this.documentModel.findOne({ id: id }).exec();
+        if (!documentRef) return null;
+        if (documentRef.uid != uid) return null;
         const document = this.documentModel.deleteOne({ id: id }).exec();
         return document;
     }

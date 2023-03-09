@@ -39,6 +39,13 @@ export class DocumentController {
             throw new HttpException(error, 500);
         }
     }
+    @Delete('')
+    async deleteDocument(@Headers() header, @Query('id') id) {
+        let decodedToken = await this.authService.validateUser(header.authorization);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401);
+        return await this.documentService.deleteDocument(id,decodedToken.uid);
+        
+    }
 
     @Put('')
     async updateDocument(@Headers() header, @Body() body, @Query('id') id, @Query('uid') uid) {
