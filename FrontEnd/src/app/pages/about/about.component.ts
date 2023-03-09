@@ -11,25 +11,25 @@ export class AboutComponent {
   members = [
     {
       name: 'Nguyễn Hoàng Trung',
-      position: 'Leader & Mentor',
+      position: ' Mentor',
       image: '../../../assets/members-img/NHT.jpg',
       imageXOffset: '0px'
     },
     {
       name: 'Nguyễn Lê Quốc Khánh',
-      position: 'Member 1',
+      position: 'Leader',
       image: '../../../assets/members-img/NLQK.jpg',
       imageXOffset: '200px'
     },
     {
       name: 'Huỳnh Chu Minh Khôi',
-      position: 'Member 2',
+      position: 'Developer',
       image: '../../../assets/members-img/HCMK.jpg',
       imageXOffset: '0px'
     },
     {
       name: 'Nguyễn Ngọc Minh',
-      position: 'Member 3',
+      position: 'Developer',
       image: '../../../assets/members-img/NNM.jpg',
       imageXOffset: '100px'
     }
