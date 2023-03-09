@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class MainComponent {
   sidebarToggle: boolean = true;
+  activeLink: string = '';
   navigateItems: any[] = [
     {
       icon: 'contact_page',
@@ -43,6 +44,17 @@ export class MainComponent {
 
   ]
   constructor(private route: Router) {
+    this.route.routeReuseStrategy.shouldReuseRoute = () => false;
+    //get link from url and active link
+    if(this.route.url.split('/')[3]==undefined){
+      this.activeLink= this.route.url.split('/')[2];
+    }
+    else{
+      this.activeLink= `${this.route.url.split('/')[2]}/${this.route.url.split('/')[3]}`;
+    }
+    this.navigateItems.forEach((item) => {
+      item.link == this.activeLink ? item.active = true : item.active = false;
+    })
   }
   ngOnInit(): void {
   }
@@ -52,9 +64,11 @@ export class MainComponent {
   }
   navigate(link: string) {
 
-    this.route.navigate([`main/${link}`]);
     this.navigateItems.forEach((item) => {
+
       item.link == link ? item.active = true : item.active = false;
     })
+    this.route.navigate([`main/${link}`]);
+
   }
 }

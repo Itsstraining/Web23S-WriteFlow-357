@@ -1,6 +1,10 @@
-import { Body, Controller, Get, Headers, HttpException, Put, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable prefer-const */
+/* eslint-disable prettier/prettier */
+import { Body, Controller, Get, Headers, HttpException, Post, Put, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { join } from 'path';
+import { UserModel } from 'src/models/user.model';
 import { AuthService } from 'src/services/auth/auth.service';
 import { UserService } from 'src/services/user/user.service';
 import { saveImageToStorage, isFileValid, deleteFile } from './userImageFilter';
@@ -14,6 +18,14 @@ export class UserController {
         try {
             if (!uid) throw new HttpException('uid is required', 400);
             return await this.userService.getUser(uid);
+        } catch (error) {
+            throw new HttpException(error, 500);
+        }
+    }
+    @Post('register')
+    async registerUser(@Body() header:any,@Body('user') body: UserModel) {
+        try {
+            return await this.userService.createUser(body);
         } catch (error) {
             throw new HttpException(error, 500);
         }

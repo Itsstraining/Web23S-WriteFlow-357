@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable prefer-const */
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
@@ -14,4 +17,5 @@ export class AuthService {
             return null;
         }
     }
+
 }

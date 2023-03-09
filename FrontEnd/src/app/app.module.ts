@@ -17,10 +17,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { DocumentReducer } from 'src/ngrx/reducers/document.reducer';
 import { DocumentEffects } from 'src/ngrx/effects/document.effect';
 import { RoleDialogComponent } from './components/role-dialog/role-dialog.component';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
 
 
-
+const config: SocketIoConfig = { url: environment.socketURL, options: {} };
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { RoleDialogComponent } from './components/role-dialog/role-dialog.compon
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     StoreModule.forRoot({doc:DocumentReducer}, {}),
-    EffectsModule.forRoot([DocumentEffects])
+    EffectsModule.forRoot([DocumentEffects]),
+    SocketIoModule.forRoot(config),
   ],
   providers: [],
   bootstrap: [AppComponent]

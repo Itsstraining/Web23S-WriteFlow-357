@@ -156,7 +156,7 @@ quill-editor {
     margin: 0 auto;
     top: calc(#{$toolbar-button + $toolbar-padding * 2});
 }
-.status-container {
+.status-container, .status-container-status{
   position: absolute;
   top: 50%;
   left: 50%;
@@ -164,7 +164,9 @@ quill-editor {
   width: 100%;
   height: 90%;
   z-index: 10001;
-
+}
+.status-container-status{
+  z-index: 9999;
 }
 .cdk-overlay-container {
   width: 100% !important;

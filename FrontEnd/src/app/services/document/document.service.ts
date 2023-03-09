@@ -21,7 +21,7 @@ export class DocumentService {
   }
 
   create(doc: DocModel): Observable<any> {
-    return this.http.post(environment.apiURL + this.url +"/createDoc",
+    return this.http.post(environment.apiURL + this.url + "/createDoc",
       {
         document: doc,
       },
@@ -30,5 +30,12 @@ export class DocumentService {
           'authorization': this.authService.getToken(),
         }
       }) as Observable<any>
+  }
+  delete(id: string): Observable<any> {
+    return this.http.delete(`${environment.apiURL}${this.url}?id=${id}`, {
+      headers: {
+        'authorization': this.authService.getToken(),
+      }
+    }) as Observable<any>
   }
 }

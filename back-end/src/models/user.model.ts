@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 export interface UserModel {
     uid: string;
     email: string;
@@ -5,6 +6,5 @@ export interface UserModel {
     job: string[];
     displayName: string;
     photoURL: string;
-
     starDocs: string[]
 }

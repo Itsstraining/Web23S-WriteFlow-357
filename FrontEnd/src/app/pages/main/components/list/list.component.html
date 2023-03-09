@@ -1,12 +1,8 @@
 <div class="container">
-  <div class="topbar">
-
-  </div>
-
   <div class="status-container" *ngIf="(this.doc$|async)?.loading==true">
       <app-loading [inputData]="'Getting your documents'" [loading]="true" ></app-loading>
   </div>
-  <div class="status-container" *ngIf="(this.doc$|async)?.loading==false&&(this.doc$|async)?.error!=''">
+  <div class="status-container-status" *ngIf="(this.doc$|async)?.loading==false&&(this.doc$|async)?.error!=''">
     <app-status ></app-status>
 </div>
   <!-- <div class="tab-container" >
@@ -38,18 +34,18 @@
     </div>
   </div>
   <div class="main-container" *ngIf="(this.doc$|async)?.loading==false&&(this.doc$|async)?.error==''">
-    <div class="item-container"*ngFor="let doc of (this.doc$|async)?.documents" (click)="navigateToDoc(doc.id)">
+    <div class="item-container"*ngFor="let doc of (this.doc$|async)?.documents" >
       <div class="icon-container">
         <div>
           <mat-icon matTooltip="Edit">edit</mat-icon>
           <mat-icon>star</mat-icon>
         </div>
-        <mat-icon matTooltip="Delete">close</mat-icon>
+        <mat-icon matTooltip="Delete" (click)="deleteDoc(doc.id)" >close</mat-icon>
       </div>
-      <img src="../../../../../assets/Logo.svg" alt="" class="doc-img">
+      <img src="../../../../../assets/Logo.svg" alt="" class="doc-img"(click)="navigateToDoc(doc.id)">
       <hr>
       <div class="item-info">
-        <p class="doc-name">{{doc.name}}</p>
+        <p class="doc-name" (click)="navigateToDoc(doc.id)">{{doc.name}}</p>
         <span class="doc-created">Created: <span>{{this.shareFunctionService.convertDateTime(doc.dateCreated)}}</span></span><br>
         <span class="doc-created">Modify: <span>{{this.shareFunctionService.convertDateTime(doc.dateCreated)}}</span></span>
       </div>
