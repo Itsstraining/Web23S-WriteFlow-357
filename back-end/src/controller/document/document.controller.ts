@@ -8,6 +8,7 @@ import { DocumentService } from 'src/services/document/document.service';
 import { saveDocumentToStorage } from './documentFilter';
 import * as fs from 'fs';
 import { DocModel } from 'src/models/document.model';
+
 @Controller('document')
 export class DocumentController {
     constructor(private documentService: DocumentService, private authService: AuthService) { }
@@ -24,6 +25,26 @@ export class DocumentController {
                 return await this.documentService.getDocuments(uid);
             }
             return await this.documentService.getDocuments(null);
+        } catch (error) {
+            throw new HttpException(error, 500);
+        }
+    }
+    @Get('shared')
+    async getSharedDocuments(@Headers() header, @Query('uid') uid) {
+        let decodedToken = await this.authService.validateUser(header.authorization);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401);
+        try {
+            return await this.documentService.getSharedDocumentsByUserId(uid);
+        } catch (error) {
+            throw new HttpException(error, 500);
+        }
+    }
+    @Get('deleted')
+    async getDeletedDocuments(@Headers() header, @Query('uid') uid) {
+        let decodedToken = await this.authService.validateUser(header.authorization);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401);
+        try {
+            return await this.documentService.getDeletedDocumentsByUserId(uid);
         } catch (error) {
             throw new HttpException(error, 500);
         }
@@ -46,13 +67,13 @@ export class DocumentController {
     }
 
     @Put('')
-    async updateDocument(@Headers() header, @Body() body, @Query('id') id, @Query('uid') uid) {
+    async updateDocument(@Headers() header, @Body('updateField') updateField,@Body('updateValue') updateValue, @Query('id') id, @Query('uid') uid) {
         let decodedToken = await this.authService.validateUser(header.authorization);
         if (!decodedToken) throw new HttpException('Unauthorized', 401);
-        if (decodedToken.uid != body.uid) throw new HttpException('Unauthorized', 401);
+        if (decodedToken.uid != uid) throw new HttpException('Unauthorized', 401);
 
         try {
-            return await this.documentService.updateDocument(id, uid, body);
+            return await this.documentService.updateDocumentField(id, uid, updateField, updateValue);
         } catch (error) {
             throw new HttpException(error, 500);
         }

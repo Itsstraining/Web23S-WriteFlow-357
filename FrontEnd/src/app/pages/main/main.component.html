@@ -10,7 +10,7 @@
       <mat-icon>notifications</mat-icon>
   </button>
   <button mat-icon-button matTooltip="My Account" [matMenuTriggerFor]="userAccountMenu">
-      <mat-icon>account_circle</mat-icon>
+
   </button>
   <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
       <button mat-menu-item routerLink="#">
@@ -36,13 +36,13 @@
                   Document
               </mat-expansion-panel-header>
               <mat-nav-list>
-                  <a mat-list-item [routerLink]="['/main','documents','owned']">
+                  <a mat-list-item [routerLink]="['/main','documents','owned']" [disabled]="(this.document$|async)?.loading">
                       <mat-icon>description</mat-icon><span>My document</span>
                   </a>
-                  <a mat-list-item [routerLink]="['/main','documents','shared']">
+                  <a mat-list-item [routerLink]="['/main','documents','shared']" [disabled]="(this.document$|async)?.loading">
                       <mat-icon>contact_page</mat-icon><span>Shared document</span>
                   </a>
-                  <a mat-list-item [routerLink]="['/main','documents','bin']">
+                  <a mat-list-item [routerLink]="['/main','documents','bin']" [disabled]="(this.document$|async)?.loading">
                     <mat-icon>delete</mat-icon><span>Recycle bin</span>
                 </a>
               </mat-nav-list>

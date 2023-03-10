@@ -36,7 +36,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatExpansionModule,
     MatBadgeModule,
     MatStepperModule,
-    MatSelectModule
+    MatSelectModule,
     MatSnackBarModule,
     MatSidenavModule,
     MatListModule,
@@ -55,7 +55,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatExpansionModule,
     MatBadgeModule,
     MatStepperModule,
-    MatSelectModule
+    MatSelectModule,
     MatSnackBarModule,
     MatSidenavModule,
     MatListModule,
