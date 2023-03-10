@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'home', redirectTo: '', pathMatch: 'full' },
   { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
 
-  { path: 'main', loadChildren: () => import('./pages/main/main.module').then(m => m.MainModule), },
+  { path: 'main', canActivate: [AuthGuard], loadChildren: () => import('./pages/main/main.module').then(m => m.MainModule), },
   { path: 'about', loadChildren: () => import('./pages/about/about.module').then(m => m.AboutModule) },
   { path: 'profile', loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule) },
 

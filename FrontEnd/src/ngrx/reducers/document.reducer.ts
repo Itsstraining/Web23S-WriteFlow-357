@@ -3,7 +3,7 @@ import { DocumentActions } from "../actions/document.action";
 import { DocumentState } from "../states/document.state";
 
 let initialState: DocumentState = {
-  documents: null,
+  documents: [],
   document: null,
   loading: false,
   inProcess: false,
