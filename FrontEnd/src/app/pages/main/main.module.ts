@@ -15,6 +15,7 @@ import { CreateDocumentComponent } from './components/create-document/create-doc
 
 
 
+
 @NgModule({
   declarations: [
     MainComponent,
@@ -22,7 +23,7 @@ import { CreateDocumentComponent } from './components/create-document/create-doc
     ListComponent,
     MailComponent,
     RecycleComponent,
-    CreateDocumentComponent,
+    CreateDocumentComponent
 
   ],
   imports: [

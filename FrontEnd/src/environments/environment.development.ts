@@ -8,4 +8,5 @@ export const environment = {
     messagingSenderId: '92118223652',
   },
   apiURL: 'http://localhost:3000',
+  socketURL:'http://localhost:3000'
 };

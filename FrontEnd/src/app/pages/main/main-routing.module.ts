@@ -7,9 +7,13 @@ import { RecycleComponent } from './components/recycle/recycle.component';
 import { MainComponent } from './main.component';
 
 const routes: Routes = [{
-  path: '', component: MainComponent, children: [
+  path: '', component: MainComponent, runGuardsAndResolvers: 'always', children: [
     { path: '', redirectTo: 'documents/owned', pathMatch: 'full' },
-    { path: 'documents/:type', component: ListComponent },
+    {
+      path: 'documents/:type', component: ListComponent,
+      runGuardsAndResolvers: 'always',
+    },
+
     { path: 'mail', component: MailComponent },
     { path: 'recycle', component: RecycleComponent },
   ]

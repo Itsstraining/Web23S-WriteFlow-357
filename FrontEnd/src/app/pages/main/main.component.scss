@@ -1,138 +1,32 @@
-.container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  overflow-x: hidden;
+.toolbar-item-spacer {
+  flex: 1 1 auto;
 }
 
-.main-container-opensidebar {
-  width: 80%;
-  height: 100%;
-  margin-left: 20%;
-  transition: width 0.5s;
-
+.app-container {
+  height: 90%;
+  margin: 0;
 }
 
-.main-container-closesidebar {
-  width: 95%;
-  height: 100%;
-  margin-left: 5%;
-  transition: width 0.5s;
-}
-
-.side-bar-container {
+.app-sidenav {
   width: 20%;
-  border-right: 1px solid #ccc;
-
-  position: fixed;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  transition: width 0.5s;
 }
 
-.side-bar-close {
-  width: 5%;
-  position: fixed;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  border-right: 1px solid #ccc;
-  transition: width 0.5s;
-
-  .logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    img {
-      width: 100%;
-      height: 100%;
-    }
-
-    span {
-      display: none;
-    }
-
-  }
-
-  .navigate-container,
-  .navigate-active-link {
-
-    justify-content: center;
-    margin: 20% 8%;
-
-    span {
-      display: none;
-    }
-  }
-}
-
-.navigate-container,
-.navigate-active-link {
-  transition: visibility 0s, opacity 0.5s linear;
-
-  margin: 5% 8%;
-  padding: 3%;
-  border-radius: 10px;
+.app-sidenav-content {
   display: flex;
-  align-items: center;
-
-  cursor: pointer;
-
-  mat-icon,
-  span {
-    color: var(--color-2);
-    font-size: 1rem;
-  }
-
-  span {
-    text-align: left;
-  }
-
-  mat-icon {
-    margin-right: 5%;
-  }
+  height: 100%;
+  flex-direction: column;
 
 }
 
-.navigate-active-link {
-  background-color: var(--color-3);
-
-  mat-icon,
-  span {
-    color: var(--color-4);
-    font-size: 1rem;
-  }
+.write,
+.flow {
+  font-size: 1.5rem;
 }
 
-.navigate-container:hover {
-  background-color: var(--color-3);
+.write {
+  color: var(--color-4);
 }
 
-.logo-container {
-  display: flex;
-  align-items: center;
-  margin: 5% 8%;
-
-  img {
-    width: 30%;
-    height: 30%;
-  }
-
-  .write,
-  .flow {
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-
-  .write {
-    color: var(--color-2);
-  }
-
-  .flow {
-    color: var(--color-4);
-  }
+.flow {
+  color: var(--color-5);
 }
