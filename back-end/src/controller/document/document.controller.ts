@@ -53,8 +53,8 @@ export class DocumentController {
             throw new HttpException(error, 500);
         }
     }
-    @Post('/createDoc')
-    async createUserDocument(@Headers() header, @Body('document') document:DocModel) {
+    @Post('create')
+    async createUserDocument(@Headers() header, @Body('document') document: DocModel) {
         let decodedToken = await this.authService.validateUser(header.authorization);
         if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
         try {
@@ -71,7 +71,7 @@ export class DocumentController {
     }
 
     @Put('')
-    async updateDocument(@Headers() header, @Body('updateField') updateField,@Body('updateValue') updateValue, @Query('id') id, @Query('uid') uid) {
+    async updateDocument(@Headers() header, @Body('updateField') updateField, @Body('updateValue') updateValue, @Query('id') id, @Query('uid') uid) {
         let decodedToken = await this.authService.validateUser(header.authorization);
         if (!decodedToken) throw new HttpException('Unauthorized', 401);
         if (decodedToken.uid != uid) throw new HttpException('Unauthorized', 401);

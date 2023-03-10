@@ -1,9 +1,36 @@
+mat-toolbar {
+  background-color: var(--color-1);
+  box-shadow: 0px 0px 4px 0px rgba(var(--color-4-rgb), 0.5);
+  position: fixed;
+  z-index: 9999;
+
+  button {
+    color: var(--color-4);
+    margin: 0rem 0.25rem;
+  }
+
+}
+
+::ng-deep.mat-icon-no-color {
+  color: var(--color-4) !important;
+}
+
+.mat-toolbar-height {
+  height: 64px;
+}
+
+@media screen and (max-width: 600px) {
+  .mat-toolbar-height {
+    height: 56px;
+  }
+}
+
 .toolbar-item-spacer {
   flex: 1 1 auto;
 }
 
 .app-container {
-  height: 90%;
+  height: calc(100% - 64px);
   margin: 0;
 }
 
@@ -18,15 +45,38 @@
 
 }
 
+mat-expansion-panel-header {
+  color: var(--color-4);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+mat-nav-list>.list-item {
+  color: var(--color-4);
+  font-weight: 500;
+  font-size: 1rem;
+
+  &>mat-icon {
+    color: var(--color-4);
+  }
+}
+
+::ng-deep.mdc-list-item__primary-text {
+  color: var(--color-4) !important;
+}
+
+
 .write,
 .flow {
   font-size: 1.5rem;
 }
 
 .write {
+  font-weight: 500;
   color: var(--color-4);
 }
 
 .flow {
-  color: var(--color-5);
+  font-weight: 700;
+  color: var(--color-4);
 }
