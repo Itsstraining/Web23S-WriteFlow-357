@@ -88,5 +88,7 @@ export class ListComponent {
     })
     this.store.dispatch(DocumentActions.delete({ id: id }));
   }
+  openDeleteDialog(){
 
+  }
 }

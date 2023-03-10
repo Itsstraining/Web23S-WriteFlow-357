@@ -23,7 +23,7 @@ export const DocumentActions={
   deleteSuccess:createAction('[Document] Delete Success',props<{doc:DocModel}>()),
   deleteFail:createAction('[Document] Delete Fail',props<{error:string}>()),
 
-  update:createAction('[Document] Update',props<{document:DocModel}>()),
-  updateSuccess:createAction('[Document] Update Success',props<{document:DocModel}>()),
+  update:createAction('[Document] Update',props<{id:string,uid:string,updateField:string,updateValue:any}>()),
+  updateSuccess:createAction('[Document] Update Success',props<{doc:DocModel}>()),
   updateFail:createAction('[Document] Update Fail',props<{error:string}>()),
 }

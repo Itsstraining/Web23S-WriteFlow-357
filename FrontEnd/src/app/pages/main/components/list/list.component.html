@@ -5,27 +5,6 @@
   <div class="status-container-status" *ngIf="(this.doc$|async)?.loading==false&&(this.doc$|async)?.error!=''">
     <app-status ></app-status>
 </div>
-  <!-- <div class="tab-container" >
-    <span class="tab-name">Open recently</span>
-
-  </div>
-  <div class="main-container-recently">
-    <div class="item-container">
-      <div class="icon-container">
-        <div>
-          <mat-icon matTooltip="Edit">edit</mat-icon>
-          <mat-icon>star</mat-icon>
-        </div>
-        <mat-icon matTooltip="Delete">close</mat-icon>
-      </div>
-      <img src="../../../../../assets/Logo.svg" alt="" class="doc-img">
-      <hr>
-      <div class="item-info">
-        <p class="doc-name">Report</p>
-        <span class="doc-created">Created: <span>15:30 24/12/2023</span></span>
-      </div>
-    </div>
-  </div> -->
   <div class="tab-container">
     <span class="tab-name">All Document</span>
     <div class="add-container" matTooltip="Create" (click)="openCreateDialog()">
@@ -40,7 +19,7 @@
           <mat-icon matTooltip="Edit">edit</mat-icon>
           <mat-icon>star</mat-icon>
         </div>
-        <mat-icon matTooltip="Delete" (click)="deleteDoc(doc.id)" >close</mat-icon>
+        <mat-icon matTooltip="Send to recycle bin" (click)="deleteDoc(doc.id)" >close</mat-icon>
       </div>
       <img src="../../../../../assets/Logo.svg" alt="" class="doc-img"(click)="navigateToDoc(doc.id)">
       <hr>

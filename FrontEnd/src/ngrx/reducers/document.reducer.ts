@@ -129,4 +129,28 @@ export const DocumentReducer = createReducer(
       error: error
     }
   })),
+  on(DocumentActions.update, ((state) => {
+    return {
+      ...state,
+      inProcess: true,
+      error: ''
+    }
+  })),
+  on(DocumentActions.updateSuccess, ((state, { doc }) => {
+    let documents = [...state.documents!]
+    let index = documents.findIndex(x => x.id == doc.id);
+    documents[index] = doc;
+    return {
+      ...state,
+      documents: documents,
+      inProcess: false
+    }
+  })),
+  on(DocumentActions.updateFail, ((state, { error }) => {
+    return {
+      ...state,
+      inProcess: false,
+      error: error
+    }
+  })),
 )

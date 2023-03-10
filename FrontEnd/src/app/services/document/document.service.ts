@@ -33,7 +33,6 @@ export class DocumentService {
     }) as Observable<DocModel[]>
   }
 
-
   getDoc(id: string): Observable<any> {
     return this.http.get(`${environment.apiURL}${this.url}?id=${id}`, {
       headers: new HttpHeaders({

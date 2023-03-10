@@ -73,6 +73,8 @@ export const UserReducer = createReducer(
       loading: false,
       error: error
     }
-  })
+  }),
+
+
 
 )
