@@ -2,13 +2,11 @@
 import { SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
 import { DocumentService } from 'src/services/document/document.service';
 
-@WebSocketGateway({cors:true})
+@WebSocketGateway({ cors: true })
 export class AutoSaveGateway {
   @WebSocketServer() server;
 
-  constructor(private documentService: DocumentService) { 
-    
-  }
+  constructor(private documentService: DocumentService) { }
 
   @SubscribeMessage('save')
   handleMessage(client: any, payload: any) {

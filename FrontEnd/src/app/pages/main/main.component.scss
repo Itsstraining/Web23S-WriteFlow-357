@@ -1,4 +1,3 @@
-
 .toolbar-item-spacer {
   flex: 1 1 auto;
 }
@@ -7,21 +6,27 @@
   height: 90%;
   margin: 0;
 }
+
 .app-sidenav {
   width: 20%;
 }
+
 .app-sidenav-content {
   display: flex;
   height: 100%;
   flex-direction: column;
 
 }
-.write, .flow{
+
+.write,
+.flow {
   font-size: 1.5rem;
 }
-.write{
+
+.write {
   color: var(--color-4);
 }
-.flow{
+
+.flow {
   color: var(--color-5);
 }

@@ -50,10 +50,7 @@ export class ListComponent {
   ngOnInit(): void {
 
   }
-  ngAfterViewInit(): void {
 
-
-  }
   ngOnDestroy(): void {
     try {
       this.tempSub.unsubscribe();
