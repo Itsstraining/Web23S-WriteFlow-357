@@ -23,7 +23,7 @@ export class UserController {
         }
     }
     @Post('register')
-    async registerUser(@Body() header:any,@Body('user') body: UserModel) {
+    async registerUser(@Body('user') body: UserModel) {
         try {
             return await this.userService.createUser(body);
         } catch (error) {

@@ -11,14 +11,28 @@ import { AuthService } from '../auth.service';
 export class DocumentService {
   url = '/document'
   constructor(private http: HttpClient, private authService: AuthService,) { }
-
-  getAll(): Observable<any[]> {
+  getAll(): Observable<DocModel[]> {
     return this.http.get(`${environment.apiURL}${this.url}?uid=${this.authService.currentUser?.uid}`, {
       headers: {
         'authorization': this.authService.getToken(),
       }
-    }) as Observable<any[]>
+    }) as Observable<DocModel[]>
   }
+  getDeleted(): Observable<DocModel[]> {
+    return this.http.get(`${environment.apiURL}${this.url}/deleted?uid=${this.authService.currentUser?.uid}`, {
+      headers: {
+        'authorization': this.authService.getToken(),
+      }
+    }) as Observable<DocModel[]>
+  }
+  getShared(): Observable<DocModel[]> {
+    return this.http.get(`${environment.apiURL}${this.url}/shared?uid=${this.authService.currentUser?.uid}`, {
+      headers: {
+        'authorization': this.authService.getToken(),
+      }
+    }) as Observable<DocModel[]>
+  }
+
 
   getDoc(id: string): Observable<any> {
     return this.http.get(`${environment.apiURL}${this.url}?id=${id}`, {
@@ -77,14 +91,13 @@ export class DocumentService {
         headers: {
           'authorization': this.authService.getToken(),
         }
-      }) as Observable<any>
+      }) as Observable<DocModel>
   }
-
-  delete(id: string): Observable<any> {
+  delete(id: string): Observable<DocModel> {
     return this.http.delete(`${environment.apiURL}${this.url}?id=${id}`, {
       headers: {
         'authorization': this.authService.getToken(),
       }
-    }) as Observable<any>
+    }) as Observable<DocModel>
   }
 }

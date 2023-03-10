@@ -30,33 +30,33 @@
       <!-- <mat-list-item routerLink="#">
               <mat-icon>dashboard</mat-icon><span>Dashboard</span>
           </mat-list-item> -->
-      <mat-expansion-panel [class.mat-elevation-z0]="true">
-        <mat-expansion-panel-header>
-          Document
-        </mat-expansion-panel-header>
-        <mat-nav-list>
-          <a mat-list-item [routerLink]="['/main','documents','owned']">
-            <mat-icon>description</mat-icon><span>My document</span>
-          </a>
-          <a mat-list-item [routerLink]="['/main','documents','shared']">
-            <mat-icon>contact_page</mat-icon><span>Shared document</span>
-          </a>
-          <a mat-list-item [routerLink]="['/main','documents','bin']">
-            <mat-icon>delete</mat-icon><span>Recycle bin</span>
-          </a>
-        </mat-nav-list>
-      </mat-expansion-panel>
-      <mat-expansion-panel [class.mat-elevation-z0]="true">
-        <mat-expansion-panel-header>
-          Mail
-        </mat-expansion-panel-header>
-        <mat-nav-list>
-          <a mat-list-item [routerLink]="['/main','mail']">
-            <mat-icon>mail</mat-icon><span>Inbox</span>
-          </a>
-        </mat-nav-list>
-      </mat-expansion-panel>
-    </mat-nav-list>
+          <mat-expansion-panel [class.mat-elevation-z0]="true">
+              <mat-expansion-panel-header>
+                  Document
+              </mat-expansion-panel-header>
+              <mat-nav-list>
+                  <a mat-list-item [routerLink]="['/main','documents','owned']" [disabled]="(this.document$|async)?.loading">
+                      <mat-icon>description</mat-icon><span>My document</span>
+                  </a>
+                  <a mat-list-item [routerLink]="['/main','documents','shared']" [disabled]="(this.document$|async)?.loading">
+                      <mat-icon>contact_page</mat-icon><span>Shared document</span>
+                  </a>
+                  <a mat-list-item [routerLink]="['/main','documents','bin']" [disabled]="(this.document$|async)?.loading">
+                    <mat-icon>delete</mat-icon><span>Recycle bin</span>
+                </a>
+              </mat-nav-list>
+          </mat-expansion-panel>
+          <mat-expansion-panel [class.mat-elevation-z0]="true">
+              <mat-expansion-panel-header >
+                  Mail
+              </mat-expansion-panel-header>
+              <mat-nav-list>
+                <a mat-list-item [routerLink]="['/main','mail']">
+                  <mat-icon>mail</mat-icon><span>Inbox</span>
+              </a>
+              </mat-nav-list>
+          </mat-expansion-panel>
+      </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet>

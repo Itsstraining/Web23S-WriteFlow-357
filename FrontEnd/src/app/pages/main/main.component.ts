@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { DocumentState } from 'src/ngrx/states/document.state';
 
 @Component({
   selector: 'app-main',
@@ -43,8 +45,9 @@ export class MainComponent {
 
 
   ]
-  constructor(private route: Router) {
-    this.route.routeReuseStrategy.shouldReuseRoute = () => false;
+  document$=this.store.select('doc');
+  constructor(private route: Router,private store: Store<{ doc: DocumentState }>) {
+    // this.route.routeReuseStrategy.shouldReuseRoute = () => false;
     //get link from url and active link
     if(this.route.url.split('/')[3]==undefined){
       this.activeLink= this.route.url.split('/')[2];
@@ -57,10 +60,6 @@ export class MainComponent {
     })
   }
   ngOnInit(): void {
-  }
-  //Ẩn hiện sidebar
-  sidebarChange() {
-    this.sidebarToggle = !this.sidebarToggle;
   }
   navigate(link: string) {
 
