@@ -11,16 +11,14 @@
       <span>{{item.title}}</span>
     </div>
     <div class='navigate-container' (click)="sidebarChange()">
-      <mat-icon aria-hidden="false" aria-label="Document Icon" fontIcon="{{this.sidebarToggle?'arrow_back':'arrow_forward'}}"></mat-icon>
+      <mat-icon aria-hidden="false" aria-label="Document Icon"
+        fontIcon="{{this.sidebarToggle?'arrow_back':'arrow_forward'}}"></mat-icon>
       <span *ngIf="this.sidebarToggle">Hide</span>
     </div>
 
   </div>
-  <div [ngClass]="{'main-container-opensidebar':this.sidebarToggle,'main-container-closesidebar':this.sidebarToggle==false}">
+  <div
+    [ngClass]="{'main-container-opensidebar':this.sidebarToggle,'main-container-closesidebar':this.sidebarToggle==false}">
     <router-outlet></router-outlet>
   </div>
-
-
-
-
 </div>

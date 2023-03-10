@@ -1,23 +1,26 @@
-.container{
+.container {
   width: 100%;
   height: 100%;
   display: flex;
   overflow-x: hidden;
 }
-.main-container-opensidebar{
+
+.main-container-opensidebar {
   width: 80%;
   height: 100%;
   margin-left: 20%;
   transition: width 0.5s;
 
 }
-.main-container-closesidebar{
+
+.main-container-closesidebar {
   width: 95%;
   height: 100%;
   margin-left: 5%;
   transition: width 0.5s;
 }
-.side-bar-container{
+
+.side-bar-container {
   width: 20%;
   border-right: 1px solid #ccc;
 
@@ -28,7 +31,8 @@
   z-index: 9999;
   transition: width 0.5s;
 }
-.side-bar-close{
+
+.side-bar-close {
   width: 5%;
   position: fixed;
   height: 100%;
@@ -38,76 +42,97 @@
   border-right: 1px solid #ccc;
   transition: width 0.5s;
 
-  .logo-container{
-    display:flex;
+  .logo-container {
+    display: flex;
     align-items: center;
     justify-content: center;
-    img{
+
+    img {
       width: 100%;
       height: 100%;
     }
-    span{
+
+    span {
       display: none;
     }
 
   }
-  .navigate-container, .navigate-active-link{
+
+  .navigate-container,
+  .navigate-active-link {
 
     justify-content: center;
-    margin:20% 8%;
-    span{
+    margin: 20% 8%;
+
+    span {
       display: none;
     }
   }
 }
-.navigate-container, .navigate-active-link{
+
+.navigate-container,
+.navigate-active-link {
   transition: visibility 0s, opacity 0.5s linear;
 
-  margin:5% 8%;
-  padding:3%;
+  margin: 5% 8%;
+  padding: 3%;
   border-radius: 10px;
   display: flex;
   align-items: center;
 
   cursor: pointer;
-  mat-icon,span{
-    color:var(--color-2);
-    font-size:1rem;
+
+  mat-icon,
+  span {
+    color: var(--color-2);
+    font-size: 1rem;
   }
-  span{
+
+  span {
     text-align: left;
   }
-  mat-icon{
+
+  mat-icon {
     margin-right: 5%;
   }
 
 }
-.navigate-active-link{
+
+.navigate-active-link {
   background-color: var(--color-3);
-  mat-icon,span{
-    color:var(--color-4);
-    font-size:1rem;
+
+  mat-icon,
+  span {
+    color: var(--color-4);
+    font-size: 1rem;
   }
 }
-.navigate-container:hover{
+
+.navigate-container:hover {
   background-color: var(--color-3);
 }
-.logo-container{
+
+.logo-container {
   display: flex;
   align-items: center;
-  margin:5% 8%;
-   img{
+  margin: 5% 8%;
+
+  img {
     width: 30%;
     height: 30%;
-   }
-   .write, .flow{
+  }
+
+  .write,
+  .flow {
     font-size: 1.5rem;
     font-weight: 600;
-   }
-   .write{
-    color:var(--color-2);
-   }
-   .flow{
-    color:var(--color-4);
-   }
+  }
+
+  .write {
+    color: var(--color-2);
+  }
+
+  .flow {
+    color: var(--color-4);
+  }
 }

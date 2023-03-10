@@ -8,6 +8,7 @@ import { MainComponent } from './main.component';
 
 const routes: Routes = [{
   path: '', component: MainComponent, children: [
+    { path: '', redirectTo: 'documents/owned', pathMatch: 'full' },
     { path: 'documents/:type', component: ListComponent },
     { path: 'mail', component: MailComponent },
     { path: 'recycle', component: RecycleComponent },
