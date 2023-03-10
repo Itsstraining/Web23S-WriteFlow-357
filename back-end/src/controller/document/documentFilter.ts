@@ -22,17 +22,21 @@ export const saveDocumentToStorage = {
         filename: (req, file, cb) => {
             let ownderid = req.headers.ownerid as string;
             let fullNameFile = req.headers.filename as string;
+            let filePath = '';
 
-            let filePath = path.join('src', 'documentsStorage', ownderid, fullNameFile);
-
-            if (fs.existsSync(filePath)) {
-                cb(null, fullNameFile);
-            } else {
-                const fileExtension = path.extname(file.originalname);
-                const fileName = uuidv4() + (fileExtension ? fileExtension : '.json');
-
-                cb(null, fileName);
+            if (fullNameFile) {
+                filePath = path.join('src', 'documentsStorage', ownderid, fullNameFile);
             }
+
+            if (fs.existsSync(filePath) && fullNameFile) {
+                cb(null, fullNameFile);
+                return;
+            }
+
+            const fileExtension = path.extname(file.originalname);
+            const fileName = uuidv4() + (fileExtension ? fileExtension : '.json');
+
+            cb(null, fileName);
         }
     }),
     fileFilter: (req, file, cb) => {
