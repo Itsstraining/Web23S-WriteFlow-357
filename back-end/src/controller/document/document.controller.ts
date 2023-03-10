@@ -33,7 +33,6 @@ export class DocumentController {
             throw new HttpException(error, 500);
         }
     }
-<<<<<<< HEAD
     @Get('shared')
     async getSharedDocuments(@Headers() header, @Query('uid') uid) {
         let decodedToken = await this.authService.validateUser(header.authorization);
@@ -56,11 +55,6 @@ export class DocumentController {
     }
     @Post('/createDoc')
     async createUserDocument(@Headers() header, @Body('document') document:DocModel) {
-=======
-
-    @Post('/create')
-    async createUserDocument(@Headers() header, @Body('document') document: DocModel) {
->>>>>>> 6154542060ffe07f2c25df5ebf4ca7451088f3c7
         let decodedToken = await this.authService.validateUser(header.authorization);
         if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
         try {
@@ -79,13 +73,8 @@ export class DocumentController {
     @Put('')
     async updateDocument(@Headers() header, @Body('updateField') updateField,@Body('updateValue') updateValue, @Query('id') id, @Query('uid') uid) {
         let decodedToken = await this.authService.validateUser(header.authorization);
-<<<<<<< HEAD
         if (!decodedToken) throw new HttpException('Unauthorized', 401);
         if (decodedToken.uid != uid) throw new HttpException('Unauthorized', 401);
-=======
-        if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
-        if (decodedToken.uid != body.uid) throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
->>>>>>> 6154542060ffe07f2c25df5ebf4ca7451088f3c7
 
         try {
             return await this.documentService.updateDocumentField(id, uid, updateField, updateValue);
