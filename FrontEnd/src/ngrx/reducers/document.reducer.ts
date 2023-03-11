@@ -129,4 +129,57 @@ export const DocumentReducer = createReducer(
       error: error
     }
   })),
+  on(DocumentActions.update, ((state) => {
+    return {
+      ...state,
+      inProcess: true,
+      error: ''
+    }
+  })),
+  on(DocumentActions.updateSuccess, ((state, { doc, updateField, updateValue }) => {
+
+    let documents = [...state.documents!]
+    if (updateField == 'isPublic' || updateField == 'isDelete') {
+      let index = documents.findIndex(x => x.id == doc.id);
+      documents.splice(index, 1);
+    } else {
+      let index = documents.findIndex(x => x.id == doc.id);
+      documents[index] = doc;
+    }
+    return {
+      ...state,
+      documents: documents,
+      inProcess: false
+    }
+  })),
+  on(DocumentActions.updateFail, ((state, { error }) => {
+    return {
+      ...state,
+      inProcess: false,
+      error: error
+    }
+  })),
+  on(DocumentActions.get, ((state) => {
+    return {
+      ...state,
+      document: null,
+      loading: true,
+      error: ''
+    }
+  })),
+  on(DocumentActions.getSuccess, ((state, { document }) => {
+    return {
+      ...state,
+      document: document,
+      loading: false
+    }
+  })),
+  on(DocumentActions.getFail, ((state, { error }) => {
+    return {
+      ...state,
+      document: null,
+      loading: false,
+      error: error
+    }
+  })),
 )

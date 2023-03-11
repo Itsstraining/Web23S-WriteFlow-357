@@ -1,5 +1,7 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Doc, DocDocument } from 'src/schemas/document.schema';
@@ -9,7 +11,7 @@ import { UserService } from '../user/user.service';
 
 @Injectable()
 export class DocumentService {
-    constructor(@InjectModel(Doc.name) private documentModel: Model<DocDocument>,private userSerivce:UserService) { }
+    constructor(@InjectModel(Doc.name) private documentModel: Model<DocDocument>, private userSerivce: UserService) { }
 
     async createDocument(document: DocModel): Promise<DocModel> {
         const createdDocument = new this.documentModel(document);
@@ -18,7 +20,7 @@ export class DocumentService {
 
     async getDocuments(uid: string): Promise<DocModel[]> {
         if (uid) {
-            const documents = this.documentModel.find({ uid: uid,isDelete:false}).exec();
+            const documents = this.documentModel.find({ uid: uid, isDelete: false }).exec();
             return documents;
         }
 
@@ -26,9 +28,21 @@ export class DocumentService {
         return documents;
     }
 
-    async getDocument(id: string): Promise<DocModel> {
-        const document = this.documentModel.findOne({ id: id }).exec();
+    async getDocument(id: string, uid: string): Promise<DocModel> {
+        //find if document uid == uid and canView or canEdit contains uid
+        const document = await this.documentModel.findOne({ id: id }).exec();
+        // if document uid is not equal to uid, if in canView or canEdit, return null
+        if (!document) return null;
+        if (document.uid != uid) {
+            let inView = document.canView.findIndex((element) => element == uid);
+            let inEdit = document.canEdit.findIndex((element) => element == uid);
+            if (inView === -1) return null;
+            if (inEdit === -1) return null;
+        }
         return document;
+
+
+
     }
 
     async updateDocument(id: string, uid: string, documentModel: DocModel): Promise<DocModel> {
@@ -41,10 +55,10 @@ export class DocumentService {
         return document.save();
     }
 
-    async deleteDocument(id: string,uid:string): Promise<DeleteResult> {
-        const findDoc=await this.documentModel.findOne({ id: id }).exec();
-        if(!findDoc) return null;
-        if(findDoc.uid!=uid) return null;
+    async deleteDocument(id: string, uid: string): Promise<DeleteResult> {
+        const findDoc = await this.documentModel.findOne({ id: id }).exec();
+        if (!findDoc) return null;
+        if (findDoc.uid != uid) return null;
         const document = this.documentModel.deleteOne({ id: id }).exec();
         return document;
     }
@@ -72,13 +86,13 @@ export class DocumentService {
         document.canEdit = document.canEdit.filter(uid => uid != vieweruid);
         return document.save();
     }
-    async updateDocumentField(id: string, uid: string,updateField:string,updateValue:any): Promise<DocModel> {
+    async updateDocumentField(id: string, uid: string, updateField: string, updateValue: any): Promise<DocModel> {
         const document = await this.documentModel.findOne({ id: id }).exec();
-        if (!document.hasOwnProperty(updateField)) return null;
         if (typeof document[updateField] != typeof updateValue) return null;
         if (!document) return null;
         if (document.uid != uid) return null;
-         switch (updateField) {
+
+        switch (updateField) {
             case 'name':
                 document.name = updateValue;
                 break;
@@ -87,13 +101,15 @@ export class DocumentService {
                 break;
             case 'isPublic':
                 document.isPublic = updateValue;
-                break;  
-         }
+                break;
+            case 'isDelete':
+                document.isDelete = updateValue;
+        }
         return document.save();
     }
-       //user star document
-       async starDocument(id: string, uid: string): Promise<DocModel> {
-        const document=await this.documentModel.findOne({ id: id }).exec();
+    //user star document
+    async starDocument(id: string, uid: string): Promise<DocModel> {
+        const document = await this.documentModel.findOne({ id: id }).exec();
         if (!document) return null;
         if (document.uid == uid) return null;
         const user = await this.userSerivce.getUser(uid);
@@ -105,7 +121,7 @@ export class DocumentService {
     }
     //filter document by user Id and isDeleted
     async getDeletedDocumentsByUserId(uid: string): Promise<DocModel[]> {
-        const documents = this.documentModel.find({ uid: uid,isDelete:true }).exec();
+        const documents = this.documentModel.find({ uid: uid, isDelete: true }).exec();
         return documents;
     }
     //get shared document by user Id

@@ -47,8 +47,6 @@ export class MainComponent {
   ]
   document$=this.store.select('doc');
   constructor(private route: Router,private store: Store<{ doc: DocumentState }>) {
-    // this.route.routeReuseStrategy.shouldReuseRoute = () => false;
-    //get link from url and active link
     if(this.route.url.split('/')[3]==undefined){
       this.activeLink= this.route.url.split('/')[2];
     }

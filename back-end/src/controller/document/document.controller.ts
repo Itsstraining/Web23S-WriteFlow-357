@@ -20,7 +20,9 @@ export class DocumentController {
 
         try {
             if (id) {
-                let document = await this.documentService.getDocument(id);
+                
+                let document = await this.documentService.getDocument(id,decodedToken.uid);
+            
                 if (document.uid == decodedToken.uid) {
                     return document;
                 }

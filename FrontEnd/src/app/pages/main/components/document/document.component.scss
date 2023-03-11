@@ -1,0 +1,22 @@
+.header{
+  width: 100%;
+  background-color: var(--color-1);
+  height: 10%;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: 0;
+  z-index: 1000;
+
+}
+.container{
+display: flex;
+justify-content: center;
+}
+.user-avatar{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--color-2);
+}

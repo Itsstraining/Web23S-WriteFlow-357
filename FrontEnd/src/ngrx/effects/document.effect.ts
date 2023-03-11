@@ -65,6 +65,23 @@ export class DocumentEffects {
       ),
     )
   )
+  get$= createEffect(() =>
+    this.actions$.pipe(
+      ofType(DocumentActions.get),
+      switchMap((action) => this.documentService.getDoc(action.id).pipe(
+        map((document) => {
+          return DocumentActions.getSuccess({ document: document })
+        }),
+        catchError((error) => {
+          return of(DocumentActions.getFail({ error }))
+        })
+        )
+      ),
+    )
+  )
+
+
+
   delete$ = createEffect(() =>
     this.actions$.pipe(
       ofType(DocumentActions.delete),
@@ -74,6 +91,20 @@ export class DocumentEffects {
         }),
         catchError((error) => {
           return of(DocumentActions.deleteFail({ error }))
+        })
+       )
+      ),
+    )
+  )
+  update$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(DocumentActions.update),
+      switchMap((action) => this.documentService.update(action.id,action.uid,action.updateField,action.updateValue).pipe(
+        map((doc) => {
+          return DocumentActions.updateSuccess({doc:doc,updateField:action.updateField,updateValue:action.updateValue})
+        }),
+        catchError((error) => {
+          return of(DocumentActions.updateFail({ error }))
         })
        )
       ),
