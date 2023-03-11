@@ -12,7 +12,7 @@ export class AuthService {
   currentUser: User | null = null;
   isLoading$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private auth: Auth) {
+  constructor(public auth: Auth) {
     this.currentUser = auth.currentUser;
     this.user$.next(this.currentUser);
     this.isLoading$.next(true);
@@ -47,8 +47,9 @@ export class AuthService {
   logout() {
     this.auth.signOut();
   }
+
    getToken() {
-    
+
     return this.userToken;
   }
 }

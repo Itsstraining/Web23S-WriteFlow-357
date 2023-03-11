@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable prettier/prettier */
 import { diskStorage } from "multer";
@@ -20,18 +22,33 @@ export const saveDocumentToStorage = {
             cb(null, pathToImageFolder);
         },
         filename: (req, file, cb) => {
+            let ownderid = req.headers.ownerid as string;
+            let fullNameFile = req.headers.filename as string;
+            let filePath = '';
+
+            if (fullNameFile) {
+                filePath = path.join('src', 'documentsStorage', ownderid, fullNameFile);
+            }
+
+            if (fs.existsSync(filePath) && fullNameFile) {
+                cb(null, fullNameFile);
+                return;
+            }
+
             const fileExtension = path.extname(file.originalname);
-            const fileName = uuidv4() + fileExtension;
+            const fileName = uuidv4() + (fileExtension ? fileExtension : '.json');
+
             cb(null, fileName);
         }
     }),
     fileFilter: (req, file, cb) => {
-        // try {
-        //     let test = JSON.parse(file.buffer.toString());
-        //     cb(null, true);
-        // } catch (error) {
-        //     cb(null, false);
-        // }
+        try {
+            console.log("test:", file.buffer.toString());
+            let test = JSON.parse(file.buffer.toString());
+            cb(null, true);
+        } catch (error) {
+            cb(null, false);
+        }
         cb(null, true);
     }
 }
