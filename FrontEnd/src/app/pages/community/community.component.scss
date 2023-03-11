@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,300&display=swap');
-
+.DocList-Status{
+    display:inline-block;
+}
+.Status-Info{
+    margin-top: 0.8rem;
+}
 .Recent-New{
     display: flex;
     margin-top: 1rem;
@@ -16,7 +21,9 @@
     margin-left: 1rem;
 }
 .Doc-When{
-    display: flex;
+    margin-left: 1rem;
+    color: #424874;
+   
 }
 .Doc-Navigation{
     height:41rem;
@@ -28,22 +35,44 @@
     border-style:solid;
     border-radius: 10px;
     border-color: #424874;
+    float: left;
+}
+.Edit-Status{
+    
+    height: 41.1rem;
+    position: absolute;
+    bottom: 0;
+    right: 5rem;
+    float: left;
+    border-radius: 10px;
+    
+    border: solid 1px #424874;
 }
 .grid-container1 {
-    height: 5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    border: solid 1px #424874;
+    height: 1rem;
     display: grid;
     grid-template-columns: auto auto auto;
     padding: 1.3rem;
-    grid-column-gap: 19rem;
+    grid-column-gap: 27rem;
+    
   }
   .Img-DocStatus{
     display: flex;
+    margin-bottom: 7rem;
+  
   }
 .Doc-When{
     margin-top:0.35rem;
 }
 .Person-Name{
+    margin-top:1rem;
     margin-left:3rem;
+    font-size: 25px;
+    color: #424874;
 }
 .New-Button{
     width:4rem;
@@ -85,9 +114,21 @@
 }
 .document-img{
     width: 2rem;
+    //margin-top:0.5rem
 }
-.Edit-Status{
-    position: absolute;
-    bottom: 0;
-    right: 0;
+.document-img1{
+    width: 2rem;
+    margin-top:0.5rem
+}
+.When-Edited{
+    font-size:13px;
+}
+.Favorite-Button{
+    border-radius: 10px;
+    border-color: rgba(var(--color-4-rgb), 0.45);
+    width: 7rem;
+    font-size: 19px;
+    color: #424874;
+    background-color: #F4F6FF;
+    
 }
