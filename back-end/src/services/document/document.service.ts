@@ -9,7 +9,7 @@ import { UserService } from '../user/user.service';
 
 @Injectable()
 export class DocumentService {
-    constructor(@InjectModel(Doc.name) private documentModel: Model<DocDocument>,private userSerivce:UserService) { }
+    constructor(@InjectModel(Doc.name) private documentModel: Model<DocDocument>, private userSerivce: UserService) { }
 
     async createDocument(document: DocModel): Promise<DocModel> {
         const createdDocument = new this.documentModel(document);
@@ -18,11 +18,16 @@ export class DocumentService {
 
     async getDocuments(uid: string): Promise<DocModel[]> {
         if (uid) {
-            const documents = this.documentModel.find({ uid: uid,isDelete:false}).exec();
+            const documents = this.documentModel.find({ uid: uid, isDelete: false }).exec();
             return documents;
         }
 
         const documents = this.documentModel.find({ isPublic: true }).exec();
+        return documents;
+    }
+
+    async getDocumentsPublic(uid: string): Promise<DocModel[]> {
+        const documents = this.documentModel.find({ uid: uid, isDelete: false, isPublic: true }).exec();
         return documents;
     }
 
@@ -41,10 +46,10 @@ export class DocumentService {
         return document.save();
     }
 
-    async deleteDocument(id: string,uid:string): Promise<DeleteResult> {
-        const findDoc=await this.documentModel.findOne({ id: id }).exec();
-        if(!findDoc) return null;
-        if(findDoc.uid!=uid) return null;
+    async deleteDocument(id: string, uid: string): Promise<DeleteResult> {
+        const findDoc = await this.documentModel.findOne({ id: id }).exec();
+        if (!findDoc) return null;
+        if (findDoc.uid != uid) return null;
         const document = this.documentModel.deleteOne({ id: id }).exec();
         return document;
     }
@@ -72,13 +77,13 @@ export class DocumentService {
         document.canEdit = document.canEdit.filter(uid => uid != vieweruid);
         return document.save();
     }
-    async updateDocumentField(id: string, uid: string,updateField:string,updateValue:any): Promise<DocModel> {
+    async updateDocumentField(id: string, uid: string, updateField: string, updateValue: any): Promise<DocModel> {
         const document = await this.documentModel.findOne({ id: id }).exec();
         if (!document.hasOwnProperty(updateField)) return null;
         if (typeof document[updateField] != typeof updateValue) return null;
         if (!document) return null;
         if (document.uid != uid) return null;
-         switch (updateField) {
+        switch (updateField) {
             case 'name':
                 document.name = updateValue;
                 break;
@@ -87,13 +92,13 @@ export class DocumentService {
                 break;
             case 'isPublic':
                 document.isPublic = updateValue;
-                break;  
-         }
+                break;
+        }
         return document.save();
     }
-       //user star document
-       async starDocument(id: string, uid: string): Promise<DocModel> {
-        const document=await this.documentModel.findOne({ id: id }).exec();
+    //user star document
+    async starDocument(id: string, uid: string): Promise<DocModel> {
+        const document = await this.documentModel.findOne({ id: id }).exec();
         if (!document) return null;
         if (document.uid == uid) return null;
         const user = await this.userSerivce.getUser(uid);
@@ -105,7 +110,7 @@ export class DocumentService {
     }
     //filter document by user Id and isDeleted
     async getDeletedDocumentsByUserId(uid: string): Promise<DocModel[]> {
-        const documents = this.documentModel.find({ uid: uid,isDelete:true }).exec();
+        const documents = this.documentModel.find({ uid: uid, isDelete: true }).exec();
         return documents;
     }
     //get shared document by user Id

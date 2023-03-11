@@ -12,8 +12,8 @@ export class UserService {
     constructor(@InjectModel(User.name) private documentModel: Model<UserDocument>) { }
 
     async createUser(user: UserModel): Promise<UserDocument> {
-        let findUser=await this.getUser(user.uid);
-        if(findUser) return null;
+        let findUser = await this.getUser(user.uid);
+        if (findUser) return findUser;
         const createdUser = new this.documentModel(user);
         return createdUser.save();
     }
@@ -24,10 +24,11 @@ export class UserService {
     }
 
     async updateUser(uid: string, userModel: UserModel): Promise<UserDocument> {
-        const user = await this.documentModel.findOne({ uid: uid }).exec();
+        let user = await this.documentModel.findOne({ uid: uid }).exec();
         if (!user) return null;
 
         Object.assign(user, userModel);
+
         return user.save();
     }
 

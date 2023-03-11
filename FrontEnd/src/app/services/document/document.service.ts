@@ -18,6 +18,11 @@ export class DocumentService {
       }
     }) as Observable<DocModel[]>
   }
+
+  getPublicDocs(uid: string) {
+    return lastValueFrom(this.http.get(`${environment.apiURL}${this.url}/public?uid=${uid}`));
+  }
+
   getDeleted(): Observable<DocModel[]> {
     return this.http.get(`${environment.apiURL}${this.url}/deleted?uid=${this.authService.currentUser?.uid}`, {
       headers: {

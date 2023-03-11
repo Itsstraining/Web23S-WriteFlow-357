@@ -1,41 +1,55 @@
 <app-loading></app-loading>
-<div class="container">
+<div class="container" *ngIf="user; else notExist">
     <div class="profile-image banner">
         <div class="detail">
             <span>
-                <img src="https://picsum.photos/300/200" alt="">
+                <img [src]="user.photoURL" alt="">
             </span>
             <span class="name">
-                <div>Nguyễn Văn A</div>
+                <div>{{user.displayName}}</div>
             </span>
         </div>
     </div>
     <div class="information-container">
         <div>
             <div>
-                <span>About</span>
-                <div class="about">
-                    asdasdasdasdasd
-                    asdasdasdasdasd
+                <div class="bio-head">
+                    <span>Bio</span>
+                    <button mat-icon-button (click)="openEditBio()">
+                        <mat-icon>edit</mat-icon>
+                    </button>
                 </div>
-                <span>Contact</span>
-                <div class="contact">
-                    asdasdasdasdasd
-                    asdasdasdasdasd
-                    asdasdasdasdasd
+                <div class="bio">
+                    {{user.bio}}
+                </div>
+                <div class="job-head">
+                    <span>Job</span>
+                    <button mat-icon-button (click)="openEditJob()">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </div>
+                <div class="job">
+                    <div *ngFor="let job of user.job">
+                        <mat-icon matListItemIcon>work</mat-icon>
+                        <div>{{job}}</div>
+                    </div>
                 </div>
             </div>
             <div class="documents">
                 <span>Documents</span>
                 <div>
-                    asdasdasdasdasd
-                    asdasdasdasdasd
-                    asdasdasdasdasd
-                    asdasdasdasdasd
-                    asdasdasdasdasd
-                    asdasdasdasdasd
+                    <div *ngFor="let doc of documents">
+                        <ng-container *ngIf="doc.isPublic">
+                            {{doc.name}}
+                        </ng-container>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<ng-template #notExist>
+    <div>
+        this profile is not available
+    </div>
+</ng-template>

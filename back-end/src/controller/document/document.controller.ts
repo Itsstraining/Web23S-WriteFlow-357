@@ -33,6 +33,14 @@ export class DocumentController {
             throw new HttpException(error, 500);
         }
     }
+
+
+    @Get('public')
+    async getDocumentsPublic(@Query('uid') uid) {
+        return await this.documentService.getDocumentsPublic(uid);
+    }
+
+
     @Get('shared')
     async getSharedDocuments(@Headers() header, @Query('uid') uid) {
         let decodedToken = await this.authService.validateUser(header.authorization);
