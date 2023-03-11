@@ -99,4 +99,15 @@ export class DocumentService {
       }
     }) as Observable<DocModel>
   }
+  update(id: string, uid: string|undefined, updateField: string, updateValue: any): Observable<DocModel> {
+    return this.http.put(`${environment.apiURL}${this.url}?uid=${uid}&id=${id}`, {
+      updateField: updateField,
+      updateValue: updateValue
+    }, {
+      headers: {
+        'authorization': this.authService.getToken(),
+      }
+    }) as Observable<DocModel>
+
+  }
 }

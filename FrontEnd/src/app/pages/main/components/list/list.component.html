@@ -18,7 +18,7 @@
   <div class="main-container" *ngIf="(this.doc$|async)?.loading==false&&(this.doc$|async)?.error==''">
     <div class="item-container" *ngFor="let doc of (this.doc$|async)?.documents">
 
-      <div class="icon-container">
+      <div class="icon-container" *ngIf="!doc.isDelete">
         <div>
           <button mat-icon-button>
             <mat-icon matTooltip="Edit">edit</mat-icon>
@@ -28,8 +28,20 @@
           </button>
         </div>
         <div>
+          <button mat-icon-button (click)="changeDocDeleted(doc.id,true)">
+            <mat-icon matTooltip="Delete" >close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="icon-container" *ngIf="doc.isDelete">
+        <div>
+          <button mat-icon-button (click)="changeDocDeleted(doc.id,false)">
+            <mat-icon matTooltip="Restore" >settings_backup_restore</mat-icon>
+          </button>
+        </div>
+        <div>
           <button mat-icon-button>
-            <mat-icon matTooltip="Delete" (click)="deleteDoc(doc.id)">close</mat-icon>
+            <mat-icon matTooltip="Delete" >close</mat-icon>
           </button>
         </div>
       </div>

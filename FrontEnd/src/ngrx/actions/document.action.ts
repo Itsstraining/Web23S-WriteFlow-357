@@ -7,6 +7,10 @@ export const DocumentActions={
   getAllSuccess:createAction('[Document] Get All Success',props<{documents:DocModel[]}>()),
   getAllFail:createAction('[Document] Get All Fail',props<{error:string}>()),
 
+  get:createAction('[Document] Get',props<{id:string}>()),
+  getSuccess:createAction('[Document] Get Success',props<{document:DocModel}>()),
+  getFail:createAction('[Document] Get Fail',props<{error:string}>()),
+
   getDeleted:createAction('[Document] Get Deleted'),
   getDeletedSuccess:createAction('[Document] Get Deleted Success',props<{documents:DocModel[]}>()),
   getDeletedFail:createAction('[Document] Get Deleted Fail',props<{error:string}>()),
@@ -23,7 +27,7 @@ export const DocumentActions={
   deleteSuccess:createAction('[Document] Delete Success',props<{doc:DocModel}>()),
   deleteFail:createAction('[Document] Delete Fail',props<{error:string}>()),
 
-  update:createAction('[Document] Update',props<{id:string,uid:string,updateField:string,updateValue:any}>()),
-  updateSuccess:createAction('[Document] Update Success',props<{doc:DocModel}>()),
+  update:createAction('[Document] Update',props<{id:string,uid:string|undefined,updateField:string,updateValue:any}>()),
+  updateSuccess:createAction('[Document] Update Success',props<{doc:DocModel,updateField:string,updateValue:any}>()),
   updateFail:createAction('[Document] Update Fail',props<{error:string}>()),
 }

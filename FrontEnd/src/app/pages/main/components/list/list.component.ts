@@ -29,6 +29,7 @@ export class ListComponent {
     private dialogService: MatDialog,
     public shareFunctionService: SharedFunctionService,
     private _snackBar: MatSnackBar,
+
     private router: Router) {
 
     this.tempSub = this.activateRoute.url.subscribe(async (path) => {
@@ -64,7 +65,12 @@ export class ListComponent {
     this.router.navigate(['main/document/edit'], { queryParams: { id: id } })
 
   }
-  deleteDoc(id: string) {
+
+  openDeleteDialog(){
+
+  }
+  changeDocDeleted(id: string,status:boolean) {
+
     if (this.inProgress == true) return;
     let tempSub: Subscription = this.store$.subscribe((data) => {
       if (this.inProgress == true && data.inProcess == false) {
@@ -73,22 +79,19 @@ export class ListComponent {
 
             tempSub.unsubscribe();
             this.inProgress = false;
-            this._snackBar.open('Delete document successfully', 'Close');
+            this._snackBar.open('Document has been move to Recycle bin', 'Close');
 
           } catch (err) {
-            this._snackBar.open('Delete document failed', 'Close');
+            this._snackBar.open('Document has been move to Recycle bin', 'Close');
           }
         } else {
           this.inProgress = false;
-          this._snackBar.open('Delete document failed', 'Close');
+          this._snackBar.open('Document has been move to Recycle bin', 'Close');
         }
       } else {
         this.inProgress = data.inProcess;
       }
     })
-    this.store.dispatch(DocumentActions.delete({ id: id }));
-  }
-  openDeleteDialog(){
-
+    this.store.dispatch(DocumentActions.update({id:id,uid:this.authService.auth.currentUser?.uid,updateField:'isDelete',updateValue:status}));
   }
 }
