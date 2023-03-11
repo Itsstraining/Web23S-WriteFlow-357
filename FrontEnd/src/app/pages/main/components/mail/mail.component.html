@@ -1,9 +1,9 @@
 <div class="container">
   <div class="top-container">
       <mat-form-field class="full-width" appearance="outline">
-        <mat-icon matSuffix>search</mat-icon>
         <mat-label class="input-holder">Find</mat-label>
         <input matInput placeholder="Ex. Email">
+        <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
 
       <div class="button-holder">
@@ -41,7 +41,7 @@
           <div class="name">
             Nguyen Van A
           </div>
-          <div class="request">
+          <div div class="request">
             <p>Nguyen Van A accepted your request </p>
           </div>
           <div class="date">
@@ -72,8 +72,8 @@
         </div>
       </mat-expansion-panel-header>
       <div class="panel-button-holder">
-        <button mat-button class="panel-button Open"  (click)="AcceptRequest()">Acpect</button>
-        <button mat-button class="panel-button Close" (click)="RejectRequest()">Reject</button>
+        <button mat-button class="panel-button Open">Acpect</button>
+        <button mat-button class="panel-button Close">Reject</button>
       </div>
     </mat-expansion-panel>
     <mat-expansion-panel (opened)="panelOpenState = true"
@@ -102,9 +102,9 @@
     (closed)="panelOpenState = false">
   </mat-expansion-panel>
 </mat-accordion>
-<div class="loading-state">
-  <app-loading [fixed]="true" [loading]="true"></app-loading>
-</div>
+<!-- <div class="loading-state">
+  <app-loading [inputData]="'Getting your mail'" [loading]="true"></app-loading>
+</div> -->
   </div>
 </div>
 

@@ -1,5 +1,7 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Doc, DocDocument } from 'src/schemas/document.schema';
@@ -26,6 +28,7 @@ export class DocumentService {
         return documents;
     }
 
+<<<<<<< HEAD
     async getDocumentsPublic(uid: string): Promise<DocModel[]> {
         const documents = this.documentModel.find({ uid: uid, isDelete: false, isPublic: true }).exec();
         return documents;
@@ -33,7 +36,23 @@ export class DocumentService {
 
     async getDocument(id: string): Promise<DocModel> {
         const document = this.documentModel.findOne({ id: id }).exec();
+=======
+    async getDocument(id: string, uid: string): Promise<DocModel> {
+        //find if document uid == uid and canView or canEdit contains uid
+        const document = await this.documentModel.findOne({ id: id }).exec();
+        // if document uid is not equal to uid, if in canView or canEdit, return null
+        if (!document) return null;
+        if (document.uid != uid) {
+            let inView = document.canView.findIndex((element) => element == uid);
+            let inEdit = document.canEdit.findIndex((element) => element == uid);
+            if (inView === -1) return null;
+            if (inEdit === -1) return null;
+        }
+>>>>>>> 5a1f7d3be3871b120fc7a6f7bd5e1f563c8c0e22
         return document;
+
+
+
     }
 
     async updateDocument(id: string, uid: string, documentModel: DocModel): Promise<DocModel> {
@@ -79,10 +98,13 @@ export class DocumentService {
     }
     async updateDocumentField(id: string, uid: string, updateField: string, updateValue: any): Promise<DocModel> {
         const document = await this.documentModel.findOne({ id: id }).exec();
-        if (!document.hasOwnProperty(updateField)) return null;
         if (typeof document[updateField] != typeof updateValue) return null;
         if (!document) return null;
         if (document.uid != uid) return null;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5a1f7d3be3871b120fc7a6f7bd5e1f563c8c0e22
         switch (updateField) {
             case 'name':
                 document.name = updateValue;
@@ -93,6 +115,11 @@ export class DocumentService {
             case 'isPublic':
                 document.isPublic = updateValue;
                 break;
+<<<<<<< HEAD
+=======
+            case 'isDelete':
+                document.isDelete = updateValue;
+>>>>>>> 5a1f7d3be3871b120fc7a6f7bd5e1f563c8c0e22
         }
         return document.save();
     }

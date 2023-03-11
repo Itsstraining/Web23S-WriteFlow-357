@@ -38,7 +38,6 @@ export class DocumentService {
     }) as Observable<DocModel[]>
   }
 
-
   getDoc(id: string): Observable<any> {
     return this.http.get(`${environment.apiURL}${this.url}?id=${id}`, {
       headers: new HttpHeaders({
@@ -104,5 +103,16 @@ export class DocumentService {
         'authorization': this.authService.getToken(),
       }
     }) as Observable<DocModel>
+  }
+  update(id: string, uid: string|undefined, updateField: string, updateValue: any): Observable<DocModel> {
+    return this.http.put(`${environment.apiURL}${this.url}?uid=${uid}&id=${id}`, {
+      updateField: updateField,
+      updateValue: updateValue
+    }, {
+      headers: {
+        'authorization': this.authService.getToken(),
+      }
+    }) as Observable<DocModel>
+
   }
 }

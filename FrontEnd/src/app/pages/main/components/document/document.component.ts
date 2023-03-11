@@ -6,6 +6,13 @@ import { ActivatedRoute } from '@angular/router';
 import { DocumentService } from 'src/app/services/document/document.service';
 import { concat, last, lastValueFrom } from 'rxjs';
 import { DocModel } from 'src/app/models/doc.model';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { RoleComponent } from 'src/app/pages/role/role.component';
+import { DocumentState } from 'src/ngrx/states/document.state';
+import { Store } from '@ngrx/store';
+import { DocumentActions } from 'src/ngrx/actions/document.action';
+import { AuthService } from 'src/app/services/auth.service';
+import { RoleDialogComponent } from 'src/app/components/role-dialog/role-dialog.component';
 
 @Component({
   selector: 'app-document',
@@ -18,15 +25,30 @@ export class DocumentComponent {
   previousContent!: any;
   roomId!: string;
   document!: DocModel;
+  store$=this.store.select('doc');
 
   constructor(
     private _socket: Socket,
     private activateRoute: ActivatedRoute,
-    private documentService: DocumentService
-  ) { }
+    private documentService: DocumentService,
+    private dialogService:MatDialog,
+    private store:Store<{doc:DocumentState}>,
+    private authService:AuthService,
+
+  ) {
+    this.activateRoute.queryParams.subscribe((data)=>{
+
+      this.handleSocketEvents(data['id']);
+      this.store.dispatch(DocumentActions.get({id:data['id']}))
+    });
+  }
 
   ngOnInit(): void {
-    this.activateRoute.queryParams.subscribe(this.handleSocketEvents);
+    this.store$.subscribe((data)=>{
+      if(data.error){
+        alert("You are not allowed to access this document");
+      }
+    })
   }
 
   ngAfterViewInit(): void {
@@ -37,7 +59,7 @@ export class DocumentComponent {
   }
 
   handleSocketEvents = (params: any) => {
-    this.roomId = params['id'];
+    this.roomId = params;
 
     this._socket.on('connect', () => {
       console.log("connected");
@@ -66,11 +88,8 @@ export class DocumentComponent {
     }, 1000);
   }
 
-
-  //smaller functions
   processData() {
     concat(this.documentService.getFile(this.document.contentPath), this.listenForChanged()).subscribe((data: any) => {
-      console.log(data);
       this.editor.quillEditor.updateContents(data);
     })
   }
@@ -101,6 +120,15 @@ export class DocumentComponent {
       ],
     },
   }
+  openShareDialog(){
+    this.dialogService.open(RoleDialogComponent,{
 
+    });
+
+  }
+  changeName(event:any){
+    if(this.document.name===event.target.value) return;
+    this.store.dispatch(DocumentActions.update({id:this.document.id,uid:this.authService.currentUser?.uid,updateField:'name',updateValue:event.target.value}));
+  }
 
 }
