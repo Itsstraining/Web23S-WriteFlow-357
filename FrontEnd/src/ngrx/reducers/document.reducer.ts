@@ -3,7 +3,7 @@ import { DocumentActions } from "../actions/document.action";
 import { DocumentState } from "../states/document.state";
 
 let initialState: DocumentState = {
-  documents: null,
+  documents: [],
   document: null,
   loading: false,
   inProcess: false,
@@ -66,9 +66,9 @@ export const DocumentReducer = createReducer(
       error: ''
     }
   })),
-  on(DocumentActions.deleteSuccess, ((state, { id }) => {
+  on(DocumentActions.deleteSuccess, ((state, { doc }) => {
     let documents = [...state.documents!]
-    let index = documents.findIndex(x => x.id == id);
+    let index = documents.findIndex(x => x.id == doc.id);
     documents.splice(index, 1);
     return {
       ...state,
@@ -80,6 +80,52 @@ export const DocumentReducer = createReducer(
     return {
       ...state,
       inProcess: false,
+      error: error
+    }
+  })),
+  on(DocumentActions.getDeleted, ((state) => {
+    return {
+      ...state,
+      documents: null,
+      loading: true,
+      error: ''
+    }
+  })),
+  on(DocumentActions.getDeletedSuccess, ((state, { documents }) => {
+    return {
+      ...state,
+      documents: documents,
+      loading: false
+    }
+  })),
+  on(DocumentActions.getDeletedFail, ((state, { error }) => {
+    return {
+      ...state,
+      documents: null,
+      loading: false,
+      error: error
+    }
+  })),
+  on(DocumentActions.getShared, ((state) => {
+    return {
+      ...state,
+      documents: null,
+      loading: true,
+      error: ''
+    }
+  })),
+  on(DocumentActions.getSharedSuccess, ((state, { documents }) => {
+    return {
+      ...state,
+      documents: documents,
+      loading: false
+    }
+  })),
+  on(DocumentActions.getSharedFail, ((state, { error }) => {
+    return {
+      ...state,
+      documents: null,
+      loading: false,
       error: error
     }
   })),

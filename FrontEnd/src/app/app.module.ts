@@ -16,7 +16,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { DocumentReducer } from 'src/ngrx/reducers/document.reducer';
 import { DocumentEffects } from 'src/ngrx/effects/document.effect';
+import { RoleDialogComponent } from './components/role-dialog/role-dialog.component';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+
 
 
 const config: SocketIoConfig = { url: environment.socketURL, options: {} };
@@ -24,6 +26,7 @@ const config: SocketIoConfig = { url: environment.socketURL, options: {} };
 @NgModule({
   declarations: [
     AppComponent,
+    RoleDialogComponent,
   ],
   imports: [
     BrowserModule,

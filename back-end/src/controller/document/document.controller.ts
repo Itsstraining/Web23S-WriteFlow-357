@@ -1,6 +1,7 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable prefer-const */
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Put, Query, UploadedFile, Headers, UseInterceptors, Body, Delete, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Put, Query, UploadedFile, Headers, UseInterceptors, Body, Delete, HttpException, StreamableFile } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AuthService } from 'src/services/auth/auth.service';
@@ -8,17 +9,22 @@ import { DocumentService } from 'src/services/document/document.service';
 import { saveDocumentToStorage } from './documentFilter';
 import * as fs from 'fs';
 import { DocModel } from 'src/models/document.model';
+
 @Controller('document')
 export class DocumentController {
     constructor(private documentService: DocumentService, private authService: AuthService) { }
     @Get('')
     async getDocuments(@Headers() header, @Query('id') id, @Query('uid') uid) {
         let decodedToken = await this.authService.validateUser(header.authorization);
-        if (!decodedToken) throw new HttpException('Unauthorized', 401);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
 
         try {
             if (id) {
-                return await this.documentService.getDocument(id);
+                let document = await this.documentService.getDocument(id);
+                if (document.uid == decodedToken.uid) {
+                    return document;
+                }
+                throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
             }
             if (uid) {
                 return await this.documentService.getDocuments(uid);
@@ -28,10 +34,30 @@ export class DocumentController {
             throw new HttpException(error, 500);
         }
     }
-    @Post('/createDoc')
-    async createUserDocument(@Headers() header, @Body('document') document:DocModel) {
+    @Get('shared')
+    async getSharedDocuments(@Headers() header, @Query('uid') uid) {
         let decodedToken = await this.authService.validateUser(header.authorization);
         if (!decodedToken) throw new HttpException('Unauthorized', 401);
+        try {
+            return await this.documentService.getSharedDocumentsByUserId(uid);
+        } catch (error) {
+            throw new HttpException(error, 500);
+        }
+    }
+    @Get('deleted')
+    async getDeletedDocuments(@Headers() header, @Query('uid') uid) {
+        let decodedToken = await this.authService.validateUser(header.authorization);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401);
+        try {
+            return await this.documentService.getDeletedDocumentsByUserId(uid);
+        } catch (error) {
+            throw new HttpException(error, 500);
+        }
+    }
+    @Post('create')
+    async createUserDocument(@Headers() header, @Body('document') document: DocModel) {
+        let decodedToken = await this.authService.validateUser(header.authorization);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
         try {
             return await this.documentService.createDocument(document);
         } catch (error) {
@@ -41,18 +67,18 @@ export class DocumentController {
     @Delete('')
     async deleteDocument(@Headers() header, @Query('id') id) {
         let decodedToken = await this.authService.validateUser(header.authorization);
-        if (!decodedToken) throw new HttpException('Unauthorized', 401);
-        return await this.documentService.deleteDocument(id,decodedToken.uid);    
+        if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
+        return await this.documentService.deleteDocument(id, decodedToken.uid);
     }
 
     @Put('')
-    async updateDocument(@Headers() header, @Body() body, @Query('id') id, @Query('uid') uid) {
+    async updateDocument(@Headers() header, @Body('updateField') updateField, @Body('updateValue') updateValue, @Query('id') id, @Query('uid') uid) {
         let decodedToken = await this.authService.validateUser(header.authorization);
         if (!decodedToken) throw new HttpException('Unauthorized', 401);
-        if (decodedToken.uid != body.uid) throw new HttpException('Unauthorized', 401);
+        if (decodedToken.uid != uid) throw new HttpException('Unauthorized', 401);
 
         try {
-            return await this.documentService.updateDocument(id, uid, body);
+            return await this.documentService.updateDocumentField(id, uid, updateField, updateValue);
         } catch (error) {
             throw new HttpException(error, 500);
         }
@@ -61,8 +87,8 @@ export class DocumentController {
     @Put('viewer')
     async addViewer(@Headers() header, @Body() body) {
         let decodedToken = await this.authService.validateUser(header.authorization);
-        if (!decodedToken) throw new HttpException('Unauthorized', 401);
-        if (decodedToken.uid != body.uid) throw new HttpException('Unauthorized', 401);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
+        if (decodedToken.uid != body.uid) throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
 
         try {
             return await this.documentService.addViewer(body.id, decodedToken.uid);
@@ -74,8 +100,8 @@ export class DocumentController {
     @Delete('viewer')
     async removeViewer(@Headers() header, @Body() body) {
         let decodedToken = await this.authService.validateUser(header.authorization);
-        if (!decodedToken) throw new HttpException('Unauthorized', 401);
-        if (decodedToken.uid != body.uid) throw new HttpException('Unauthorized', 401);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
+        if (decodedToken.uid != body.uid) throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
 
         try {
             return await this.documentService.removeViewer(body.id, decodedToken.uid);
@@ -87,8 +113,8 @@ export class DocumentController {
     @Put('editor')
     async addEditor(@Headers() header, @Body() body) {
         let decodedToken = await this.authService.validateUser(header.authorization);
-        if (!decodedToken) throw new HttpException('Unauthorized', 401);
-        if (decodedToken.uid != body.uid) throw new HttpException('Unauthorized', 401);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
+        if (decodedToken.uid != body.uid) throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
 
         try {
             return await this.documentService.addEditor(body.id, decodedToken.uid);
@@ -100,8 +126,8 @@ export class DocumentController {
     @Delete('editor')
     async removeEditor(@Headers() header, @Body() body) {
         let decodedToken = await this.authService.validateUser(header.authorization);
-        if (!decodedToken) throw new HttpException('Unauthorized', 401);
-        if (decodedToken.uid != body.uid) throw new HttpException('Unauthorized', 401);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
+        if (decodedToken.uid != body.uid) throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
 
         try {
             return await this.documentService.removeEditor(body.id, decodedToken.uid);
@@ -113,24 +139,22 @@ export class DocumentController {
 
     //file
     @Get('file')
-    async getDocument(@Headers() header, @Query('path') path) {
+    async getDocument(@Headers() header) {
         let decodedToken = await this.authService.validateUser(header.authorization);
-        if (!decodedToken) throw new HttpException('Unauthorized', 401);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
 
         try {
-            const pathToImage = join(process.cwd(), 'documentsStorage', header['ownerid'], path);
+            const pathToImage = join(process.cwd(), 'src', 'documentsStorage', decodedToken.uid, header['filename']);
             //read file json
-            let file = fs.readFileSync(pathToImage, 'utf8');
-            return file;
+            let file = fs.createReadStream(pathToImage);
+            return new StreamableFile(file);
 
         } catch (error) {
-            throw new HttpException(error, 500);
+            throw new HttpException("File not found", 500, { cause: new Error(error) });
         }
     }
-   
 
-
-    @Post('file')
+    @Put('file')
     @UseInterceptors(FileInterceptor('file', saveDocumentToStorage))
     async createDocument(@UploadedFile() file: Express.Multer.File, @Headers() header) {
         if (!file) return "File is not valid";
@@ -143,4 +167,5 @@ export class DocumentController {
             name: file.filename,
         };
     }
+
 }

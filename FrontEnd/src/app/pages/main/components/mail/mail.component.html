@@ -72,8 +72,8 @@
         </div>
       </mat-expansion-panel-header>
       <div class="panel-button-holder">
-        <button mat-button class="panel-button Open"  (click)="AcceptRequest()">Acpect</button>
-        <button mat-button class="panel-button Close" (click)="RejectRequest()">Reject</button>
+        <button mat-button class="panel-button Open">Acpect</button>
+        <button mat-button class="panel-button Close">Reject</button>
       </div>
     </mat-expansion-panel>
     <mat-expansion-panel (opened)="panelOpenState = true"
@@ -103,7 +103,7 @@
   </mat-expansion-panel>
 </mat-accordion>
 <!-- <div class="loading-state">
-  <app-loading [fixed]="true" [loading]="true"></app-loading>
+  <app-loading [inputData]="'Getting your mail'" [loading]="true"></app-loading>
 </div> -->
   </div>
 </div>
