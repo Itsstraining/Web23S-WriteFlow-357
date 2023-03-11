@@ -5,29 +5,30 @@
     margin-top: 1rem;
     font-size: 18px;
 }
+
 .doc1{
     display: flex;
-    
 }
+
 .Recent-Text{
-    color: #424874;
-    font-weight: 500;
+    color: var(--color-4);
+    font-weight: 600;
     margin-top: 0.3rem;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
 }
+
 .Doc-When{
     display: flex;
 }
 .Doc-Navigation{
+
     height:41rem;
-   width: 16rem;
+    width: 16rem;
     position: fixed;
-    bottom: 0;
-    left: 0;
-    border: 2px;
-    border-style:solid;
+
+    border: 2px solid var(--color-4) ;
     border-radius: 10px;
-    border-color: #424874;
+
 }
 .grid-container1 {
     height: 5rem;
@@ -35,10 +36,12 @@
     grid-template-columns: auto auto auto;
     padding: 1.3rem;
     grid-column-gap: 19rem;
-  }
-  .Img-DocStatus{
+}
+
+.Img-DocStatus{
     display: flex;
-  }
+}
+
 .Doc-When{
     margin-top:0.35rem;
 }
@@ -49,20 +52,20 @@
     width:4rem;
     height:2rem;
     margin-left: 2rem;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-bottom: 0.2rem;
     color: #F4F6FF;
     background-color: #424874;
     font-size:18px;
 }
+
 .File-Name{
     margin-top:0.4rem;
 }
 
 .Doc-List{
- 
     margin-bottom: 7rem;
-    height:10rem;
+    height: 7rem;
 }
 
 .Find-Doc{
@@ -76,12 +79,12 @@
     border-radius: 5px;
     background-color: #F4F6FF;
     color: #424874;
-    
+
 }
 .header-image {
     background-image: url("../../../assets/document-icon.png");
     background-size: cover;
-   
+
 }
 .document-img{
     width: 2rem;
