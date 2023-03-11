@@ -28,18 +28,21 @@
     justify-content: center;
     flex-direction: row;
 }
-.img-container{
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  img{
-    width: 50%;
-    height: 50%;
-  }
+.img-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        width: 50%;
+        height: 50%;
+        mix-blend-mode: multiply;
+    }
 }
+
 .section-2>div>div,
 .section-3>div>div,
 .section-4>div>div {

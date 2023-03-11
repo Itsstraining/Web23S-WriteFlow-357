@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,12 @@ import { lastValueFrom } from 'rxjs';
 export class NavbarComponent {
   isTop = true;
 
-  constructor(private authService: AuthService, public dialog: MatDialog, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    public dialog: MatDialog,
+    private router: Router,
+    private userService: UserService
+  ) { }
 
   user$ = this.authService.user$;
   user: User | null = null;
@@ -30,6 +36,8 @@ export class NavbarComponent {
     })
 
     this.user = this.authService.currentUser;
+    this.isLoading = this.authService.isLoading;
+
     if (this.user) {
       this.isLoading = false;
     }

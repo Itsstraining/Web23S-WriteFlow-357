@@ -8,8 +8,7 @@ export interface UserModel {
     job: string[];
     displayName: string;
     photoURL: string;
-    starDocuments:string[],
+    starDocuments: string[],
     following: string[],
     followers: string[],
-    
 }

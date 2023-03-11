@@ -1,68 +1,99 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,300&display=swap');
 
+.DocList-Status{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.Status-Info{
+    margin-top: 0.8rem;
+
+}
 .Recent-New{
     display: flex;
     margin-top: 1rem;
-    font-size: 18px;
+    font-size: 1rem;
 }
+
 .doc1{
     display: flex;
-    
 }
+
 .Recent-Text{
-    color: #424874;
+    color: var(--color-4);
     font-weight: 500;
     margin-top: 0.3rem;
     margin-left: 1rem;
 }
 .Doc-When{
-    display: flex;
+    margin-left: 1.2rem;
+    color: var(--color-4);
+
 }
 .Doc-Navigation{
-    height:41rem;
-   width: 16rem;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    border: 2px;
-    border-style:solid;
+    height: 91%;
+    width: 20%;
+    border: 2px solid var(--color-4);
     border-radius: 10px;
-    border-color: #424874;
+    margin: 1rem 0 0 1rem;
+}
+.Edit-Status{
+    height: 91%;
+    width: 70%;
+    margin-left: 2rem;
+    margin-top: 1rem;
+    border-radius: 10px;
+    border: 2px solid var(--color-4);
+
+
 }
 .grid-container1 {
-    height: 5rem;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #424874;
+    border-radius: 10px;
+    height: 1rem;
     display: grid;
-    grid-template-columns: auto auto auto;
-    padding: 1.3rem;
-    grid-column-gap: 19rem;
+    grid-template-columns: auto auto;
+    padding: 1rem 0.5rem;
+    grid-column-gap: 41rem;
+
   }
   .Img-DocStatus{
     display: flex;
+    margin-top: -1rem;
+    margin-left: 0.2rem;
   }
 .Doc-When{
     margin-top:0.35rem;
 }
 .Person-Name{
+    margin-top:1.6rem;
     margin-left:3rem;
+    font-size: 25px;
+    color: #424874;
 }
 .New-Button{
-    width:4rem;
-    height:2rem;
+    width:  4rem;
+    height: 2rem;
     margin-left: 2rem;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-bottom: 0.2rem;
-    color: #F4F6FF;
-    background-color: #424874;
-    font-size:18px;
+    color: var(--color-1);
+    background-color: var(--color-4);
+    font-size:  1rem;
 }
 .File-Name{
     margin-top:0.4rem;
 }
 
 .Doc-List{
- 
+
     margin-bottom: 7rem;
-    height:10rem;
+    height: 10rem;
 }
 
 .Find-Doc{
@@ -76,18 +107,45 @@
     border-radius: 5px;
     background-color: #F4F6FF;
     color: #424874;
-    
+
 }
 .header-image {
     background-image: url("../../../assets/document-icon.png");
     background-size: cover;
-   
+
 }
 .document-img{
     width: 2rem;
+    //margin-top:0.5rem
 }
-.Edit-Status{
-    position: absolute;
-    bottom: 0;
-    right: 0;
+.document-img1{
+    width: 2rem;
+    margin-top:0.5rem
+}
+.When-Edited{
+    font-size:13px;
+}
+.Favorite-Button{
+    margin-top: -3rem;
+    border-radius: 10px;
+    border-color: rgba(var(--color-4-rgb), 0.45);
+    width: 6rem;
+    font-size: 1rem;
+    color: var(--color-4);
+    background-color: #F4F6FF;
+
+}
+.Star-Icon{
+    margin-top:0.2rem;
+}
+.Icon-Text{
+    display: flex;
+}
+.Favorite-Text{
+    margin-left: 0.4rem;
+    margin-top: 0.3rem;
+}
+
+.star{
+  margin-right: 20rem;
 }

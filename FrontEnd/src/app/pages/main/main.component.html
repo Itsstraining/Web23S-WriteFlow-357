@@ -12,13 +12,13 @@
     <mat-icon>account_circle</mat-icon>
   </button>
   <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
-    <button mat-menu-item routerLink="#">
+    <button mat-menu-item routerLink="#" [routerLink]="['/profile', currentUser.uid]">
       <mat-icon>person</mat-icon><span>My Account</span>
     </button>
     <button mat-menu-item routerLink="#">
       <mat-icon>settings</mat-icon><span>Settings</span>
     </button>
-    <button mat-menu-item routerLink="#">
+    <button mat-menu-item (click)="logout()">
       <mat-icon>exit_to_app</mat-icon><span>Logout</span>
     </button>
   </mat-menu>

@@ -23,24 +23,39 @@ export class UserController {
         }
     }
     @Post('register')
-    async registerUser(@Body('user') body: UserModel) {
+    async registerUser(@Body() body: any) {
         try {
-            return await this.userService.createUser(body);
+            let userData: UserModel = {
+                uid: body.uid,
+                email: body.email,
+                bio: '',
+                job: [],
+                displayName: body.displayName,
+                photoURL: body.photoURL,
+                starDocuments: [],
+                following: [],
+                followers: [],
+            }
+
+
+            let user = await this.userService.createUser(userData);
+            if (!user) throw new HttpException('User already exists', 400);
+            return user;
         } catch (error) {
             throw new HttpException(error, 500);
         }
     }
 
-    @Put('')
+    @Put('update')
     async updateUser(@Headers() header: any, @Body() body: any) {
         let decodedToken = await this.authService.validateUser(header.authorization);
         if (!decodedToken) throw new HttpException('Unauthorized', 401);
 
         try {
             let uid = decodedToken.uid;
-            return await this.userService.updateUser(uid, body);
+            return this.userService.updateUser(uid, body);
         } catch (error) {
-            throw new HttpException(error, 500);
+            throw new HttpException(error, 500, { cause: error });
         }
     }
 

@@ -18,6 +18,11 @@ export class DocumentService {
       }
     }) as Observable<DocModel[]>
   }
+
+  getPublicDocs(uid: string) {
+    return lastValueFrom(this.http.get(`${environment.apiURL}${this.url}/public?uid=${uid}`));
+  }
+
   getDeleted(): Observable<DocModel[]> {
     return this.http.get(`${environment.apiURL}${this.url}/deleted?uid=${this.authService.currentUser?.uid}`, {
       headers: {
@@ -32,7 +37,6 @@ export class DocumentService {
       }
     }) as Observable<DocModel[]>
   }
-
 
   getDoc(id: string): Observable<any> {
     return this.http.get(`${environment.apiURL}${this.url}?id=${id}`, {
@@ -99,5 +103,16 @@ export class DocumentService {
         'authorization': this.authService.getToken(),
       }
     }) as Observable<DocModel>
+  }
+  update(id: string, uid: string|undefined, updateField: string, updateValue: any): Observable<DocModel> {
+    return this.http.put(`${environment.apiURL}${this.url}?uid=${uid}&id=${id}`, {
+      updateField: updateField,
+      updateValue: updateValue
+    }, {
+      headers: {
+        'authorization': this.authService.getToken(),
+      }
+    }) as Observable<DocModel>
+
   }
 }

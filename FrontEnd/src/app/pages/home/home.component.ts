@@ -18,12 +18,12 @@ export class HomeComponent {
     this.authService.user$.subscribe(user => {
       this.user = user;
       if (user) {
-        // this.router.navigate(['/main']);
+        this.router.navigate(['/main']);
       }
     });
 
     if (this.user) {
-      // this.router.navigate(['/main']);
+      this.router.navigate(['/main']);
     }
   }
 }

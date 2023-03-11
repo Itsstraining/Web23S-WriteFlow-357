@@ -7,28 +7,6 @@
   <div class="status-container-status" *ngIf="(this.doc$|async)?.loading==false&&(this.doc$|async)?.error!=''">
     <app-status></app-status>
   </div>
-
-  <!-- <div class="tab-container" >
-    <span class="tab-name">Open recently</span>
-  </div>
-  <div class="main-container-recently">
-    <div class="item-container">
-      <div class="icon-container">
-        <div>
-          <mat-icon matTooltip="Edit">edit</mat-icon>
-          <mat-icon>star</mat-icon>
-        </div>
-        <mat-icon matTooltip="Delete">close</mat-icon>
-      </div>
-      <img src="../../../../../assets/Logo.svg" alt="" class="doc-img">
-      <hr>
-      <div class="item-info">
-        <p class="doc-name">Report</p>
-        <span class="doc-created">Created: <span>15:30 24/12/2023</span></span>
-      </div>
-    </div>
-  </div> -->
-
   <div class="tab-container">
     <h2>All Document</h2>
     <button mat-button matTooltip="Create" (click)="openCreateDialog()">
@@ -40,7 +18,7 @@
   <div class="main-container" *ngIf="(this.doc$|async)?.loading==false&&(this.doc$|async)?.error==''">
     <div class="item-container" *ngFor="let doc of (this.doc$|async)?.documents">
 
-      <div class="icon-container">
+      <div class="icon-container" *ngIf="!doc.isDelete">
         <div>
           <button mat-icon-button>
             <mat-icon matTooltip="Edit">edit</mat-icon>
@@ -50,8 +28,20 @@
           </button>
         </div>
         <div>
+          <button mat-icon-button (click)="changeDocDeleted(doc.id,true)">
+            <mat-icon matTooltip="Delete" >close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="icon-container" *ngIf="doc.isDelete">
+        <div>
+          <button mat-icon-button (click)="changeDocDeleted(doc.id,false)">
+            <mat-icon matTooltip="Restore" >settings_backup_restore</mat-icon>
+          </button>
+        </div>
+        <div>
           <button mat-icon-button>
-            <mat-icon matTooltip="Delete" (click)="deleteDoc(doc.id)">close</mat-icon>
+            <mat-icon matTooltip="Delete" >close</mat-icon>
           </button>
         </div>
       </div>

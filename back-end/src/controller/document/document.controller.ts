@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable prefer-const */
 /* eslint-disable prettier/prettier */
 import { Controller, Get, Post, Put, Query, UploadedFile, Headers, UseInterceptors, Body, Delete, HttpException, StreamableFile } from '@nestjs/common';
@@ -19,7 +20,9 @@ export class DocumentController {
 
         try {
             if (id) {
-                let document = await this.documentService.getDocument(id);
+                
+                let document = await this.documentService.getDocument(id,decodedToken.uid);
+            
                 if (document.uid == decodedToken.uid) {
                     return document;
                 }
@@ -33,6 +36,14 @@ export class DocumentController {
             throw new HttpException(error, 500);
         }
     }
+
+
+    @Get('public')
+    async getDocumentsPublic(@Query('uid') uid) {
+        return await this.documentService.getDocumentsPublic(uid);
+    }
+
+
     @Get('shared')
     async getSharedDocuments(@Headers() header, @Query('uid') uid) {
         let decodedToken = await this.authService.validateUser(header.authorization);
