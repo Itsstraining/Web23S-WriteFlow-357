@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,300&display=swap');
 .DocList-Status{
-    display:inline-block;
+    display: inline-block;
+    bottom: 0;
+    position:absolute;
 }
 .Status-Info{
     margin-top: 0.8rem;
+   
 }
 .Recent-New{
     display: flex;
@@ -21,16 +24,15 @@
     margin-left: 1rem;
 }
 .Doc-When{
-    margin-left: 1rem;
+    margin-left: 1.2rem;
     color: #424874;
    
 }
 .Doc-Navigation{
     height:41rem;
-   width: 16rem;
-    position: fixed;
-    bottom: 0;
-    left: 0;
+   width: 22rem;
+    //position: fixed;
+   
     border: 2px;
     border-style:solid;
     border-radius: 10px;
@@ -38,38 +40,39 @@
     float: left;
 }
 .Edit-Status{
-    
     height: 41.1rem;
-    position: absolute;
-    bottom: 0;
-    right: 5rem;
+    margin-left: 2rem;
+    right: 4rem;
     float: left;
-    border-radius: 10px;
-    
+    border-radius: 10px; 
     border: solid 1px #424874;
+    width: 67.5rem;
+    
 }
 .grid-container1 {
+    margin-top: 0.5rem;
     margin-left: 1rem;
     margin-right: 1rem;
     margin-bottom: 1rem;
-    border: solid 1px #424874;
+    border: solid #424874;
+    border-radius: 10px;
     height: 1rem;
     display: grid;
-    grid-template-columns: auto auto auto;
-    padding: 1.3rem;
-    grid-column-gap: 27rem;
+    grid-template-columns: auto auto;
+    padding: 1.2rem;
+    grid-column-gap: 41rem;
     
   }
   .Img-DocStatus{
     display: flex;
-    margin-bottom: 7rem;
-  
+    margin-top: -1rem;
+    margin-left: 0.2rem;
   }
 .Doc-When{
     margin-top:0.35rem;
 }
 .Person-Name{
-    margin-top:1rem;
+    margin-top:1.6rem;
     margin-left:3rem;
     font-size: 25px;
     color: #424874;
@@ -124,11 +127,23 @@
     font-size:13px;
 }
 .Favorite-Button{
+    margin-top: -3rem;
     border-radius: 10px;
     border-color: rgba(var(--color-4-rgb), 0.45);
     width: 7rem;
     font-size: 19px;
     color: #424874;
     background-color: #F4F6FF;
-    
+    font-size:20px;
+   margin-left: 1rem;
+}
+.Star-Icon{
+    margin-top:0.2rem;
+}
+.Icon-Text{
+    display: flex;
+}
+.Favorite-Text{
+    margin-left: 0.4rem;
+    margin-top: 0.3rem;
 }
