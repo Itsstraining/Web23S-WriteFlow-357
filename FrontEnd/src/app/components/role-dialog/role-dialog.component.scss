@@ -10,12 +10,33 @@
     color:#424874;
     background-color: white;
 }
+.Access-Option{
+    width: 12rem;
+    height: 3.5rem;
+    margin-top: 0.3rem;
+    margin-left: 1.2rem;
+    background-color: #F4F6FF;
+}
 .P{
     display: flex;
 }
 .P-Info{
     margin-top: 0.7rem;
     
+}
+.Select-Access-Button{
+    margin-left: 0.3rem;
+    width:8rem;
+    font-size:1.01rem;
+    margin-top: -0.3rem;
+    height: 2.2rem;
+    background-color: #F4F6FF;
+}
+.Select-Access{
+    width:5rem;
+}
+.Select-Access-Option{
+    width:2.5rem;
 }
 .dialog{
     border-radius: 10px;
@@ -38,6 +59,7 @@
     background-color: #F4F6FF;
     text-align-last:center;
     width:5rem;
+    
     margin-left: 1.6rem;
 }
 .grid-item2{
@@ -59,6 +81,7 @@
     overflow-y:scroll;
    
   }
+
 .Display{
     display: flex;
 }
@@ -122,8 +145,6 @@
     margin-left: 0.3rem;
    
 }
-
-
 .Div-Group1{
     display: flex;
     
@@ -142,14 +163,13 @@
     font-size: 17px;
     margin-left: 1.3rem;
 
-
-    
 }
 .Title{
     font-family: 'Open Sans', sans-serif;
     color: #424874;
     font-weight: bold;
     font-size: 22px;
+    
 }
 .List-Title{
     margin-top: 0.5em;
