@@ -1,7 +1,26 @@
 <app-loading></app-loading>
-<app-navbar></app-navbar>
+<app-navbar [photoURL]="user.photoURL"></app-navbar>
 <div class="container" *ngIf="user; else notExist">
-    <div class="banner" #banner (click)="openEditBanner()"></div>
+    <ng-container *ngIf="currentUser?.uid === id">
+        <div class="banner-edit">
+            <div>
+                <button mat-icon-button [matMenuTriggerFor]="banner">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <mat-menu #banner="matMenu">
+                    <button mat-menu-item>
+                        <span class="menu-item" (click)="openViewImage(user.bannerURL)">View Image</span>
+                    </button>
+                    <button mat-menu-item (click)="openEditBanner()">
+                        <span class="menu-item">Edit Image</span>
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+    </ng-container>
+    <div class="banner" #banner (click)="openViewImage(user.bannerURL)">
+        <img [src]="this.user.bannerURL">
+    </div>
     <div class="profile-image">
         <div class="detail">
             <span>

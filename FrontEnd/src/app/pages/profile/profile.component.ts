@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DocModel } from 'src/app/models/doc.model';
 import { UserModel } from 'src/app/models/user.model';
@@ -27,7 +27,8 @@ export class ProfileComponent {
     private activateRoute: ActivatedRoute,
     public dialog: MatDialog,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   @ViewChild('banner') banner: any;
@@ -60,17 +61,10 @@ export class ProfileComponent {
     this.currentUser = this.authService.currentUser;
     this.authService.user$.subscribe(user => {
       this.currentUser = user;
-      this.changeBanner();
     });
   }
 
   ngAfterViewInit() {
-    this.changeBanner();
-  }
-
-  changeBanner() {
-    if (!this.user.bannerURL) return;
-    this.banner.nativeElement.style.backgroundImage = `url('${this.user.bannerURL}')`;
   }
 
   //initialize
@@ -91,6 +85,7 @@ export class ProfileComponent {
 
   handleDialogJobClose = (result: any) => {
     if (!result) return;
+    result.job = result.job.filter((item: any) => item !== '');
     Object.assign(this.user, result);
     this.userService.updateUser(this.user).then(this.updateUser);
   }
@@ -107,7 +102,6 @@ export class ProfileComponent {
     if (!result) return;
     this.userService.updateBannerAvatar(result)
       .then(this.updateUser)
-      .then(() => { this.changeBanner() })
       .catch(err => console.log(err));
   }
 

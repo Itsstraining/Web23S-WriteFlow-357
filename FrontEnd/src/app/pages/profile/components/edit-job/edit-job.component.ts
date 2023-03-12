@@ -32,5 +32,4 @@ export class EditJobComponent {
   removeJob(index: number) {
     this.tempJob.job.splice(index, 1);
   }
-
 }
