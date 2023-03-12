@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guard/auth.guard';
+import { ProfileGuard } from './guard/profile.guard';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
@@ -10,7 +11,7 @@ const routes: Routes = [
 
   { path: 'main', canActivate: [AuthGuard], loadChildren: () => import('./pages/main/main.module').then(m => m.MainModule), },
   { path: 'about', loadChildren: () => import('./pages/about/about.module').then(m => m.AboutModule) },
-  { path: 'profile/:id', canActivate: [AuthGuard], loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule) },
+  { path: 'profile/:id', canActivate: [ProfileGuard], loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule) },
 
   { path: 'role', loadChildren: () => import('./pages/role/role.module').then(m => m.RoleModule) },
   { path: 'community', loadChildren: () => import('./pages/community/community.module').then(m => m.CommunityModule) },
@@ -20,7 +21,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    onSameUrlNavigation: 'reload'
+    onSameUrlNavigation: 'reload',
   })],
   exports: [RouterModule]
 })

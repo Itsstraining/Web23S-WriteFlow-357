@@ -1,9 +1,25 @@
 <app-loading></app-loading>
+<app-navbar></app-navbar>
 <div class="container" *ngIf="user; else notExist">
-    <div class="profile-image banner">
+    <div class="banner" #banner (click)="openEditBanner()"></div>
+    <div class="profile-image">
         <div class="detail">
             <span>
-                <img [src]="user.photoURL" alt="">
+                <ng-container *ngIf="currentUser?.uid === id; else noaccess">
+                    <img [src]="user.photoURL" alt="avatar" class="change" [matMenuTriggerFor]="avatar">
+                    <mat-menu #avatar="matMenu">
+                        <button mat-menu-item>
+                            <span class="menu-item" (click)="openViewImage(user.photoURL)">View Image</span>
+                        </button>
+                        <button mat-menu-item (click)="openEditAvatar()">
+                            <span class="menu-item">Edit Image</span>
+                        </button>
+                    </mat-menu>
+                </ng-container>
+                <ng-template #noaccess>
+                    <img class="avatar-no-access" [src]="user.photoURL" alt="avatar"
+                        (click)="openViewImage(user.photoURL)">
+                </ng-template>
             </span>
             <span class="name">
                 <div>{{user.displayName}}</div>
@@ -15,18 +31,22 @@
             <div>
                 <div class="bio-head">
                     <span>Bio</span>
-                    <button mat-icon-button (click)="openEditBio()">
-                        <mat-icon>edit</mat-icon>
-                    </button>
+                    <ng-container *ngIf="currentUser">
+                        <button mat-icon-button (click)="openEditBio()" *ngIf="currentUser.uid === id">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </ng-container>
                 </div>
                 <div class="bio">
                     {{user.bio}}
                 </div>
                 <div class="job-head">
                     <span>Job</span>
-                    <button mat-icon-button (click)="openEditJob()">
-                        <mat-icon>edit</mat-icon>
-                    </button>
+                    <ng-container *ngIf="currentUser">
+                        <button mat-icon-button (click)="openEditJob()" *ngIf="currentUser.uid === id">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </ng-container>
                 </div>
                 <div class="job">
                     <div *ngFor="let job of user.job">

@@ -1,0 +1,17 @@
+.container {
+    padding: 1rem;
+
+    .close {
+        width: 100%;
+
+        display: flex;
+        justify-content: flex-end;
+        color: var(--color-4);
+
+        margin-bottom: 1rem;
+    }
+
+    img {
+        height: 500px;
+    }
+}

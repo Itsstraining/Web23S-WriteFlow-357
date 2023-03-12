@@ -27,11 +27,39 @@ export class UserService {
 
     let res = await lastValueFrom(this.http.put(`${this.url}user/update`, user, {
       headers: new HttpHeaders({
-        'authorization': this.authService.getToken()
+        'authorization': this.authService.getToken(),
+        'ownerid': this.authService.currentUser?.uid!
       })
     }));
 
     return res;
   }
 
+  async updateUserAvatar(image: any): Promise<Object> {
+    let formData = new FormData();
+    formData.append('file-avatar', image);
+
+    let res = await lastValueFrom(this.http.put(`${this.url}user/upload-avatar`, formData, {
+      headers: new HttpHeaders({
+        'authorization': this.authService.getToken(),
+        'ownerid': this.authService.currentUser?.uid!
+      })
+    }));
+
+    return res;
+  }
+
+  async updateBannerAvatar(image: any): Promise<Object> {
+    let formData = new FormData();
+    formData.append('file-banner', image);
+
+    let res = await lastValueFrom(this.http.put(`${this.url}user/upload-banner`, formData, {
+      headers: new HttpHeaders({
+        'authorization': this.authService.getToken(),
+        'ownerid': this.authService.currentUser?.uid!
+      })
+    }));
+
+    return res;
+  }
 }

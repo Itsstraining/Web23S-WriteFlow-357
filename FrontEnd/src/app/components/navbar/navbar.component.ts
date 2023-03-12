@@ -24,6 +24,7 @@ export class NavbarComponent {
 
   user$ = this.authService.user$;
   user: User | null = null;
+  userPhoto: string | '' = '';
   isLoading = true;
 
   ngOnInit(): void {
@@ -37,6 +38,7 @@ export class NavbarComponent {
 
     this.user = this.authService.currentUser;
     this.isLoading = this.authService.isLoading;
+    this.userPhoto = this.authService.photoURL || '';
 
     if (this.user) {
       this.isLoading = false;
@@ -44,11 +46,21 @@ export class NavbarComponent {
 
     this.user$.subscribe(user => {
       this.user = user;
+      this.updatePhotoURL(user);
     });
 
     this.authService.isLoading$.subscribe(isLoading => {
       this.isLoading = isLoading;
     });
+
+    this.updatePhotoURL(this.user);
+  }
+
+  updatePhotoURL(user: any) {
+    if (!this.user) return;
+    this.userService.getUser(this.user.uid).then((res: any) => {
+      this.userPhoto = res.photoURL;
+    })
   }
 
   loginWithGoogle() {

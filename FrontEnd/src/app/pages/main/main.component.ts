@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/services/auth.service';
@@ -54,6 +54,7 @@ export class MainComponent {
     private route: Router,
     private store: Store<{ doc: DocumentState }>,
     private authService: AuthService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     // this.route.routeReuseStrategy.shouldReuseRoute = () => false;
     //get link from url and active link
@@ -82,5 +83,9 @@ export class MainComponent {
 
   logout() {
     this.authService.logout();
+  }
+
+  ngAfterViewInit() {
+    this.changeDetectorRef.detectChanges();
   }
 }

@@ -3,10 +3,16 @@
         <h1>Edit Bio</h1>
     </div>
     <div class="editor">
-        <mat-form-field appearance="outline" *ngFor="let job of tempJob.job; let i = index ; trackBy:trackByFn">
-            <mat-label>{{i + 1}}</mat-label>
-            <input matInput type="text" [(ngModel)]="tempJob.job[i]">
-        </mat-form-field>
+        <div class="job" *ngFor="let job of tempJob.job; let i = index ; trackBy:trackByFn">
+            <mat-form-field appearance="outline">
+                <mat-label>job {{i + 1}}</mat-label>
+                <input matInput type="text" [(ngModel)]="tempJob.job[i]">
+            </mat-form-field>
+            <button mat-icon-button (click)="removeJob(i)"><mat-icon>delete</mat-icon></button>
+        </div>
+        <button mat-icon-button (click)="addJob()">
+            <mat-icon>add</mat-icon>
+        </button>
     </div>
     <div class="btn">
         <button mat-stroked-button (click)="onNoClick()">Cancel</button>

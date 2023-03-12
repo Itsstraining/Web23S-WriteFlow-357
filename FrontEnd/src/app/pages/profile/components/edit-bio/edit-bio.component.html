@@ -5,11 +5,11 @@
     <div class="editor">
         <mat-form-field appearance="outline">
             <mat-label>Bio</mat-label>
-            <textarea matInput [(ngModel)]="data.bio" rows="15" cols="30"></textarea>
+            <textarea matInput [(ngModel)]="tempBio.bio" rows="15" cols="30"></textarea>
         </mat-form-field>
     </div>
     <div class="btn">
         <button mat-stroked-button (click)="onNoClick()">Cancel</button>
-        <button mat-raised-button class="save" [mat-dialog-close]="data.bio" cdkFocusInitial>Save</button>
+        <button mat-raised-button class="save" [mat-dialog-close]="tempBio" cdkFocusInitial>Save</button>
     </div>
 </div>

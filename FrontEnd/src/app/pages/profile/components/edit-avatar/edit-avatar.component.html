@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="header">
+        <h1>Edit Avatar</h1>
+        <button type="button" mat-stroked-button (click)="fileavatar.click()">
+            <span [hidden]="originalImage">Choose image</span>
+            <span [hidden]="!originalImage">Change image</span>
+            <mat-icon>add</mat-icon>
+        </button>
+        <input hidden #fileavatar type="file" name="file" id="file" (change)="fileChangeEvent($event)"
+            accept="image/png, image/gif, image/jpeg">
+        <div *ngIf="invalidImage" class="error">
+            PLEASE UPLOAD A VALID IMAGE
+        </div>
+    </div>
+
+    <div [hidden]="!originalImage">
+        <mat-dialog-content>
+            <image-cropper class="cropper" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                [aspectRatio]="1" format="png" (imageCropped)="imageCropped($event)"
+                (loadImageFailed)="loadImageFailed()">
+            </image-cropper>
+        </mat-dialog-content>
+        <div class="btn">
+            <button mat-stroked-button (click)="onNoClick()">Cancel</button>
+            <button mat-raised-button class="save" [mat-dialog-close]="finalImage" cdkFocusInitial>Save</button>
+        </div>
+    </div>
+
+</div>

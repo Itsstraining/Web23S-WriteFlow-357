@@ -24,7 +24,7 @@ export class User {
     displayName: string;
 
     @Prop()
-    starDocuments:string[];
+    starDocuments: string[];
 
     @Prop()
     following: string[];
@@ -34,6 +34,9 @@ export class User {
 
     @Prop()
     photoURL: string;
+
+    @Prop()
+    bannerURL: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
