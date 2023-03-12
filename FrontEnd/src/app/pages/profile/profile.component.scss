@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-$max-width: 1000px;
+$max-width: 1200px;
 $banner-height-pc: 300px;
 $banner-height-mobile: 150px;
 $avatar-pc: 200px;
@@ -112,8 +112,8 @@ $padding-mobile: 1rem;
             }
         }
 
-        .about,
-        .contact,
+        .bio,
+        .job,
         .documents>div {
             background-color: var(--color-1);
             border-radius: 10px;
@@ -124,10 +124,50 @@ $padding-mobile: 1rem;
             box-shadow: 2px 2px 4px 0px rgba(var(--color-4-rgb), $alpha: 0.5);
             flex: 1 1 auto
         }
+
+        .job {
+            display: flex;
+            flex-direction: column;
+
+            &>div {
+                color: var(--color-4);
+
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+
+                margin: 0.5rem;
+
+                &>mat-icon {
+                    margin-right: 0.5rem;
+                }
+            }
+        }
+
+
+        .bio-head,
+        .job-head {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            button {
+                color: rgba($color: var(--color-4-rgb), $alpha: 0.5);
+                transition: all 0.2s ease-in-out;
+
+                &:hover {
+                    color: var(--color-4);
+                    transition: all 0.2s ease-in-out;
+                }
+            }
+        }
     }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
     .profile-image {
         .detail {
             width: 100%;
@@ -190,11 +230,10 @@ $padding-mobile: 1rem;
     }
 
     .information-container {
-
         &>div {
 
-            .about,
-            .contact,
+            .bio,
+            .job,
             .documents>div {
                 font-size: 0.75rem;
             }

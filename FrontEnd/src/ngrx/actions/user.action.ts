@@ -15,4 +15,6 @@ export const UserAction={
   getAllSuccess:createAction('[User] Get All User Success',props<{users:UserModel[]}>()),
   getAllFailure:createAction('[User] Get All User Failure',props<{error:string}>()),
 
+
+
 }

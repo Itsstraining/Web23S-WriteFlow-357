@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AuthService } from 'src/app/services/auth.service';
+import { DocumentState } from 'src/ngrx/states/document.state';
 
 @Component({
   selector: 'app-main',
@@ -43,32 +46,41 @@ export class MainComponent {
 
 
   ]
-  constructor(private route: Router) {
-    this.route.routeReuseStrategy.shouldReuseRoute = () => false;
+  document$ = this.store.select('doc');
+
+  currentUser: any;
+
+  constructor(
+    private route: Router,
+    private store: Store<{ doc: DocumentState }>,
+    private authService: AuthService,
+  ) {
+    // this.route.routeReuseStrategy.shouldReuseRoute = () => false;
     //get link from url and active link
-    if(this.route.url.split('/')[3]==undefined){
-      this.activeLink= this.route.url.split('/')[2];
+    if (this.route.url.split('/')[3] == undefined) {
+      this.activeLink = this.route.url.split('/')[2];
     }
-    else{
-      this.activeLink= `${this.route.url.split('/')[2]}/${this.route.url.split('/')[3]}`;
+    else {
+      this.activeLink = `${this.route.url.split('/')[2]}/${this.route.url.split('/')[3]}`;
     }
     this.navigateItems.forEach((item) => {
       item.link == this.activeLink ? item.active = true : item.active = false;
     })
   }
+
   ngOnInit(): void {
+    this.currentUser = this.authService.currentUser;
   }
-  //Ẩn hiện sidebar
-  sidebarChange() {
-    this.sidebarToggle = !this.sidebarToggle;
-  }
+
+
   navigate(link: string) {
-
     this.navigateItems.forEach((item) => {
-
       item.link == link ? item.active = true : item.active = false;
     })
     this.route.navigate([`main/${link}`]);
+  }
 
+  logout() {
+    this.authService.logout();
   }
 }

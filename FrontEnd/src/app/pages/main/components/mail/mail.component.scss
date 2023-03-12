@@ -9,8 +9,8 @@
 }
 
 .full-width{
-    width: 25rem;
-    margin: 0.5rem 0 0 0.5rem;
+    width: 40rem;
+    margin: 0.5rem 2rem 0 0.5rem;
     font-size: medium;
   .input-holder{
     color: var(--color-4);
@@ -21,14 +21,15 @@
 .button-holder{
   display: flex;
   justify-content: space-between;
+  width: 99%;
+  height: 2.5rem;
   margin: auto;
-
   .button{
     color: var(--color-4);
-    margin: 0 1rem 0 1.2rem;
+    margin: 0 1.5rem 0 1rem;
     background-color: var(--color-3);
-    height: 2rem;
-    width: 8rem;
+    height: 2.5rem;
+    width: 10rem;
     border-radius: 10px;
     font-size: medium;
     font-weight: 700;
@@ -90,14 +91,14 @@
     margin-right: 0.5rem;
   }
   .request{
-    height: 15%;
+    height: 20%;
     width: 40%;
 
     p{
       font-size: medium;
       display: flex;
       justify-content: center;
-      align-items: center;
+      text-align: center;
     }
   }
 }
@@ -147,7 +148,7 @@
 .loading-state{
   position: absolute;
   top: 50%;
-  left: 60%;
+  left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
   height: 90%;

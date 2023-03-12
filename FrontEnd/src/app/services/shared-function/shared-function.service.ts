@@ -11,16 +11,16 @@ export class SharedFunctionService {
   convertDateTime(timeStamp:string):string{
 
     let date = new Date(parseInt(timeStamp));
-
+    let hour = date.getHours()<10?date.getHours():"0"+date.getHours();
+    let minute = date.getMinutes()<10?date.getMinutes():"0"+date.getMinutes();
     if(date.getDate()==new Date().getDate()){
-      return `${date.getHours()}:${date.getMinutes()} Today`
+      return `${hour}:${minute} Today`
     }else{
       //check xem ngày và tháng có bé hơn 10 k nếu có thì thêm 0 vào
       let day= date.getDate()<10?date.getDate():"0"+date.getDate();
       let month= date.getMonth()<10?date.getMonth():"0"+date.getMonth();
       let year = date.getFullYear();
-      let hour = date.getHours();
-      let minute = date.getMinutes();
+
       return `${hour}:${minute} ${day}/${month}:${year}`
     }
 

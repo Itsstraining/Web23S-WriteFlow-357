@@ -1,3 +1,5 @@
+
+
 /* eslint-disable prettier/prettier */
 export interface UserModel {
     uid: string;
@@ -6,5 +8,7 @@ export interface UserModel {
     job: string[];
     displayName: string;
     photoURL: string;
-    starDocs: string[]
+    starDocuments: string[],
+    following: string[],
+    followers: string[],
 }

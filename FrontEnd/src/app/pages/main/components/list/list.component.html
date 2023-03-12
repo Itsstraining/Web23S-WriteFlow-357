@@ -1,54 +1,65 @@
 <div class="container">
-  <div class="status-container" *ngIf="(this.doc$|async)?.loading==true">
-      <app-loading [inputData]="'Getting your documents'" [loading]="true" ></app-loading>
-  </div>
-  <div class="status-container-status" *ngIf="(this.doc$|async)?.loading==false&&(this.doc$|async)?.error!=''">
-    <app-status ></app-status>
-</div>
-  <!-- <div class="tab-container" >
-    <span class="tab-name">Open recently</span>
 
+  <div class="status-container" *ngIf="(this.doc$|async)?.loading==true">
+    <app-loading [inputData]="'Getting your documents'" [loading]="true"></app-loading>
   </div>
-  <div class="main-container-recently">
-    <div class="item-container">
-      <div class="icon-container">
-        <div>
-          <mat-icon matTooltip="Edit">edit</mat-icon>
-          <mat-icon>star</mat-icon>
-        </div>
-        <mat-icon matTooltip="Delete">close</mat-icon>
-      </div>
-      <img src="../../../../../assets/Logo.svg" alt="" class="doc-img">
-      <hr>
-      <div class="item-info">
-        <p class="doc-name">Report</p>
-        <span class="doc-created">Created: <span>15:30 24/12/2023</span></span>
-      </div>
-    </div>
-  </div> -->
+
+  <div class="status-container-status" *ngIf="(this.doc$|async)?.loading==false&&(this.doc$|async)?.error!=''">
+    <app-status></app-status>
+  </div>
   <div class="tab-container">
-    <span class="tab-name">All Document</span>
-    <div class="add-container" matTooltip="Create" (click)="openCreateDialog()">
-      <mat-icon class="add-icon">add_circle</mat-icon>
-      <span class="add-text">New Document</span>
-    </div>
+    <h2>All Document</h2>
+    <button mat-button matTooltip="Create" (click)="openCreateDialog()">
+      <mat-icon>add_circle</mat-icon>
+      <span>New Document</span>
+    </button>
   </div>
+
   <div class="main-container" *ngIf="(this.doc$|async)?.loading==false&&(this.doc$|async)?.error==''">
-    <div class="item-container"*ngFor="let doc of (this.doc$|async)?.documents" >
-      <div class="icon-container">
+    <div class="item-container" *ngFor="let doc of (this.doc$|async)?.documents">
+
+      <div class="icon-container" *ngIf="!doc.isDelete">
         <div>
-          <mat-icon matTooltip="Edit">edit</mat-icon>
-          <mat-icon>star</mat-icon>
+          <button mat-icon-button>
+            <mat-icon matTooltip="Edit">edit</mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon>star</mat-icon>
+          </button>
         </div>
-        <mat-icon matTooltip="Delete" (click)="deleteDoc(doc.id)" >close</mat-icon>
+        <div>
+          <button mat-icon-button (click)="changeDocDeleted(doc.id,true)">
+            <mat-icon matTooltip="Delete" >close</mat-icon>
+          </button>
+        </div>
       </div>
-      <img src="../../../../../assets/Logo.svg" alt="" class="doc-img"(click)="navigateToDoc(doc.id)">
-      <hr>
+      <div class="icon-container" *ngIf="doc.isDelete">
+        <div>
+          <button mat-icon-button (click)="changeDocDeleted(doc.id,false)">
+            <mat-icon matTooltip="Restore" >settings_backup_restore</mat-icon>
+          </button>
+        </div>
+        <div>
+          <button mat-icon-button>
+            <mat-icon matTooltip="Delete" >close</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="thumbnail">
+        <img src="../../../../../assets/Logo.svg" alt="" class="doc-img" (click)="navigateToDoc(doc.id)">
+      </div>
+
       <div class="item-info">
-        <p class="doc-name" (click)="navigateToDoc(doc.id)">{{doc.name}}</p>
-        <span class="doc-created">Created: <span>{{this.shareFunctionService.convertDateTime(doc.dateCreated)}}</span></span><br>
-        <span class="doc-created">Modify: <span>{{this.shareFunctionService.convertDateTime(doc.dateCreated)}}</span></span>
+        <div>
+          <span class="title" matListItemTitle (click)="navigateToDoc(doc.id)">{{doc.name}}</span>
+          <span class="time">
+            <span>Created:<span>{{this.shareFunctionService.convertDateTime(doc.dateCreated)}}</span></span><br>
+            <span>Modify:<span>{{this.shareFunctionService.convertDateTime(doc.dateCreated)}}</span></span>
+          </span>
+        </div>
       </div>
+
     </div>
   </div>
 </div>

@@ -1,10 +1,12 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
+import { User } from '@angular/fire/auth';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { config, Subscription } from 'rxjs';
+import { config, Subject, Subscription, take } from 'rxjs';
+import { UserModel } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { SharedFunctionService } from 'src/app/services/shared-function/shared-function.service';
 import { DocumentActions } from 'src/ngrx/actions/document.action';
@@ -17,55 +19,79 @@ import { CreateDocumentComponent } from '../create-document/create-document.comp
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-doc$=this.store.select('doc');
-store$=this.store.select('doc');
-inProgress=false;
-constructor(private activateRoute:ActivatedRoute
-  ,private authService:AuthService,private store:Store<{doc:DocumentState}>,
-  private dialogService:MatDialog,
-  public shareFunctionService:SharedFunctionService,
-  private _snackBar: MatSnackBar,
-  private router:Router) {
+  doc$ = this.store.select('doc');
+  store$ = this.store.select('doc');
+  inProgress = false;
+  tempSub!: Subscription;
 
- }
- ngOnInit(): void {
-  this.authService.user$.subscribe((data)=>{
-    if(data!=null){
-      this.store.dispatch(DocumentActions.getAll());
-    }
-  })
+  constructor(private activateRoute: ActivatedRoute,
+    private authService: AuthService, private store: Store<{ doc: DocumentState }>,
+    private dialogService: MatDialog,
+    public shareFunctionService: SharedFunctionService,
+    private _snackBar: MatSnackBar,
 
- }
- openCreateDialog(){
-  this.dialogService.open(CreateDocumentComponent,{
-  });
- }
- navigateToDoc(id:string){
-  this.router.navigate(['main/document/edit'],{queryParams:{id:id}})
+    private router: Router) {
 
- }
- deleteDoc(id:string) {
-  if (this.inProgress == true) return;
-  let tempSub: Subscription = this.store$.subscribe((data) => {
-    if (this.inProgress == true && data.inProcess == false) {
-      if (data.error == '') {
-        try {
+    this.tempSub = this.activateRoute.url.subscribe(async (path) => {
 
-          tempSub.unsubscribe();
+      if (this.authService.auth.currentUser == null) return;
+      switch (path[1].path) {
+        case 'owned':
+          this.store.dispatch(DocumentActions.getAll());
+          break;
+        case 'bin':
+          this.store.dispatch(DocumentActions.getDeleted());
+          break;
+        case 'shared':
+          this.store.dispatch(DocumentActions.getShared());
+          break;
+      }
+    })
+  }
+  ngOnInit(): void {
+
+  }
+
+  ngOnDestroy(): void {
+    try {
+      this.tempSub.unsubscribe();
+    } catch (err) { }
+  }
+  openCreateDialog() {
+    this.dialogService.open(CreateDocumentComponent, {
+    });
+  }
+  navigateToDoc(id: string) {
+    this.router.navigate(['main/document/edit'], { queryParams: { id: id } })
+
+  }
+
+  openDeleteDialog(){
+
+  }
+  changeDocDeleted(id: string,status:boolean) {
+
+    if (this.inProgress == true) return;
+    let tempSub: Subscription = this.store$.subscribe((data) => {
+      if (this.inProgress == true && data.inProcess == false) {
+        if (data.error == '') {
+          try {
+
+            tempSub.unsubscribe();
+            this.inProgress = false;
+            this._snackBar.open('Document has been move to Recycle bin', 'Close');
+
+          } catch (err) {
+            this._snackBar.open('Document has been move to Recycle bin', 'Close');
+          }
+        } else {
           this.inProgress = false;
-          this._snackBar.open('Delete document successfully', 'Close');
-
-        } catch (err) {
-          this._snackBar.open('Delete document failed', 'Close');
+          this._snackBar.open('Document has been move to Recycle bin', 'Close');
         }
       } else {
-        this.inProgress = false;
-        this._snackBar.open('Delete document failed', 'Close');
+        this.inProgress = data.inProcess;
       }
-    } else {
-      this.inProgress = data.inProcess;
-    }
-  })
-  this.store.dispatch(DocumentActions.delete({ id:id }));
-}
+    })
+    this.store.dispatch(DocumentActions.update({id:id,uid:this.authService.auth.currentUser?.uid,updateField:'isDelete',updateValue:status}));
+  }
 }
