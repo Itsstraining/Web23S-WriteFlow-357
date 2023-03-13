@@ -24,12 +24,12 @@ export class MailController {
     }
    }
    @Post('invite')
-   async createInvite(@Headers() header,@Body('sender') sender:UserModel, @Body('sentTo ')sentTo : string,doc:MailDocModel,@Body('right') right:string){
+   async createInvite(@Headers() header,@Body('sender') senderId:string, @Body('sentTo ')sentTo : string,doc:MailDocModel,@Body('right') right:string){
     let decodedToken = await this.authService.validateUser(header.authorization);
     if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
-    if (decodedToken.uid != sender.uid) throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
+    if (decodedToken.uid != senderId) throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
     try {
-        return this.mailService.createInvite(sender,sentTo,doc,right);
+        return this.mailService.createInvite(senderId,sentTo,doc,right);
     } catch (error) {
         throw new HttpException(error, 500);
     }

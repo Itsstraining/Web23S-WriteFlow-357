@@ -13,12 +13,7 @@
 .Recent-New{
     display: flex;
     margin-top: 1rem;
-<<<<<<< HEAD
-    font-size: 1.3rem;
-    font-weight: bold;
-=======
     font-size: 1rem;
->>>>>>> fa3ff26b77a5f6e7751886150cdbd06f29a1d04f
 }
 
 .doc1{
@@ -38,11 +33,7 @@
 }
 .Doc-Navigation{
     height: 91%;
-<<<<<<< HEAD
-    width: 23%;
-=======
     width: 20%;
->>>>>>> fa3ff26b77a5f6e7751886150cdbd06f29a1d04f
     border: 2px solid var(--color-4);
     border-radius: 10px;
     margin: 1rem 0 0 1rem;
@@ -64,19 +55,11 @@
     margin-bottom: 1rem;
     border: 1px solid #424874;
     border-radius: 10px;
-<<<<<<< HEAD
-    height: 1.3rem;
-    display: grid;
-    grid-template-columns: auto auto;
-    padding: 1rem 0.5rem;
-    grid-column-gap: 38rem;
-=======
     height: 1rem;
     display: grid;
     grid-template-columns: auto auto;
     padding: 1rem 0.5rem;
     grid-column-gap: 41rem;
->>>>>>> fa3ff26b77a5f6e7751886150cdbd06f29a1d04f
 
   }
   .Img-DocStatus{
@@ -87,16 +70,11 @@
 .Doc-When{
     margin-top:0.35rem;
 }
-<<<<<<< HEAD
-.Doc-Edited{
-    font-size: 1.2rem;
-=======
 .Person-Name{
     margin-top:1.6rem;
     margin-left:3rem;
     font-size: 25px;
     color: #424874;
->>>>>>> fa3ff26b77a5f6e7751886150cdbd06f29a1d04f
 }
 
 .Person-Name{
@@ -112,21 +90,6 @@
 }
 
 .New-Button{
-<<<<<<< HEAD
-    width:  6rem;
-    height: 2.5rem;
-    margin-left: 2rem;
-    border-radius: 10px;
-    margin-bottom: 0.2rem;
-    color: var(--color-4);
-    background-color: var(--color-1);
-    font-size:  1.3rem;
-    border-color: rgba(var(--color-4-rgb), 0.25);
-}
-.New-Button:hover{
-    background-color: var(--color-4);
-    color: var(--color-1);
-=======
     width:  4rem;
     height: 2rem;
     margin-left: 2rem;
@@ -135,7 +98,6 @@
     color: var(--color-1);
     background-color: var(--color-4);
     font-size:  1rem;
->>>>>>> fa3ff26b77a5f6e7751886150cdbd06f29a1d04f
 }
 .File-Name{
     margin-top:0.25rem;
@@ -143,14 +105,9 @@
 }
 
 .Doc-List{
-<<<<<<< HEAD
-    height: 10rem;
-    margin: 1.4rem 0 7rem 0.5rem;
-=======
 
     margin-bottom: 7rem;
     height: 10rem;
->>>>>>> fa3ff26b77a5f6e7751886150cdbd06f29a1d04f
 }
 
 .Find-Doc{
@@ -162,11 +119,6 @@
     border-radius: 5px;
     background-color: #F4F6FF;
     color: #424874;
-<<<<<<< HEAD
-    font-size: 1rem;
-=======
-
->>>>>>> fa3ff26b77a5f6e7751886150cdbd06f29a1d04f
 }
 .header-image {
     background-image: url("../../../assets/document-icon.png");
@@ -176,42 +128,6 @@
 .document-img{
     width: 2rem;
     //margin-top:0.5rem
-<<<<<<< HEAD
-}
-.document-img1{
-    width: 2rem;
-    margin-top:0.5rem
-}
-.When-Edited{
-    font-size:0.9rem;
-}
-.Favorite-Button{
-    margin-top: -0.45rem;
-    border-radius: 10px;
-    border-color: rgba(var(--color-4-rgb), 0.45);
-    width: 6rem;
-    font-size: 1rem;
-    color: var(--color-4);
-    background-color: #F4F6FF;
-}
-
-.Star-Icon{
-    margin-top:0.2rem;
-}
-.Icon-Text{
-    display: flex;
-}
-.Favorite-Text{
-    margin-left: 0.2rem;
-    margin-top: 0.34rem;
-}
-
-.star{
-  margin-right: 20rem;
-}
-
-
-=======
 }
 .document-img1{
     width: 2rem;
@@ -244,4 +160,3 @@
 .star{
   margin-right: 20rem;
 }
->>>>>>> fa3ff26b77a5f6e7751886150cdbd06f29a1d04f

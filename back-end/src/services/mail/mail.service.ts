@@ -16,8 +16,9 @@ import {Mail, MailDocument} from './../../schemas/mail.schema';
 export class MailService {
     constructor(@InjectModel(Mail.name) private mailModel: Model<MailDocument>,@InjectModel(Doc.name) private docModel:Model<DocDocument>,@InjectModel(User.name) private userModel:Model<UserDocument>){}
 
-   async  createInvite(sender:UserModel,sentTo:string,doc:MailDocModel,right:string){
+   async  createInvite(senderId:string,sentTo:string,doc:MailDocModel,right:string){
         let user=await this.userModel.findOne({email:sentTo}).exec();
+        let sender=await this.userModel.findOne({id:senderId}).exec();
         if(!user) return null;
         let now=Date.now();
         let mail:Mail={
