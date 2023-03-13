@@ -21,8 +21,8 @@
     display: flex;
 }
 .P-Info{
-    margin-top: 0.7rem;
-    
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
 }
 .Select-Access-Button{
     margin-left: 0.3rem;
@@ -75,13 +75,15 @@
     display: grid;
     grid-template-columns: auto auto;
     grid-gap: 1rem;
-    column-gap: 13rem;
-    padding: 10px;
+    column-gap: 20.8rem;
+    padding: 0.625rem;
     max-height: 8rem;
     overflow-y:scroll;
    
   }
-
+.P-Email{
+    margin-top: 0.2rem;
+}
 .Display{
     display: flex;
 }
@@ -91,7 +93,7 @@
     border-radius: 10px;
     border-color: rgba(var(--color-4-rgb), 0.25);
     height: 2.25em;
-    width: 8rem;
+    width: 7rem;
     font-size: 1.125rem;
     margin-left: 0.7em;
     border-color: #F4F6FF;
@@ -169,7 +171,7 @@
     color: #424874;
     font-weight: bold;
     font-size: 1.375rem;
-    
+    margin-top: -1rem
 }
 .List-Title{
     margin-top: 0.5em;
@@ -195,12 +197,10 @@
     font-size: 1.0625rem;
     height: 3em;
     border-radius: 10px;
-    margin-bottom: 1.3rem;
-    margin-left: 1em;
     border-color: #F4F6FF;
     display: flex;
-    margin-right: 1rem;
-   margin-top: 0.6rem;
+    
+   margin: 0.6rem 0.15rem 1.3rem 7.7rem;
 }
 .Icon-Text{
     display: flex;
