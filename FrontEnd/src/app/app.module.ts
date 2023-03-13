@@ -27,6 +27,7 @@ const config: SocketIoConfig = { url: environment.socketURL, options: {} };
   declarations: [
     AppComponent,
     RoleDialogComponent,
+    // DocumentComponent,
   ],
   imports: [
     BrowserModule,

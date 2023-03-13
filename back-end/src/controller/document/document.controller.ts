@@ -17,16 +17,16 @@ export class DocumentController {
     async getDocuments(@Headers() header, @Query('id') id, @Query('uid') uid) {
         let decodedToken = await this.authService.validateUser(header.authorization);
         if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
-
         try {
             if (id) {
-                
-                let document = await this.documentService.getDocument(id,decodedToken.uid);
-            
-                if (document.uid == decodedToken.uid) {
+                let document = await this.documentService.getDocument(id, decodedToken.uid);
+                if (!document){
+                    throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
+                }else{
                     return document;
                 }
-                throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
+
+         
             }
             if (uid) {
                 return await this.documentService.getDocuments(uid);
@@ -149,17 +149,19 @@ export class DocumentController {
 
     //file
     @Get('file')
-    async getDocument(@Headers() header) {
+    async getDocument(@Headers() header, @Query('id') id: string) {
+      
         let decodedToken = await this.authService.validateUser(header.authorization);
         if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
-
+        const document = await this.documentService.getDocument(id, decodedToken.uid);
         try {
-            const pathToImage = join(process.cwd(), 'src', 'documentsStorage', decodedToken.uid, header['filename']);
+            const pathToImage = join(process.cwd(), 'src', 'documentsStorage', document.uid, header['filename']);
             //read file json
             let file = fs.createReadStream(pathToImage);
             return new StreamableFile(file);
 
         } catch (error) {
+           
             throw new HttpException("File not found", 500, { cause: new Error(error) });
         }
     }

@@ -5,6 +5,6 @@ export interface DocumentState {
   document:DocModel|null;
   loading:boolean;
   inProcess:boolean;
-  error:string;
+  error:any;
 
 }

@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'community', loadChildren: () => import('./pages/community/community.module').then(m => m.CommunityModule) },
 
   { path: '**', loadChildren: () => import('./pages/notfound/notfound.module').then(m => m.NotfoundModule) },
+
 ];
 
 @NgModule({

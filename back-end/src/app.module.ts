@@ -22,6 +22,10 @@ import { UserController } from './controller/user/user.controller';
 import { AutoSaveGateway } from './sockets/auto-save/auto-save.gateway';
 import { DocumentGateway } from './sockets/document/document.gateway';
 import { MailController } from './controller/mail/mail.controller';
+import { RoomService } from './services/room/room.service';
+import { RoomController } from './controller/room/room/room.controller';
+import { Room, RoomSchema } from './schemas/room.schema';
+
 
 
 @Module({
@@ -31,9 +35,10 @@ import { MailController } from './controller/mail/mail.controller';
       { name: Doc.name, schema: DocumentSchema },
       { name: User.name, schema: UserSchema },
       { name: Mail.name, schema: MailSchema},
+      { name: Room.name, schema: RoomSchema}
     ]),
   ],
-  controllers: [AppController, DocumentController, UserController, MailController,],
-  providers: [AppService, DocumentService, AuthService, UserService, AutoSaveGateway, DocumentGateway, MailService,],
+  controllers: [AppController, DocumentController, UserController, MailController, RoomController,],
+  providers: [AppService, DocumentService, AuthService, UserService, AutoSaveGateway, DocumentGateway, MailService, RoomService,],
 })
 export class AppModule { }

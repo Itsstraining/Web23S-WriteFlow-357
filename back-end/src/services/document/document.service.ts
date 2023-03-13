@@ -41,10 +41,13 @@ export class DocumentService {
         if (document.uid != uid) {
             let inView = document.canView.findIndex((element) => element == uid);
             let inEdit = document.canEdit.findIndex((element) => element == uid);
-            if (inView === -1) return null;
-            if (inEdit === -1) return null;
+            if (inView === -1 && inEdit===-1) return null;
+            
+            return document;
+        } else {
+            return document;
         }
-        return document;
+
 
 
 
