@@ -13,3 +13,7 @@ export interface DocModel {
     canEdit: string[];
     uid: string;
 }
+export interface MailDocModel{
+    docId: string;
+    name: string;
+}
