@@ -1,59 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,300&display=swap');
 
-.DocList-Status{
+.DocList-Status {
     display: flex;
     width: 100%;
     height: 100%;
 }
 
-.Status-Info{
+.Status-Info {
     margin-top: 0.8rem;
 
 }
-.Recent-New{
+
+.Recent-New {
     display: flex;
     margin-top: 1rem;
-<<<<<<< HEAD
-
-    font-size: 1.3rem;
-    font-weight: bold;
-
-    
-=======
     font-size: 1rem;
->>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
 }
 
 
-.doc1{
+.doc1 {
     display: flex;
 }
 
-.Recent-Text{
+.Recent-Text {
     color: var(--color-4);
     font-weight: 500;
     margin-top: 0.3rem;
     margin-left: 1rem;
 }
-.Doc-When{
+
+.Doc-When {
     margin-left: 1.2rem;
     color: var(--color-4);
 
 }
-.Doc-Navigation{
+
+.Doc-Navigation {
     height: 91%;
-<<<<<<< HEAD
-
-    width: 23%;
-
-=======
     width: 20%;
->>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
     border: 2px solid var(--color-4);
     border-radius: 10px;
     margin: 1rem 0 0 1rem;
 }
-.Edit-Status{
+
+.Edit-Status {
     height: 91%;
     width: 70%;
     margin-left: 2rem;
@@ -63,6 +53,7 @@
 
 
 }
+
 .grid-container1 {
     margin-top: 0.5rem;
     margin-left: 1rem;
@@ -70,182 +61,97 @@
     margin-bottom: 1rem;
     border: 1px solid #424874;
     border-radius: 10px;
-<<<<<<< HEAD
-
-    height: 1.3rem;
-    display: grid;
-    grid-template-columns: auto auto;
-    padding: 1rem 0.5rem;
-    grid-column-gap: 38rem;
-=======
->>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
     height: 1rem;
     display: grid;
     grid-template-columns: auto auto;
     padding: 1rem 0.5rem;
     grid-column-gap: 41rem;
-<<<<<<< HEAD
 
-=======
->>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
+}
 
-  }
-  .Img-DocStatus{
+.Img-DocStatus {
     display: flex;
     margin-top: -1rem;
     margin-left: 0.2rem;
-  }
-.Doc-When{
-    margin-top:0.35rem;
 }
-<<<<<<< HEAD
 
-.Doc-Edited{
-    font-size: 1.2rem;
+.Doc-When {
+    margin-top: 0.35rem;
 }
-=======
->>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
-.Person-Name{
-    margin-top:1.6rem;
-    margin-left:3rem;
+
+.Person-Name {
+    margin-top: 1.6rem;
+    margin-left: 3rem;
     font-size: 25px;
     color: #424874;
-<<<<<<< HEAD
-
-=======
->>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
 }
 
-.Person-Name{
+.Person-Name {
     margin-top: 0.25rem;
     // margin-left:3rem;
     font-size: 1.5625rem;
     color: #424874;
 }
-.Person-Img-Name{
+
+.Person-Img-Name {
     margin-top: 1.3rem;
-    display:flex;
+    display: flex;
     margin-left: 1rem;
 }
 
-.New-Button{
-<<<<<<< HEAD
-
-    width:  6rem;
-    height: 2.5rem;
-    margin-left: 2rem;
-    border-radius: 10px;
-    margin-bottom: 0.2rem;
-    color: var(--color-4);
-    background-color: var(--color-1);
-    font-size:  1.3rem;
-    border-color: rgba(var(--color-4-rgb), 0.25);
-}
-.New-Button:hover{
-    background-color: var(--color-4);
-    color: var(--color-1);
-
-=======
->>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
-    width:  4rem;
+.New-Button {
+    width: 4rem;
     height: 2rem;
     margin-left: 2rem;
     border-radius: 10px;
     margin-bottom: 0.2rem;
     color: var(--color-1);
     background-color: var(--color-4);
-    font-size:  1rem;
-<<<<<<< HEAD
-
-=======
->>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
+    font-size: 1rem;
 }
-.File-Name{
-    margin-top:0.25rem;
+
+.File-Name {
+    margin-top: 0.25rem;
     font-size: 1.2rem;
 }
 
-.Doc-List{
-<<<<<<< HEAD
-    height: 10rem;
-    margin: 1.4rem 0 7rem 0.5rem;
-=======
->>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
+.Doc-List {
 
     height: 10rem;
 }
 
-.Find-Doc{
+.Find-Doc {
     margin: 0.5rem 0 -1rem 1.3rem;
     width: 17rem;
     height: 2.6rem;
-    color:#F9FAFF;
+    color: #F9FAFF;
     border-color: rgba(var(--color-4-rgb), 0.25);
     border-radius: 5px;
     background-color: #F4F6FF;
     color: #424874;
-<<<<<<< HEAD
-    font-size: 1rem;
-
-
-=======
->>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
 }
+
 .header-image {
     background-image: url("../../../assets/document-icon.png");
     background-size: cover;
 
 }
-.document-img{
+
+.document-img {
     width: 2rem;
     //margin-top:0.5rem
-<<<<<<< HEAD
-
 }
-.document-img1{
+
+.document-img1 {
     width: 2rem;
-    margin-top:0.5rem
-}
-.When-Edited{
-    font-size:0.9rem;
-}
-.Favorite-Button{
-    margin-top: -0.45rem;
-    border-radius: 10px;
-    border-color: rgba(var(--color-4-rgb), 0.45);
-    width: 6rem;
-    font-size: 1rem;
-    color: var(--color-4);
-    background-color: #F4F6FF;
+    margin-top: 0.5rem
 }
 
-.Star-Icon{
-    margin-top:0.2rem;
-}
-.Icon-Text{
-    display: flex;
-}
-.Favorite-Text{
-    margin-left: 0.2rem;
-    margin-top: 0.34rem;
+.When-Edited {
+    font-size: 13px;
 }
 
-.star{
-  margin-right: 20rem;
-}
-
-
-=======
-}
->>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
-.document-img1{
-    width: 2rem;
-    margin-top:0.5rem
-}
-.When-Edited{
-    font-size:13px;
-}
-.Favorite-Button{
+.Favorite-Button {
     margin-top: -3rem;
     border-radius: 10px;
     border-color: rgba(var(--color-4-rgb), 0.45);
@@ -255,17 +161,20 @@
     background-color: #F4F6FF;
 
 }
-.Star-Icon{
-    margin-top:0.2rem;
+
+.Star-Icon {
+    margin-top: 0.2rem;
 }
-.Icon-Text{
+
+.Icon-Text {
     display: flex;
 }
-.Favorite-Text{
+
+.Favorite-Text {
     margin-left: 0.4rem;
     margin-top: 0.3rem;
 }
 
-.star{
-  margin-right: 20rem;
+.star {
+    margin-right: 20rem;
 }
