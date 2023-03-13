@@ -22,8 +22,11 @@ import { mailReducer } from 'src/ngrx/reducers/mail.reducer';
 import { MailEffect } from 'src/ngrx/effects/mail.effect';
 
 
-
-const config: SocketIoConfig = { url: environment.socketURL, options: {} };
+const config: SocketIoConfig = {
+  url: environment.socketURL, options: {
+    closeOnBeforeunload: false,
+  }
+};
 
 @NgModule({
   declarations: [

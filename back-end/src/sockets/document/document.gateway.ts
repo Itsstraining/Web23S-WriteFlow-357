@@ -19,24 +19,19 @@ export class DocumentGateway {
     client.join(payload.roomId);
     await this._roomService.addUser(payload.roomId, payload.user);
     client.to(payload.roomId).emit('update-room', await this._roomService.get(payload.roomId));
-
-
   }
-  @SubscribeMessage('disconnect')
-  handleDisconnect(client: Socket, payload: any) {
-    console.log('disconnect')
 
-  }
+  // @SubscribeMessage('disconnect')
+  // handleDisconnect(client: Socket, payload: any) {
+  //   console.log('disconnect')
+  // }
 
   @SubscribeMessage('leave-room')
   async handleLeaveRoom(client: Socket, payload: any) {
-
+    console.log(payload)
     client.leave(payload.roomId);
     await this._roomService.removeUser(payload.roomId, payload.user);
     client.to(payload.roomId).emit('update-room', await this._roomService.get(payload.roomId));
-
-
-
   }
 
   @SubscribeMessage('send-data')

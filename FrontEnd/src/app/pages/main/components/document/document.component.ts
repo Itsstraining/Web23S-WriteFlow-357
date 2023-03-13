@@ -1,27 +1,26 @@
-import { AfterViewInit, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { QuillEditorComponent, QuillModule } from 'ngx-quill';
 import * as Quill from 'quill';
 import { Socket } from 'ngx-socket-io';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentService } from 'src/app/services/document/document.service';
-import { concat, last, lastValueFrom } from 'rxjs';
+import { concat, last } from 'rxjs';
 import { DocModel } from 'src/app/models/doc.model';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { RoleComponent } from 'src/app/pages/role/role.component';
+import { MatDialog } from '@angular/material/dialog';
 import { DocumentState } from 'src/ngrx/states/document.state';
 import { Store } from '@ngrx/store';
 import { DocumentActions } from 'src/ngrx/actions/document.action';
 import { AuthService } from 'src/app/services/auth.service';
 import { RoleDialogComponent } from 'src/app/components/role-dialog/role-dialog.component';
 import { UserService } from 'src/app/services/user/user.service';
-
+import { EditNameComponent } from './components/edit-name/edit-name.component';
 
 @Component({
   selector: 'app-document',
   templateUrl: './document.component.html',
   styleUrls: ['./document.component.scss']
 })
-export class DocumentComponent  implements OnInit, AfterViewInit, OnDestroy{
+export class DocumentComponent implements OnInit, AfterViewInit {
   @ViewChild('quillEditor') editor!: QuillEditorComponent;
 
   previousContent!: any;
@@ -36,61 +35,39 @@ export class DocumentComponent  implements OnInit, AfterViewInit, OnDestroy{
     private activateRoute: ActivatedRoute,
     private documentService: DocumentService,
     private dialogService: MatDialog,
-    private userService:UserService,
+    private userService: UserService,
     private store: Store<{ doc: DocumentState }>,
     private authService: AuthService,
-
   ) {
-    console.log("aloha")
-    this.activateRoute.queryParams.subscribe((data) => {
-      this.roomId = data['id'];
-    });
-
   }
 
   ngOnInit(): void {
-    console.log("alo")
     this.handleSocketEvents(this.roomId);
+    this.activateRoute.queryParams.subscribe((data) => { this.roomId = data['id']; });
     this.store.dispatch(DocumentActions.get({ id: this.roomId }))
     this.store$.subscribe((data) => {
-      if (data.error.error.status===403) {
+      if (data.error.status === 403) {
         alert("You don't have permission to access this document")
       }
     })
-
   }
 
   ngAfterViewInit(): void {
     this.setup();
-
-
   }
-  ngOnDestroy(): void {
 
-
-    this._socket.emit('leave-room', { roomId: this.roomId,user:this.authService.currentUser?.uid! });
-    this._socket.disconnect();
-     //unload component
-
-
-  }
 
   handleSocketEvents = (params: any) => {
     this.roomId = params;
 
     this._socket.on('connect', async () => {
       console.log("connected");
-       let user=await this.userService.getUser(this.authService.currentUser?.uid!)
+      let user = await this.userService.getUser(this.authService.currentUser?.uid!)
 
-       // get user in room
-       this.listenRoomChange().subscribe((data)=>{
-        console.log(data);
-      })
-      this._socket.emit('join-room',{roomId:this.roomId,user:user} );
-
-
+      // get user in room
+      this.listenRoomChange().subscribe((data) => { console.log(data); })
+      this._socket.emit('join-room', { roomId: this.roomId, user: user });
     })
-
   }
 
   async setup() {
@@ -103,18 +80,19 @@ export class DocumentComponent  implements OnInit, AfterViewInit, OnDestroy{
       const quill: Quill.Quill = this.editor.quillEditor;
       quill.on('text-change', (delta, oldDelta, source) => {
         if (source === 'user') {
-          this.sendUpdateData(delta)
+          this.sendUpdateData(delta);
         }
       });
       this.processData()
-      setInterval(() => {
-        // this.documentService.saveFile(this.editor.quillEditor.getContents(), this.document.contentPath);
-      }, 3000)
     }, 1000);
   }
 
+  saveFile() {
+    this.documentService.saveFile(this.editor.quillEditor.getContents(), this.document.contentPath);
+  }
+
   processData() {
-    concat(this.documentService.getFile(this.document.contentPath,this.roomId), this.listenForChanged()).subscribe((data: any) => {
+    concat(this.documentService.getFile(this.document.contentPath, this.roomId), this.listenForChanged()).subscribe((data: any) => {
       this.defaultData = data;
       this.editor.quillEditor.updateContents(data);
     })
@@ -127,6 +105,7 @@ export class DocumentComponent  implements OnInit, AfterViewInit, OnDestroy{
   listenForChanged() {
     return this._socket.fromEvent('receive-data')
   }
+
   listenRoomChange() {
     return this._socket.fromEvent('update-room')
   }
@@ -149,18 +128,39 @@ export class DocumentComponent  implements OnInit, AfterViewInit, OnDestroy{
       ],
     },
   }
-  openShareDialog() {
-    this.dialogService.open(RoleDialogComponent, {
 
+  async openEditNameDialog() {
+    if (!this.document) return;
+    let name = this.document.name;
+    const dialogRef = this.dialogService.open(EditNameComponent, {
+      width: '500px',
+      data: name
     });
 
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (!result) return;
+      this.document.name = result;
+      this.store.dispatch(DocumentActions.update({ id: this.document.id, uid: this.authService.currentUser?.uid, updateField: 'name', updateValue: result }));
+    });
   }
-  changeName(event: any) {
-    if (this.document.name === event.target.value) return;
-    this.store.dispatch(DocumentActions.update({ id: this.document.id, uid: this.authService.currentUser?.uid, updateField: 'name', updateValue: event.target.value }));
+
+  openShareDialog() {
+    this.dialogService.open(RoleDialogComponent, {});
   }
-  back(){
+
+  back() {
     window.history.back();
   }
 
+  beforeleave() {
+    this._socket.emit('leave-room', { roomId: this.roomId, user: this.authService.currentUser?.uid! });
+    this.saveFile()
+  }
+
+  //auto save
+  @HostListener('window:beforeunload', ['$event'])
+  async unloadHandler($event: any) {
+    $event.preventDefault();
+    this.beforeleave();
+  }
 }

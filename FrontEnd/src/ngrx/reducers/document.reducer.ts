@@ -1,4 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
+import { DocModel } from "src/app/models/doc.model";
 import { DocumentActions } from "../actions/document.action";
 import { DocumentState } from "../states/document.state";
 
@@ -139,16 +140,20 @@ export const DocumentReducer = createReducer(
   on(DocumentActions.updateSuccess, ((state, { doc, updateField, updateValue }) => {
 
     let documents = [...state.documents!]
-    if (updateField == 'isPublic' || updateField == 'isDelete') {
-      let index = documents.findIndex(x => x.id == doc.id);
-      documents.splice(index, 1);
-    } else {
-      let index = documents.findIndex(x => x.id == doc.id);
-      documents[index] = doc;
-    }
+    let tempDocuments: DocModel[] = []
+
+    documents.forEach((document: any) => {
+      if (updateField == 'isPublic' || updateField == 'isDelete') return;
+      if (document.id !== doc.id) tempDocuments.push(document);
+
+      let tempDoc = { ...document };
+      tempDoc[updateField] = updateValue;
+      tempDocuments.push(tempDoc);
+    });
+
     return {
       ...state,
-      documents: documents,
+      documents: tempDocuments,
       inProcess: false
     }
   })),

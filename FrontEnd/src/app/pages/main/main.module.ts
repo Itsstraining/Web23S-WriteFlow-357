@@ -11,6 +11,8 @@ import { MailComponent } from './components/mail/mail.component';
 import { RecycleComponent } from './components/recycle/recycle.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { CreateDocumentComponent } from './components/create-document/create-document.component';
+import { EditNameComponent } from './components/document/components/edit-name/edit-name.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,14 +22,15 @@ import { CreateDocumentComponent } from './components/create-document/create-doc
     ListComponent,
     MailComponent,
     RecycleComponent,
-    CreateDocumentComponent
-
+    CreateDocumentComponent,
+    EditNameComponent
   ],
   imports: [
     CommonModule,
     MainRoutingModule,
     AngularMaterialModule,
     SharedModule,
+    FormsModule,
     QuillModule.forRoot(),
   ]
 })

@@ -17,7 +17,7 @@ export class DocumentEffects {
         catchError((error) => {
           return of(DocumentActions.getAllFail({ error }))
         })
-       )
+      )
       ),
 
     )
@@ -32,7 +32,7 @@ export class DocumentEffects {
         catchError((error) => {
           return of(DocumentActions.getDeletedFail({ error }))
         })
-        )
+      )
       ),
     )
   )
@@ -46,7 +46,7 @@ export class DocumentEffects {
         catchError((error) => {
           return of(DocumentActions.getSharedFail({ error }))
         })
-        )
+      )
       ),
     )
   )
@@ -61,11 +61,11 @@ export class DocumentEffects {
         catchError((error) => {
           return of(DocumentActions.createFail({ error }))
         })
-       )
+      )
       ),
     )
   )
-  get$= createEffect(() =>
+  get$ = createEffect(() =>
     this.actions$.pipe(
       ofType(DocumentActions.get),
       switchMap((action) => this.documentService.getDoc(action.id).pipe(
@@ -75,7 +75,7 @@ export class DocumentEffects {
         catchError((error) => {
           return of(DocumentActions.getFail({ error }))
         })
-        )
+      )
       ),
     )
   )
@@ -87,26 +87,26 @@ export class DocumentEffects {
       ofType(DocumentActions.delete),
       switchMap((action) => this.documentService.delete(action.id).pipe(
         map((doc) => {
-          return DocumentActions.deleteSuccess({doc:doc})
+          return DocumentActions.deleteSuccess({ doc: doc })
         }),
         catchError((error) => {
           return of(DocumentActions.deleteFail({ error }))
         })
-       )
+      )
       ),
     )
   )
   update$ = createEffect(() =>
     this.actions$.pipe(
       ofType(DocumentActions.update),
-      switchMap((action) => this.documentService.update(action.id,action.uid,action.updateField,action.updateValue).pipe(
+      switchMap((action) => this.documentService.update(action.id, action.uid, action.updateField, action.updateValue).pipe(
         map((doc) => {
-          return DocumentActions.updateSuccess({doc:doc,updateField:action.updateField,updateValue:action.updateValue})
+          return DocumentActions.updateSuccess({ doc: doc, updateField: action.updateField, updateValue: action.updateValue })
         }),
         catchError((error) => {
           return of(DocumentActions.updateFail({ error }))
         })
-       )
+      )
       ),
     )
   )

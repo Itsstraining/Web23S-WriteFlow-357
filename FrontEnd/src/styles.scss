@@ -137,7 +137,6 @@ quill-editor {
   height: 100%;
   width: 100%;
   margin: 5% 0 0 0;
-
 }
 
 .ql-toolbar {
@@ -145,11 +144,18 @@ quill-editor {
 
   display: flex;
   justify-content: center;
-  top: 10%;
   padding: $toolbar-padding !important;
   position: fixed;
+
+  top: 64px;
   z-index: 1000;
   background-color: var(--color-1);
+}
+
+@media screen and (max-width: 600px) {
+  .ql-toolbar {
+    top: 56px;
+  }
 }
 
 .ql-container {

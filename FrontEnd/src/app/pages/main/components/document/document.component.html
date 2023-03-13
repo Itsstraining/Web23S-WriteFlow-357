@@ -1,19 +1,28 @@
-<div class="header">
-  <div class="container">
-    <mat-icon (click)="back()">arrow_circle_left</mat-icon>
-    <mat-icon (click)="openShareDialog()">share</mat-icon>
+<mat-toolbar>
+  <div class="back-share">
+    <button mat-icon-button>
+      <mat-icon (click)="back()">
+        arrow_back
+      </mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon (click)="openShareDialog()">share</mat-icon>
+    </button>
   </div>
-  <mat-form-field class="container" appearance="outline">
-      <mat-label>Document name</mat-label>
-      <input type="text" matInput placeholder="Document name" [value]="(this.store$|async)?.document?.name" (blur)="changeName($event)">
-      <mat-icon matSuffix>mode_edit</mat-icon>
-    </mat-form-field>
-  <div class="container">
-    <img src="../../../../../assets/document-icon.png" class="user-avatar">
-    <img src="../../../../../assets/document-icon.png" class="user-avatar">
-    <img src="../../../../../assets/document-icon.png" class="user-avatar">
-    <img src="../../../../../assets/document-icon.png" class="user-avatar">
-
+  <div class="filename">
+    <span class="spacer"></span>
+    <span>
+      <ng-container *ngIf="document; else diffName">{{document.name}}</ng-container>
+      <ng-template #diffName>{{(store$ | async)?.document?.name}}</ng-template>
+    </span>
+    <button mat-icon-button (click)="openEditNameDialog()"><mat-icon>edit</mat-icon></button>
+    <button mat-icon-button (click)="saveFile()"><mat-icon>save</mat-icon></button>
   </div>
-</div>
+  <div class="watcher">
+    <img src="../../../../../assets/document-icon.png">
+    <img src="../../../../../assets/document-icon.png">
+    <img src="../../../../../assets/document-icon.png">
+    <img src="../../../../../assets/document-icon.png">
+  </div>
+</mat-toolbar>
 <quill-editor [modules]="quillModule" #quillEditor></quill-editor>
