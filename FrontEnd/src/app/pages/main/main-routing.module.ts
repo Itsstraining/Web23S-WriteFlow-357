@@ -18,7 +18,8 @@ const routes: Routes = [{
     { path: 'recycle', component: RecycleComponent },
   ]
 },
-{ path: 'document/edit', component: DocumentComponent }];
+{ path: 'document/edit', component: DocumentComponent, runGuardsAndResolvers: 'always' }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

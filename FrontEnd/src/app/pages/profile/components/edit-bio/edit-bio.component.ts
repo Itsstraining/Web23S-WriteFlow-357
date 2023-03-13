@@ -12,6 +12,12 @@ export class EditBioComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
+  tempBio: any;
+
+  ngOnInit() {
+    this.tempBio = { bio: structuredClone(this.data.bio) };
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }

@@ -1,5 +1,5 @@
 import { LoginpopupComponent } from '../../components/loginpopup/loginpopup.component';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { User } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,6 +15,8 @@ import { UserService } from 'src/app/services/user/user.service';
 export class NavbarComponent {
   isTop = true;
 
+  @Input() photoURL = '';
+
   constructor(
     private authService: AuthService,
     public dialog: MatDialog,
@@ -24,6 +26,7 @@ export class NavbarComponent {
 
   user$ = this.authService.user$;
   user: User | null = null;
+  userPhoto: string | '' = '';
   isLoading = true;
 
   ngOnInit(): void {
@@ -37,6 +40,7 @@ export class NavbarComponent {
 
     this.user = this.authService.currentUser;
     this.isLoading = this.authService.isLoading;
+    this.userPhoto = this.authService.photoURL || '';
 
     if (this.user) {
       this.isLoading = false;
@@ -44,11 +48,21 @@ export class NavbarComponent {
 
     this.user$.subscribe(user => {
       this.user = user;
+      this.updatePhotoURL();
     });
 
     this.authService.isLoading$.subscribe(isLoading => {
       this.isLoading = isLoading;
     });
+
+    this.updatePhotoURL();
+  }
+
+  updatePhotoURL() {
+    if (!this.user) return;
+    this.userService.getUser(this.user.uid).then((res: any) => {
+      this.userPhoto = res.photoURL;
+    })
   }
 
   loginWithGoogle() {

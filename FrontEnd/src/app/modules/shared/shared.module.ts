@@ -8,12 +8,12 @@ import { LoadingComponent } from 'src/app/components/loading/loading.component';
 import { RoleComponent } from 'src/app/pages/role/role.component';
 //Angular Material
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
-import {MatMenuModule} from '@angular/material/menu';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginpopupComponent } from 'src/app/components/loginpopup/loginpopup.component';
 import { StatusComponent } from 'src/app/components/status/status.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     AngularMaterialModule,
     ReactiveFormsModule,
-   
+    RouterModule
   ],
   providers: [
     AuthService,

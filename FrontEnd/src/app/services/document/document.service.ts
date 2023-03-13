@@ -46,8 +46,8 @@ export class DocumentService {
     }) as Observable<any>
   }
 
-  getFile(filename: string) {
-    return this.http.get(`${environment.apiURL}${this.url}/file`, {
+  getFile(filename: string,id:string) {
+    return this.http.get(`${environment.apiURL}${this.url}/file?id=${id}`, {
       headers: new HttpHeaders({
         'authorization': this.authService.getToken(),
         'filename': filename

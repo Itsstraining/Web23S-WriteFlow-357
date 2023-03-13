@@ -24,6 +24,18 @@
         margin-bottom: 1rem;
 
         width: 100%;
+
+        &>.job {
+            width: 100%;
+
+            mat-form-field {
+                width: calc(100% - 48px);
+            }
+
+            button {
+                color: var(--color-4);
+            }
+        }
     }
 
     &>.btn {

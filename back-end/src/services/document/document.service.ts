@@ -28,15 +28,11 @@ export class DocumentService {
         return documents;
     }
 
-<<<<<<< HEAD
     async getDocumentsPublic(uid: string): Promise<DocModel[]> {
         const documents = this.documentModel.find({ uid: uid, isDelete: false, isPublic: true }).exec();
         return documents;
     }
 
-    async getDocument(id: string): Promise<DocModel> {
-        const document = this.documentModel.findOne({ id: id }).exec();
-=======
     async getDocument(id: string, uid: string): Promise<DocModel> {
         //find if document uid == uid and canView or canEdit contains uid
         const document = await this.documentModel.findOne({ id: id }).exec();
@@ -45,11 +41,13 @@ export class DocumentService {
         if (document.uid != uid) {
             let inView = document.canView.findIndex((element) => element == uid);
             let inEdit = document.canEdit.findIndex((element) => element == uid);
-            if (inView === -1) return null;
-            if (inEdit === -1) return null;
+            if (inView === -1 && inEdit===-1) return null;
+            
+            return document;
+        } else {
+            return document;
         }
->>>>>>> 5a1f7d3be3871b120fc7a6f7bd5e1f563c8c0e22
-        return document;
+
 
 
 
@@ -101,10 +99,7 @@ export class DocumentService {
         if (typeof document[updateField] != typeof updateValue) return null;
         if (!document) return null;
         if (document.uid != uid) return null;
-<<<<<<< HEAD
-=======
 
->>>>>>> 5a1f7d3be3871b120fc7a6f7bd5e1f563c8c0e22
         switch (updateField) {
             case 'name':
                 document.name = updateValue;
@@ -115,11 +110,8 @@ export class DocumentService {
             case 'isPublic':
                 document.isPublic = updateValue;
                 break;
-<<<<<<< HEAD
-=======
             case 'isDelete':
                 document.isDelete = updateValue;
->>>>>>> 5a1f7d3be3871b120fc7a6f7bd5e1f563c8c0e22
         }
         return document.save();
     }

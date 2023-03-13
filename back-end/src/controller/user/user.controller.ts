@@ -7,7 +7,7 @@ import { join } from 'path';
 import { UserModel } from 'src/models/user.model';
 import { AuthService } from 'src/services/auth/auth.service';
 import { UserService } from 'src/services/user/user.service';
-import { saveImageToStorage, isFileValid, deleteFile } from './userImageFilter';
+import { isFileValid, deleteFile, saveAvatarToStorage, saveBannerToStorage } from './userImageFilter';
 
 @Controller('user')
 export class UserController {
@@ -32,6 +32,7 @@ export class UserController {
                 job: [],
                 displayName: body.displayName,
                 photoURL: body.photoURL,
+                bannerURL: '',
                 starDocuments: [],
                 following: [],
                 followers: [],
@@ -39,7 +40,6 @@ export class UserController {
 
 
             let user = await this.userService.createUser(userData);
-            if (!user) throw new HttpException('User already exists', 400);
             return user;
         } catch (error) {
             throw new HttpException(error, 500);
@@ -59,21 +59,44 @@ export class UserController {
         }
     }
 
-    @Put('file')
-    @UseInterceptors(FileInterceptor('file', saveImageToStorage))
-    async updateUserFile(@UploadedFile() file: Express.Multer.File, @Headers() header) {
+    @Put('upload-avatar')
+    @UseInterceptors(FileInterceptor('file-avatar', saveAvatarToStorage))
+    async updateUserAvatarFile(@UploadedFile() file: Express.Multer.File, @Headers() header) {
+        let decodedToken = await this.authService.validateUser(header.authorization);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401);
+
         if (!file) {
             return { error: 'File must be png, jpg, jpeg or wepb' };
         }
 
-        const pathToImageFolder = join(process.cwd(), 'src', 'public', 'usersImage');
+        const pathToImageFolder = join(process.cwd(), 'src', 'public', decodedToken.uid, 'avatar');
         const pathToImage = join(pathToImageFolder, file.filename);
 
         let fileValid = await isFileValid(pathToImage);
-
         if (fileValid) {
-            let decodedToken = await this.authService.validateUser(header.authorization);
-            if (!decodedToken) throw new HttpException('Unauthorized', 401);
+            return await this.userService.updateUserAvatar(decodedToken.uid, `http://localhost:3000/static/${decodedToken.uid}/avatar/${file.filename}`);
+        }
+
+        deleteFile(pathToImage);
+        return { error: "File extension doesn't match the file content" }
+    }
+
+    @Put('upload-banner')
+    @UseInterceptors(FileInterceptor('file-banner', saveBannerToStorage))
+    async updateUserBannerFile(@UploadedFile() file: Express.Multer.File, @Headers() header) {
+        let decodedToken = await this.authService.validateUser(header.authorization);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401);
+
+        if (!file) {
+            return { error: 'File must be png, jpg, jpeg or wepb' };
+        }
+
+        const pathToImageFolder = join(process.cwd(), 'src', 'public', decodedToken.uid, 'banner');
+        const pathToImage = join(pathToImageFolder, file.filename);
+
+        let fileValid = await isFileValid(pathToImage);
+        if (fileValid) {
+            return await this.userService.updateUserBanner(decodedToken.uid, `http://localhost:3000/static/${decodedToken.uid}/banner/${file.filename}`);
         }
 
         deleteFile(pathToImage);

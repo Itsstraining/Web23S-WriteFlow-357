@@ -1,4 +1,4 @@
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { QuillEditorComponent, QuillModule } from 'ngx-quill';
 import * as Quill from 'quill';
 import { Socket } from 'ngx-socket-io';
@@ -13,58 +13,84 @@ import { Store } from '@ngrx/store';
 import { DocumentActions } from 'src/ngrx/actions/document.action';
 import { AuthService } from 'src/app/services/auth.service';
 import { RoleDialogComponent } from 'src/app/components/role-dialog/role-dialog.component';
+import { UserService } from 'src/app/services/user/user.service';
+
 
 @Component({
   selector: 'app-document',
   templateUrl: './document.component.html',
   styleUrls: ['./document.component.scss']
 })
-export class DocumentComponent {
+export class DocumentComponent  implements OnInit, AfterViewInit, OnDestroy{
   @ViewChild('quillEditor') editor!: QuillEditorComponent;
 
   previousContent!: any;
+  defaultData: any;
   roomId!: string;
+  roomData: any;
   document!: DocModel;
-  store$=this.store.select('doc');
+  store$ = this.store.select('doc');
 
   constructor(
     private _socket: Socket,
     private activateRoute: ActivatedRoute,
     private documentService: DocumentService,
-    private dialogService:MatDialog,
-    private store:Store<{doc:DocumentState}>,
-    private authService:AuthService,
+    private dialogService: MatDialog,
+    private userService:UserService,
+    private store: Store<{ doc: DocumentState }>,
+    private authService: AuthService,
 
   ) {
-    this.activateRoute.queryParams.subscribe((data)=>{
-
-      this.handleSocketEvents(data['id']);
-      this.store.dispatch(DocumentActions.get({id:data['id']}))
+    console.log("aloha")
+    this.activateRoute.queryParams.subscribe((data) => {
+      this.roomId = data['id'];
     });
+
   }
 
   ngOnInit(): void {
-    this.store$.subscribe((data)=>{
-      if(data.error){
-        alert("You are not allowed to access this document");
+    console.log("alo")
+    this.handleSocketEvents(this.roomId);
+    this.store.dispatch(DocumentActions.get({ id: this.roomId }))
+    this.store$.subscribe((data) => {
+      if (data.error.error.status===403) {
+        alert("You don't have permission to access this document")
       }
     })
+
   }
 
   ngAfterViewInit(): void {
-    //let editor = this.editor.elementRef.nativeElement;
-    //let container = editor.getElementsByClassName('ql-container')[0];
-
     this.setup();
+
+
+  }
+  ngOnDestroy(): void {
+
+
+    this._socket.emit('leave-room', { roomId: this.roomId,user:this.authService.currentUser?.uid! });
+    this._socket.disconnect();
+     //unload component
+
+
   }
 
   handleSocketEvents = (params: any) => {
     this.roomId = params;
 
-    this._socket.on('connect', () => {
+    this._socket.on('connect', async () => {
       console.log("connected");
-      this._socket.emit('join-room', this.roomId);
+       let user=await this.userService.getUser(this.authService.currentUser?.uid!)
+
+       // get user in room
+       this.listenRoomChange().subscribe((data)=>{
+        console.log(data);
+      })
+      this._socket.emit('join-room',{roomId:this.roomId,user:user} );
+
+
     })
+
   }
 
   async setup() {
@@ -72,24 +98,24 @@ export class DocumentComponent {
     this.documentService.getDoc(this.roomId).pipe(last()).subscribe((data: DocModel) => {
       this.document = data;
     });
-
     // Make sure  for quill to be fully loaded
     setTimeout(() => {
       const quill: Quill.Quill = this.editor.quillEditor;
-
       quill.on('text-change', (delta, oldDelta, source) => {
         if (source === 'user') {
           this.sendUpdateData(delta)
-          this.documentService.saveFile(this.editor.quillEditor.getContents(), this.document.contentPath);
         }
       });
-
       this.processData()
+      setInterval(() => {
+        // this.documentService.saveFile(this.editor.quillEditor.getContents(), this.document.contentPath);
+      }, 3000)
     }, 1000);
   }
 
   processData() {
-    concat(this.documentService.getFile(this.document.contentPath), this.listenForChanged()).subscribe((data: any) => {
+    concat(this.documentService.getFile(this.document.contentPath,this.roomId), this.listenForChanged()).subscribe((data: any) => {
+      this.defaultData = data;
       this.editor.quillEditor.updateContents(data);
     })
   }
@@ -100,6 +126,9 @@ export class DocumentComponent {
 
   listenForChanged() {
     return this._socket.fromEvent('receive-data')
+  }
+  listenRoomChange() {
+    return this._socket.fromEvent('update-room')
   }
 
   //Quill editor config
@@ -120,15 +149,18 @@ export class DocumentComponent {
       ],
     },
   }
-  openShareDialog(){
-    this.dialogService.open(RoleDialogComponent,{
+  openShareDialog() {
+    this.dialogService.open(RoleDialogComponent, {
 
     });
 
   }
-  changeName(event:any){
-    if(this.document.name===event.target.value) return;
-    this.store.dispatch(DocumentActions.update({id:this.document.id,uid:this.authService.currentUser?.uid,updateField:'name',updateValue:event.target.value}));
+  changeName(event: any) {
+    if (this.document.name === event.target.value) return;
+    this.store.dispatch(DocumentActions.update({ id: this.document.id, uid: this.authService.currentUser?.uid, updateField: 'name', updateValue: event.target.value }));
+  }
+  back(){
+    window.history.back();
   }
 
 }

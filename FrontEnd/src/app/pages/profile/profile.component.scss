@@ -7,20 +7,60 @@
 }
 
 $max-width: 1200px;
-$banner-height-pc: 300px;
-$banner-height-mobile: 150px;
+$banner-height-pc: 400px;
+$banner-height-mobile: 300px;
 $avatar-pc: 200px;
 $avatar-mobile: 150px;
 
-.banner {
+.banner,
+.banner-edit {
+    position: absolute;
     width: 100%;
     height: $banner-height-pc;
-    background-image: url('https://picsum.photos/1000/800');
-    background-size: cover;
-    background-position: center;
-    box-shadow: 2px 0px 150px 50px rgba(var(--color-4-rgb), $alpha: 0.5) inset;
+
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(0.8);
+        transition: all 0.2s ease-in-out;
+    }
 }
 
+.banner {
+    z-index: 0;
+
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-color: gray;
+
+    box-shadow: 2px 0px 150px 50px rgba(var(--color-4-rgb), $alpha: 0.5) inset;
+
+    img {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover
+    }
+}
+
+.banner-edit {
+    z-index: 3;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    &>div {
+        color: var(--color-1);
+        margin-top: 64px;
+        z-index: 4;
+    }
+
+}
 
 .profile-image {
     display: flex;
@@ -36,11 +76,9 @@ $avatar-mobile: 150px;
         width: $max-width;
         height: 100%;
 
-        margin-top: calc($banner-height-pc);
-
-        span {
-            height: $avatar-pc;
-        }
+        transition: all 0.2s ease-in-out;
+        margin-top: calc($banner-height-pc - $avatar-pc / 2);
+        z-index: 1;
 
         &>span>img {
             width: $avatar-pc;
@@ -63,9 +101,46 @@ $avatar-mobile: 150px;
                 font-weight: 800;
             }
         }
+
+        .change {
+            transition: all 0.2s ease-in-out;
+
+            &:hover {
+                filter: brightness(0.8);
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+            }
+
+            &>:active {
+                filter: brightness(0.6);
+                transition: all 0.2s ease-in-out;
+            }
+        }
     }
 
 }
+
+.avatar-no-access {
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(0.8);
+        transition: all 0.2s ease-in-out;
+    }
+
+    &>:active {
+        filter: brightness(0.6);
+        transition: all 0.2s ease-in-out;
+    }
+}
+
+.menu-item {
+    display: flex;
+    justify-content: center;
+
+    width: calc($avatar-pc - 32px) !important;
+}
+
 
 $padding-pc: 2rem;
 $padding-mobile: 1rem;
@@ -74,7 +149,7 @@ $padding-mobile: 1rem;
     height: 100%;
     width: 100%;
 
-    margin-top: calc($avatar-pc / 2);
+    transition: all 0.2s ease-in-out;
 
     &>div {
         width: $max-width;
@@ -140,7 +215,7 @@ $padding-mobile: 1rem;
                 margin: 0.5rem;
 
                 &>mat-icon {
-                    margin-right: 0.5rem;
+                    padding-right: 1rem;
                 }
             }
         }
@@ -174,14 +249,14 @@ $padding-mobile: 1rem;
             flex-direction: column;
             align-items: center;
 
-            margin-top: calc($banner-height-pc + 5rem);
+            transition: all 0.2s ease-in-out;
 
             &>.name {
                 display: flex;
                 align-items: center;
 
                 div {
-                    margin: 0rem;
+                    margin-top: 1rem;
                     padding: 0rem;
                 }
             }
@@ -189,8 +264,6 @@ $padding-mobile: 1rem;
     }
 
     .information-container {
-        margin-top: calc($avatar-pc / 2 + 5rem);
-
         &>div {
             width: 100%;
             flex-direction: column;
@@ -207,13 +280,14 @@ $padding-mobile: 1rem;
 
 @media screen and (max-width: 600px) {
 
-    .banner {
+    .banner,
+    .banner-edit {
         height: $banner-height-mobile;
     }
 
     .profile-image {
         .detail {
-            margin-top: calc($banner-height-mobile);
+            margin-top: calc($banner-height-mobile - $avatar-mobile/2);
 
             &>span>img {
                 width: $avatar-mobile;
@@ -238,5 +312,9 @@ $padding-mobile: 1rem;
                 font-size: 0.75rem;
             }
         }
+    }
+
+    .menu-item {
+        width: calc($avatar-mobile) !important;
     }
 }

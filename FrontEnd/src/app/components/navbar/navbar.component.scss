@@ -42,10 +42,21 @@ mat-toolbar>span {
         align-items: center;
 
         .avatar {
+            $avatar-size: 40px;
+
             margin-left: 1rem;
-            width: 40px;
-            height: 40px;
+            width: $avatar-size;
+            height: $avatar-size;
             border-radius: 50%;
+
+            &:hover {
+                filter: brightness(0.8);
+                cursor: pointer;
+            }
+
+            &:active {
+                filter: brightness(0.6);
+            }
         }
     }
 
@@ -67,6 +78,14 @@ mat-toolbar>span {
         color: var(--color-4);
         background-color: var(--color-1);
         box-shadow: 2px 2px 2px 0px rgba(var(--color-4-rgb), 0.2);
+    }
+
+    .menu-item {
+
+        mat-icon,
+        span {
+            color: var(--color-4);
+        }
     }
 }
 

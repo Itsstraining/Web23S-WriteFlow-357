@@ -10,7 +10,6 @@
         <a href="/community">Community</a>
         <a href="/support">Support</a>
         <a href="/about">About</a>
-        <a href="/main/documents/owned">My document</a>
     </span>
     <span class="spacer"></span>
     <span>
@@ -21,7 +20,26 @@
         <ng-template #isLogged>
             <span>
                 <button mat-button class="button logout" (click)="logout()">Logout</button>
-                <img class="avatar" [src]="user?.photoURL" [alt]="user?.displayName" referrerpolicy='no-referrer'>
+                <img class="avatar" [matMenuTriggerFor]="usermenu" [src]="photoURL || this.user?.photoURL"
+                    [alt]="user?.displayName" referrerpolicy='no-referrer'>
+                <mat-menu #usermenu="matMenu">
+                    <button mat-menu-item [routerLink]="['/profile', user?.uid]">
+                        <mat-icon>person</mat-icon>
+                        <span>My Account</span>
+                    </button>
+                    <button class="menu-item" mat-menu-item [routerLink]="['/main']">
+                        <mat-icon>description</mat-icon>
+                        <span>My Documents</span>
+                    </button>
+                    <button class="menu-item" mat-menu-item>
+                        <mat-icon>settings</mat-icon>
+                        <span>Settings</span>
+                    </button>
+                    <button class="menu-item" mat-menu-item (click)="logout()">
+                        <mat-icon>exit_to_app</mat-icon>
+                        <span>Logout</span>
+                    </button>
+                </mat-menu>
             </span>
         </ng-template>
     </span>

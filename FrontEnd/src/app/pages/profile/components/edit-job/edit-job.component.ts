@@ -25,4 +25,11 @@ export class EditJobComponent {
     return index;
   }
 
+  addJob() {
+    this.tempJob.job.push('');
+  }
+
+  removeJob(index: number) {
+    this.tempJob.job.splice(index, 1);
+  }
 }

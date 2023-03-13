@@ -1,0 +1,64 @@
+.container {
+    padding: 3rem;
+
+    h1 {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: var(--color-4);
+        margin-bottom: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    &>.header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        margin-bottom: 1rem;
+    }
+
+    &>div>mat-dialog-content {
+        padding: 0;
+        margin-bottom: 2rem;
+    }
+
+    &>div>.btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        button {
+            border-radius: 10px;
+            color: var(--color-4);
+            font-weight: 700;
+            font-size: 1.1em;
+            padding: 1.5rem;
+        }
+
+        &>.save {
+            background-color: var(--color-1);
+        }
+    }
+
+    .cropper {
+        width: 100%;
+        padding: 0;
+    }
+}
+
+.preview {
+    img {
+        display: block;
+
+        /* This rule is very important, please don't ignore this */
+        max-width: 100%;
+    }
+}
+
+.error {
+    margin: 1rem 2rem;
+    color: rgba($color: #ff3e3e, $alpha: 1.0);
+    font-weight: 600;
+    font-size: 1.1em;
+}

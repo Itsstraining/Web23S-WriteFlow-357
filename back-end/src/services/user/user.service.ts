@@ -32,4 +32,22 @@ export class UserService {
         return user.save();
     }
 
+    async updateUserAvatar(uid: string, path: string) {
+        let user = await this.documentModel.findOne({ uid: uid }).exec();
+        if (!user) return null;
+
+        user.photoURL = path;
+
+        return user.save();
+    }
+
+    async updateUserBanner(uid: string, path: string) {
+        let user = await this.documentModel.findOne({ uid: uid }).exec();
+        if (!user) return null;
+
+        user.bannerURL = path;
+
+        return user.save();
+    }
+
 }

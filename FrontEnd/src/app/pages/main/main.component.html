@@ -12,7 +12,7 @@
     <mat-icon>account_circle</mat-icon>
   </button>
   <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
-    <button mat-menu-item routerLink="#" [routerLink]="['/profile', currentUser.uid]">
+    <button mat-menu-item [routerLink]="['/profile', currentUser.uid]">
       <mat-icon>person</mat-icon><span>My Account</span>
     </button>
     <button mat-menu-item routerLink="#">

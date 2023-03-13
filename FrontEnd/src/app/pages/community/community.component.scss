@@ -13,11 +13,15 @@
 .Recent-New{
     display: flex;
     margin-top: 1rem;
+<<<<<<< HEAD
 
     font-size: 1.3rem;
     font-weight: bold;
 
     
+=======
+    font-size: 1rem;
+>>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
 }
 
 
@@ -38,9 +42,13 @@
 }
 .Doc-Navigation{
     height: 91%;
+<<<<<<< HEAD
 
     width: 23%;
 
+=======
+    width: 20%;
+>>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
     border: 2px solid var(--color-4);
     border-radius: 10px;
     margin: 1rem 0 0 1rem;
@@ -62,18 +70,24 @@
     margin-bottom: 1rem;
     border: 1px solid #424874;
     border-radius: 10px;
+<<<<<<< HEAD
 
     height: 1.3rem;
     display: grid;
     grid-template-columns: auto auto;
     padding: 1rem 0.5rem;
     grid-column-gap: 38rem;
+=======
+>>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
     height: 1rem;
     display: grid;
     grid-template-columns: auto auto;
     padding: 1rem 0.5rem;
     grid-column-gap: 41rem;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
 
   }
   .Img-DocStatus{
@@ -84,16 +98,22 @@
 .Doc-When{
     margin-top:0.35rem;
 }
+<<<<<<< HEAD
 
 .Doc-Edited{
     font-size: 1.2rem;
 }
+=======
+>>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
 .Person-Name{
     margin-top:1.6rem;
     margin-left:3rem;
     font-size: 25px;
     color: #424874;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
 }
 
 .Person-Name{
@@ -109,6 +129,7 @@
 }
 
 .New-Button{
+<<<<<<< HEAD
 
     width:  6rem;
     height: 2.5rem;
@@ -124,6 +145,8 @@
     background-color: var(--color-4);
     color: var(--color-1);
 
+=======
+>>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
     width:  4rem;
     height: 2rem;
     margin-left: 2rem;
@@ -132,7 +155,10 @@
     color: var(--color-1);
     background-color: var(--color-4);
     font-size:  1rem;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
 }
 .File-Name{
     margin-top:0.25rem;
@@ -140,8 +166,11 @@
 }
 
 .Doc-List{
+<<<<<<< HEAD
     height: 10rem;
     margin: 1.4rem 0 7rem 0.5rem;
+=======
+>>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
 
     height: 10rem;
 }
@@ -155,9 +184,12 @@
     border-radius: 5px;
     background-color: #F4F6FF;
     color: #424874;
+<<<<<<< HEAD
     font-size: 1rem;
 
 
+=======
+>>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
 }
 .header-image {
     background-image: url("../../../assets/document-icon.png");
@@ -167,6 +199,7 @@
 .document-img{
     width: 2rem;
     //margin-top:0.5rem
+<<<<<<< HEAD
 
 }
 .document-img1{
@@ -202,6 +235,9 @@
 }
 
 
+=======
+}
+>>>>>>> 55b6d0aa2178fc31de81c75b6336870c4239c9e0
 .document-img1{
     width: 2rem;
     margin-top:0.5rem
