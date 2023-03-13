@@ -38,6 +38,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     private userService: UserService,
     private store: Store<{ doc: DocumentState }>,
     private authService: AuthService,
+    private router: Router
   ) {
   }
 
@@ -149,7 +150,8 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   }
 
   back() {
-    window.history.back();
+    // window.history.back();
+    this.router.navigate(['/main']);
   }
 
   beforeleave() {

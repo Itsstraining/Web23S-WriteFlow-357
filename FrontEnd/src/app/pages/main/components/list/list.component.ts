@@ -24,14 +24,14 @@ export class ListComponent {
   inProgress = false;
   tempSub!: Subscription;
 
-  constructor(private activateRoute: ActivatedRoute,
+  constructor(
+    private activateRoute: ActivatedRoute,
     private authService: AuthService, private store: Store<{ doc: DocumentState }>,
     private dialogService: MatDialog,
     public shareFunctionService: SharedFunctionService,
     private _snackBar: MatSnackBar,
-
-    private router: Router) {
-
+    private router: Router
+  ) {
     this.tempSub = this.activateRoute.url.subscribe(async (path) => {
 
       if (this.authService.auth.currentUser == null) return;
@@ -48,50 +48,49 @@ export class ListComponent {
       }
     })
   }
-  ngOnInit(): void {
 
-  }
+  ngOnInit(): void { }
 
   ngOnDestroy(): void {
     try {
       this.tempSub.unsubscribe();
-    } catch (err) { }
+    }
+    catch (err) { }
   }
+
   openCreateDialog() {
-    this.dialogService.open(CreateDocumentComponent, {
-    });
+    this.dialogService.open(CreateDocumentComponent, {});
   }
+
   navigateToDoc(id: string) {
     this.router.navigate(['main/document/edit'], { queryParams: { id: id } })
-
   }
 
-  openDeleteDialog(){
+  openDeleteDialog() { }
 
-  }
-  changeDocDeleted(id: string,status:boolean) {
-
+  changeDocDeleted(id: string, status: boolean) {
     if (this.inProgress == true) return;
     let tempSub: Subscription = this.store$.subscribe((data) => {
-      if (this.inProgress == true && data.inProcess == false) {
-        if (data.error == '') {
-          try {
-
-            tempSub.unsubscribe();
-            this.inProgress = false;
-            this._snackBar.open('Document has been move to Recycle bin', 'Close');
-
-          } catch (err) {
-            this._snackBar.open('Document has been move to Recycle bin', 'Close');
-          }
-        } else {
-          this.inProgress = false;
-          this._snackBar.open('Document has been move to Recycle bin', 'Close');
-        }
-      } else {
+      if (this.inProgress || !data.inProcess) {
         this.inProgress = data.inProcess;
+        return;
+      }
+
+      if (data.error) {
+        this.inProgress = false;
+        return;
+        //this._snackBar.open('Document has been move to Recycle bin', 'Close');
+      }
+
+      try {
+        tempSub.unsubscribe();
+        this.inProgress = false;
+        this._snackBar.open('Document has been move to Recycle bin', 'Close');
+      } catch (err) {
+        this._snackBar.open('Document has been move to Recycle bin', 'Close');
       }
     })
-    this.store.dispatch(DocumentActions.update({id:id,uid:this.authService.auth.currentUser?.uid,updateField:'isDelete',updateValue:status}));
+
+    this.store.dispatch(DocumentActions.update({ id: id, uid: this.authService.auth.currentUser?.uid, updateField: 'isDelete', updateValue: status }));
   }
 }

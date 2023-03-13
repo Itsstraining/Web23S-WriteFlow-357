@@ -1,5 +1,5 @@
 <app-loading></app-loading>
-<app-navbar [photoURL]="user.photoURL"></app-navbar>
+<app-navbar></app-navbar>
 <div class="container" *ngIf="user; else notExist">
     <ng-container *ngIf="currentUser?.uid === id">
         <div class="banner-edit">

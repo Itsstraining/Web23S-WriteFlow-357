@@ -20,7 +20,7 @@
         <ng-template #isLogged>
             <span>
                 <button mat-button class="button logout" (click)="logout()">Logout</button>
-                <img class="avatar" [matMenuTriggerFor]="usermenu" [src]="photoURL || this.user?.photoURL"
+                <img class="avatar" [matMenuTriggerFor]="usermenu" [src]="userPhoto || this.user?.photoURL"
                     [alt]="user?.displayName" referrerpolicy='no-referrer'>
                 <mat-menu #usermenu="matMenu">
                     <button mat-menu-item [routerLink]="['/profile', user?.uid]">

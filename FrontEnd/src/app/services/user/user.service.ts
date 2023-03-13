@@ -10,8 +10,7 @@ import { AuthService } from '../auth.service';
 })
 export class UserService {
   constructor(private authService: AuthService, private http: HttpClient) { }
-  apiURL:string=environment.apiURL;
-
+  apiURL: string = environment.apiURL;
 
   getUser(uid: string) {
     return lastValueFrom(this.http.get(`${this.apiURL}/user?uid=${uid}`));

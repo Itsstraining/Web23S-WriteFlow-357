@@ -43,8 +43,6 @@ export class MainComponent {
       link: 'mail',
       active: false
     }
-
-
   ]
   document$ = this.store.select('doc');
 
@@ -58,11 +56,12 @@ export class MainComponent {
   ) {
     // this.route.routeReuseStrategy.shouldReuseRoute = () => false;
     //get link from url and active link
-    if (this.route.url.split('/')[3] == undefined) {
-      this.activeLink = this.route.url.split('/')[2];
+    let currentURL = this.route.url.split('/');
+    if (currentURL[3] == undefined) {
+      this.activeLink = currentURL[2];
     }
     else {
-      this.activeLink = `${this.route.url.split('/')[2]}/${this.route.url.split('/')[3]}`;
+      this.activeLink = `${currentURL[2]}/${currentURL[3]}`;
     }
     this.navigateItems.forEach((item) => {
       item.link == this.activeLink ? item.active = true : item.active = false;

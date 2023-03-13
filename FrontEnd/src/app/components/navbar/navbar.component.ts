@@ -4,7 +4,6 @@ import { User } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { lastValueFrom } from 'rxjs';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -14,8 +13,6 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class NavbarComponent {
   isTop = true;
-
-  @Input() photoURL = '';
 
   constructor(
     private authService: AuthService,
@@ -54,7 +51,9 @@ export class NavbarComponent {
     this.authService.isLoading$.subscribe(isLoading => {
       this.isLoading = isLoading;
     });
+  }
 
+  ngAfterViewInit() {
     this.updatePhotoURL();
   }
 
