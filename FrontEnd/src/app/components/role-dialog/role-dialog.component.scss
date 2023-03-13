@@ -1,5 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,300&display=swap');
-mat-dialog-content{
+
+::ng-deep .custom-modalbox {
+    mat-dialog-container{
+        background-color: #F4F6FF;
+        border-radius: 10px;
+    }
+}
+.Close-Icon{
+    color:#424874;
+    background-color: white;
+}
+.Access-Option{
+    width: 12rem;
+    height: 3.5rem;
+    margin-top: 0.3rem;
+    margin-left: 1.2rem;
     background-color: #F4F6FF;
 }
 .P{
@@ -8,6 +23,20 @@ mat-dialog-content{
 .P-Info{
     margin-top: 0.7rem;
     
+}
+.Select-Access-Button{
+    margin-left: 0.3rem;
+    width:8rem;
+    font-size:1.01rem;
+    margin-top: -0.3rem;
+    height: 2.2rem;
+    background-color: #F4F6FF;
+}
+.Select-Access{
+    width:5rem;
+}
+.Select-Access-Option{
+    width:2.5rem;
 }
 .dialog{
     border-radius: 10px;
@@ -30,6 +59,7 @@ mat-dialog-content{
     background-color: #F4F6FF;
     text-align-last:center;
     width:5rem;
+    
     margin-left: 1.6rem;
 }
 .grid-item2{
@@ -51,6 +81,7 @@ mat-dialog-content{
     overflow-y:scroll;
    
   }
+
 .Display{
     display: flex;
 }
@@ -61,7 +92,7 @@ mat-dialog-content{
     border-color: rgba(var(--color-4-rgb), 0.25);
     height: 2.25em;
     width: 8rem;
-    font-size: 18px;
+    font-size: 1.125rem;
     margin-left: 0.7em;
     border-color: #F4F6FF;
     
@@ -70,7 +101,7 @@ mat-dialog-content{
     font-family: 'Open Sans', sans-serif;
     color: #424874;
     font-weight: 400;
-    font-size: 17px;
+    font-size: 1.0625rem;
     margin-top: 0.5rem;
     margin-left: 1rem;
     line-height: 0.9;
@@ -82,7 +113,7 @@ mat-dialog-content{
     color: #424874;
     font-weight: bold;
     margin-top: 1rem;
-    font-size: 22px;
+    font-size: 1.375rem;
 }
 .Access-Select{
     width: 11rem;
@@ -94,7 +125,7 @@ mat-dialog-content{
 }
 .Select-Button{
     color:#424874;
-    font-size: 17px;
+    font-size: 1.0625rem;
     width: 12rem;
     margin-top: 0.4rem;
     margin-left: 1rem;
@@ -108,14 +139,12 @@ mat-dialog-content{
 }
 
 .Option-Value1{
-    font-size: 21px;
+    font-size: 1.3125rem;
     color: #F4F6FF;
     margin-top: 0.68rem;
     margin-left: 0.3rem;
    
 }
-
-
 .Div-Group1{
     display: flex;
     
@@ -126,29 +155,28 @@ mat-dialog-content{
 .Search{
     width: 22em;
     border-color: rgba(var(--color-4-rgb), 0.25);
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: #F4F6FF;
     color: #424874;
     margin-top: 1em;
     height: 2em;
-    font-size: 17px;
+    font-size: 1.0625rem;
     margin-left: 1.3rem;
 
-
-    
 }
 .Title{
     font-family: 'Open Sans', sans-serif;
     color: #424874;
     font-weight: bold;
-    font-size: 22px;
+    font-size: 1.375rem;
+    
 }
 .List-Title{
     margin-top: 0.5em;
     font-family: 'Open Sans', sans-serif;
     color: #424874;
     font-weight: bold;
-    font-size: 22px;
+    font-size: 1.375rem;
 }
 
 
@@ -164,7 +192,7 @@ mat-dialog-content{
     color: #fff;
     background-color: #424874;
     width: 8.45em;
-    font-size: 17px;
+    font-size: 1.0625rem;
     height: 3em;
     border-radius: 10px;
     margin-bottom: 1.3rem;
@@ -179,23 +207,25 @@ mat-dialog-content{
     margin-bottom: 0.3rem;
 }
 .Copy-Text{
-    margin-top: 0.7rem;
+    margin-top: 0.75rem;
     margin-left: 0.5rem;
+    font-size: 1.0625rem;
 }
 .Copy-Icon{
     margin-top: 0.63rem;
 }
 .Close{
     color:#424874;
+    background-color: white;
     position: absolute;
     top: 0;
   right: 0;
   padding: 0.5rem;
-  line-height: 14px;
+  line-height: 0.875rem;
   font-size: 1.5rem;
   border-style: none;
   margin-right: 0.5rem;
-  background-color: #F4F6FF;
+  
 }
 .Close:hover{
  background-color: #424874;

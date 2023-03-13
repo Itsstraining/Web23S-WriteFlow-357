@@ -41,6 +41,7 @@ const config: SocketIoConfig = { url: environment.socketURL, options: {} };
     StoreModule.forRoot({doc:DocumentReducer}, {}),
     EffectsModule.forRoot([DocumentEffects]),
     SocketIoModule.forRoot(config),
+    StoreModule.forRoot({}, {}),
   ],
   providers: [],
   bootstrap: [AppComponent]
