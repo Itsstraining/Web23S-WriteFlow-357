@@ -19,9 +19,10 @@ export class RoleComponent {
   constructor(private matDialog:MatDialog){}
   openDialog(){
     this.matDialog.open(RoleDialogComponent,{
-      height: '31.4rem',
-      width: '35rem',
-      
+      height: '36rem',
+      width: '44rem',
+      panelClass: 'custom-modalbox'
+
     })
   }
   options: Option[] = [
