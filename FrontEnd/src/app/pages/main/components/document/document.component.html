@@ -10,8 +10,17 @@
     </button>
   </div>
   <div class="filename">
-    <span class="spacer"></span>
     <span>
+      <button [matMenuTriggerFor]="buttonExpand" mat-icon-button class="button-expand">
+        <mat-icon>expand_more</mat-icon>
+      </button>
+      <mat-menu #buttonExpand="matMenu">
+        <button (click)="openEditNameDialog()" mat-menu-item>Edit Name</button>
+        <button (click)="saveFile()" mat-menu-item>Save File</button>
+      </mat-menu>
+    </span>
+    <span class="spacer"></span>
+    <span class="name">
       <ng-container *ngIf="document; else diffName">{{document.name}}</ng-container>
       <ng-template #diffName>{{(store$ | async)?.document?.name}}</ng-template>
     </span>
@@ -19,7 +28,6 @@
     <button mat-icon-button (click)="saveFile()"><mat-icon>save</mat-icon></button>
   </div>
   <div class="watcher">
-    <img src="../../../../../assets/document-icon.png">
     <img src="../../../../../assets/document-icon.png">
     <img src="../../../../../assets/document-icon.png">
     <img src="../../../../../assets/document-icon.png">
