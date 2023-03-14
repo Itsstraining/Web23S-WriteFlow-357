@@ -67,8 +67,9 @@ export class RoomService {
             if (!document) return null;
             let inRoom = document.users.findIndex((userInRoom) => userInRoom.uid == user.uid);
             if (inRoom !== -1) return null;
+            console.log('inRoom', inRoom);
             document.users.splice(inRoom, 1);
-            if (document.users.length === 0) return this.delete(id);
+            if (document.users.length === 0) return await this.delete(id);
             return document.save();
         } catch (err) {
             console.log('lỗi 1', err);

@@ -7,18 +7,19 @@
     <div mat-dialog-content class="Title"> Share "Document1.docx" </div>
 <!-- Search Input, Invite Button -->
 <div>
-    <input class="Search" type="text" placeholder="Type to search people and groups">
-    
+
+    <input class="Search" type="text" placeholder="Type user email" [(ngModel)]="formData">
+
     <button mat-raised-button type="button" class="Select-Access-Button">
-     
+
       <mat-select class="Select-Access">
         <mat-option class="Select-Access-Option" *ngFor="let accessoption of accessoptions" [value]="accessoption.value">
           {{accessoption.viewValue}}
         </mat-option>
       </mat-select>
     </button>
-    
-    <button mat-fab extended class="Invite"> Invite </button>
+
+    <button mat-fab extended class="Invite" (click)="invite()"> Invite </button>
     </div>
     <!-- End -->
     <!-- People list -->
@@ -37,8 +38,8 @@
         <option value="Viewer"> Viewer </option>
         <option value="Editor"> Editor </option> <hr>
         <option value="Delete"> Delete </option>
-    </select></div>  
-   
+    </select></div>
+
   </div>
 <!-- End -->
 <div class="General-Text"> General access </div> <br>
@@ -46,7 +47,7 @@
         <div class="">
             <mat-icon class="security-icon">security</mat-icon>
     </div>
-        <div> 
+        <div>
             <button mat-raised-button type="button" color="primary" class="Select-Button">
                 <mat-select class="Access-Select"[(value)]="selected2" [compareWith]="compareFn">
                   <mat-select-trigger> <div class="Div-Group1"><div class="Option-Icon"><mat-icon class="">{{selected2.icon}}</mat-icon></div><div class="Option-Value1">{{selected2.viewValue}}</div></div></mat-select-trigger>
@@ -56,11 +57,11 @@
                 </mat-select>
                 </button>
 
-            <div class="Only"> Only people with access can open with the link  </div><br>  
+            <div class="Only"> Only people with access can open with the link  </div><br>
         </div>
     <!-- Copy-Link Button -->
     <div><button mat-fab extended class="Copy-Link">
-       
+
         <div class="Icon-Text"><div class="Copy-Icon"><mat-icon >link</mat-icon></div> <div class="Copy-Text">Copy link</div></div></button>
     </div>
       <!-- End -->

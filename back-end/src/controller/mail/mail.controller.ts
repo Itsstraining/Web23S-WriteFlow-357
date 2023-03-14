@@ -13,7 +13,8 @@ export class MailController {
    constructor(private authService: AuthService, private mailService: MailService) { } 
 
    @Get('getall')
-   async getalluserbyId(@Headers() header, @Query('id') uid : string){
+   async getalluserbyId(@Headers() header, @Query('uid') uid : string){
+    console.log("alo");
     let decodedToken = await this.authService.validateUser(header.authorization);
     if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
     if (decodedToken.uid != uid) throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
@@ -24,40 +25,41 @@ export class MailController {
     }
    }
    @Post('invite')
-   async createInvite(@Headers() header,@Body('sender') senderId:string, @Body('sentTo ')sentTo : string,doc:MailDocModel,@Body('right') right:string){
+   async createInvite(@Headers() header,@Body('sender') sender:string, @Body('sentTo')sentTo : string,@Body('docId')docId:string,@Body('right') right:string){
+    console.log(sender,sentTo,docId,right);
     let decodedToken = await this.authService.validateUser(header.authorization);
     if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
-    if (decodedToken.uid != senderId) throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
+    if (decodedToken.uid != sender) throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
     try {
-        return this.mailService.createInvite(senderId,sentTo,doc,right);
+        return this.mailService.createInvite(sender,sentTo,docId,right);
     } catch (error) {
         throw new HttpException(error, 500);
     }
    }
-   @Put('accept')
-   //docId:string,right:string,uid:string,id:string
-    async acceptInvite(@Headers() header,@Body('docId') docId:string,@Body('right') right:string,@Body('uid') uid:string,@Body('id') id:string){
-        let decodedToken = await this.authService.validateUser(header.authorization);
-        if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
-        if (decodedToken.uid != uid) throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
-        try {
-            return this.mailService.acceptInvite(docId,right,uid,id);
-        } catch (error) {
-            throw new HttpException(error, 500);
-        }
-    }
-    @Put('decline')
-    async declineInvite(@Headers() header,@Body('id') id:string,@Body('uid') uid:string){
-        let decodedToken = await this.authService.validateUser(header.authorization);
-        if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
-        if (decodedToken.uid != uid) throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
-        try {
-            return this.mailService.declineInvite(id);
-        } catch (error) {
-            throw new HttpException(error, 500);
-        }
+//    @Put('accept')
+//    //docId:string,right:string,uid:string,id:string
+//     async acceptInvite(@Headers() header,@Body('docId') docId:string,@Body('right') right:string,@Body('uid') uid:string,@Body('id') id:string){
+//         let decodedToken = await this.authService.validateUser(header.authorization);
+//         if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
+//         if (decodedToken.uid != uid) throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
+//         try {
+//             return this.mailService.acceptInvite(docId,right,uid,id);
+//         } catch (error) {
+//             throw new HttpException(error, 500);
+//         }
+//     }
+//     @Put('decline')
+//     async declineInvite(@Headers() header,@Body('id') id:string,@Body('uid') uid:string){
+//         let decodedToken = await this.authService.validateUser(header.authorization);
+//         if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
+//         if (decodedToken.uid != uid) throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
+//         try {
+//             return this.mailService.declineInvite(id);
+//         } catch (error) {
+//             throw new HttpException(error, 500);
+//         }
 
-    }
+    // }
 
    
 

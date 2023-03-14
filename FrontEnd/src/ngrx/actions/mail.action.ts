@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { MailDocModel } from "src/app/models/doc.model";
+
 import { UserModel } from "src/app/models/user.model";
 import { MailModel } from "src/models/mail.model";
 
@@ -7,11 +7,11 @@ import { MailModel } from "src/models/mail.model";
 
 
 export const MailActions={
-  getAllMails: createAction('[Mail] Get All Mails'),
-  getAllMailsSuccess: createAction('[Mail] Get All Mails Success',props<{mails:MailModel[]}>()),
+  getAllMails: createAction('[Mail] Get All Mails',props<{uid:string|undefined}>()),
+  getAllMailsSuccess: createAction('[Mail] Get All Mails Success',props<{mails:any[]}>()),
   getAllMailsFailure: createAction('[Mail] Get All Mails Failure',props<{error:any}>()),
 
-  createInvite: createAction('[Mail] Create Invite',props<{senderId:string,sentTo:string,doc:MailDocModel,right:string}>()),
+  createInvite: createAction('[Mail] Create Invite',props<{senderId:string|undefined,sentTo:string,docId:string,right:string}>()),
   createInviteSuccess: createAction('[Mail] Create Invite Success',props<{mail:MailModel}>()),
   createInviteFailure: createAction('[Mail] Create Invite Failure',props<{error:any}>()),
 

@@ -26,7 +26,7 @@ export class MailEffect {
   createInvite$ = createEffect(() =>
     this.actions$.pipe(
       ofType(MailActions.createInvite),
-      switchMap((action) => this.mailService.createInvite(action.senderId,action.sentTo,action.doc,action.right).pipe(
+      switchMap((action) => this.mailService.createInvite(action.senderId,action.sentTo,action.docId,action.right).pipe(
         map((mail) => {
           return MailActions.createInviteSuccess({ mail: mail })
         }),

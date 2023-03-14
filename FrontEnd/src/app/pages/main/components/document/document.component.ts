@@ -4,7 +4,7 @@ import * as Quill from 'quill';
 import { Socket } from 'ngx-socket-io';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentService } from 'src/app/services/document/document.service';
-import { concat, last } from 'rxjs';
+import { concat, last, of, switchMap } from 'rxjs';
 import { DocModel } from 'src/app/models/doc.model';
 import { MatDialog } from '@angular/material/dialog';
 import { DocumentState } from 'src/ngrx/states/document.state';
@@ -29,6 +29,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   roomData: any;
   document!: DocModel;
   store$ = this.store.select('doc');
+  users:Array<any>=[];
 
   constructor(
     private _socket: Socket,
@@ -38,22 +39,32 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     private userService: UserService,
     private store: Store<{ doc: DocumentState }>,
     private authService: AuthService,
+
   ) {
+
   }
 
   ngOnInit(): void {
-    this.handleSocketEvents(this.roomId);
+
+
     this.activateRoute.queryParams.subscribe((data) => { this.roomId = data['id']; });
+    this.handleSocketEvents(this.roomId);
     this.store.dispatch(DocumentActions.get({ id: this.roomId }))
     this.store$.subscribe((data) => {
       if (data.error.status === 403) {
         alert("You don't have permission to access this document")
       }
     })
+    window.addEventListener('beforeunload', () => {
+      this.beforeleave();
+    });
   }
 
   ngAfterViewInit(): void {
     this.setup();
+  }
+  ngOnDestroy(): void {
+    this.beforeleave();
   }
 
 
@@ -63,11 +74,15 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     this._socket.on('connect', async () => {
       console.log("connected");
       let user = await this.userService.getUser(this.authService.currentUser?.uid!)
-
-      // get user in room
-      this.listenRoomChange().subscribe((data) => { console.log(data); })
+      this.listenRoomChange().subscribe((data:any) => {
+        console.log(data);
+        this.users=data.users;
+      })
       this._socket.emit('join-room', { roomId: this.roomId, user: user });
+
     })
+
+
   }
 
   async setup() {
@@ -103,10 +118,12 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   }
 
   listenForChanged() {
+
     return this._socket.fromEvent('receive-data')
   }
 
   listenRoomChange() {
+    console.log("listen room change");
     return this._socket.fromEvent('update-room')
   }
 
@@ -145,7 +162,9 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   }
 
   openShareDialog() {
-    this.dialogService.open(RoleDialogComponent, {});
+    this.dialogService.open(RoleDialogComponent,{
+      data:this.roomId
+    });
   }
 
   back() {
@@ -154,6 +173,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
 
   beforeleave() {
     this._socket.emit('leave-room', { roomId: this.roomId, user: this.authService.currentUser?.uid! });
+    this._socket.disconnect();
     this.saveFile()
   }
 

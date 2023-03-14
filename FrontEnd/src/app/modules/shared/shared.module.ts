@@ -12,7 +12,7 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginpopupComponent } from 'src/app/components/loginpopup/loginpopup.component';
 import { StatusComponent } from 'src/app/components/status/status.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -28,7 +28,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     AngularMaterialModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   providers: [
     AuthService,
@@ -40,7 +41,8 @@ import { RouterModule } from '@angular/router';
     LoadingComponent,
     StatusComponent,
     ReactiveFormsModule,
-    RoleComponent
+    RoleComponent,
+    FormsModule,
   ]
 })
 

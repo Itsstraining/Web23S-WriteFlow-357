@@ -41,9 +41,10 @@ const config: SocketIoConfig = {
     BrowserAnimationsModule,
     RouterModule,
     HttpClientModule,
+
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    StoreModule.forRoot({ doc: DocumentReducer, mail: mailReducer }),
+    StoreModule.forRoot({ doc: DocumentReducer, mail: mailReducer}),
     EffectsModule.forRoot([DocumentEffects, MailEffect]),
     SocketIoModule.forRoot(config),
   ],
