@@ -14,23 +14,29 @@ import { SharedFunctionService } from 'src/app/services/shared-function/shared-f
 export class MailComponent {
 
   constructor(private http: HttpClient,
-    private store: Store<{ mail:MailState }>,
-    private authService:AuthService,
-    public shareFunction:SharedFunctionService
-    ){}
+    private store: Store<{ mail: MailState }>,
+    private authService: AuthService,
+    public shareFunction: SharedFunctionService
+  ) { }
+
   store$ = this.store.select('mail');
   panelOpenState = false;
-  reloadEmail(){
+
+  reloadEmail() {
     location.reload();
   }
+
   ngOnInit(): void {
-    this.store.dispatch(MailActions.getAllMails({uid:this.authService.currentUser?.uid}))
+    this.store.dispatch(MailActions.getAllMails({ uid: this.authService.currentUser?.uid }))
+    this.store$.subscribe((data) => { console.log(data) })
   }
-  acceptInvite(id:string,right:string,docId:string){
-    this.store.dispatch(MailActions.acceptInvite({id:id,right:right,docId:docId,uid:this.authService.currentUser?.uid}))
+
+  acceptInvite(id: string, right: string, docId: string) {
+    this.store.dispatch(MailActions.acceptInvite({ id: id, right: right, docId: docId, uid: this.authService.currentUser?.uid }))
   }
-  declineInvite(id:string,right:string,docId:string){
-    this.store.dispatch(MailActions.declineInvite({id:id,right:'decline',docId:docId,uid:this.authService.currentUser?.uid}))
+
+  declineInvite(id: string, right: string, docId: string) {
+    this.store.dispatch(MailActions.declineInvite({ id: id, right: 'decline', docId: docId, uid: this.authService.currentUser?.uid }))
   }
 
 }
