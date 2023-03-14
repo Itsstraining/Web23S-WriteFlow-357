@@ -15,11 +15,11 @@ export const MailActions={
   createInviteSuccess: createAction('[Mail] Create Invite Success',props<{mail:MailModel}>()),
   createInviteFailure: createAction('[Mail] Create Invite Failure',props<{error:any}>()),
 
-  acceptInvite: createAction('[Mail] Accept Invite',props<{docId:string,right:string,uid:string,id:string}>()),
+  acceptInvite: createAction('[Mail] Accept Invite',props<{docId:string,right:string,uid:string|undefined,id:string}>()),
   acceptInviteSuccess: createAction('[Mail] Accept Invite Success',props<{mail:MailModel}>()),
   acceptInviteFailure: createAction('[Mail] Accept Invite Failure',props<{error:any}>()),
 
-  declineInvite: createAction('[Mail] Decline Invite',props<{uid:string,id:string}>()),
+  declineInvite: createAction('[Mail] Decline Invite',props<{docId:string,right:string,uid:string|undefined,id:string}>()),
   declineInviteSuccess: createAction('[Mail] Decline Invite Success',props<{mail:MailModel}>()),
   declineInviteFailure: createAction('[Mail] Decline Invite Failure',props<{error:any}>()),
 

@@ -54,7 +54,7 @@ export class MailEffect {
   declineInvite$ = createEffect(() =>
     this.actions$.pipe(
       ofType(MailActions.declineInvite),
-      switchMap((action) => this.mailService.declineInvite(action.uid,action.id).pipe(
+      switchMap((action) => this.mailService.declineInvite(action.docId,action.uid,action.id).pipe(
         map((mail) => {
           return MailActions.declineInviteSuccess({ mail: mail })
         }),

@@ -12,10 +12,9 @@
 
     <button mat-raised-button type="button" class="Select-Access-Button">
 
-      <mat-select class="Select-Access">
-        <mat-option class="Select-Access-Option" *ngFor="let accessoption of accessoptions" [value]="accessoption.value">
-          {{accessoption.viewValue}}
-        </mat-option>
+      <mat-select class="Select-Access" value="canView" (selectionChange)="changeRole($event)">
+        <mat-option class="Select-Access-Option" value="canView" >Viewer</mat-option>
+        <mat-option class="Select-Access-Option" value="canEdit">Editor</mat-option>
       </mat-select>
     </button>
 

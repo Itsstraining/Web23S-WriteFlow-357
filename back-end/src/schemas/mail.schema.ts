@@ -11,19 +11,19 @@ export type MailDocument = HydratedDocument<Mail>;
 @Schema()
 export class Mail {
 
-    @Prop({type: mongoose.Schema.Types.ObjectId,ref: 'docs'})
+    @Prop({type: mongoose.Schema.Types.ObjectId,ref: 'Doc'})
     doc:Doc;
     @Prop()
     date: string;
     @Prop()
     id: string;
-    @Prop({type: mongoose.Schema.Types.ObjectId,ref: 'users'})
+    @Prop({type: mongoose.Schema.Types.ObjectId,ref: 'User'})
     sender: User;
     @Prop()
     type: string;
     @Prop()
     right: string;
-    @Prop({type: mongoose.Schema.Types.ObjectId,ref: 'users'})
+    @Prop({type: mongoose.Schema.Types.ObjectId,ref: 'User'})
     sendTo: User;
     @Prop()
     isRead: boolean;

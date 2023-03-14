@@ -26,7 +26,7 @@ export class MailService {
       sender: senderId,
       sentTo: sentTo,
       docId: docId,
-      right: 'canEdit'
+      right: right,
     }, {
       headers: {
         'authorization': this.authService.getToken(),
@@ -34,7 +34,7 @@ export class MailService {
     }) as Observable<MailModel>
   }
   //docId:string,right:string,uid:string,id:string
-  acceptInvite(docId: string, uid: string, id: string) {
+  acceptInvite(docId: string, uid: string|undefined, id: string) {
     return this.http.put(`${this.apiUrl}/accept`, {
       docId: docId,
       right: 'accept',
@@ -47,8 +47,10 @@ export class MailService {
     }) as Observable<MailModel>
   }
 
-  declineInvite(id: string, uid: string) {
+  declineInvite(docId: string, uid: string|undefined, id: string) {
     return this.http.put(`${this.apiUrl}/decline`, {
+      docId: docId,
+      right: 'decline',
       uid: uid,
       id: id,
     }, {
