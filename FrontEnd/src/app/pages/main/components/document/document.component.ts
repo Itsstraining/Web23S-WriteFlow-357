@@ -29,7 +29,8 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   roomData: any;
   document!: DocModel;
   store$ = this.store.select('doc');
-  users:Array<any>=[];
+  users: Array<any> = [];
+  isSocketConnected = false;
 
   constructor(
     private _socket: Socket,
@@ -39,14 +40,11 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     private userService: UserService,
     private store: Store<{ doc: DocumentState }>,
     private authService: AuthService,
-
   ) {
 
   }
 
   ngOnInit(): void {
-
-
     this.activateRoute.queryParams.subscribe((data) => { this.roomId = data['id']; });
     this.handleSocketEvents(this.roomId);
     this.store.dispatch(DocumentActions.get({ id: this.roomId }))
@@ -63,26 +61,27 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.setup();
   }
+
   ngOnDestroy(): void {
     this.beforeleave();
   }
 
-
-  handleSocketEvents = (params: any) => {
+  handleSocketEvents(params: any) {
     this.roomId = params;
-
-    this._socket.on('connect', async () => {
-      console.log("connected");
-      let user = await this.userService.getUser(this.authService.currentUser?.uid!)
-      this.listenRoomChange().subscribe((data:any) => {
-        console.log(data);
-        this.users=data.users;
-      })
-      this._socket.emit('join-room', { roomId: this.roomId, user: user });
-
+    this._socket.on('connect', () => {
+      this.handleSocketConnection();
     })
 
+    this._socket.connect();
+  }
 
+  async handleSocketConnection() {
+    if (this.isSocketConnected) return;
+    console.log('connected');
+    this.isSocketConnected = true;
+    let user = await this.userService.getUser(this.authService.currentUser?.uid!)
+    this.listenRoomChange().subscribe((data: any) => { this.users = data.users; })
+    this._socket.emit('join-room', { roomId: this.roomId, user: user });
   }
 
   async setup() {
@@ -118,7 +117,6 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   }
 
   listenForChanged() {
-
     return this._socket.fromEvent('receive-data')
   }
 
@@ -162,8 +160,8 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   }
 
   openShareDialog() {
-    this.dialogService.open(RoleDialogComponent,{
-      data:this.roomId
+    this.dialogService.open(RoleDialogComponent, {
+      data: this.roomId
     });
   }
 
