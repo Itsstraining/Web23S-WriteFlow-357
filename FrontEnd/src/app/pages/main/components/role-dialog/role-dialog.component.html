@@ -30,7 +30,7 @@
 
   <div class="access" *ngIf="!(this.doc$|async)?.inProcess">
     <h2>Access List</h2>
-    <div class="access-list"  *ngIf="!(this.doc$|async)?.users!=null">
+    <div class="access-list" *ngIf="!(this.doc$|async)?.users!=null">
 
       <div class="empty" *ngIf="(this.doc$|async)?.users!.length==0">
         Currently Empty

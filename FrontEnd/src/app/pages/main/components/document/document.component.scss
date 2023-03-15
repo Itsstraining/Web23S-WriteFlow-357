@@ -75,6 +75,10 @@ $button-gap-medium: 8px;
   }
 }
 
+::ng-deep.mat-drawer-backdrop {
+  background-color: inherit !important;
+}
+
 .watcher {
   &>* {
     transition: all 0.2s ease-in-out;

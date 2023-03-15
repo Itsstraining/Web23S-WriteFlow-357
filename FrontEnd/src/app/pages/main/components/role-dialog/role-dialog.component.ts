@@ -29,13 +29,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class RoleDialogComponent {
   constructor(private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: string,
-    private store: Store<{ mail: MailState,doc:DocumentState }>,
+    private store: Store<{ mail: MailState, doc: DocumentState }>,
     private authService: AuthService
   ) { }
 
   store$ = this.store.select('mail');
   doc$ = this.store.select('doc');
-  defaultRole: string = 'canView'
+  role: string = 'canView'
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   matcher = new MyErrorStateMatcher();
 
@@ -45,21 +45,21 @@ export class RoleDialogComponent {
   ];
 
   ngOnInit(): void {
-    this.store.dispatch(DocumentActions.getUserInDoc({id:this.data}))
-   }
+    this.store.dispatch(DocumentActions.getUserInDoc({ id: this.data }))
+  }
 
   compareFn(f1: Option, f2: Option): boolean {
     return f1 && f2 ? f1.value === f2.value : f1 === f2;
   }
 
   changeRole(event: any) {
-    this.defaultRole = event.value
+    this.role = event.value
   }
 
   invite() {
     if (this.emailFormControl.invalid) return;
-    if (this.defaultRole == null) return;
-    this.store.dispatch(MailActions.createInvite({ senderId: this.authService.currentUser?.uid, sentTo: this.emailFormControl.value!, docId: this.data, right: 'canEdit' }))
+    if (this.role == null) return;
+    this.store.dispatch(MailActions.createInvite({ senderId: this.authService.currentUser?.uid, sentTo: this.emailFormControl.value!, docId: this.data, right: this.role }))
   }
 
   close() {
