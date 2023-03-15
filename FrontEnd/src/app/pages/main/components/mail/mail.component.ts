@@ -38,7 +38,7 @@ export class MailComponent {
     this.store.dispatch(MailActions.getAllMails({ uid: this.authService.currentUser?.uid }))
     this.store$.subscribe((data) => {
       if (data.mails) {
-        console.log(data.mails);
+
         this.allMails = data.mails;
         this.filteredMail = [...data.mails].sort((a: any, b: any) => parseInt(b.date) - parseInt(a.date));
         this.acceptMails = data.mails.filter((mail: any) => mail.right === 'accept').sort((a: any, b: any) => parseInt(b.date) - parseInt(a.date));
@@ -77,11 +77,7 @@ export class MailComponent {
 
     }
     this.startNumber = 0;
-    if(this.filteredMail.length /10>=1){
-      this.endNumber+=10
-    }else{
-      this.endNumber += this.filteredMail.length %10
-    }
+    this.endNumber = 10;
 
   }
   searchMail(event: any) {
