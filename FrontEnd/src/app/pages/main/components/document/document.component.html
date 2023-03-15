@@ -27,15 +27,9 @@
     <button mat-icon-button (click)="openEditNameDialog()" *ngIf="(this.store$|async)?.document?.uid===this.authService.currentUser?.uid"><mat-icon>edit</mat-icon></button>
     <button mat-icon-button (click)="saveFile()"><mat-icon>save</mat-icon></button>
   </div>
-<<<<<<< HEAD
-  <div class="watcher">
-    <img *ngFor="let user of this.users" [src]="user.photoURL" [matTooltip]="user.displayName"
-      matTooltipPosition="below" matTooltipClass="joiner">
-=======
   <div class="watcher" *ngIf="this.users !=[]">
     <img *ngFor="let user of this.users" [src]="user.photoURL">
 
->>>>>>> e1d36ae4e98bf1079d6773331a168b0fbd8182ff
   </div>
 </mat-toolbar>
 <quill-editor [modules]="quillModule" #quillEditor></quill-editor>
