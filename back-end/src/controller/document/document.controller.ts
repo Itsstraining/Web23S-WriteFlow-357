@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable prettier/prettier */
 /* eslint-disable prefer-const */
 /* eslint-disable prettier/prettier */
@@ -20,13 +21,13 @@ export class DocumentController {
         try {
             if (id) {
                 let document = await this.documentService.getDocument(id, decodedToken.uid);
-                if (!document){
+                if (!document) {
                     throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
-                }else{
+                } else {
                     return document;
                 }
 
-         
+
             }
             if (uid) {
                 return await this.documentService.getDocuments(uid);
@@ -150,7 +151,7 @@ export class DocumentController {
     //file
     @Get('file')
     async getDocument(@Headers() header, @Query('id') id: string) {
-      
+
         let decodedToken = await this.authService.validateUser(header.authorization);
         if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
         const document = await this.documentService.getDocument(id, decodedToken.uid);
@@ -161,7 +162,7 @@ export class DocumentController {
             return new StreamableFile(file);
 
         } catch (error) {
-           
+
             throw new HttpException("File not found", 500, { cause: new Error(error) });
         }
     }
@@ -178,6 +179,18 @@ export class DocumentController {
             path: pathToImage,
             name: file.filename,
         };
+    }
+    @Get('invite')
+    async getInvite(@Headers() header, @Query('id') id: string,@Query('uid') uid: string) {
+        let decodedToken = await this.authService.validateUser(header.authorization);
+        if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
+        if (decodedToken.uid != uid) throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
+        try {
+            return this.documentService.getAllUserInDocument(id);
+        }catch(err){
+            throw new HttpException("File not found", 500, { cause: new Error(err) });
+        }
+
     }
 
 }

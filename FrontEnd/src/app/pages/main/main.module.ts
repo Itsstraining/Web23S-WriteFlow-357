@@ -14,6 +14,7 @@ import { CreateDocumentComponent } from './components/create-document/create-doc
 import { EditNameComponent } from './components/document/components/edit-name/edit-name.component';
 import { FormsModule } from '@angular/forms';
 import { RoleComponent } from '../role/role.component';
+import { NotifyDialogComponent } from './components/notify-dialog/notify-dialog.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { RoleComponent } from '../role/role.component';
     RecycleComponent,
     CreateDocumentComponent,
     EditNameComponent,
-    RoleComponent
+    RoleComponent,
+    NotifyDialogComponent
   ],
   imports: [
     CommonModule,

@@ -6,6 +6,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MailActions } from 'src/ngrx/actions/mail.action';
 import { MailState } from 'src/ngrx/states/mail.state';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { DocumentState } from 'src/ngrx/states/document.state';
+import { DocumentActions } from 'src/ngrx/actions/document.action';
 
 interface Option {
   value: string;
@@ -27,12 +29,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class RoleDialogComponent {
   constructor(private matDialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: string,
-    private store: Store<{ mail: MailState }>,
+    private store: Store<{ mail: MailState,doc:DocumentState }>,
     private authService: AuthService
   ) { }
 
   store$ = this.store.select('mail');
-
+  doc$ = this.store.select('doc');
   defaultRole: string = 'canView'
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   matcher = new MyErrorStateMatcher();
@@ -42,7 +44,9 @@ export class RoleDialogComponent {
     { value: 'public-2', icon: 'public', viewValue: 'Anyone with the link' }
   ];
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.store.dispatch(DocumentActions.getUserInDoc({id:this.data}))
+   }
 
   compareFn(f1: Option, f2: Option): boolean {
     return f1 && f2 ? f1.value === f2.value : f1 === f2;

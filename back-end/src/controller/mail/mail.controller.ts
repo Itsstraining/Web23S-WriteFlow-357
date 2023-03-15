@@ -58,7 +58,6 @@ export class MailController {
         } catch (error) {
             throw new HttpException(error, 500);
         }
-
     }
 
 

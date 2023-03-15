@@ -39,7 +39,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     private dialogService: MatDialog,
     private userService: UserService,
     private store: Store<{ doc: DocumentState }>,
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router
   ) {
 
@@ -81,8 +81,17 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     console.log('connected');
     this.isSocketConnected = true;
     let user = await this.userService.getUser(this.authService.currentUser?.uid!)
-    this.listenRoomChange().subscribe((data: any) => { this.users = data.users; })
+    this.listenRoomChange().subscribe((data: any) => {
+      console.log(data)
+        this.users = data.users;
+    })
     this._socket.emit('join-room', { roomId: this.roomId, user: user });
+    this.watchDogListener().subscribe((data: any) => {
+      //data return is document , if document uid !== current user uid or current user uid is not in canEdit and canView Array
+      if (data.uid !== this.authService.currentUser?.uid && !data.canEdit.includes(this.authService.currentUser?.uid!) && !data.canView.includes(this.authService.currentUser?.uid!)) {
+        alert("You permission were remove to access this document")
+      } else { }
+    })
   }
 
   async setup() {
@@ -161,8 +170,11 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   }
 
   openShareDialog() {
-    this.dialogService.open(RoleDialogComponent, {
+    let dialogRef = this.dialogService.open(RoleDialogComponent, {
       data: this.roomId
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      this._socket.emit('watch-dog', { docId: this.roomId })
     });
   }
 
@@ -182,5 +194,8 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   async unloadHandler($event: any) {
     $event.preventDefault();
     this.beforeleave();
+  }
+  watchDogListener() {
+    return this._socket.fromEvent('watch-dog-message')
   }
 }

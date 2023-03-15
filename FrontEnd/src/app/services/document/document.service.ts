@@ -113,6 +113,12 @@ export class DocumentService {
         'authorization': this.authService.getToken(),
       }
     }) as Observable<DocModel>
-
+  }
+  getUserInDoc(id: string): Observable<any> {
+    return this.http.get(`${environment.apiURL}${this.url}/invite/?id=${id}&uid=${this.authService.currentUser?.uid}`, {
+      headers: {
+        'authorization': this.authService.getToken(),
+      }
+    }) as Observable<any>
   }
 }

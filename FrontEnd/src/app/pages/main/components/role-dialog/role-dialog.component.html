@@ -28,21 +28,21 @@
 
   </div>
 
-  <div class="access">
+  <div class="access" *ngIf="!(this.doc$|async)?.inProcess">
     <h2>Access List</h2>
-    <div class="access-list">
+    <div class="access-list"  *ngIf="!(this.doc$|async)?.users!=null">
 
-      <!-- <div class="empty">
+      <div class="empty" *ngIf="(this.doc$|async)?.users!.length==0">
         Currently Empty
-      </div> -->
+      </div>
 
-      <div>
+      <div *ngFor="let user of (this.doc$|async)?.users">
         <div class="info">
-          <p class="name">Nguyễn Văn A</p>
-          <p class="email">nguyevana@gmail.com</p>
+          <p class="name">{{user._doc.displayName}}</p>
+          <p class="email">{{user._doc.email}}</p>
         </div>
         <div class="select">
-          <mat-select value="canView" matNativeControl required>
+          <mat-select value="{{user.role}}" matNativeControl required>
             <mat-option value="canView"><span class="select-item">Viewer</span></mat-option>
             <mat-option value="canEdit"><span class="select-item">Editor</span></mat-option>
           </mat-select>
