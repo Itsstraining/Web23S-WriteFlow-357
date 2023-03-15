@@ -2,26 +2,30 @@
   <div class="top-container">
     <mat-form-field class="full-width" appearance="outline">
       <mat-label>Find</mat-label>
-      <input matInput placeholder="Ex. Email">
+      <input matInput placeholder="Ex. Email" (change)="this.searchMail($event)">
       <button mat-icon-button matSuffix>
         <mat-icon>search</mat-icon>
       </button>
     </mat-form-field>
     <div class="button-holder">
-      <button mat-button><span>Invited</span></button>
-      <button mat-button matBadge="2"><span>Retrieved</span></button>
-      <button mat-button class="selected" matBadgePosition="after" matBadgeColor="warn"><span>Accepted</span></button>
-      <button mat-button><span>Rejected</span></button>
+      <button mat-button [ngClass]="this.activeFilter=='all' ? 'selected' : ''"
+        (click)="changeMailType('all')"><span>All</span></button>
+      <button mat-button [ngClass]="this.activeFilter=='invite' ? 'selected' : ''"
+        (click)="changeMailType('invite')"><span>Invited</span></button>
+      <button mat-button [ngClass]="this.activeFilter=='accept' ? 'selected' : ''" matBadgePosition="after"
+        matBadgeColor="warn" (click)="changeMailType('accept')"><span>Accepted</span></button>
+      <button mat-button [ngClass]="this.activeFilter=='decline' ? 'selected' : ''"
+        (click)="changeMailType('decline')"><span>Rejected</span></button>
     </div>
     <div class="filter">
       <button mat-icon-button [matMenuTriggerFor]="filter">
         <mat-icon>filter_list</mat-icon>
       </button>
       <mat-menu #filter="matMenu">
-        <button mat-menu-item><span class="filter-item">Invited</span></button>
-        <button mat-menu-item><span class="filter-item" matBadge="2">Retrieved</span></button>
-        <button mat-menu-item><span class="filter-item">Accepted</span></button>
-        <button mat-menu-item><span class="filter-item">Rejected</span></button>
+        <button mat-menu-item><span class="filter-item" (click)="changeMailType('all')">All</span></button>
+        <button mat-menu-item><span class="filter-item" (click)="changeMailType('invite')">Invited</span></button>
+        <button mat-menu-item><span class="filter-item" (click)="changeMailType('accept')">Accepted</span></button>
+        <button mat-menu-item><span class="filter-item" (click)="changeMailType('decline')">Rejected</span></button>
       </mat-menu>
     </div>
   </div>
@@ -32,16 +36,16 @@
     </div>
     <div class="spacer"></div>
     <div class="page">
-      <button mat-icon-button><mat-icon>keyboard_arrow_left</mat-icon></button>
-      <p>1-100 of 200</p>
-      <button mat-icon-button><mat-icon>keyboard_arrow_right</mat-icon></button>
+      <button mat-icon-button (click)="changePage('decrease')"><mat-icon>keyboard_arrow_left</mat-icon></button>
+      <p>{{startNumber+1}}-{{endNumber}} of {{this.filteredMail.length}}</p>
+      <button mat-icon-button (click)="changePage('increase')"><mat-icon>keyboard_arrow_right</mat-icon></button>
     </div>
     <div class="spacer"></div>
   </div>
 
   <div class="email-holder">
 
-    <mat-expansion-panel hideToggle *ngFor="let mail of (this.store$ | async)?.mails">
+    <mat-expansion-panel hideToggle *ngFor="let mail of this.filteredMail|slice:this.startNumber:10">
       <mat-expansion-panel-header>
         <div class="email-info">
           <span class="title-description">
@@ -57,8 +61,10 @@
       </mat-expansion-panel-header>
       <div class="content">
         <p *ngIf="mail.type!=='notify'">You are invited in document {{mail.doc.name}} by {{mail.sender.displayName}}</p>
-        <p *ngIf="mail.right=='accept'">{{mail.sender.displayName}} has accepted your invitation to {{mail.doc.name}}</p>
-        <p *ngIf="mail.right=='reject'">{{mail.sender.displayName}} has rejected your invitation to {{mail.doc.name}}</p>
+        <p *ngIf="mail.right=='accept'">{{mail.sender.displayName}} has accepted your invitation to {{mail.doc.name}}
+        </p>
+        <p *ngIf="mail.right=='reject'">{{mail.sender.displayName}} has rejected your invitation to {{mail.doc.name}}
+        </p>
         <div *ngIf="mail.type!=='notify'">
           <button mat-button (click)="acceptInvite(mail.id, mail.right, mail.doc.id)" class="accept">Accept</button>
           <button mat-button (click)="declineInvite(mail.id, mail.right, mail.doc.id)">Reject</button>

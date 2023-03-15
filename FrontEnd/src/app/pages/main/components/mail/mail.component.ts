@@ -18,18 +18,34 @@ export class MailComponent {
     private authService: AuthService,
     public shareFunction: SharedFunctionService
   ) { }
-
+  acceptMails: Array<any> = [];
+  declineMails: Array<any> = [];
+  inviteMails: Array<any> = [];
+  allMails: Array<any> = [];
+  filteredMail: Array<any> = [];
+  activeFilter: string = 'all';
+  startNumber: number = 0;
+  endNumber: number = 10;
+  totalPage: number = 0;
   store$ = this.store.select('mail');
   panelOpenState = false;
 
   reloadEmail() {
-    location.reload();
+    this.store.dispatch(MailActions.getAllMails({ uid: this.authService.currentUser?.uid }))
   }
 
   ngOnInit(): void {
     this.store.dispatch(MailActions.getAllMails({ uid: this.authService.currentUser?.uid }))
-    this.store$.subscribe((data)=>{
-      console.log(data)
+    this.store$.subscribe((data) => {
+      if (data.mails) {
+
+        this.allMails = data.mails;
+        this.filteredMail = [...data.mails].sort((a: any, b: any) => parseInt(b.date) - parseInt(a.date));
+        this.acceptMails = data.mails.filter((mail: any) => mail.right === 'accept').sort((a: any, b: any) => parseInt(b.date) - parseInt(a.date));
+        this.declineMails = data.mails.filter((mail: any) => mail.right === 'decline').sort((a: any, b: any) => parseInt(b.date) - parseInt(a.date));
+        this.inviteMails = data.mails.filter((mail: any) => mail.type === 'invite').sort((a: any, b: any) => parseInt(b.date) - parseInt(a.date));
+
+      }
     })
   }
 
@@ -40,6 +56,58 @@ export class MailComponent {
 
   declineInvite(id: string, right: string, docId: string) {
     this.store.dispatch(MailActions.declineInvite({ id: id, right: 'decline', docId: docId, uid: this.authService.currentUser?.uid }))
+  }
+  changeMailType(type: string) {
+    switch (type) {
+      case 'accept':
+        this.activeFilter = 'accept';
+        this.filteredMail = this.acceptMails;
+        break;
+      case 'decline':
+        this.activeFilter = 'decline';
+        this.filteredMail = this.declineMails;
+        break;
+      case 'invite':
+        this.activeFilter = 'invite';
+        this.filteredMail = this.inviteMails;
+        break;
+      case 'all':
+        this.activeFilter = 'all';
+        this.filteredMail = this.allMails;
+
+    }
+    this.startNumber = 0;
+    this.endNumber = 10;
+
+  }
+  searchMail(event: any) {
+
+    this.filteredMail = this.allMails.filter((mail: any) => mail.sender.displayName.toLowerCase().includes(event.target.value.toLowerCase()) || mail.doc.name.toLowerCase().includes(event.target.value.toLowerCase()));
+  }
+  changePage(event: any) {
+    if(event==='increase'){
+      if(this.startNumber+10 >= this.filteredMail.length){
+        return;
+      }
+    this.startNumber+=10
+    if(this.filteredMail.length /this.endNumber>=1){
+      this.endNumber+=10
+    }else{
+      this.endNumber += this.filteredMail.length %10
+    }
+  }else{
+
+    if(this.startNumber-10 < 0){
+      return;
+    }
+    this.startNumber-=10;
+    if(this.filteredMail.length /this.endNumber>=1){
+      this.endNumber-=10
+    }else{
+      this.endNumber -= this.filteredMail.length %10
+    }
+  }
+
   }
 
 }
