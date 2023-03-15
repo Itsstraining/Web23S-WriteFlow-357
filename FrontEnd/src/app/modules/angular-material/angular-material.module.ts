@@ -40,8 +40,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatSnackBarModule,
     MatSidenavModule,
     MatListModule,
-    MatMenuModule
-
+    MatMenuModule,
+    MatTooltipModule
   ],
   exports: [
     MatToolbarModule,
@@ -59,8 +59,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatSnackBarModule,
     MatSidenavModule,
     MatListModule,
-    MatMenuModule
-
+    MatMenuModule,
+    MatTooltipModule
   ]
 })
 export class AngularMaterialModule { }

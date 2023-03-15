@@ -1,5 +1,5 @@
 import { LoginpopupComponent } from '../../components/loginpopup/loginpopup.component';
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input, ViewChild } from '@angular/core';
 import { User } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,10 +21,12 @@ export class NavbarComponent {
     private userService: UserService
   ) { }
 
+
   user$ = this.authService.user$;
   user: User | null = null;
   userPhoto: string | '' = '';
   isLoading = true;
+  innerWidth: number = window.innerWidth;
 
   ngOnInit(): void {
     window.addEventListener('scroll', () => {
@@ -86,5 +88,10 @@ export class NavbarComponent {
 
   navigateToHome() {
     this.router.navigate(['/']);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.innerWidth = window.innerWidth;
   }
 }

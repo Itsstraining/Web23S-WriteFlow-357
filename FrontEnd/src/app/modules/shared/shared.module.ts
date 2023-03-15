@@ -27,7 +27,7 @@ import { RouterModule } from '@angular/router';
     AngularMaterialModule,
     ReactiveFormsModule,
     RouterModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     AuthService,

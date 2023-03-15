@@ -137,9 +137,12 @@ $button-gap-medium: 8px;
       width: 40px;
       height: 40px;
       margin: 0px -8px;
+
+
     }
   }
 }
+
 
 
 @media screen and (max-width: 600px) {
@@ -163,6 +166,10 @@ $button-gap-medium: 8px;
       margin: 0px -6px;
     }
   }
+}
+
+::ng-deep.mat-mdc-tooltip {
+  font-size: 0.75rem !important;
 }
 
 

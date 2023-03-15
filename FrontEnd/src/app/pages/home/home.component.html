@@ -18,14 +18,14 @@
 </div>
 <div class="section-2">
   <div>
-    <div class="words left">
+    <div class="words" [ngClass]="innerWidth >= 1200 ? 'left' : 'center'">
       <div>
         <div class="title">
           <h1>Create your<br>idea instantly</h1>
         </div>
         <div class="description">
-          <p>Write<span class="bold">Flow</span> is a site to write your idea<br>whenever you want like a text
-            editor<br>with necessary
+          <p>Write<span class="bold">Flow</span> is a site to write your idea<br> whenever you want like a text
+            editor<br> with necessary
             tool
           </p>
         </div>
@@ -41,13 +41,13 @@
     <div class="img-container">
       <img src="../../../assets/share idea/Man selling idea for startup.jpg">
     </div>
-    <div class="words right">
+    <div class="words" [ngClass]="innerWidth >= 1200 ? 'right' : 'center'">
       <div>
         <div class="title">
           <h1>Share your idea<br>to anyone</h1>
         </div>
         <div class="description">
-          <p>Write<span class="bold">Flow</span> can help you to share<br>your idea with a simple click </p>
+          <p>Write<span class="bold">Flow</span> can help you to share<br> your idea with a simple click </p>
         </div>
       </div>
     </div>
@@ -55,20 +55,20 @@
 </div>
 <div class="section-4">
   <div>
-    <div class="words left">
+    <div class="words" [ngClass]="innerWidth >= 1200 ? 'left' : 'center'">
       <div>
         <div class="title">
           <h1>Discuss about<br>your idea</h1>
         </div>
         <div class="description">
-          <p>Write<span class="bold">Flow</span> has a community to<br>help your share your idea to<br>improve
+          <p>Write<span class="bold">Flow</span> has a community to<br> help your share your idea to<br> improve
             your skill</p>
         </div>
       </div>
     </div>
     <div class="img-container">
       <img src="../../../assets/discuss/5469.jpg">
-      </div>
+    </div>
   </div>
 </div>
 <app-footer></app-footer>

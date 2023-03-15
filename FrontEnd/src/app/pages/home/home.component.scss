@@ -37,8 +37,9 @@
     justify-content: center;
 
     img {
-        width: 50%;
-        height: 50%;
+        max-width: 75%;
+        min-width: 50%;
+        height: auto;
         mix-blend-mode: multiply;
     }
 }
@@ -132,4 +133,131 @@
 
 .right>div {
     margin-left: 5rem;
+}
+
+.center {
+    justify-content: center;
+}
+
+
+@media screen and (max-width: 1200px) {
+    .section-1 {
+        height: 100%;
+
+        .big-title {
+            font-size: 36px;
+        }
+
+        .idea-button {
+            button {
+                font-size: 18px;
+            }
+        }
+
+        .big-title-description {
+            font-size: 24px;
+        }
+    }
+
+
+    .section-1,
+    .section-2,
+    .section-3,
+    .section-4 {
+        height: auto;
+        padding: 2.5rem 0rem;
+    }
+
+    .section-1>div,
+    .section-2>div,
+    .section-3>div,
+    .section-4>div {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .title,
+    .description {
+        br {
+            display: none;
+        }
+    }
+
+}
+
+@media screen and (max-width: 850px) {
+
+    .section-1 {
+        .big-title {
+            font-size: 28px;
+        }
+
+        .idea-button {
+            button {
+                font-size: 16px;
+                height: 2.5rem;
+                width: 150px;
+            }
+        }
+
+        .big-title-description {
+            font-size: 20px;
+        }
+    }
+
+
+
+    .words,
+    .words>div {
+        padding: 0rem 2rem;
+        width: calc(100% - 4rem);
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    .description {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .section-1 {
+        padding: 4rem 1rem;
+        width: calc(100% - 2rem);
+
+        .big-title {
+            font-size: 18px;
+        }
+
+        .idea-button {
+            margin-bottom: 1rem;
+
+            button {
+                margin: 0.5rem;
+                font-size: 16px;
+                height: 2.5rem;
+                width: 150px;
+            }
+        }
+
+        .big-title-description {
+            font-size: 18px;
+        }
+    }
+
+    .words,
+    .words>div {
+        padding: 0rem 1rem;
+        width: calc(100% - 2rem);
+    }
+
+    .title {
+        font-size: 18px;
+    }
+
+    .description {
+        font-size: 16px;
+    }
 }
