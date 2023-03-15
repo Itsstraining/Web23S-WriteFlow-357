@@ -28,7 +28,11 @@ export class MailComponent {
 
   ngOnInit(): void {
     this.store.dispatch(MailActions.getAllMails({ uid: this.authService.currentUser?.uid }))
+    this.store$.subscribe((data)=>{
+      console.log(data)
+    })
   }
+
 
   acceptInvite(id: string, right: string, docId: string) {
     this.store.dispatch(MailActions.acceptInvite({ id: id, right: right, docId: docId, uid: this.authService.currentUser?.uid }))

@@ -30,4 +30,8 @@ export const DocumentActions={
   update:createAction('[Document] Update',props<{id:string,uid:string|undefined,updateField:string,updateValue:any}>()),
   updateSuccess:createAction('[Document] Update Success',props<{doc:DocModel,updateField:string,updateValue:any}>()),
   updateFail:createAction('[Document] Update Fail',props<{error:string}>()),
+
+  getUserInDoc:createAction('[Document] Get User In Doc',props<{id:string}>()),
+  getUserInDocSuccess:createAction('[Document] Get User In Doc Success',props<{users:any[]}>()),
+  getUserInDocFail:createAction('[Document] Get User In Doc Fail',props<{error:string}>()),
 }

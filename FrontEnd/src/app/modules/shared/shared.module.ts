@@ -13,6 +13,7 @@ import { LoginpopupComponent } from 'src/app/components/loginpopup/loginpopup.co
 import { StatusComponent } from 'src/app/components/status/status.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NotifyDialogComponent } from 'src/app/pages/main/components/notify-dialog/notify-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { RouterModule } from '@angular/router';
     LoadingComponent,
     LoginpopupComponent,
     StatusComponent,
+    NotifyDialogComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,7 @@ import { RouterModule } from '@angular/router';
     AngularMaterialModule,
     NavbarComponent,
     FooterComponent,
+    NotifyDialogComponent,
     LoadingComponent,
     StatusComponent,
     ReactiveFormsModule,

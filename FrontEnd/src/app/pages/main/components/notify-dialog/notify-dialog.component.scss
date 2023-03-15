@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,300&display=swap');
+
+* {
+    transition: all 0.2s ease-in-out;
+}
+
+mat-dialog-content {
+    font-family: 'Open Sans', sans-serif;
+    padding: 2rem !important;
+    min-width: 600px;
+
+    &>div {
+        width: 100%;
+
+        h2 {
+            width: 100%;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1rem 0rem;
+            color: var(--color-4);
+        }
+    }
+
+    &>.header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    &>.search {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        &>.full-width {
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        &>.button {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            width: 100%;
+
+            &>mat-select,
+            &>button {
+                background-color: var(--color-1);
+                color: var(--color-4);
+                font-size: 1rem;
+                box-shadow: 2px 2px 2px 0px rgba(var(--color-4-rgb), 0.25);
+
+                margin: 1rem 1rem;
+                width: 100%;
+                border-radius: 10px;
+            }
+
+            $button: 3rem;
+
+            &>button {
+                padding: calc(#{$button} / 2) 1rem;
+            }
+
+            &>mat-select {
+                padding: 0rem 1rem;
+                height: $button;
+            }
+        }
+    }
+
+    &>.access,
+    &>.access>.access-list {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &>.access {
+        margin-bottom: 2rem;
+
+        .access-list {
+            $padding-side: 1rem;
+            padding: 0rem $padding-side;
+            width: calc(100% - #{$padding-side} * 2);
+
+            max-height: 140px;
+            overflow-y: auto;
+
+            &>.empty {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+
+                font-size: 1rem;
+                height: 100px;
+            }
+
+            &>div {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 1rem;
+
+                width: inherit;
+
+                .info {
+                    p {
+                        margin: 0.5rem 0rem;
+                    }
+
+                    .name {
+                        font-size: 1rem;
+                        font-weight: 600;
+                        color: var(--color-4);
+                    }
+
+                    .email {
+                        font-size: 1rem;
+                        color: rgba(var(--color-4-rgb), 0.5);
+                    }
+                }
+
+                &>.select {
+                    padding-right: 1rem;
+                }
+
+                mat-select {
+                    padding: 0rem 1rem;
+                    height: 2rem;
+                    background-color: var(--color-1);
+                    box-shadow: 2px 2px 2px 0px rgba(var(--color-4-rgb), 0.25);
+                    border-radius: 10px;
+                }
+            }
+        }
+    }
+
+    &>.general {
+        width: 100%;
+
+        &>.edit-permission {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+
+            width: 100%;
+
+            &>.select {
+                padding-right: 1rem;
+            }
+
+            &>div>button {
+                background-color: var(--color-1);
+                color: var(--color-4);
+                font-size: 1rem;
+                font-weight: 500;
+                padding: 1.5rem 1rem;
+                box-shadow: 2px 2px 2px 0px rgba(var(--color-4-rgb), 0.25);
+            }
+
+            mat-select {
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: var(--color-4);
+            }
+        }
+    }
+
+
+}
+
+::ng-deep.mat-mdc-select-trigger {
+    height: 100%;
+}
+
+::ng-deep.mat-mdc-select-value {
+    color: var(--color-4);
+}
+
+@media screen and (max-width: 768px) {
+    mat-dialog-content {
+        min-width: 100%;
+
+        &>div {
+            h2 {
+                font-size: 1rem;
+            }
+        }
+
+        &>.search {
+            &>.full-width {
+                font-size: 0.8rem;
+            }
+
+            &>.button {
+                flex-direction: column;
+
+                &>mat-select,
+                &>button {
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    margin: 0.5rem 0.5rem;
+                }
+
+                $button: 2.5rem;
+
+                &>button {
+                    padding: calc(#{$button} / 2) 1rem;
+                }
+
+                &>mat-select {
+                    width: calc(100% - 2rem);
+                    padding: 0rem 1rem;
+                    height: $button;
+                }
+            }
+        }
+
+        &>.access {
+            .access-list {
+                $padding-side: 0.2rem;
+                padding: 0rem $padding-side;
+                width: calc(100% - #{$padding-side} * 2);
+
+                &>.empty {
+                    font-size: 0.8rem;
+                }
+
+                &>div {
+                    flex-direction: column;
+
+                    .info,
+                    .info>p,
+                    .select {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: flex-start;
+                        align-items: center;
+                    }
+
+                    .info {
+                        flex-direction: column;
+                        margin-bottom: 1rem;
+
+                        .name,
+                        .email {
+                            margin: 0.2rem 0rem;
+                        }
+
+                        .name {
+                            font-size: 0.8rem;
+                        }
+
+                        .email {
+                            font-size: 0.8rem;
+                        }
+                    }
+                }
+            }
+        }
+
+        &>.general {
+            &>.edit-permission {
+                flex-direction: column;
+
+                &>div>button {
+                    margin-top: 1rem;
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                }
+
+                mat-select {
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                }
+
+                &>div>p {
+                    font-size: 0.8rem;
+                }
+            }
+        }
+    }
+}

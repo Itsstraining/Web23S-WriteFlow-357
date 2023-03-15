@@ -6,6 +6,7 @@ import { DocumentState } from "../states/document.state";
 let initialState: DocumentState = {
   documents: [],
   document: null,
+  users: [],
   loading: false,
   inProcess: false,
   error: ''
@@ -179,6 +180,29 @@ export const DocumentReducer = createReducer(
       ...state,
       document: null,
       loading: false,
+      error: error
+    }
+  })),
+  on(DocumentActions.getUserInDoc, ((state) => {
+    return {
+      ...state,
+      users: null,
+      inProcess: true,
+      error: '',
+    }
+  })),
+  on(DocumentActions.getUserInDocSuccess, ((state, { users }) => {
+    return {
+      ...state,
+      users: users,
+      inProcess: false,
+    }
+  })),
+  on(DocumentActions.getUserInDocFail, ((state, { error }) => {
+    return {
+      ...state,
+      users: null,
+      inProcess: false,
       error: error
     }
   })),

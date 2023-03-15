@@ -110,5 +110,16 @@ export class DocumentEffects {
       ),
     )
   )
-
+  getUserInDoc$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(DocumentActions.getUserInDoc),
+      switchMap((action) => this.documentService.getUserInDoc(action.id).pipe(
+        map((users) => {
+          return DocumentActions.getUserInDocSuccess({ users: users })
+        }),
+        catchError((error) => {
+          return of(DocumentActions.getUserInDocFail({ error }))
+        })
+      )))
+  )
 }
