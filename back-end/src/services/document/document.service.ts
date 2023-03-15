@@ -134,8 +134,8 @@ export class DocumentService {
     }
     //get shared document by user Id
     async getSharedDocumentsByUserId(uid: string): Promise<DocModel[]> {
-        //user must meet uid and canView or canEdit contain uid
-        const documents = this.documentModel.find({ $and: [{ uid: { $ne: uid } }, { $or: [{ canView: uid }, { canEdit: uid }] }] }).exec();
+        //user must meet uid and canView or canEdit contain uid and isDelete is false
+        const documents = this.documentModel.find({ $and: [{ uid: { $ne: uid } }, { $or: [{ canView: uid }, { canEdit: uid }]}] }).exec();
         return documents;
     }
 }

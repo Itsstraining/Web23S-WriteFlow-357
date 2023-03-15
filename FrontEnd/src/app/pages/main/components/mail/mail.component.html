@@ -47,15 +47,19 @@
           <span class="title-description">
             <span class="title">{{mail.sender.displayName}}</span>
             <span class="spacer"></span>
-            <span class="description">You have an invitation</span>
+            <span class="description" *ngIf="mail.type!=='notify'">You have an invitation</span>
+            <span class="description" *ngIf="mail.right=='accept'">Invitation Accepted</span>
+            <span class="description" *ngIf="mail.right=='reject'">Invitation Rejected</span>
           </span>
           <span class="spacer"></span>
-          <span class="date">{{mail.date}}</span>
+          <span class="date">{{this.shareFunction.getDate(mail.date)}}</span>
         </div>
       </mat-expansion-panel-header>
       <div class="content">
-        <p>You are invited in document {{mail.doc.name}} by {{mail.sender.displayName}}</p>
-        <div>
+        <p *ngIf="mail.type!=='notify'">You are invited in document {{mail.doc.name}} by {{mail.sender.displayName}}</p>
+        <p *ngIf="mail.right=='accept'">{{mail.sender.displayName}} has accepted your invitation to {{mail.doc.name}}</p>
+        <p *ngIf="mail.right=='reject'">{{mail.sender.displayName}} has rejected your invitation to {{mail.doc.name}}</p>
+        <div *ngIf="mail.type!=='notify'">
           <button mat-button (click)="acceptInvite(mail.id, mail.right, mail.doc.id)" class="accept">Accept</button>
           <button mat-button (click)="declineInvite(mail.id, mail.right, mail.doc.id)">Reject</button>
         </div>

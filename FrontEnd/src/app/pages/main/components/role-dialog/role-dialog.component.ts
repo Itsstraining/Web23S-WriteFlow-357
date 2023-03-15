@@ -32,7 +32,7 @@ export class RoleDialogComponent {
   ) { }
 
   store$ = this.store.select('mail');
-  formData!: string;
+
   defaultRole: string = 'canView'
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   matcher = new MyErrorStateMatcher();
@@ -53,9 +53,9 @@ export class RoleDialogComponent {
   }
 
   invite() {
-    if (this.formData.trim() == '') return;
+    if (this.emailFormControl.invalid) return;
     if (this.defaultRole == null) return;
-    this.store.dispatch(MailActions.createInvite({ senderId: this.authService.currentUser?.uid, sentTo: this.formData, docId: this.data, right: 'canEdit' }))
+    this.store.dispatch(MailActions.createInvite({ senderId: this.authService.currentUser?.uid, sentTo: this.emailFormControl.value!, docId: this.data, right: 'canEdit' }))
   }
 
   close() {
