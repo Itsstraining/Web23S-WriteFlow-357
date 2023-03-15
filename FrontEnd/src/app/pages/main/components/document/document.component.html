@@ -5,8 +5,8 @@
         arrow_back
       </mat-icon>
     </button>
-    <button mat-icon-button>
-      <mat-icon (click)="openShareDialog()">share</mat-icon>
+    <button mat-icon-button (click)="openShareDialog()">
+      <mat-icon>share</mat-icon>
     </button>
   </div>
   <div class="filename">
@@ -28,9 +28,8 @@
     <button mat-icon-button (click)="saveFile()"><mat-icon>save</mat-icon></button>
   </div>
   <div class="watcher">
-    <img src="../../../../../assets/document-icon.png">
-    <img src="../../../../../assets/document-icon.png">
-    <img src="../../../../../assets/document-icon.png">
+    <img *ngFor="let user of this.users" [src]="user.photoURL">
+
   </div>
 </mat-toolbar>
 <quill-editor [modules]="quillModule" #quillEditor></quill-editor>

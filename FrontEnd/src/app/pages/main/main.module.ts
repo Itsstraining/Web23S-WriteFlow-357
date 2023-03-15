@@ -13,6 +13,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { CreateDocumentComponent } from './components/create-document/create-document.component';
 import { EditNameComponent } from './components/document/components/edit-name/edit-name.component';
 import { FormsModule } from '@angular/forms';
+import { RoleComponent } from '../role/role.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     MailComponent,
     RecycleComponent,
     CreateDocumentComponent,
-    EditNameComponent
+    EditNameComponent,
+    RoleComponent
   ],
   imports: [
     CommonModule,

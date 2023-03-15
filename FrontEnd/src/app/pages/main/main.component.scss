@@ -8,7 +8,6 @@ mat-toolbar {
     color: var(--color-4);
     margin: 0rem 0.25rem;
   }
-
 }
 
 ::ng-deep.mat-icon-no-color {
@@ -34,8 +33,11 @@ mat-toolbar {
   margin: 0;
 }
 
+$app-sidenav-width-pc: 300px;
+$app-sidenav-width-mobile: 250px;
+
 .app-sidenav {
-  width: 20%;
+  width: $app-sidenav-width-pc;
 }
 
 .app-sidenav-content {
@@ -97,4 +99,34 @@ mat-nav-list>.list-item {
 .flow {
   font-weight: 700;
   color: var(--color-4);
+}
+
+
+@media screen and (max-width: 600px) {
+  .app-sidenav {
+    width: $app-sidenav-width-mobile;
+  }
+
+  mat-expansion-panel-header {
+    font-size: 0.8rem;
+  }
+
+  mat-nav-list>.list-item {
+    font-size: 0.75rem;
+
+    &>mat-icon {
+      font-size: 1rem;
+      line-height: 1rem;
+
+      margin: 0px 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+
+  .write,
+  .flow {
+    display: none !important;
+  }
 }

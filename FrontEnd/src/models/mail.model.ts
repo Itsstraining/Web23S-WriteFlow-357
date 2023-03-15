@@ -1,8 +1,9 @@
-import { MailDocModel } from "src/app/models/doc.model";
+
+import { DocModel } from "src/app/models/doc.model";
 import { UserModel } from "src/app/models/user.model";
 
 export interface MailModel{
-  doc: MailDocModel;
+  doc: DocModel;
   date: string;
   id: string;
   sender: UserModel;

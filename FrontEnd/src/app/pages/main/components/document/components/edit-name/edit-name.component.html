@@ -5,11 +5,11 @@
     <div class="editor">
         <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
-            <input matInput [(ngModel)]="tempName" rows="15" cols="30">
+            <input matInput [(ngModel)]="tempName" rows="15" cols="30" maxlength="30" (keydown.enter)="onYesClick()">
         </mat-form-field>
     </div>
     <div class="btn">
         <button mat-stroked-button (click)="onNoClick()">Cancel</button>
-        <button mat-raised-button class="save" [mat-dialog-close]="tempName" cdkFocusInitial>Save</button>
+        <button mat-raised-button class="save" [mat-dialog-close]="tempName">Save</button>
     </div>
 </div>

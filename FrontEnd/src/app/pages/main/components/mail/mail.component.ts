@@ -1,6 +1,11 @@
 import { environment } from './../../../../../environments/environment';
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { MailState } from 'src/ngrx/states/mail.state';
+import { Store } from '@ngrx/store';
+import { MailActions } from 'src/ngrx/actions/mail.action';
+import { AuthService } from 'src/app/services/auth.service';
+import { SharedFunctionService } from 'src/app/services/shared-function/shared-function.service';
 @Component({
   selector: 'app-mail',
   templateUrl: './mail.component.html',
@@ -8,24 +13,29 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MailComponent {
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient,
+    private store: Store<{ mail: MailState }>,
+    private authService: AuthService,
+    public shareFunction: SharedFunctionService
+  ) { }
 
+  store$ = this.store.select('mail');
   panelOpenState = false;
-  reloadEmail(){
+
+  reloadEmail() {
     location.reload();
   }
 
-  getall()
-  {
-    return this.http.get(`${environment.apiURL}getall`);
+  ngOnInit(): void {
+    this.store.dispatch(MailActions.getAllMails({ uid: this.authService.currentUser?.uid }))
   }
-  // AcceptRequest()
-  // {
-  //   window.alert('You have accepted the invitation');
-  // }
 
-  // RejectRequest()
-  // {
-  //   window.alert('You have been denied the invitation');
-  // }
+  acceptInvite(id: string, right: string, docId: string) {
+    this.store.dispatch(MailActions.acceptInvite({ id: id, right: right, docId: docId, uid: this.authService.currentUser?.uid }))
+  }
+
+  declineInvite(id: string, right: string, docId: string) {
+    this.store.dispatch(MailActions.declineInvite({ id: id, right: 'decline', docId: docId, uid: this.authService.currentUser?.uid }))
+  }
+
 }

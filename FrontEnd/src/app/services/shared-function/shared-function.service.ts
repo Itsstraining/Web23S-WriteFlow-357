@@ -11,8 +11,8 @@ export class SharedFunctionService {
   convertDateTime(timeStamp:string):string{
 
     let date = new Date(parseInt(timeStamp));
-    let hour = date.getHours()<10?date.getHours():"0"+date.getHours();
-    let minute = date.getMinutes()<10?date.getMinutes():"0"+date.getMinutes();
+    let hour = date.getHours()>=10?date.getHours():"0"+date.getHours();
+    let minute = date.getMinutes()>=10?date.getMinutes():"0"+date.getMinutes();
     if(date.getDate()==new Date().getDate()){
       return `${hour}:${minute} Today`
     }else{
@@ -24,5 +24,12 @@ export class SharedFunctionService {
       return `${hour}:${minute} ${day}/${month}:${year}`
     }
 
+  }
+  getDate(timeStamp:string):string{
+    let date = new Date(parseInt(timeStamp));
+    let day= date.getDate()>=10?date.getDate():"0"+date.getDate();
+    let month= date.getMonth()>=10?date.getMonth():"0"+date.getMonth();
+    let year = date.getFullYear();
+    return `${day}/${month}/${year}`
   }
 }

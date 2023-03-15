@@ -1,110 +1,66 @@
 <div class="container">
   <div class="top-container">
-      <mat-form-field class="full-width" appearance="outline">
-        <mat-label class="input-holder">Find</mat-label>
-        <input matInput placeholder="Ex. Email">
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
-
-      <div class="button-holder">
-        <button mat-button class="button">Invited</button>
-        <button mat-button class="button">Retrieved</button>
-        <button mat-button class="button"
-         matBadge="1" matBadgePosition="after" matBadgeColor="warn">Accepted</button>
-        <button mat-button class="button">Rejected</button>
-      </div>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Find</mat-label>
+      <input matInput placeholder="Ex. Email">
+      <button mat-icon-button matSuffix>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="button-holder">
+      <button mat-button><span>Invited</span></button>
+      <button mat-button matBadge="2"><span>Retrieved</span></button>
+      <button mat-button class="selected" matBadgePosition="after" matBadgeColor="warn"><span>Accepted</span></button>
+      <button mat-button><span>Rejected</span></button>
+    </div>
+    <div class="filter">
+      <button mat-icon-button [matMenuTriggerFor]="filter">
+        <mat-icon>filter_list</mat-icon>
+      </button>
+      <mat-menu #filter="matMenu">
+        <button mat-menu-item><span class="filter-item">Invited</span></button>
+        <button mat-menu-item><span class="filter-item" matBadge="2">Retrieved</span></button>
+        <button mat-menu-item><span class="filter-item">Accepted</span></button>
+        <button mat-menu-item><span class="filter-item">Rejected</span></button>
+      </mat-menu>
+    </div>
   </div>
 
   <div class="mid-container">
-    <div class="loop-button">
-      <button mat-button class="reload" (click)="reloadEmail()" >
-          <mat-icon>loop</mat-icon>
-      </button>
+    <div>
+      <button mat-icon-button (click)="reloadEmail()"><mat-icon>loop</mat-icon></button>
     </div>
-      <div class="move-button-holder">
-      <button mat-button >
-        <mat-icon>keyboard_arrow_left</mat-icon>
-      </button>
-        <p>1-100 of total 200</p>
-      <button mat-button>
-        <mat-icon>keyboard_arrow_right</mat-icon>
-      </button>
-      </div>
-      <div></div>
+    <div class="spacer"></div>
+    <div class="page">
+      <button mat-icon-button><mat-icon>keyboard_arrow_left</mat-icon></button>
+      <p>1-100 of 200</p>
+      <button mat-icon-button><mat-icon>keyboard_arrow_right</mat-icon></button>
+    </div>
+    <div class="spacer"></div>
   </div>
 
   <div class="email-holder">
-  <mat-accordion>
-    <mat-expansion-panel hideToggle class="panel">
-      <mat-expansion-panel-header >
-        <div class="email-container">
-          <div class="name">
-            Nguyen Van A
-          </div>
-          <div div class="request">
-            <p>Nguyen Van A accepted your request </p>
-          </div>
-          <div class="date">
-            01/03/2023
-          </div>
-        </div>
-      </mat-expansion-panel-header>
-      <p class="text">You’ve gotta dance like there’s nobody watching, love like you’ll never be hurt, sing like there’s nobody listening, and live like it’s heaven on earth.</p>
-    </mat-expansion-panel>
-    <mat-expansion-panel (opened)="panelOpenState = true"
-    (closed)="panelOpenState = false">
-  </mat-expansion-panel>
-  </mat-accordion>
 
-  <mat-accordion>
-    <mat-expansion-panel hideToggle class="panel">
+    <mat-expansion-panel hideToggle *ngFor="let mail of (this.store$ | async)?.mails">
       <mat-expansion-panel-header>
-        <div class="email-container">
-          <div class="name">
-            Le Van B
-          </div>
-          <div class="request">
-            <p>Le Van B sent you an invitation to join the project</p>
-          </div>
-          <div class="date">
-            02/03/2023
-          </div>
+        <div class="email-info">
+          <span class="title-description">
+            <span class="title">{{mail.sender.displayName}}</span>
+            <span class="spacer"></span>
+            <span class="description">You have an invitation</span>
+          </span>
+          <span class="spacer"></span>
+          <span class="date">{{mail.date}}</span>
         </div>
       </mat-expansion-panel-header>
-      <div class="panel-button-holder">
-        <button mat-button class="panel-button Open">Acpect</button>
-        <button mat-button class="panel-button Close">Reject</button>
+      <div class="content">
+        <p>You are invited in document {{mail.doc.name}} by {{mail.sender.displayName}}</p>
+        <div>
+          <button mat-button (click)="acceptInvite(mail.id, mail.right, mail.doc.id)" class="accept">Accept</button>
+          <button mat-button (click)="declineInvite(mail.id, mail.right, mail.doc.id)">Reject</button>
+        </div>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel (opened)="panelOpenState = true"
-    (closed)="panelOpenState = false">
-  </mat-expansion-panel>
 
-  </mat-accordion>
-  <mat-accordion  class="panel-header">
-    <mat-expansion-panel hideToggle class="panel">
-      <mat-expansion-panel-header>
-        <div class="email-container">
-          <div class="name">
-            You
-          </div>
-          <div class="request">
-            <p>You have accepted the request from Le Van B</p>
-          </div>
-          <div class="date">
-            02/03/2023
-          </div>
-        </div>
-      </mat-expansion-panel-header>
-      <p class="text">You’ve gotta dance like there’s nobody watching, love like you’ll never be hurt, sing like there’s nobody listening, and live like it’s heaven on earth.</p>
-    </mat-expansion-panel>
-    <mat-expansion-panel (opened)="panelOpenState = true"
-    (closed)="panelOpenState = false">
-  </mat-expansion-panel>
-</mat-accordion>
-<!-- <div class="loading-state">
-  <app-loading [inputData]="'Getting your mail'" [loading]="true"></app-loading>
-</div> -->
   </div>
 </div>
-

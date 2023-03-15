@@ -1,0 +1,71 @@
+<mat-dialog-content>
+  <div class="header">
+    <h2>Share</h2>
+    <button mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>
+  </div>
+
+  <div class="search">
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Type User Email</mat-label>
+      <input matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher" placeholder="Ex. pat@example.com"
+        type="email">
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <div class="button">
+      <mat-select (selectionChange)="changeRole($event)" value="canView" matNativeControl required>
+        <mat-option value="canView"><span class="select-item">Viewer</span></mat-option>
+        <mat-option value="canEdit"><span class="select-item">Editor</span></mat-option>
+      </mat-select>
+      <button mat-button class="invite"> Invite </button>
+    </div>
+
+  </div>
+
+  <div class="access">
+    <h2>Access List</h2>
+    <div class="access-list">
+
+      <!-- <div class="empty">
+        Currently Empty
+      </div> -->
+
+      <div>
+        <div class="info">
+          <p class="name">Nguyễn Văn A</p>
+          <p class="email">nguyevana@gmail.com</p>
+        </div>
+        <div class="select">
+          <mat-select value="canView" matNativeControl required>
+            <mat-option value="canView"><span class="select-item">Viewer</span></mat-option>
+            <mat-option value="canEdit"><span class="select-item">Editor</span></mat-option>
+          </mat-select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="general">
+    <h2>General Access</h2>
+    <div class="edit-permission">
+      <div>
+        <div class="select">
+          <mat-select value="canView" matNativeControl required>
+            <mat-option value="canView"><span class="select-item">Viewer</span></mat-option>
+            <mat-option value="canEdit"><span class="select-item">Editor</span></mat-option>
+          </mat-select>
+        </div>
+        <p>Only people with permission can open with the link</p>
+      </div>
+      <div>
+        <button mat-button>Copy Link</button>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>

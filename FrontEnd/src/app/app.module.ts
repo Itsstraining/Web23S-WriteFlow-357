@@ -16,7 +16,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { DocumentReducer } from 'src/ngrx/reducers/document.reducer';
 import { DocumentEffects } from 'src/ngrx/effects/document.effect';
-import { RoleDialogComponent } from './components/role-dialog/role-dialog.component';
+import { RoleDialogComponent } from './pages/main/components/role-dialog/role-dialog.component';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { mailReducer } from 'src/ngrx/reducers/mail.reducer';
 import { MailEffect } from 'src/ngrx/effects/mail.effect';
@@ -41,6 +41,7 @@ const config: SocketIoConfig = {
     BrowserAnimationsModule,
     RouterModule,
     HttpClientModule,
+
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     StoreModule.forRoot({ doc: DocumentReducer, mail: mailReducer }),

@@ -22,4 +22,8 @@ export class EditNameComponent {
     this.dialogRef.close();
   }
 
+  onYesClick(): void {
+    this.dialogRef.close(this.tempName);
+  }
+
 }

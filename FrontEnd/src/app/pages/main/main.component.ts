@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/services/auth.service';
@@ -47,6 +47,7 @@ export class MainComponent {
   document$ = this.store.select('doc');
 
   currentUser: any;
+  innerWidth: any;
 
   constructor(
     private route: Router,
@@ -70,6 +71,7 @@ export class MainComponent {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUser;
+    this.innerWidth = window.innerWidth;
   }
 
 
@@ -86,5 +88,10 @@ export class MainComponent {
 
   ngAfterViewInit() {
     this.changeDetectorRef.detectChanges();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.innerWidth = window.innerWidth;
   }
 }
