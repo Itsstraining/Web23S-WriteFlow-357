@@ -27,7 +27,7 @@ import { NotifyDialogComponent } from './components/notify-dialog/notify-dialog.
     CreateDocumentComponent,
     EditNameComponent,
     RoleComponent,
-    NotifyDialogComponent
+
   ],
   imports: [
     CommonModule,
