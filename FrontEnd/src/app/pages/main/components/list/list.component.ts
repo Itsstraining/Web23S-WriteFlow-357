@@ -23,6 +23,7 @@ export class ListComponent {
   store$ = this.store.select('doc');
   inProgress = false;
   tempSub!: Subscription;
+  currenstRoute:string = '';
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -37,12 +38,15 @@ export class ListComponent {
       if (this.authService.auth.currentUser == null) return;
       switch (path[1].path) {
         case 'owned':
+          this.currenstRoute = 'owned';
           this.store.dispatch(DocumentActions.getAll());
           break;
         case 'bin':
+          this.currenstRoute = 'bin';
           this.store.dispatch(DocumentActions.getDeleted());
           break;
         case 'shared':
+          this.currenstRoute = 'shared';
           this.store.dispatch(DocumentActions.getShared());
           break;
       }

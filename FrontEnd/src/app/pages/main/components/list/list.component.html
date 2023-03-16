@@ -19,14 +19,14 @@
       <div class="icon-container" *ngIf="!doc.isDelete">
         <div>
           <button mat-icon-button>
-            <mat-icon matTooltip="Edit">edit</mat-icon>
+            <mat-icon matTooltip="Edit">share</mat-icon>
           </button>
           <button mat-icon-button>
             <mat-icon>star</mat-icon>
           </button>
         </div>
         <div>
-          <button mat-icon-button (click)="changeDocDeleted(doc.id,true)">
+          <button mat-icon-button (click)="changeDocDeleted(doc.id,true)" *ngIf="this.currenstRoute!='shared'">
             <mat-icon matTooltip="Delete">close</mat-icon>
           </button>
         </div>

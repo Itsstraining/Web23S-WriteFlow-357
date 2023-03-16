@@ -34,7 +34,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   users: Array<any> = [];
   isSocketConnected = false;
   saveInterval: any;
-
+  currentDoc!:DocModel;
   constructor(
     private _socket: Socket,
     private activateRoute: ActivatedRoute,
@@ -43,6 +43,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     private userService: UserService,
     private store: Store<{ doc: DocumentState }>,
     public authService: AuthService,
+
     private router: Router
   ) {
 
@@ -53,9 +54,11 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     this.handleSocketEvents(this.roomId);
     this.store.dispatch(DocumentActions.get({ id: this.roomId }))
     this.store$.subscribe((data) => {
+      this.currentDoc=data.document!;
       if (data.error.status === 500) {
         if(this.showNotification) return;
         this.showNotification = true;
+
         this.openShowNotification("You don't have permission to access this document");
 
       }
@@ -97,6 +100,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     this.isSocketConnected = true;
     let user = await this.userService.getUser(this.authService.currentUser?.uid!)
     this.listenRoomChange().subscribe((data: any) => {
+
       if(data.users!=null){
         this.users = data.users;
       }
@@ -129,17 +133,21 @@ export class DocumentComponent implements OnInit, AfterViewInit {
       this.processData()
     }, 1000);
 
+
   }
 
   saveFile() {
-    this.documentService.saveFile(this.editor.quillEditor.getContents(), this.document.contentPath);
+
+    this.documentService.saveFile(this.editor.quillEditor.getContents(), this.document.contentPath,this.currentDoc.uid);
   }
 
   processData() {
-    concat(this.documentService.getFile(this.document.contentPath, this.roomId), this.listenForChanged()).subscribe((data: any) => {
+    concat(this.documentService.getFile(this.document.contentPath, this.roomId),this.listenForChanged()).subscribe((data: any) => {
+
       this.defaultData = data;
       this.editor.quillEditor.updateContents(data);
     })
+
     this.saveInterval = setInterval(() => {
       this._socket.emit('watch-dog', { docId: this.roomId })
       this.saveFile();
@@ -147,7 +155,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   }
 
   sendUpdateData(data: any) {
-    this._socket.emit('send-data', { room: this.roomId, data: data });
+    this._socket.emit('send-data', { roomId: this.roomId, data: data });
   }
 
   listenForChanged() {
