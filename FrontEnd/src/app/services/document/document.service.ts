@@ -70,7 +70,7 @@ export class DocumentService {
     return filePath;
   }
 
-  async saveFile(content: any, filename: string) {
+  async saveFile(content: any, filename: string,uid:string) {
     let formData = new FormData();
     let file = new File([JSON.stringify(content)], 'file.json', { type: 'application/json' });
     formData.append('file', file);
@@ -78,7 +78,7 @@ export class DocumentService {
     let response = await lastValueFrom(this.http.put(`${environment.apiURL}${this.url}/file`, formData, {
       headers: new HttpHeaders({
         'authorization': this.authService.getToken(),
-        'ownerid': this.authService.currentUser?.uid!,
+        'ownerid': uid,
         'filename': filename
       })
     }))

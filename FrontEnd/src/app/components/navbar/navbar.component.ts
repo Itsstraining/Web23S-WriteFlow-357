@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -21,6 +22,7 @@ export class NavbarComponent {
     private userService: UserService
   ) { }
 
+  @ViewChild('sidenav', { static: false }) sidenav: any;
 
   user$ = this.authService.user$;
   user: User | null = null;
@@ -62,7 +64,7 @@ export class NavbarComponent {
   updatePhotoURL() {
     if (!this.user) return;
     this.userService.getUser(this.user.uid).then((res: any) => {
-      this.userPhoto = res.photoURL;
+      this.userPhoto = environment.apiURL + res.photoURL;
     })
   }
 
@@ -93,5 +95,10 @@ export class NavbarComponent {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.innerWidth = window.innerWidth;
+  }
+
+  toggle() {
+    if (!this.sidenav) return;
+    this.sidenav.toggle();
   }
 }

@@ -15,6 +15,7 @@ import { RoleDialogComponent } from 'src/app/pages/main/components/role-dialog/r
 import { UserService } from 'src/app/services/user/user.service';
 import { EditNameComponent } from './components/edit-name/edit-name.component';
 import { NotifyDialogComponent } from '../notify-dialog/notify-dialog.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-document',
@@ -34,6 +35,8 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   users: Array<any> = [];
   isSocketConnected = false;
   saveInterval: any;
+  currentDoc!: DocModel;
+  url = environment.apiURL;
 
   constructor(
     private _socket: Socket,
@@ -43,6 +46,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     private userService: UserService,
     private store: Store<{ doc: DocumentState }>,
     public authService: AuthService,
+
     private router: Router
   ) {
 
@@ -53,21 +57,22 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     this.handleSocketEvents(this.roomId);
     this.store.dispatch(DocumentActions.get({ id: this.roomId }))
     this.store$.subscribe((data) => {
+      this.currentDoc = data.document!;
       if (data.error.status === 500) {
-        if(this.showNotification) return;
+        if (this.showNotification) return;
         this.showNotification = true;
-        this.openShowNotification("You don't have permission to access this document");
 
+        this.openShowNotification("You don't have permission to access this document");
       }
     })
     window.addEventListener('beforeunload', () => {
       this.beforeleave();
     });
   }
-  openShowNotification(message:string) {
+  openShowNotification(message: string) {
     this.dialogService.open(NotifyDialogComponent, {
       width: '500px',
-      data:message
+      data: message
     }).afterClosed().subscribe(() => {
       this.back();
     })
@@ -97,14 +102,16 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     this.isSocketConnected = true;
     let user = await this.userService.getUser(this.authService.currentUser?.uid!)
     this.listenRoomChange().subscribe((data: any) => {
-
+      if (data.users != null) {
         this.users = data.users;
+      }
+
     })
     this._socket.emit('join-room', { roomId: this.roomId, user: user });
     this.watchDogListener().subscribe((data: any) => {
       //data return is document , if document uid !== current user uid or current user uid is not in canEdit and canView Array
       if (data.uid !== this.authService.currentUser?.uid && !data.canEdit.includes(this.authService.currentUser?.uid!) && !data.canView.includes(this.authService.currentUser?.uid!)) {
-        if(this.showNotification) return;
+        if (this.showNotification) return;
         this.showNotification = true;
         this.openShowNotification("Your permission to access this document were removed ");
       } else { }
@@ -127,10 +134,12 @@ export class DocumentComponent implements OnInit, AfterViewInit {
       this.processData()
     }, 1000);
 
+
   }
 
   saveFile() {
-    this.documentService.saveFile(this.editor.quillEditor.getContents(), this.document.contentPath);
+
+    this.documentService.saveFile(this.editor.quillEditor.getContents(), this.document.contentPath, this.currentDoc.uid);
   }
 
   processData() {
@@ -138,14 +147,15 @@ export class DocumentComponent implements OnInit, AfterViewInit {
       this.defaultData = data;
       this.editor.quillEditor.updateContents(data);
     })
+
     this.saveInterval = setInterval(() => {
       this._socket.emit('watch-dog', { docId: this.roomId })
       this.saveFile();
-    },3000)
+    }, 3000)
   }
 
   sendUpdateData(data: any) {
-    this._socket.emit('send-data', { room: this.roomId, data: data });
+    this._socket.emit('send-data', { roomId: this.roomId, data: data });
   }
 
   listenForChanged() {

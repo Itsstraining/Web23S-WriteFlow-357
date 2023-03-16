@@ -5,7 +5,6 @@ import { UserModel } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { DocumentService } from 'src/app/services/document/document.service';
 import { UserService } from 'src/app/services/user/user.service';
-import { lastValueFrom } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { EditBioComponent } from './components/edit-bio/edit-bio.component';
 import { EditJobComponent } from './components/edit-job/edit-job.component';
@@ -14,6 +13,7 @@ import { Router } from '@angular/router';
 import { EditAvatarComponent } from './components/edit-avatar/edit-avatar.component';
 import { ViewImageComponent } from './components/view-image/view-image.component';
 import { EditBannerComponent } from './components/edit-banner/edit-banner.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -35,6 +35,7 @@ export class ProfileComponent {
 
   currentUser: User | null = null;
   id: string = '';
+  url: string = environment.apiURL;
 
   user: UserModel = {
     uid: '',

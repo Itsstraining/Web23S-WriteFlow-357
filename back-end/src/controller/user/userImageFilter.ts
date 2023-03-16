@@ -6,6 +6,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 import { fromFile } from 'file-type'
+import { HttpException } from "@nestjs/common";
 
 type ValidFileExtension = 'png' | 'jpg' | 'jpeg' | 'webp';
 type ValidFileMime = 'image/png' | 'image/jpg' | 'image/jpeg' | 'image/webp';
@@ -26,37 +27,47 @@ const validFileMimes: ValidFileMime[] = [
 export const saveAvatarToStorage = {
     storage: diskStorage({
         destination: (req, file, cb) => {
-            let pathToImageFolder = path.join('src', 'public', req.headers.ownerid as string);
+            try {
+                let pathToImageFolder = path.join('src', 'public', req.headers.ownerid as string);
 
-            if (!fs.existsSync(pathToImageFolder)) {
-                fs.mkdirSync(pathToImageFolder)
+                if (!fs.existsSync(pathToImageFolder)) {
+                    fs.mkdirSync(pathToImageFolder)
+                }
+
+                pathToImageFolder = path.join(pathToImageFolder, 'avatar');
+
+                if (!fs.existsSync(pathToImageFolder)) {
+                    fs.mkdirSync(pathToImageFolder)
+                }
+
+                cb(null, pathToImageFolder);
             }
-
-            pathToImageFolder = path.join(pathToImageFolder, 'avatar');
-
-            if (!fs.existsSync(pathToImageFolder)) {
-                fs.mkdirSync(pathToImageFolder)
+            catch (error) {
+                throw new HttpException('Bad request', 400, { cause: new Error("Forbidden") });
             }
-
-            cb(null, pathToImageFolder);
         },
         filename: (req, file, cb) => {
-            const fileExtension = path.extname(file.originalname);
-            const fileName = uuidv4() + fileExtension;
+            try {
+                const fileExtension = path.extname(file.originalname);
+                const fileName = uuidv4() + fileExtension;
 
-            let pathToImageFolder = path.join('src', 'public', req.headers.ownerid as string, 'avatar');
+                let pathToImageFolder = path.join('src', 'public', req.headers.ownerid as string, 'avatar');
 
-            fs.readdir(pathToImageFolder, (err, files) => {
-                if (err) throw err;
+                fs.readdir(pathToImageFolder, (err, files) => {
+                    if (err) throw err;
 
-                for (const file of files) {
-                    fs.unlink(path.join(pathToImageFolder, file), (err) => {
-                        if (err) throw err;
-                    });
-                }
-            })
+                    for (const file of files) {
+                        fs.unlink(path.join(pathToImageFolder, file), (err) => {
+                            if (err) throw err;
+                        });
+                    }
+                })
 
-            cb(null, fileName);
+                cb(null, fileName);
+            }
+            catch (error) {
+                throw new HttpException('Bad request', 400, { cause: new Error("Forbidden") });
+            }
         }
     }),
     fileFilter: (req, file, cb) => {
@@ -67,37 +78,47 @@ export const saveAvatarToStorage = {
 export const saveBannerToStorage = {
     storage: diskStorage({
         destination: (req, file, cb) => {
-            let pathToImageFolder = path.join('src', 'public', req.headers.ownerid as string);
+            try {
+                let pathToImageFolder = path.join('src', 'public', req.headers.ownerid as string);
 
-            if (!fs.existsSync(pathToImageFolder)) {
-                fs.mkdirSync(pathToImageFolder)
+                if (!fs.existsSync(pathToImageFolder)) {
+                    fs.mkdirSync(pathToImageFolder)
+                }
+
+                pathToImageFolder = path.join(pathToImageFolder, 'banner');
+
+                if (!fs.existsSync(pathToImageFolder)) {
+                    fs.mkdirSync(pathToImageFolder)
+                }
+
+                cb(null, pathToImageFolder);
             }
-
-            pathToImageFolder = path.join(pathToImageFolder, 'banner');
-
-            if (!fs.existsSync(pathToImageFolder)) {
-                fs.mkdirSync(pathToImageFolder)
+            catch (error) {
+                throw new HttpException('Bad request', 400, { cause: new Error("Forbidden") });
             }
-
-            cb(null, pathToImageFolder);
         },
         filename: (req, file, cb) => {
-            const fileExtension = path.extname(file.originalname);
-            const fileName = uuidv4() + fileExtension;
+            try {
+                const fileExtension = path.extname(file.originalname);
+                const fileName = uuidv4() + fileExtension;
 
-            let pathToImageFolder = path.join('src', 'public', req.headers.ownerid as string, 'banner');
+                let pathToImageFolder = path.join('src', 'public', req.headers.ownerid as string, 'banner');
 
-            fs.readdir(pathToImageFolder, (err, files) => {
-                if (err) throw err;
+                fs.readdir(pathToImageFolder, (err, files) => {
+                    if (err) throw err;
 
-                for (const file of files) {
-                    fs.unlink(path.join(pathToImageFolder, file), (err) => {
-                        if (err) throw err;
-                    });
-                }
-            })
+                    for (const file of files) {
+                        fs.unlink(path.join(pathToImageFolder, file), (err) => {
+                            if (err) throw err;
+                        });
+                    }
+                })
 
-            cb(null, fileName);
+                cb(null, fileName);
+            }
+            catch (error) {
+                throw new HttpException('Bad request', 400, { cause: new Error("Forbidden") });
+            }
         }
     }),
     fileFilter: (req, file, cb) => {
