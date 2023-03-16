@@ -122,6 +122,9 @@ Apache-2.0
 @firebase/remote-config
 Apache-2.0
 
+@firebase/storage
+Apache-2.0
+
 @firebase/util
 Apache-2.0
 
@@ -174,6 +177,8 @@ firebase/auth
 firebase/messaging
 
 firebase/remote-config
+
+firebase/storage
 
 idb
 ISC

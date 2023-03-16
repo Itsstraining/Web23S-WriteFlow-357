@@ -170,7 +170,10 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   }
 
   listenForFile(url: string) {
-    return this.httpClient.get(url, { responseType: 'json' });
+    return this.httpClient.get(url, {
+      responseType: 'json',
+
+    });
   }
 
   listenForChanged() {
