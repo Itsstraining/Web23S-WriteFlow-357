@@ -5,7 +5,8 @@
         arrow_back
       </mat-icon>
     </button>
-    <button mat-icon-button (click)="openShareDialog()"*ngIf="(this.store$|async)?.document?.uid===this.authService.currentUser?.uid">
+    <button mat-icon-button (click)="openShareDialog()"
+      *ngIf="(this.store$|async)?.document?.uid===this.authService.currentUser?.uid">
       <mat-icon>share</mat-icon>
     </button>
   </div>
@@ -15,7 +16,8 @@
         <mat-icon>expand_more</mat-icon>
       </button>
       <mat-menu #buttonExpand="matMenu">
-        <button (click)="openEditNameDialog()" mat-menu-item *ngIf="(this.store$|async)?.document?.uid===this.authService.currentUser?.uid">Edit Name</button>
+        <button (click)="openEditNameDialog()" mat-menu-item
+          *ngIf="(this.store$|async)?.document?.uid===this.authService.currentUser?.uid">Edit Name</button>
         <button (click)="saveFile()" mat-menu-item>Save File</button>
       </mat-menu>
     </span>
@@ -24,11 +26,12 @@
       <ng-container *ngIf="document; else diffName">{{document.name}}</ng-container>
       <ng-template #diffName>{{(store$ | async)?.document?.name}}</ng-template>
     </span>
-    <button mat-icon-button (click)="openEditNameDialog()" *ngIf="(this.store$|async)?.document?.uid===this.authService.currentUser?.uid"><mat-icon>edit</mat-icon></button>
+    <button mat-icon-button (click)="openEditNameDialog()"
+      *ngIf="(this.store$|async)?.document?.uid===this.authService.currentUser?.uid"><mat-icon>edit</mat-icon></button>
     <button mat-icon-button (click)="saveFile()"><mat-icon>save</mat-icon></button>
   </div>
   <div class="watcher" *ngIf="this.users !=[]">
-    <img *ngFor="let user of this.users" [src]="user.photoURL">
+    <img *ngFor="let user of this.users" [src]="url + user.photoURL">
 
   </div>
 </mat-toolbar>

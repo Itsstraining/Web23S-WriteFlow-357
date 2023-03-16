@@ -7,6 +7,6 @@ export const environment = {
     authDomain: 'writeflow-7cb01.firebaseapp.com',
     messagingSenderId: '92118223652',
   },
-  apiURL: 'http://localhost:3000',
-  socketURL:'http://localhost:3000'
+  apiURL: 'https://writeflow-server-rjndwqlfka-as.a.run.app',
+  socketURL: 'https://writeflow-server-rjndwqlfka-as.a.run.app'
 };

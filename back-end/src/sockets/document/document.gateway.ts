@@ -2,15 +2,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable prettier/prettier */
-import { SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
-import { Socket } from 'socket.io';
+import { ConnectedSocket, SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
+import { Server, Socket } from 'socket.io';
 import { DocumentService } from 'src/services/document/document.service';
 import { RoomService } from 'src/services/room/room.service';
 
 @WebSocketGateway()
 export class DocumentGateway {
+<<<<<<< HEAD
   @WebSocketServer() server;
   constructor(private _roomService: RoomService, private _documentService: DocumentService) {
+=======
+  @WebSocketServer() server:Server;
+ 
+  constructor(private _roomService: RoomService, private _documentService: DocumentService) { 
+>>>>>>> 576c6dbe8d2af5f86dff4d8cfe4ee1fe1499fc21
   }
   @SubscribeMessage('message')
   handleMessage(client: Socket, payload: any): string {

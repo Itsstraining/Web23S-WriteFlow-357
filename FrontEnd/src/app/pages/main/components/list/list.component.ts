@@ -6,12 +6,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { config, Subject, Subscription, take } from 'rxjs';
+import { DocModel } from 'src/app/models/doc.model';
 import { UserModel } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { SharedFunctionService } from 'src/app/services/shared-function/shared-function.service';
 import { DocumentActions } from 'src/ngrx/actions/document.action';
 import { DocumentState } from 'src/ngrx/states/document.state';
 import { CreateDocumentComponent } from '../create-document/create-document.component';
+import { ComfirmDeleteComponent } from './components/comfirm-delete/comfirm-delete.component';
 
 @Component({
   selector: 'app-list',
@@ -23,6 +25,7 @@ export class ListComponent {
   store$ = this.store.select('doc');
   inProgress = false;
   tempSub!: Subscription;
+  currentRoute: string = '';
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -37,12 +40,15 @@ export class ListComponent {
       if (this.authService.auth.currentUser == null) return;
       switch (path[1].path) {
         case 'owned':
+          this.currentRoute = 'owned';
           this.store.dispatch(DocumentActions.getAll());
           break;
         case 'bin':
+          this.currentRoute = 'bin';
           this.store.dispatch(DocumentActions.getDeleted());
           break;
         case 'shared':
+          this.currentRoute = 'shared';
           this.store.dispatch(DocumentActions.getShared());
           break;
       }
@@ -66,10 +72,20 @@ export class ListComponent {
     this.router.navigate(['main/document/edit'], { queryParams: { id: id } })
   }
 
-  openDeleteDialog() { }
+  openDeleteDialog(doc: DocModel) {
+    console.log('test');
+    let dialogRef = this.dialogService.open(ComfirmDeleteComponent, {
+      width: '500px',
+      data: { doc: doc.name }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => { console.log(result) })
+  }
+
 
   changeDocDeleted(id: string, status: boolean) {
-    if (this.inProgress == true) return;
+    if (this.inProgress) return;
+
     let tempSub: Subscription = this.store$.subscribe((data) => {
       if (this.inProgress || !data.inProcess) {
         this.inProgress = data.inProcess;
@@ -85,9 +101,9 @@ export class ListComponent {
       try {
         tempSub.unsubscribe();
         this.inProgress = false;
-        this._snackBar.open('Document has been move to Recycle bin', 'Close');
+        this._snackBar.open(`Document has been move to ${status ? 'Recycle Bin' : 'My Documents'}`, 'Close');
       } catch (err) {
-        this._snackBar.open('Document has been move to Recycle bin', 'Close');
+        this._snackBar.open(`Document has been move to ${status ? 'Recycle Bin' : 'My Documents'}`, 'Close');
       }
     })
 

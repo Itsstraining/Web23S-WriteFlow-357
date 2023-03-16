@@ -15,6 +15,7 @@ import { RoleDialogComponent } from 'src/app/pages/main/components/role-dialog/r
 import { UserService } from 'src/app/services/user/user.service';
 import { EditNameComponent } from './components/edit-name/edit-name.component';
 import { NotifyDialogComponent } from '../notify-dialog/notify-dialog.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-document',
@@ -34,6 +35,8 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   users: Array<any> = [];
   isSocketConnected = false;
   saveInterval: any;
+  currentDoc!: DocModel;
+  url = environment.apiURL;
 
   constructor(
     private _socket: Socket,
@@ -43,6 +46,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     private userService: UserService,
     private store: Store<{ doc: DocumentState }>,
     public authService: AuthService,
+
     private router: Router
   ) {
 
@@ -53,9 +57,11 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     this.handleSocketEvents(this.roomId);
     this.store.dispatch(DocumentActions.get({ id: this.roomId }))
     this.store$.subscribe((data) => {
+      this.currentDoc = data.document!;
       if (data.error.status === 500) {
         if (this.showNotification) return;
         this.showNotification = true;
+
         this.openShowNotification("You don't have permission to access this document");
       }
     })
@@ -128,18 +134,19 @@ export class DocumentComponent implements OnInit, AfterViewInit {
       this.processData()
     }, 1000);
 
+
   }
 
   saveFile() {
-    this.documentService.saveFile(this.editor.quillEditor.getContents(), this.document.contentPath);
+
+    this.documentService.saveFile(this.editor.quillEditor.getContents(), this.document.contentPath, this.currentDoc.uid);
   }
 
   processData() {
-    concat(this.documentService.getFile(this.document.contentPath, this.roomId)).subscribe((data: any) => {
+    concat(this.documentService.getFile(this.document.contentPath, this.roomId), this.listenForChanged()).subscribe((data: any) => {
       this.defaultData = data;
       this.editor.quillEditor.updateContents(data);
     })
-
 
     this.saveInterval = setInterval(() => {
       this._socket.emit('watch-dog', { docId: this.roomId })
@@ -148,7 +155,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   }
 
   sendUpdateData(data: any) {
-    this._socket.emit('send-data', { room: this.roomId, data: data });
+    this._socket.emit('send-data', { roomId: this.roomId, data: data });
   }
 
   listenForChanged() {
