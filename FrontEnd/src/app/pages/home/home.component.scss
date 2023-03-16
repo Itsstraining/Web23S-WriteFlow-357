@@ -186,7 +186,6 @@
 }
 
 @media screen and (max-width: 850px) {
-
     .section-1 {
         .big-title {
             font-size: 28px;
@@ -205,14 +204,6 @@
         }
     }
 
-
-
-    .words,
-    .words>div {
-        padding: 0rem 2rem;
-        width: calc(100% - 4rem);
-    }
-
     .title {
         font-size: 24px;
     }
@@ -224,11 +215,9 @@
 
 @media screen and (max-width: 650px) {
     .section-1 {
-        padding: 4rem 1rem;
-        width: calc(100% - 2rem);
-
         .big-title {
             font-size: 18px;
+            padding: 0rem 1rem;
         }
 
         .idea-button {
@@ -244,13 +233,18 @@
 
         .big-title-description {
             font-size: 18px;
+            padding: 0rem 1rem;
         }
     }
 
     .words,
     .words>div {
-        padding: 0rem 1rem;
-        width: calc(100% - 2rem);
+        padding: 0rem;
+    }
+
+    .title,
+    .description {
+        padding: 0rem 2rem;
     }
 
     .title {

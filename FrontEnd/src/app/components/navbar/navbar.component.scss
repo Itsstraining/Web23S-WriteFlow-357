@@ -5,16 +5,23 @@
 .fixed {
     position: fixed;
     z-index: 1000;
-    transition: all 1s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 mat-toolbar {
     position: absolute;
-    background-color: #fff;
-    padding: 0px 50px;
+    background-color: #ffffff;
+    width: 100%;
+
+    &>div {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
 }
 
-mat-toolbar>span {
+
+mat-toolbar>div>span {
     font-size: 1rem;
     transition: all 0.3s ease-in-out;
 
@@ -43,8 +50,6 @@ mat-toolbar>span {
 
         .avatar {
             $avatar-size: 40px;
-
-            margin-left: 1rem;
             width: $avatar-size;
             height: $avatar-size;
             border-radius: 50%;
@@ -58,6 +63,11 @@ mat-toolbar>span {
                 filter: brightness(0.6);
             }
         }
+    }
+
+    &>.avatar-container {
+        padding-right: 10px;
+
     }
 
     .login,
@@ -89,7 +99,7 @@ mat-toolbar>span {
     }
 }
 
-.logo {
+.logo>span {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -97,9 +107,10 @@ mat-toolbar>span {
     color: var(--color-4);
     margin-right: 0.5rem;
     cursor: pointer;
+    padding-left: 10px;
 
     img {
-        width: 60px;
+        width: 50px;
     }
 
     .write,
@@ -147,26 +158,11 @@ mat-toolbar>span {
     margin-right: 0.5rem;
 }
 
-$app-sidenav-width-pc: 300px;
-$app-sidenav-width-mobile: 250px;
+$app-sidenav-width-pc: 250px;
+$app-sidenav-width-mobile: 200px;
 
 .app-sidenav {
     width: $app-sidenav-width-pc !important;
-}
-
-@media screen and (max-width: 600px) {
-    .app-container {
-        top: 56px;
-        height: calc(100% - 56px);
-    }
-
-    .app-sidenav {
-        width: $app-sidenav-width-mobile !important;
-    }
-
-    mat-expansion-panel-header {
-        font-size: 0.8rem;
-    }
 }
 
 .side-bar-button {
@@ -187,70 +183,86 @@ $app-sidenav-width-mobile: 250px;
     }
 }
 
+
 @media screen and (max-width: 1000px) {
     mat-toolbar {
-        padding: 0px 20px;
+        padding: 0px;
 
-        &>.logo {
+        &>div {
+            &>.logo {
 
-            img {
-                width: 40px;
+                img {
+                    width: 40px;
+                }
+
+                .write,
+                .flow {
+                    font-size: 20px;
+                }
             }
 
-            .write,
-            .flow {
-                font-size: 20px;
-            }
-        }
-
-        &>span button {
-            margin: 0.5rem 0.5rem;
-            width: 120px;
-        }
-
-        &>span {
-            font-size: 0.8rem;
-
-            a {
-                display: inline-block;
-                margin: 0.5rem 1.2rem;
+            &>span button {
+                width: 120px;
             }
 
-            .login,
-            .logout,
-            .register {
-                font-size: 14px;
-                font-weight: 700;
+            &>span {
+                font-size: 0.8rem;
+
+                a {
+                    display: inline-block;
+                    margin: 0.5rem 1.2rem;
+                }
+
+                .login,
+                .logout,
+                .register {
+                    font-size: 14px;
+                    font-weight: 700;
+                }
+            }
+
+            &>span>.avatar-container {
+                padding-right: 10px;
             }
         }
     }
+
 }
 
 @media screen and (max-width: 600px) {
+    .app-container {
+        top: 56px;
+        height: calc(100% - 56px);
+    }
+
     .app-sidenav {
-        width: $app-sidenav-width-mobile;
+        width: $app-sidenav-width-mobile !important;
+    }
+
+    mat-expansion-panel-header {
+        font-size: 0.8rem;
     }
 }
 
 @media screen and (max-width: 400px) {
-
     .menu-opener {
         margin: 0;
     }
 
     mat-toolbar {
-        padding: 0px;
+        &>div {
+            &>.logo {
+                img {
+                    width: 35px;
+                }
 
-        &>.logo {
-
-            img {
-                width: 35px;
+                .write,
+                .flow {
+                    font-size: 16px;
+                }
             }
 
-            .write,
-            .flow {
-                font-size: 16px;
-            }
+
         }
     }
 
@@ -261,10 +273,10 @@ $app-sidenav-width-mobile: 250px;
 
 @media screen and (max-width: 300px) {
     mat-toolbar {
-        padding: 0px 5px;
-
-        .login {
-            width: 80px !important;
+        &>div {
+            .login {
+                width: 80px !important;
+            }
         }
     }
 }

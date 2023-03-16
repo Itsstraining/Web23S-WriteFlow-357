@@ -74,7 +74,7 @@ export class UserController {
 
         let fileValid = await isFileValid(pathToImage);
         if (fileValid) {
-            return await this.userService.updateUserAvatar(decodedToken.uid, `http://localhost:3000/static/${decodedToken.uid}/avatar/${file.filename}`);
+            return await this.userService.updateUserAvatar(decodedToken.uid, `/static/${decodedToken.uid}/avatar/${file.filename}`);
         }
 
         deleteFile(pathToImage);
@@ -96,7 +96,7 @@ export class UserController {
 
         let fileValid = await isFileValid(pathToImage);
         if (fileValid) {
-            return await this.userService.updateUserBanner(decodedToken.uid, `http://localhost:3000/static/${decodedToken.uid}/banner/${file.filename}`);
+            return await this.userService.updateUserBanner(decodedToken.uid, `/static/${decodedToken.uid}/banner/${file.filename}`);
         }
 
         deleteFile(pathToImage);
