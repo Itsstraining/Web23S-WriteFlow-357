@@ -97,8 +97,10 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     this.isSocketConnected = true;
     let user = await this.userService.getUser(this.authService.currentUser?.uid!)
     this.listenRoomChange().subscribe((data: any) => {
-
+      if(data.users!=null){
         this.users = data.users;
+      }
+
     })
     this._socket.emit('join-room', { roomId: this.roomId, user: user });
     this.watchDogListener().subscribe((data: any) => {

@@ -74,7 +74,7 @@ export class RoomService {
             if (document.users.length === 0) return await this.delete(id);
             return document.save();
         } catch (err) {
-            console.log('lỗi 1', err);
+            // console.log('lỗi 1', err);
         }
 
     }
