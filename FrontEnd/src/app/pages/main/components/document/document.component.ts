@@ -54,20 +54,19 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     this.store.dispatch(DocumentActions.get({ id: this.roomId }))
     this.store$.subscribe((data) => {
       if (data.error.status === 500) {
-        if(this.showNotification) return;
+        if (this.showNotification) return;
         this.showNotification = true;
         this.openShowNotification("You don't have permission to access this document");
-
       }
     })
     window.addEventListener('beforeunload', () => {
       this.beforeleave();
     });
   }
-  openShowNotification(message:string) {
+  openShowNotification(message: string) {
     this.dialogService.open(NotifyDialogComponent, {
       width: '500px',
-      data:message
+      data: message
     }).afterClosed().subscribe(() => {
       this.back();
     })
@@ -97,7 +96,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     this.isSocketConnected = true;
     let user = await this.userService.getUser(this.authService.currentUser?.uid!)
     this.listenRoomChange().subscribe((data: any) => {
-      if(data.users!=null){
+      if (data.users != null) {
         this.users = data.users;
       }
 
@@ -106,7 +105,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     this.watchDogListener().subscribe((data: any) => {
       //data return is document , if document uid !== current user uid or current user uid is not in canEdit and canView Array
       if (data.uid !== this.authService.currentUser?.uid && !data.canEdit.includes(this.authService.currentUser?.uid!) && !data.canView.includes(this.authService.currentUser?.uid!)) {
-        if(this.showNotification) return;
+        if (this.showNotification) return;
         this.showNotification = true;
         this.openShowNotification("Your permission to access this document were removed ");
       } else { }
@@ -136,14 +135,16 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   }
 
   processData() {
-    concat(this.documentService.getFile(this.document.contentPath, this.roomId), this.listenForChanged()).subscribe((data: any) => {
+    concat(this.documentService.getFile(this.document.contentPath, this.roomId)).subscribe((data: any) => {
       this.defaultData = data;
       this.editor.quillEditor.updateContents(data);
     })
+
+
     this.saveInterval = setInterval(() => {
       this._socket.emit('watch-dog', { docId: this.roomId })
       this.saveFile();
-    },3000)
+    }, 3000)
   }
 
   sendUpdateData(data: any) {
