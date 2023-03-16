@@ -31,7 +31,7 @@
     <button mat-icon-button (click)="saveFile()"><mat-icon>save</mat-icon></button>
   </div>
   <div class="watcher" *ngIf="this.users !=[]">
-    <img *ngFor="let user of this.users" [src]="url + user.photoURL">
+    <img *ngFor="let user of this.users" [src]="user.photoURL">
 
   </div>
 </mat-toolbar>

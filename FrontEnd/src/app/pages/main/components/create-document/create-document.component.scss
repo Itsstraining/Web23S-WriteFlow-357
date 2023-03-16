@@ -6,14 +6,27 @@
   margin-top: 16px;
 }
 
-.header{
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin:1%;
+  margin: 1%;
 
 }
-.input-container{
+
+.input-container {
   width: 100%;
+}
+
+.default-btn {
+  margin: 1rem 1rem;
+  padding: 0rem 1.5rem;
+
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-4);
+
+  background-color: var(--color-1);
+  box-shadow: 2px 2px 2px 0px rgba(var(--color-4-rgb), 0.75);
 }

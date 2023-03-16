@@ -79,7 +79,10 @@ export class ListComponent {
       data: { doc: doc.name }
     });
 
-    dialogRef.afterClosed().subscribe((result) => { console.log(result) })
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result) return;
+      this.store.dispatch(DocumentActions.delete({ id: doc.id }));
+    })
   }
 
 

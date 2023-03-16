@@ -4,7 +4,7 @@ import * as Quill from 'quill';
 import { Socket } from 'ngx-socket-io';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentService } from 'src/app/services/document/document.service';
-import { concat, last, of, switchMap } from 'rxjs';
+import { concat, last, Observable, of, switchMap } from 'rxjs';
 import { DocModel } from 'src/app/models/doc.model';
 import { MatDialog } from '@angular/material/dialog';
 import { DocumentState } from 'src/ngrx/states/document.state';
@@ -15,7 +15,8 @@ import { RoleDialogComponent } from 'src/app/pages/main/components/role-dialog/r
 import { UserService } from 'src/app/services/user/user.service';
 import { EditNameComponent } from './components/edit-name/edit-name.component';
 import { NotifyDialogComponent } from '../notify-dialog/notify-dialog.component';
-import { environment } from 'src/environments/environment';
+import { getStorage, ref, uploadString, getDownloadURL } from "firebase/storage";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-document',
@@ -29,6 +30,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   defaultData: any;
   roomId!: string;
   roomData: any;
+  initDocument = new Observable<any>;
   document!: DocModel;
   showNotification = false;
   store$ = this.store.select('doc');
@@ -36,7 +38,10 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   isSocketConnected = false;
   saveInterval: any;
   currentDoc!: DocModel;
-  url = environment.apiURL;
+
+  //document storage
+  storage = getStorage();
+  storageDocument: any;
 
   constructor(
     private _socket: Socket,
@@ -46,7 +51,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     private userService: UserService,
     private store: Store<{ doc: DocumentState }>,
     public authService: AuthService,
-
+    private httpClient: HttpClient,
     private router: Router
   ) {
 
@@ -56,15 +61,27 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     this.activateRoute.queryParams.subscribe((data) => { this.roomId = data['id']; });
     this.handleSocketEvents(this.roomId);
     this.store.dispatch(DocumentActions.get({ id: this.roomId }))
+
     this.store$.subscribe((data) => {
+      if (!data.document) return;
       this.currentDoc = data.document!;
+
       if (data.error.status === 500) {
         if (this.showNotification) return;
         this.showNotification = true;
-
         this.openShowNotification("You don't have permission to access this document");
+        return;
       }
+
+      if (this.currentDoc.uid && this.currentDoc.contentPath) {
+        this.storageDocument = ref(this.storage, `${this.currentDoc.uid}/documents/${this.currentDoc.contentPath}`);
+        getDownloadURL(this.storageDocument).then((url) => {
+          this.initDocument = this.listenForFile(url);
+        })
+      }
+
     })
+
     window.addEventListener('beforeunload', () => {
       this.beforeleave();
     });
@@ -119,10 +136,6 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   }
 
   async setup() {
-    // Get document data
-    this.documentService.getDoc(this.roomId).pipe(last()).subscribe((data: DocModel) => {
-      this.document = data;
-    });
     // Make sure  for quill to be fully loaded
     setTimeout(() => {
       const quill: Quill.Quill = this.editor.quillEditor;
@@ -133,17 +146,14 @@ export class DocumentComponent implements OnInit, AfterViewInit {
       });
       this.processData()
     }, 1000);
-
-
   }
 
   saveFile() {
-
-    this.documentService.saveFile(this.editor.quillEditor.getContents(), this.document.contentPath, this.currentDoc.uid);
+    uploadString(this.storageDocument, JSON.stringify(this.editor.quillEditor.getContents()), 'raw');
   }
 
   processData() {
-    concat(this.documentService.getFile(this.document.contentPath, this.roomId), this.listenForChanged()).subscribe((data: any) => {
+    concat(this.initDocument, this.listenForChanged()).subscribe((data: any) => {
       this.defaultData = data;
       this.editor.quillEditor.updateContents(data);
     })
@@ -152,10 +162,15 @@ export class DocumentComponent implements OnInit, AfterViewInit {
       this._socket.emit('watch-dog', { docId: this.roomId })
       this.saveFile();
     }, 3000)
+
   }
 
   sendUpdateData(data: any) {
     this._socket.emit('send-data', { roomId: this.roomId, data: data });
+  }
+
+  listenForFile(url: string) {
+    return this.httpClient.get(url, { responseType: 'json' });
   }
 
   listenForChanged() {
@@ -163,7 +178,6 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   }
 
   listenRoomChange() {
-
     return this._socket.fromEvent('update-room')
   }
 

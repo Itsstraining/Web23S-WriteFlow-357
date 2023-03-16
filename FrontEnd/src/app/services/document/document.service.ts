@@ -30,6 +30,7 @@ export class DocumentService {
       }
     }) as Observable<DocModel[]>
   }
+
   getShared(): Observable<DocModel[]> {
     return this.http.get(`${environment.apiURL}${this.url}/shared?uid=${this.authService.currentUser?.uid}`, {
       headers: {
@@ -46,7 +47,7 @@ export class DocumentService {
     }) as Observable<any>
   }
 
-  getFile(filename: string,id:string) {
+  getFile(filename: string, id: string) {
     return this.http.get(`${environment.apiURL}${this.url}/file?id=${id}`, {
       headers: new HttpHeaders({
         'authorization': this.authService.getToken(),
@@ -70,22 +71,6 @@ export class DocumentService {
     return filePath;
   }
 
-  async saveFile(content: any, filename: string,uid:string) {
-    let formData = new FormData();
-    let file = new File([JSON.stringify(content)], 'file.json', { type: 'application/json' });
-    formData.append('file', file);
-
-    let response = await lastValueFrom(this.http.put(`${environment.apiURL}${this.url}/file`, formData, {
-      headers: new HttpHeaders({
-        'authorization': this.authService.getToken(),
-        'ownerid': uid,
-        'filename': filename
-      })
-    }))
-
-    return response;
-  }
-
   create(doc: DocModel): Observable<any> {
     return this.http.post(environment.apiURL + this.url + "/create",
       {
@@ -97,6 +82,7 @@ export class DocumentService {
         }
       }) as Observable<DocModel>
   }
+
   delete(id: string): Observable<DocModel> {
     return this.http.delete(`${environment.apiURL}${this.url}?id=${id}`, {
       headers: {
@@ -104,7 +90,8 @@ export class DocumentService {
       }
     }) as Observable<DocModel>
   }
-  update(id: string, uid: string|undefined, updateField: string, updateValue: any): Observable<DocModel> {
+
+  update(id: string, uid: string | undefined, updateField: string, updateValue: any): Observable<DocModel> {
     return this.http.put(`${environment.apiURL}${this.url}?uid=${uid}&id=${id}`, {
       updateField: updateField,
       updateValue: updateValue

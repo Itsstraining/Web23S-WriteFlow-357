@@ -64,7 +64,7 @@ export class NavbarComponent {
   updatePhotoURL() {
     if (!this.user) return;
     this.userService.getUser(this.user.uid).then((res: any) => {
-      this.userPhoto = environment.apiURL + res.photoURL;
+      this.userPhoto = res.photoURL;
     })
   }
 

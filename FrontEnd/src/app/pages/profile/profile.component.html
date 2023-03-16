@@ -9,7 +9,7 @@
                 </button>
                 <mat-menu #banner="matMenu">
                     <button mat-menu-item>
-                        <span class="menu-item" (click)="openViewImage(url + user.bannerURL)">View Image</span>
+                        <span class="menu-item" (click)="openViewImage(user.bannerURL)">View Image</span>
                     </button>
                     <button mat-menu-item (click)="openEditBanner()">
                         <span class="menu-item">Edit Image</span>
@@ -18,17 +18,18 @@
             </div>
         </div>
     </ng-container>
-    <div class="banner" #banner (click)="openViewImage(url + user.bannerURL)">
-        <img [src]="url + this.user.bannerURL">
+    <div class="banner" #banner (click)="openViewImage(user.bannerURL)">
+        <img [src]="this.user.bannerURL">
     </div>
     <div class="profile-image">
         <div class="detail">
             <span>
                 <ng-container *ngIf="currentUser?.uid === id; else noaccess">
-                    <img [src]="url + user.photoURL" alt="avatar" class="change" [matMenuTriggerFor]="avatar">
+                    <img [src]="user.photoURL" onerror="this.src = '../../../assets/default-profile.jpg'" alt="avatar"
+                        class="change" [matMenuTriggerFor]="avatar">
                     <mat-menu #avatar="matMenu">
                         <button mat-menu-item>
-                            <span class="menu-item" (click)="openViewImage(url + user.photoURL)">View Image</span>
+                            <span class="menu-item" (click)="openViewImage(user.photoURL)">View Image</span>
                         </button>
                         <button mat-menu-item (click)="openEditAvatar()">
                             <span class="menu-item">Edit Image</span>
@@ -36,8 +37,8 @@
                     </mat-menu>
                 </ng-container>
                 <ng-template #noaccess>
-                    <img class="avatar-no-access" [src]="url + user.photoURL" alt="avatar"
-                        (click)="openViewImage(url + user.photoURL)">
+                    <img class="avatar-no-access" [src]="user.photoURL" alt="avatar"
+                        (click)="openViewImage(user.photoURL)">
                 </ng-template>
             </span>
             <span class="name">

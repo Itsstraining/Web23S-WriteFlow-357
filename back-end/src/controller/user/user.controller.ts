@@ -7,7 +7,6 @@ import { join } from 'path';
 import { UserModel } from 'src/models/user.model';
 import { AuthService } from 'src/services/auth/auth.service';
 import { UserService } from 'src/services/user/user.service';
-import { isFileValid, deleteFile, saveAvatarToStorage, saveBannerToStorage } from './userImageFilter';
 
 @Controller('user')
 export class UserController {
@@ -58,49 +57,4 @@ export class UserController {
             throw new HttpException(error, 500, { cause: error });
         }
     }
-
-    @Put('upload-avatar')
-    @UseInterceptors(FileInterceptor('file-avatar', saveAvatarToStorage))
-    async updateUserAvatarFile(@UploadedFile() file: Express.Multer.File, @Headers() header) {
-        let decodedToken = await this.authService.validateUser(header.authorization);
-        if (!decodedToken) throw new HttpException('Unauthorized', 401);
-
-        if (!file) {
-            return { error: 'File must be png, jpg, jpeg or wepb' };
-        }
-
-        const pathToImageFolder = join(process.cwd(), 'src', 'public', decodedToken.uid, 'avatar');
-        const pathToImage = join(pathToImageFolder, file.filename);
-
-        let fileValid = await isFileValid(pathToImage);
-        if (fileValid) {
-            return await this.userService.updateUserAvatar(decodedToken.uid, `/static/${decodedToken.uid}/avatar/${file.filename}`);
-        }
-
-        deleteFile(pathToImage);
-        return { error: "File extension doesn't match the file content" }
-    }
-
-    @Put('upload-banner')
-    @UseInterceptors(FileInterceptor('file-banner', saveBannerToStorage))
-    async updateUserBannerFile(@UploadedFile() file: Express.Multer.File, @Headers() header) {
-        let decodedToken = await this.authService.validateUser(header.authorization);
-        if (!decodedToken) throw new HttpException('Unauthorized', 401);
-
-        if (!file) {
-            return { error: 'File must be png, jpg, jpeg or wepb' };
-        }
-
-        const pathToImageFolder = join(process.cwd(), 'src', 'public', decodedToken.uid, 'banner');
-        const pathToImage = join(pathToImageFolder, file.filename);
-
-        let fileValid = await isFileValid(pathToImage);
-        if (fileValid) {
-            return await this.userService.updateUserBanner(decodedToken.uid, `/static/${decodedToken.uid}/banner/${file.filename}`);
-        }
-
-        deleteFile(pathToImage);
-        return { error: "File extension doesn't match the file content" }
-    }
-
 }
