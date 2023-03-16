@@ -21,6 +21,7 @@ export class NavbarComponent {
     private userService: UserService
   ) { }
 
+  @ViewChild('sidenav', { static: false }) sidenav: any;
 
   user$ = this.authService.user$;
   user: User | null = null;
@@ -93,5 +94,10 @@ export class NavbarComponent {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.innerWidth = window.innerWidth;
+  }
+
+  toggle() {
+    if (!this.sidenav) return;
+    this.sidenav.toggle();
   }
 }
