@@ -178,6 +178,16 @@ $padding-mobile: 1rem;
             width: calc(70% - #{$padding-pc});
 
             min-height: auto;
+
+            .has-doc {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+
+                width: 100%;
+                height: 100%;
+            }
         }
 
         &>div {
@@ -203,7 +213,9 @@ $padding-mobile: 1rem;
             font-size: 1rem;
 
             box-shadow: 2px 2px 4px 0px rgba(var(--color-4-rgb), $alpha: 0.5);
-            flex: 1 1 auto
+            flex: 1 1 auto;
+
+            white-space: pre-wrap;
         }
 
         .job {

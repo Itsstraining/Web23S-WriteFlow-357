@@ -57,9 +57,7 @@
                         </button>
                     </ng-container>
                 </div>
-                <div class="bio">
-                    {{user.bio}}
-                </div>
+                <div class="bio">{{user.bio}}</div>
                 <div class="job-head">
                     <span>Job</span>
                     <ng-container *ngIf="currentUser">
@@ -78,11 +76,16 @@
             <div class="documents">
                 <span>Documents</span>
                 <div>
-                    <div *ngFor="let doc of documents">
-                        <ng-container *ngIf="doc.isPublic">
-                            {{doc.name}}
-                        </ng-container>
+                    <div class="has-doc" *ngIf="!hasPublicDocs; else hasdoc">
+                        This user is currently not sharing any public documents.
                     </div>
+                    <ng-template #hasdoc>
+                        <div *ngFor="let doc of documents">
+                            <ng-container *ngIf="doc.isPublic">
+                                {{doc.name}}
+                            </ng-container>
+                        </div>
+                    </ng-template>
                 </div>
             </div>
         </div>

@@ -28,8 +28,6 @@ export class ProfileComponent {
     private activateRoute: ActivatedRoute,
     public dialog: MatDialog,
     private authService: AuthService,
-    private router: Router,
-    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   @ViewChild('banner') banner: any;
@@ -56,6 +54,7 @@ export class ProfileComponent {
   };
 
   documents: DocModel[] = [];
+  hasPublicDocs: boolean = false;
 
   ngOnInit() {
     this.activateRoute.params.subscribe(params => {
@@ -65,6 +64,10 @@ export class ProfileComponent {
     });
 
     this.currentUser = this.authService.currentUser;
+    if (this.currentUser) {
+      this.storageAvatar = ref(this.storage, `${this.currentUser.uid}/avatar.jpg`);
+      this.storageBanner = ref(this.storage, `${this.currentUser.uid}/banner.jpg`);
+    }
     this.authService.user$.subscribe(user => {
       this.currentUser = user;
 
@@ -72,7 +75,6 @@ export class ProfileComponent {
         this.storageAvatar = ref(this.storage, `${this.currentUser.uid}/avatar.jpg`);
         this.storageBanner = ref(this.storage, `${this.currentUser.uid}/banner.jpg`);
       }
-
     });
   }
 
@@ -86,6 +88,7 @@ export class ProfileComponent {
 
   async initializeUserDocuments(uid: string) {
     this.documents = <any>(await this.documentService.getPublicDocs(uid));
+    this.hasPublicDocs = this.documents.find((doc: any) => doc.isPublic) ? true : false;
   }
 
   //handle dialog
@@ -102,22 +105,21 @@ export class ProfileComponent {
     this.userService.updateUser(this.user).then(this.updateUser);
   }
 
-  handleDialogAvatarClose = (result: any) => {
+  handleDialogAvatarClose = async (result: any) => {
     if (!result) return;
-    uploadBytes(this.storageAvatar, result).then((snapshot) => {
+    await uploadBytes(this.storageAvatar, result).then((snapshot) => {
       getDownloadURL(this.storageAvatar).then(url => {
-        console.log(url);
         this.user.photoURL = url;
         this.userService.updateUser(this.user).then(this.updateUser);
-      });
-    });
+      }).catch((error) => { console.log(error) });;
+    })
+      .catch((error) => { console.log(error) });
   }
 
-  handleDialogBannerClose = (result: any) => {
+  handleDialogBannerClose = async (result: any) => {
     if (!result) return;
-    uploadBytes(this.storageBanner, result).then((snapshot) => {
+    await uploadBytes(this.storageBanner, result).then((snapshot) => {
       getDownloadURL(this.storageBanner).then(url => {
-        console.log(url);
         this.user.bannerURL = url;
         this.userService.updateUser(this.user).then(this.updateUser);
       });

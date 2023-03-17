@@ -18,13 +18,10 @@ export class UserService {
 
   createUser(user: any): void {
     this.http.post(`${this.apiURL}/user/register`, user).subscribe((res) => {
-      console.log(res);
     });
   }
 
   async updateUser(user: UserModel): Promise<Object> {
-    console.log(user);
-
     let res = await lastValueFrom(this.http.put(`${this.apiURL}/user/update`, user, {
       headers: new HttpHeaders({
         'authorization': this.authService.getToken(),

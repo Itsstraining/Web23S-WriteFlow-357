@@ -11,7 +11,7 @@ const routes: Routes = [
 
   { path: 'main', canActivate: [AuthGuard], loadChildren: () => import('./pages/main/main.module').then(m => m.MainModule), },
   { path: 'about', loadChildren: () => import('./pages/about/about.module').then(m => m.AboutModule) },
-  { path: 'profile/:id', canActivate: [ProfileGuard], loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule) },
+  { path: 'profile/:id', canActivate: [ProfileGuard], runGuardsAndResolvers: 'always', loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule) },
 
   { path: 'role', loadChildren: () => import('./pages/role/role.module').then(m => m.RoleModule) },
   { path: 'community', loadChildren: () => import('./pages/community/community.module').then(m => m.CommunityModule) },

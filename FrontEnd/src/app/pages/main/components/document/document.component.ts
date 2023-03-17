@@ -155,7 +155,6 @@ export class DocumentComponent implements OnInit, AfterViewInit {
 
   processData() {
     this.initDocument.subscribe((data: any) => {
-      console.log(data);
       this.canSave = true;
       this.defaultData = data;
       this.editor.quillEditor.updateContents(data);
