@@ -132,7 +132,6 @@ $toolbar-button: 24px;
 quill-editor {
   height: 100%;
   width: 100%;
-  margin: 5% 0 0 0;
 }
 
 .ql-toolbar {
@@ -152,14 +151,17 @@ quill-editor {
   .ql-toolbar {
     top: 56px;
   }
+
+  .ql-container {
+    top: calc(56px + #{$toolbar-padding * 2 + $toolbar-button * 2});
+  }
 }
 
 .ql-container {
   height: 100%;
   width: 80%;
-
   margin: 0 auto;
-  top: calc(#{$toolbar-button + $toolbar-padding * 2});
+  top: calc(64px + #{$toolbar-padding * 2 + $toolbar-button});
 }
 
 .status-container,
@@ -181,4 +183,29 @@ quill-editor {
   width: 100% !important;
   height: 100% !important;
   z-index: 10000 !important;
+}
+
+@media screen and (max-width: 600px) {
+  .ql-toolbar.ql-snow .ql-formats {
+    margin-right: 0px;
+  }
+}
+
+@media screen and (max-width: 812px) {
+  .ql-container {
+    width: 100%;
+    top: calc(64px + #{$toolbar-padding * 2 + $toolbar-button * 2});
+  }
+}
+
+@media screen and (max-width: 565px) {
+  .ql-container {
+    top: calc(56px + #{$toolbar-padding * 2 + $toolbar-button * 3});
+  }
+}
+
+@media screen and (max-width: 464px) {
+  .ql-container {
+    top: calc(56px + #{$toolbar-padding * 2 + $toolbar-button * 4});
+  }
 }

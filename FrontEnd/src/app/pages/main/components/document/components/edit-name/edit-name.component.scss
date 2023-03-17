@@ -24,6 +24,10 @@
         margin-bottom: 1rem;
 
         width: 100%;
+
+        .input-fs {
+            font-size: 1rem;
+        }
     }
 
     &>.btn {
@@ -41,6 +45,41 @@
 
         &>.save {
             background-color: var(--color-1);
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        &>.header {
+            h1 {
+                font-size: 1rem;
+            }
+        }
+
+        &>.editor {
+            .input-fs {
+                font-size: 0.75rem;
+            }
+        }
+
+        &>.btn {
+            button {
+                font-size: 0.75em;
+                padding: 1rem 1rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .container {
+
+
+        &>.btn {
+            button {
+                padding: 1rem 0.5rem;
+            }
         }
     }
 }

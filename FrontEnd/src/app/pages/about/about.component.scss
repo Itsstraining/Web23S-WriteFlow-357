@@ -79,7 +79,10 @@ $width-pc: 400px;
 $width-mobile: 300px;
 $width-mobile-small: 200px;
 $width-mobile-smaller: 150px;
-$grid-gap: 2rem;
+$width-mobile-smallest: 130px;
+$grid-gap-pc: 2rem;
+$grid-gap-mobile: 1rem;
+$grid-gap-mobile-small: 0.5rem;
 
 .member-container {
     div {
@@ -95,9 +98,9 @@ $grid-gap: 2rem;
 
     &>div>div {
         display: grid;
-        max-width: calc(2 * #{$width-pc} + #{$grid-gap});
+        max-width: calc(2 * #{$width-pc} + #{$grid-gap-pc});
         grid-template-columns: $width-pc $width-pc;
-        grid-gap: $grid-gap;
+        grid-gap: $grid-gap-pc;
     }
 
     &>h1 {
@@ -194,7 +197,7 @@ $grid-gap: 2rem;
     .member-container {
         &>div>div {
             grid-template-columns: $width-mobile $width-mobile;
-            max-width: calc(2 * #{$width-mobile} + #{$grid-gap});
+            max-width: calc(2 * #{$width-mobile} + #{$grid-gap-pc});
         }
 
         &>h1 {
@@ -246,7 +249,8 @@ $grid-gap: 2rem;
     .member-container {
         &>div>div {
             grid-template-columns: $width-mobile-small $width-mobile-small;
-            max-width: calc(2 * #{$width-mobile-small} + #{$grid-gap});
+            max-width: calc(2 * #{$width-mobile-small} + #{$grid-gap-mobile});
+            grid-gap: $grid-gap-mobile;
         }
 
         .card {
@@ -305,7 +309,8 @@ $grid-gap: 2rem;
     .member-container {
         &>div>div {
             grid-template-columns: $width-mobile-smaller $width-mobile-smaller;
-            max-width: calc(2 * #{$width-mobile-smaller} + #{$grid-gap});
+            max-width: calc(2 * #{$width-mobile-smaller} + #{$grid-gap-mobile});
+            grid-gap: $grid-gap-mobile;
         }
 
         &>h1 {
@@ -316,7 +321,6 @@ $grid-gap: 2rem;
             max-width: $width-mobile-smaller;
 
             .profile-image {
-
                 img {
                     width: $width-mobile-smaller;
                     height: $width-mobile-smaller;
@@ -334,4 +338,27 @@ $grid-gap: 2rem;
             }
         }
     }
+}
+
+@media screen and (max-width: 350px) {
+    .member-container {
+        &>div>div {
+            grid-template-columns: $width-mobile-smallest $width-mobile-smallest;
+            max-width: calc(2 * #{$width-mobile-smallest} + #{$grid-gap-mobile-small});
+            grid-gap: $grid-gap-mobile-small;
+        }
+
+        .card {
+            max-width: $width-mobile-smallest;
+
+            .profile-image {
+                img {
+                    width: $width-mobile-smallest;
+                    height: $width-mobile-smallest;
+                }
+            }
+        }
+    }
+
+
 }

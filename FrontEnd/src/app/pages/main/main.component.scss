@@ -121,6 +121,12 @@ mat-nav-list>.list-item {
       margin: 0px 10px;
     }
   }
+
+  .side-bar-button {
+    span {
+      font-size: 0.75rem;
+    }
+  }
 }
 
 @media screen and (max-width: 400px) {

@@ -140,6 +140,8 @@ export const DocumentReducer = createReducer(
   })),
   on(DocumentActions.updateSuccess, ((state, { doc, updateField, updateValue }) => {
     let documents = [...state.documents!]
+    let document: any = { ...state.document };
+
     if (updateField == 'isPublic' || updateField == 'isDelete') {
       let index = documents.findIndex(x => x.id == doc.id);
       documents.splice(index, 1);
@@ -147,8 +149,14 @@ export const DocumentReducer = createReducer(
       let index = documents.findIndex(x => x.id == doc.id);
       documents[index] = doc;
     }
+
+    if (document != null && document.id == doc.id) {
+      document[updateField] = updateValue;
+    }
+
     return {
       ...state,
+      document: document,
       documents: documents,
       inProcess: false
     }

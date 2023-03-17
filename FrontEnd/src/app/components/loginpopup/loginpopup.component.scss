@@ -39,28 +39,15 @@
 
 }
 
-::ng-deep.mat-form-field-ripple {
-  /*change color of underline when focused*/
-  background-color: green !important;
-}
-
 .keep-sign-in {
   font-size: 12px;
 }
 
-.forgot {
-  width: 20vw;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-
-
-}
-
 .check-holder {
+  width: 100%;
+
   display: flex;
   justify-content: space-between;
-  width: 100%;
   align-items: center;
 
   .section {
@@ -80,7 +67,6 @@
     color: var(--color-4);
     font-weight: 700;
     text-decoration: none;
-    margin-left: 10rem;
 
     &:hover {
       text-decoration: underline;
@@ -101,12 +87,12 @@
 }
 
 .break-container {
+  width: 100%;
+
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 20vw;
-
 
   margin-top: 1rem;
 
@@ -128,4 +114,61 @@
 
 img {
   width: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 1rem 2rem;
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 1rem 2rem;
+  }
+
+  .title {
+    &>h3 {
+      font-size: 1.2rem;
+    }
+  }
+
+  .full-width {
+    .name {
+      font-size: 0.8rem;
+    }
+
+    input {
+      font-size: 0.8rem;
+    }
+  }
+
+  .check-holder {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+
+    .section {
+
+      mat-checkbox {
+        font-size: 0.8rem;
+      }
+    }
+
+    &>a {
+      font-size: 0.8rem;
+    }
+  }
+
+  .break-container {
+    .or {
+      font-size: 0.8rem;
+    }
+  }
+
+  .login-button {
+    font-size: 0.9rem;
+    padding: 1.2rem 0rem;
+  }
 }
