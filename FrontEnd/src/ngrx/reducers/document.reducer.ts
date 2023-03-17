@@ -71,7 +71,9 @@ export const DocumentReducer = createReducer(
   on(DocumentActions.deleteSuccess, ((state, { doc }) => {
     let documents = [...state.documents!]
     let index = documents.findIndex(x => x.id == doc.id);
-    documents.splice(index, 1);
+    if (index > -1) {
+      documents.splice(index, 1);
+    }
     return {
       ...state,
       documents: documents,

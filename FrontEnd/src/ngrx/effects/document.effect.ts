@@ -79,15 +79,12 @@ export class DocumentEffects {
       ),
     )
   )
-
-
-
   delete$ = createEffect(() =>
     this.actions$.pipe(
       ofType(DocumentActions.delete),
-      switchMap((action) => this.documentService.delete(action.id).pipe(
+      switchMap((action) => this.documentService.delete(action.doc.id).pipe(
         map((doc) => {
-          return DocumentActions.deleteSuccess({ doc: doc })
+          return DocumentActions.deleteSuccess({ doc: action.doc })
         }),
         catchError((error) => {
           return of(DocumentActions.deleteFail({ error }))

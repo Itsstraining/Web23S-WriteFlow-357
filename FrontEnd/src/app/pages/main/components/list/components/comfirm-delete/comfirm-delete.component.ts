@@ -13,7 +13,7 @@ export class ComfirmDeleteComponent {
   ) { }
 
   temp: any = {
-    confirm: false
+    confirm: true
   }
 
   onNoClick(): void {

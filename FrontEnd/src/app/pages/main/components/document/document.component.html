@@ -28,7 +28,7 @@
     </span>
     <button mat-icon-button (click)="openEditNameDialog()"
       *ngIf="(this.store$|async)?.document?.uid===this.authService.currentUser?.uid"><mat-icon>edit</mat-icon></button>
-    <button mat-icon-button (click)="saveFile()"><mat-icon>save</mat-icon></button>
+    <button [disabled]="!canSave" mat-icon-button (click)="saveFile()"><mat-icon>save</mat-icon></button>
   </div>
   <div class="watcher" *ngIf="this.users !=[]">
     <img *ngFor="let user of this.users" [src]="user.photoURL" [matTooltip]="user.displayName">

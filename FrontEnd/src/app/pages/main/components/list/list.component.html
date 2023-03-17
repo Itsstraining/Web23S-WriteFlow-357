@@ -18,10 +18,10 @@
     <div class="item-container" *ngFor="let doc of (this.doc$|async)?.documents">
       <div class="icon-container" *ngIf="!doc.isDelete">
         <div>
-          <button mat-icon-button  *ngIf="this.currentRoute!='shared'">
+          <button mat-icon-button *ngIf="this.currentRoute!='shared'">
             <mat-icon matTooltip="Edit">share</mat-icon>
           </button>
-          <button mat-icon-button  *ngIf="this.currentRoute!='shared'">
+          <button mat-icon-button *ngIf="this.currentRoute!='shared'">
             <mat-icon>star</mat-icon>
           </button>
         </div>
@@ -45,13 +45,13 @@
         </div>
       </div>
 
-      <div class="thumbnail">
-        <img src="../../../../../assets/Logo.svg" alt="" class="doc-img" (click)="navigateToDoc(doc.id)">
+      <div class="thumbnail" (click)="navigateToDoc(doc.id)">
+        <img src="../../../../../assets/Logo.svg" alt="" class="doc-img">
       </div>
 
-      <div class="item-info">
+      <div class="item-info" (click)="navigateToDoc(doc.id)">
         <div>
-          <span class="title" matListItemTitle (click)="navigateToDoc(doc.id)">{{doc.name}}</span>
+          <span class="title" matListItemTitle>{{doc.name}}</span>
           <span class="time">
             <span>Created:<span>{{this.shareFunctionService.convertDateTime(doc.dateCreated)}}</span></span><br>
             <span>Modify:<span>{{this.shareFunctionService.convertDateTime(doc.dateCreated)}}</span></span>

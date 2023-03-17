@@ -37,6 +37,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   isSocketConnected = false;
   saveInterval: any;
   currentDoc!: DocModel;
+  canSave = false;
 
   //document storage
   storage = getStorage();
@@ -148,11 +149,19 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   }
 
   saveFile() {
+    if (!this.canSave) return;
     uploadString(this.storageDocument, JSON.stringify(this.editor.quillEditor.getContents()), 'raw');
   }
 
   processData() {
-    concat(this.initDocument, this.listenForChanged()).subscribe((data: any) => {
+    this.initDocument.subscribe((data: any) => {
+      console.log(data);
+      this.canSave = true;
+      this.defaultData = data;
+      this.editor.quillEditor.updateContents(data);
+    })
+
+    this.listenForChanged().subscribe((data: any) => {
       this.defaultData = data;
       this.editor.quillEditor.updateContents(data);
     })
@@ -171,7 +180,6 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   listenForFile(url: string) {
     return this.httpClient.get(url, {
       responseType: 'json',
-
     });
   }
 

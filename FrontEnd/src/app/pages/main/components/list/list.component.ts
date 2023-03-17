@@ -1,20 +1,17 @@
-import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
-import { User } from '@angular/fire/auth';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { config, Subject, Subscription, take } from 'rxjs';
-import { DocModel } from 'src/app/models/doc.model';
-import { UserModel } from 'src/app/models/user.model';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { SharedFunctionService } from 'src/app/services/shared-function/shared-function.service';
 import { DocumentActions } from 'src/ngrx/actions/document.action';
 import { DocumentState } from 'src/ngrx/states/document.state';
 import { CreateDocumentComponent } from '../create-document/create-document.component';
 import { ComfirmDeleteComponent } from './components/comfirm-delete/comfirm-delete.component';
-
+import { getStorage, ref, deleteObject } from "firebase/storage";
+import { DocModel } from 'src/app/models/doc.model';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -27,6 +24,9 @@ export class ListComponent {
   tempSub!: Subscription;
   currentRoute: string = '';
 
+  storage = getStorage()
+  storageRef: any;
+
   constructor(
     private activateRoute: ActivatedRoute,
     private authService: AuthService, private store: Store<{ doc: DocumentState }>,
@@ -36,7 +36,6 @@ export class ListComponent {
     private router: Router
   ) {
     this.tempSub = this.activateRoute.url.subscribe(async (path) => {
-
       if (this.authService.auth.currentUser == null) return;
       switch (path[1].path) {
         case 'owned':
@@ -73,7 +72,6 @@ export class ListComponent {
   }
 
   openDeleteDialog(doc: DocModel) {
-    console.log('test');
     let dialogRef = this.dialogService.open(ComfirmDeleteComponent, {
       width: '500px',
       data: { doc: doc.name }
@@ -81,7 +79,11 @@ export class ListComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (!result) return;
-      this.store.dispatch(DocumentActions.delete({ id: doc.id }));
+      if (result.confirm) {
+        this.store.dispatch(DocumentActions.delete({ doc: doc }));
+        this.storageRef = ref(this.storage, `${doc.uid}/documents/${doc.contentPath}`);
+        deleteObject(this.storageRef);
+      }
     })
   }
 
