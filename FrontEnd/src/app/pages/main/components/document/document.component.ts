@@ -31,7 +31,6 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   roomId!: string;
   roomData: any;
   initDocument = new Observable<any>;
-  document!: DocModel;
   showNotification = false;
   store$ = this.store.select('doc');
   users: Array<any> = [];
@@ -189,23 +188,23 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     toolbar: {
       container: [
         ['bold', 'italic', 'underline', 'strike'], // toggled buttons
-        [{ header: 1 }, { header: 2 }], // custom button values
-        [{ list: 'ordered' }, { list: 'bullet' }],
+        [{ header: 1 }, { header: 2 }, { list: 'ordered' }, { list: 'bullet' }], // custom button values
         [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
-        [{ 'direction': 'rtl' }],                         // text direction
-        [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-        [{ 'font': [] }],
-        [{ 'align': [] }],
-        ['clean'], // remove formatting button
-        ['link', 'image', 'video']
+        [
+          { 'size': ['small', false, 'large', 'huge'] },
+          { 'header': [1, 2, 3, 4, 5, 6, false] },
+          { 'font': [] }
+        ],  // custom dropdown
+        [{ 'align': [] }, 'clean', 'link', 'image'], // remove formatting button
       ],
     },
   }
 
-  async openEditNameDialog() {
-    if (!this.document) return;
-    let name = this.document.name;
+  openEditNameDialog() {
+    if (!this.currentDoc) return;
+
+    let name = this.currentDoc.name;
+
     const dialogRef = this.dialogService.open(EditNameComponent, {
       width: '500px',
       data: name
@@ -213,8 +212,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe((result: any) => {
       if (!result) return;
-      this.document.name = result;
-      this.store.dispatch(DocumentActions.update({ id: this.document.id, uid: this.authService.currentUser?.uid, updateField: 'name', updateValue: result }));
+      this.store.dispatch(DocumentActions.update({ id: this.currentDoc.id, uid: this.authService.currentUser?.uid, updateField: 'name', updateValue: result }));
     });
   }
 

@@ -17,7 +17,7 @@ export class AboutComponent {
     },
     {
       name: 'Nguyễn Lê Quốc Khánh',
-      position: 'Leader',
+      position: 'Leader & Developer',
       image: '../../../assets/members-img/NLQK.jpg',
       imageXOffset: '200px'
     },

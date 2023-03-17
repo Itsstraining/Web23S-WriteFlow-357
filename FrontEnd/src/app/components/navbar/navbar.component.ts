@@ -81,10 +81,8 @@ export class NavbarComponent {
   }
 
   openDialogLogin() {
-    const dialogRef = this.dialog.open(LoginpopupComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    const dialogRef = this.dialog.open(LoginpopupComponent, {
+      width: '500px',
     });
   }
 

@@ -12,18 +12,60 @@
 
 .container>div {
     h1 {
-        font-size: 4em;
+        font-size: 4rem;
         font-weight: 700;
         margin: 0;
+        text-align: center;
     }
 
     p {
-        font-size: 1.5em;
+        font-size: 1.5rem;
         font-weight: 400;
         margin: 0;
+        text-align: center;
     }
 
     img {
         margin-top: 2rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .container>div {
+        h1 {
+            font-size: 3rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .container>div {
+        h1 {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+        img {
+            width: 50%;
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .container>div {
+        h1 {
+            font-size: 1.25rem;
+        }
+
+        p {
+            font-size: 0.75rem;
+        }
     }
 }

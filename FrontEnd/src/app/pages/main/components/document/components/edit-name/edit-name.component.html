@@ -4,8 +4,9 @@
     </div>
     <div class="editor">
         <mat-form-field appearance="outline">
-            <mat-label>Name</mat-label>
-            <input matInput [(ngModel)]="tempName" rows="15" cols="30" maxlength="30" (keydown.enter)="onYesClick()">
+            <mat-label class="input-fs">Name</mat-label>
+            <input class="input-fs" matInput [(ngModel)]="tempName" rows="15" cols="30" maxlength="30"
+                (keydown.enter)="onYesClick()">
         </mat-form-field>
     </div>
     <div class="btn">

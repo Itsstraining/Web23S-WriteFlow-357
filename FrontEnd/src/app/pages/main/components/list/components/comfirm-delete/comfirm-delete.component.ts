@@ -15,6 +15,10 @@ export class ComfirmDeleteComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
+  temp: any = {
+    confirm: false
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }

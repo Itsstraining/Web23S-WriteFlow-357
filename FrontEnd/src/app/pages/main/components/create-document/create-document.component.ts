@@ -56,7 +56,7 @@ export class CreateDocumentComponent {
 
     //Upload document to firebase storage
     this.storageDocument = ref(this.storage, `${this.authService.currentUser?.uid}/documents/${filePath}.json`);
-    uploadString(this.storageDocument, JSON.stringify({ ops: [] }), 'raw')
+    uploadString(this.storageDocument, JSON.stringify({}), 'raw')
       .then(() => {
         Object.assign(doc, {
           contentPath: filePath + '.json',
