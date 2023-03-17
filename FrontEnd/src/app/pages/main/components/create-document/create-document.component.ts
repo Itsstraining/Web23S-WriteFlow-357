@@ -10,6 +10,7 @@ import { DocumentService } from 'src/app/services/document/document.service';
 import { DocumentActions } from 'src/ngrx/actions/document.action';
 import { DocumentState } from 'src/ngrx/states/document.state';
 import * as uuid from 'uuid';
+import { getStorage, ref, uploadString, getDownloadURL } from "firebase/storage";
 
 @Component({
   selector: 'app-create-document',
@@ -21,6 +22,10 @@ export class CreateDocumentComponent {
 
   store$ = this.store.select('doc');
   inProgress = false;
+
+  //document storage
+  storage = getStorage();
+  storageDocument: any;
 
   constructor(private _formBuilder: FormBuilder,
     private store: Store<{ doc: DocumentState }>,
@@ -47,38 +52,29 @@ export class CreateDocumentComponent {
 
     //Create an instance of DocModel
     let doc = this.createDocModel();
-    let filePath: any = await this.documentService.createFile();
+    let filePath: string = uuid.v4();
 
-    Object.assign(doc, {
-      contentPath: filePath.name,
-      dateCreated: timeNow,
-      dateModified: timeNow
-    })
+    //Upload document to firebase storage
+    this.storageDocument = ref(this.storage, `${this.authService.currentUser?.uid}/documents/${filePath}.json`);
+    uploadString(this.storageDocument, JSON.stringify({ ops: [] }), 'raw')
+      .then(() => {
+        Object.assign(doc, {
+          contentPath: filePath + '.json',
+          dateCreated: timeNow,
+          dateModified: timeNow
+        })
 
-    console.log(doc);
-
-    //Process data when store is updated
-    let tempSub: Subscription = this.store$.subscribe((data) => {
-      if (!this.inProgress || data.inProcess) {
-        this.inProgress = data.inProcess;
-        return;
-      }
-
-      if (data.error) {
-        this.stepper.previous();
-        this.inProgress = false;
-        return;
-      }
-
-      try {
-        tempSub.unsubscribe();
         this.inProgress = false;
         this.stepper.next();
-      } catch (err) { }
-    })
+        this.store.dispatch(DocumentActions.create({ document: doc }));
 
+        console.log(doc);
 
-    this.store.dispatch(DocumentActions.create({ document: doc }));
+      })
+      .catch((err) => {
+        this.stepper.previous();
+        this.inProgress = false;
+      })
   }
 
 

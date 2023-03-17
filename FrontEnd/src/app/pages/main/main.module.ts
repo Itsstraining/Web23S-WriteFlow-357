@@ -15,6 +15,7 @@ import { EditNameComponent } from './components/document/components/edit-name/ed
 import { FormsModule } from '@angular/forms';
 import { RoleComponent } from '../role/role.component';
 import { NotifyDialogComponent } from './components/notify-dialog/notify-dialog.component';
+import { ComfirmDeleteComponent } from './components/list/components/comfirm-delete/comfirm-delete.component';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { NotifyDialogComponent } from './components/notify-dialog/notify-dialog.
     CreateDocumentComponent,
     EditNameComponent,
     RoleComponent,
-
+    ComfirmDeleteComponent,
   ],
   imports: [
     CommonModule,

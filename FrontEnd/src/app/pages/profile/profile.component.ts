@@ -5,7 +5,6 @@ import { UserModel } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { DocumentService } from 'src/app/services/document/document.service';
 import { UserService } from 'src/app/services/user/user.service';
-import { lastValueFrom } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { EditBioComponent } from './components/edit-bio/edit-bio.component';
 import { EditJobComponent } from './components/edit-job/edit-job.component';
@@ -14,6 +13,8 @@ import { Router } from '@angular/router';
 import { EditAvatarComponent } from './components/edit-avatar/edit-avatar.component';
 import { ViewImageComponent } from './components/view-image/view-image.component';
 import { EditBannerComponent } from './components/edit-banner/edit-banner.component';
+import { environment } from 'src/environments/environment';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 @Component({
   selector: 'app-profile',
@@ -35,6 +36,11 @@ export class ProfileComponent {
 
   currentUser: User | null = null;
   id: string = '';
+  url: string = environment.apiURL;
+
+  storage = getStorage();
+  storageAvatar: any;
+  storageBanner: any;
 
   user: UserModel = {
     uid: '',
@@ -61,6 +67,12 @@ export class ProfileComponent {
     this.currentUser = this.authService.currentUser;
     this.authService.user$.subscribe(user => {
       this.currentUser = user;
+
+      if (this.currentUser) {
+        this.storageAvatar = ref(this.storage, `${this.currentUser.uid}/avatar.jpg`);
+        this.storageBanner = ref(this.storage, `${this.currentUser.uid}/banner.jpg`);
+      }
+
     });
   }
 
@@ -92,17 +104,24 @@ export class ProfileComponent {
 
   handleDialogAvatarClose = (result: any) => {
     if (!result) return;
-    this.userService.updateUserAvatar(result)
-      .then(this.updateUser)
-      .catch(err => console.log(err));
-
+    uploadBytes(this.storageAvatar, result).then((snapshot) => {
+      getDownloadURL(this.storageAvatar).then(url => {
+        console.log(url);
+        this.user.photoURL = url;
+        this.userService.updateUser(this.user).then(this.updateUser);
+      });
+    });
   }
 
   handleDialogBannerClose = (result: any) => {
     if (!result) return;
-    this.userService.updateBannerAvatar(result)
-      .then(this.updateUser)
-      .catch(err => console.log(err));
+    uploadBytes(this.storageBanner, result).then((snapshot) => {
+      getDownloadURL(this.storageBanner).then(url => {
+        console.log(url);
+        this.user.bannerURL = url;
+        this.userService.updateUser(this.user).then(this.updateUser);
+      });
+    });
   }
 
   handleDialogViewImageClose = (result: any) => { }

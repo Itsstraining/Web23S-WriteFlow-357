@@ -12,7 +12,7 @@ import { User, UserDocument } from 'src/schemas/user.schema';
 
 @Injectable()
 export class DocumentService {
-    constructor(@InjectModel(Doc.name) private documentModel: Model<DocDocument>,@InjectModel(User.name) private userModel: Model<UserDocument>, private userSerivce: UserService) { }
+    constructor(@InjectModel(Doc.name) private documentModel: Model<DocDocument>, @InjectModel(User.name) private userModel: Model<UserDocument>, private userSerivce: UserService) { }
 
     async createDocument(document: DocModel): Promise<DocModel> {
         const createdDocument = new this.documentModel(document);
@@ -42,16 +42,12 @@ export class DocumentService {
         if (document.uid != uid) {
             let inView = document.canView.findIndex((element) => element == uid);
             let inEdit = document.canEdit.findIndex((element) => element == uid);
-            if (inView === -1 && inEdit===-1) return null;
-            
+            if (inView === -1 && inEdit === -1) return null;
+
             return document;
         } else {
             return document;
         }
-
-
-
-
     }
 
     async updateDocument(id: string, uid: string, documentModel: DocModel): Promise<DocModel> {
@@ -136,25 +132,25 @@ export class DocumentService {
     //get shared document by user Id
     async getSharedDocumentsByUserId(uid: string): Promise<DocModel[]> {
         //user must meet uid and canView or canEdit contain uid and isDelete is false
-        const documents = this.documentModel.find({ $and: [{ uid: { $ne: uid } }, { $or: [{ canView: uid }, { canEdit: uid }]}] }).exec();
+        const documents = this.documentModel.find({ $and: [{ uid: { $ne: uid } }, { $or: [{ canView: uid }, { canEdit: uid }] }] }).exec();
         return documents;
     }
-    async getAllUserInDocument(id: string){
+    async getAllUserInDocument(id: string) {
         const document = await this.documentModel.findOne({ id: id }).exec();
-        let users=await this.userModel.find().exec();
-       
-        let result=[];
-        for(let user of users){
+        let users = await this.userModel.find().exec();
+
+        let result = [];
+        for (let user of users) {
             let inView = document.canView.findIndex((element) => element == user.uid);
             let inEdit = document.canEdit.findIndex((element) => element == user.uid);
-            if (inView !== -1 || inEdit!==-1) 
-            result.push({...user,role:inEdit!==-1?'canEdit':'canView'});
+            if (inView !== -1 || inEdit !== -1)
+                result.push({ ...user, role: inEdit !== -1 ? 'canEdit' : 'canView' });
         }
         return result;
     };
     //only for watch dog to get document
     async getDocumentForWatchDog(id: string): Promise<DocModel> {
-    const document=await this.documentModel.findOne({ id: id }).exec();
-    return document;
+        const document = await this.documentModel.findOne({ id: id }).exec();
+        return document;
     }
 }

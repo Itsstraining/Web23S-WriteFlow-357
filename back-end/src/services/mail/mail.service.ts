@@ -20,10 +20,12 @@ export class MailService {
         let sender = await this.userModel.findOne({ uid: senderId }).exec()
         let sendTo = await this.userModel.findOne({ email: sentTo }).exec();
         if (sender._id === sendTo._id) throw new HttpException('You can not invite yourself', 409);
+
         let doc = await this.docModel.findOne({ id: docId }).exec()
         let mailExists = await this.mailModel.findOne({ sender: sender._id, sendTo: sendTo._id, doc: doc._id }).exec();
         // if exists throw 409 conflict resource
         if (mailExists) throw new HttpException('Already invited', 409);
+
         let mail = {
             sender: sender._id,
             sendTo: sendTo._id,

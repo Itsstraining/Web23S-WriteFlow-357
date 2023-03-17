@@ -25,7 +25,8 @@
         <div class="detail">
             <span>
                 <ng-container *ngIf="currentUser?.uid === id; else noaccess">
-                    <img [src]="user.photoURL" alt="avatar" class="change" [matMenuTriggerFor]="avatar">
+                    <img [src]="user.photoURL" onerror="this.src = '../../../assets/default-profile.jpg'" alt="avatar"
+                        class="change" [matMenuTriggerFor]="avatar">
                     <mat-menu #avatar="matMenu">
                         <button mat-menu-item>
                             <span class="menu-item" (click)="openViewImage(user.photoURL)">View Image</span>

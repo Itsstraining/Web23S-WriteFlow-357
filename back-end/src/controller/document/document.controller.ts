@@ -3,12 +3,8 @@
 /* eslint-disable prefer-const */
 /* eslint-disable prettier/prettier */
 import { Controller, Get, Post, Put, Query, UploadedFile, Headers, UseInterceptors, Body, Delete, HttpException, StreamableFile } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { join } from 'path';
 import { AuthService } from 'src/services/auth/auth.service';
 import { DocumentService } from 'src/services/document/document.service';
-import { saveDocumentToStorage } from './documentFilter';
-import * as fs from 'fs';
 import { DocModel } from 'src/models/document.model';
 
 @Controller('document')
@@ -147,47 +143,14 @@ export class DocumentController {
         }
     }
 
-
-    //file
-    @Get('file')
-    async getDocument(@Headers() header, @Query('id') id: string) {
-
-        let decodedToken = await this.authService.validateUser(header.authorization);
-        if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
-        const document = await this.documentService.getDocument(id, decodedToken.uid);
-        try {
-            const pathToImage = join(process.cwd(), 'src', 'documentsStorage', document.uid, header['filename']);
-            //read file json
-            let file = fs.createReadStream(pathToImage);
-            return new StreamableFile(file);
-
-        } catch (error) {
-
-            throw new HttpException("File not found", 500, { cause: new Error(error) });
-        }
-    }
-
-    @Put('file')
-    @UseInterceptors(FileInterceptor('file', saveDocumentToStorage))
-    async createDocument(@UploadedFile() file: Express.Multer.File, @Headers() header) {
-        if (!file) return "File is not valid";
-
-        const pathToImageFolder = join('documentsStorage', header['ownerid']);
-        const pathToImage = join(pathToImageFolder, file.filename);
-
-        return {
-            path: pathToImage,
-            name: file.filename,
-        };
-    }
     @Get('invite')
-    async getInvite(@Headers() header, @Query('id') id: string,@Query('uid') uid: string) {
+    async getInvite(@Headers() header, @Query('id') id: string, @Query('uid') uid: string) {
         let decodedToken = await this.authService.validateUser(header.authorization);
         if (!decodedToken) throw new HttpException('Unauthorized', 401, { cause: new Error("Unauthorized") });
         if (decodedToken.uid != uid) throw new HttpException('Forbidden', 403, { cause: new Error("Forbidden") });
         try {
             return this.documentService.getAllUserInDocument(id);
-        }catch(err){
+        } catch (err) {
             throw new HttpException("File not found", 500, { cause: new Error(err) });
         }
 

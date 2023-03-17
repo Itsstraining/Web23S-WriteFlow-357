@@ -13,6 +13,7 @@ async function bootstrap() {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
   });
+
   const app = await NestFactory.create<NestExpressApplication>(AppModule, { cors: true });
 
   app.useStaticAssets(join('src', 'public'), {

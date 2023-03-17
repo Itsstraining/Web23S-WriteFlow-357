@@ -8,5 +8,5 @@ export const environment = {
     messagingSenderId: '92118223652',
   },
   apiURL: 'https://writeflow-server-rjndwqlfka-as.a.run.app',
-  socketURL:'https://writeflow-server-rjndwqlfka-as.a.run.app'
+  socketURL: 'https://writeflow-server-rjndwqlfka-as.a.run.app'
 };
