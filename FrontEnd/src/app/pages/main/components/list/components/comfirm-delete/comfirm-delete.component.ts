@@ -7,16 +7,20 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./comfirm-delete.component.scss']
 })
 export class ComfirmDeleteComponent {
+  tempConfirm={
+    confirm: false
+  }
   constructor(
     public dialogRef: MatDialogRef<ComfirmDeleteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   onNoClick(): void {
-    this.dialogRef.close({ comfirm: false });
+    this.dialogRef.close();
   }
 
   onYesClick(): void {
-    this.dialogRef.close({ comfirm: true });
+    this.tempConfirm.confirm = true;
+    this.dialogRef.close(this.tempConfirm);
   }
 }

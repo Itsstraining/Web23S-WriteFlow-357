@@ -7,6 +7,6 @@
 
     <div class="btn">
         <button mat-stroked-button (click)="onNoClick()">Cancel</button>
-        <button mat-raised-button class="save" (click)="onYesClick()" >Save</button>
+        <button mat-raised-button class="save" (click)="onYesClick()" [mat-dialog-close]="tempConfirm" >Yes</button>
     </div>
 </div>
