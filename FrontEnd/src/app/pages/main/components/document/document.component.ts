@@ -17,6 +17,7 @@ import { EditNameComponent } from './components/edit-name/edit-name.component';
 import { NotifyDialogComponent } from '../notify-dialog/notify-dialog.component';
 import { getStorage, ref, uploadString, getDownloadURL } from "firebase/storage";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-document',
@@ -33,7 +34,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   initDocument = new Observable<any>;
   showNotification = false;
   store$ = this.store.select('doc');
-  users: Array<any> = [];
+  users: Array<UserModel> = [];
   isSocketConnected = false;
   saveInterval: any;
   currentDoc!: DocModel;
@@ -239,7 +240,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
   beforeleave() {
     this._socket.emit('leave-room', { roomId: this.roomId, user: this.authService.currentUser?.uid! });
 
-    clearInterval(this.saveInterval);
+    // clearInterval(this.saveInterval);
     this._socket.disconnect();
     this.saveFile()
   }

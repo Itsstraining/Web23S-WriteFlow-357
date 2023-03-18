@@ -30,7 +30,7 @@ export class DocumentGateway {
   async handleLeaveRoom(client: Socket, payload: any) {
     client.leave(payload.roomId);
     await this._roomService.removeUser(payload.roomId, payload.user);
-    //this.server.to(payload.roomId).emit('update-room', await this._roomService.get(payload.roomId));
+    this.server.to(payload.roomId).emit('update-room', await this._roomService.get(payload.roomId));
   }
 
   @SubscribeMessage('send-data')
